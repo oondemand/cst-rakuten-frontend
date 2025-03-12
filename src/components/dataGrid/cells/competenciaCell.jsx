@@ -1,33 +1,37 @@
 import { useEffect, useState } from "react";
 import { Input } from "@chakra-ui/react";
 import { withMask } from "use-mask-input";
-import { parse } from "date-fns";
 
-export const DateInputCell = ({ getValue, row, column, table, ...rest }) => {
-  const initialValue = new Date(getValue()).toLocaleDateString();
+export const CompetenciaCell = ({ getValue, row, column, table, ...rest }) => {
+  const initialValue = getValue();
+
+  const formatValue =
+    initialValue?.mes?.toString().padStart(2, "0") +
+    initialValue?.ano?.toString();
+
   const [value, setValue] = useState("");
 
   const onBlur = async () => {
-    if (value !== initialValue) {
-      const newDate = parse(value, "dd/MM/yyyy", new Date());
-
+    if (value.replace("/", "") !== formatValue) {
       try {
+        const competencia = value.split("/");
         await table.options.meta?.updateData({
           prestadorId: row.original._id,
           data: {
-            [column.columnDef.accessorKey]: newDate,
+            [column.columnDef.accessorKey + ".mes"]: competencia[0],
+            [column.columnDef.accessorKey + ".ano"]: competencia[1],
           },
         });
       } catch (error) {
         console.log(error);
-        setValue(initialValue);
+        setValue(formatValue);
       }
     }
   };
 
   useEffect(() => {
-    setValue(initialValue ? initialValue : "");
-  }, [initialValue]);
+    setValue(formatValue ? formatValue : "");
+  }, [formatValue]);
 
   return (
     <Input
@@ -41,7 +45,7 @@ export const DateInputCell = ({ getValue, row, column, table, ...rest }) => {
       value={value}
       onChange={(e) => setValue(e.target.value)}
       onBlur={onBlur}
-      ref={withMask("99/99/9999")}
+      ref={withMask("99/9999")}
     />
   );
 };

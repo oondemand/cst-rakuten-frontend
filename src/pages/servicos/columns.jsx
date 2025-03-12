@@ -1,21 +1,21 @@
 import React from "react";
 
 import { SelectListaCell } from "../../components/dataGrid/cells/selectLista";
-import { DateInputCell } from "../../components/dataGrid/cells/dateInput";
-import { CompetenciaInputCell } from "../../components/dataGrid/cells/competenciaInput";
-import { CurrencyInputCell } from "../../components/dataGrid/cells/currencyInput";
-import { DisabledCurrencyInputCell } from "../../components/dataGrid/cells/disabledCurrencyInput";
+import { DateCell } from "../../components/dataGrid/cells/dateCell";
+import { CompetenciaCell } from "../../components/dataGrid/cells/competenciaCell";
+import { CurrencyCell } from "../../components/dataGrid/cells/currencyCell";
+import { DisabledCurrencyCell } from "../../components/dataGrid/cells/disabledCurrencyCell";
 import { DisabledDefaultCell } from "../../components/dataGrid/cells/disabledDefaultCell";
 import { SelectPrestadorCell } from "../../components/dataGrid/cells/selectPrestador";
 
 export const makeServicoDynamicColumns = ({}) => {
   return [
-    {
-      accessorKey: "acoes",
-      header: "Ações",
-      enableSorting: false,
-      cell: TableActions,
-    },
+    // {
+    //   accessorKey: "acoes",
+    //   header: "Ações",
+    //   enableSorting: false,
+    //   cell: TableActions,
+    // },
     {
       accessorKey: "tipoDocumentoFiscal",
       header: "Documento Fiscal",
@@ -38,7 +38,7 @@ export const makeServicoDynamicColumns = ({}) => {
       accessorKey: "dataProvisaoContabil",
       header: "Data Provisão Contábil",
       enableSorting: false,
-      cell: DateInputCell,
+      cell: DateCell,
       enableColumnFilter: false,
       meta: { filterKey: "dataProvisaoContabil" },
     },
@@ -46,7 +46,7 @@ export const makeServicoDynamicColumns = ({}) => {
       accessorKey: "dataRegistro",
       header: "Data Registro",
       enableSorting: false,
-      cell: DateInputCell,
+      cell: DateCell,
       enableColumnFilter: false,
       meta: { filterKey: "dataRegistro" },
     },
@@ -54,7 +54,7 @@ export const makeServicoDynamicColumns = ({}) => {
       accessorKey: "competencia",
       header: "Competência",
       enableSorting: false,
-      cell: CompetenciaInputCell,
+      cell: CompetenciaCell,
       enableColumnFilter: true,
       meta: { filterKey: "competencia.mes" },
     },
@@ -78,7 +78,7 @@ export const makeServicoDynamicColumns = ({}) => {
       accessorKey: "valores.grossValue",
       header: "Gross Value",
       enableSorting: false,
-      cell: CurrencyInputCell,
+      cell: CurrencyCell,
       enableColumnFilter: true,
       meta: { filterKey: "valores.grossValue" },
     },
@@ -86,7 +86,7 @@ export const makeServicoDynamicColumns = ({}) => {
       accessorKey: "valores.bonus",
       header: "Bonus",
       enableSorting: false,
-      cell: CurrencyInputCell,
+      cell: CurrencyCell,
       enableColumnFilter: true,
       meta: { filterKey: "valores.bonus" },
     },
@@ -94,7 +94,7 @@ export const makeServicoDynamicColumns = ({}) => {
       accessorKey: "valores.ajusteComercial",
       header: "Ajuste Comercial",
       enableSorting: false,
-      cell: CurrencyInputCell,
+      cell: CurrencyCell,
       enableColumnFilter: true,
       meta: { filterKey: "valores.ajusteComercial" },
     },
@@ -102,7 +102,7 @@ export const makeServicoDynamicColumns = ({}) => {
       accessorKey: "valores.paidPlacement",
       header: "Paid Placement",
       enableSorting: false,
-      cell: CurrencyInputCell,
+      cell: CurrencyCell,
       enableColumnFilter: true,
       meta: { filterKey: "valores.paidPlacement" },
     },
@@ -118,7 +118,7 @@ export const makeServicoDynamicColumns = ({}) => {
       accessorKey: "valores.revisionGrossValue",
       header: "Revisão - Gross Value",
       enableSorting: false,
-      cell: CurrencyInputCell,
+      cell: CurrencyCell,
       enableColumnFilter: true,
       meta: { filterKey: "valores.revisionGrossValue" },
     },
@@ -126,7 +126,7 @@ export const makeServicoDynamicColumns = ({}) => {
       accessorKey: "valores.revisionProvisionBonus",
       header: "Revisão - Bonus",
       enableSorting: false,
-      cell: CurrencyInputCell,
+      cell: CurrencyCell,
       enableColumnFilter: true,
       meta: { filterKey: "valores.revisionProvisionBonus" },
     },
@@ -134,7 +134,7 @@ export const makeServicoDynamicColumns = ({}) => {
       accessorKey: "valores.revisionComissaoPlataforma",
       header: "Revisão - Comissão Plataforma",
       enableSorting: false,
-      cell: CurrencyInputCell,
+      cell: CurrencyCell,
       enableColumnFilter: true,
       meta: { filterKey: "valores.revisionComissaoPlataforma" },
     },
@@ -142,7 +142,7 @@ export const makeServicoDynamicColumns = ({}) => {
       accessorKey: "valores.revisionPaidPlacement",
       header: "Revisão - Paid Placement",
       enableSorting: false,
-      cell: CurrencyInputCell,
+      cell: CurrencyCell,
       enableColumnFilter: true,
       meta: { filterKey: "valores.revisionPaidPlacement" },
     },
@@ -150,7 +150,7 @@ export const makeServicoDynamicColumns = ({}) => {
       accessorKey: "valores.totalServico",
       header: "Total Serviço",
       enableSorting: false,
-      cell: DisabledCurrencyInputCell,
+      cell: DisabledCurrencyCell,
       enableColumnFilter: false,
       meta: { filterKey: "valores.totalServico" },
     },
@@ -158,7 +158,7 @@ export const makeServicoDynamicColumns = ({}) => {
       accessorKey: "valores.totalRevisao",
       header: "Total Revisão",
       enableSorting: false,
-      cell: DisabledCurrencyInputCell,
+      cell: DisabledCurrencyCell,
       enableColumnFilter: false,
       meta: { filterKey: "valores.totalRevisao" },
     },
@@ -166,7 +166,7 @@ export const makeServicoDynamicColumns = ({}) => {
       accessorKey: "valor",
       header: "Valor total",
       enableSorting: false,
-      cell: DisabledCurrencyInputCell,
+      cell: DisabledCurrencyCell,
       enableColumnFilter: false,
       meta: { filterKey: "valor" },
     },

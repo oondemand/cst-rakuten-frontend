@@ -3,13 +3,7 @@ import { NumericFormat } from "react-number-format";
 import { parseBRLCurrencyToNumber } from "../../../utils/currency";
 import { Input } from "@chakra-ui/react";
 
-export const CurrencyInputCell = ({
-  getValue,
-  row,
-  column,
-  table,
-  ...props
-}) => {
+export const CurrencyCell = ({ getValue, row, column, table, ...props }) => {
   const initialValue = getValue();
   const [value, setValue] = useState("");
 

@@ -1,11 +1,11 @@
 import React from "react";
-import { CpfCnpjCell } from "../../components/dataGrid/cells/cpfCnpj";
+import { CpfCnpjCell } from "../../components/dataGrid/cells/cpfCnpjCell";
 import { SelectAutoCompleteCell } from "../../components/dataGrid/cells/selectAutoComplete";
 
 import { DefaultCell } from "../../components/dataGrid/cells/default";
 import { TableActions } from "./tableActions";
 import { SelectListaCell } from "../../components/dataGrid/cells/selectLista";
-import { DateInputCell } from "../../components/dataGrid/cells/dateInput";
+import { DateCell } from "../../components/dataGrid/cells/dateCell";
 import { PisPasepCell } from "../../components/dataGrid/cells/pisPasepCell";
 import { LISTA_PAISES_OMIE } from "../../constants/omie";
 import { SelectBancoCell } from "../../components/dataGrid/cells/selectBancoCell";
@@ -180,7 +180,7 @@ export const makePrestadorDynamicColumns = () => {
     {
       accessorKey: "pessoaFisica.dataNascimento",
       header: "Data de Nascimento",
-      cell: DateInputCell,
+      cell: DateCell,
       enableColumnFilter: false,
       meta: { filterKey: "pessoaFisica.dataNascimento" },
     },
@@ -238,21 +238,21 @@ export const makePrestadorDynamicColumns = () => {
     {
       accessorKey: "dataExportacao",
       header: "Data de Exportação",
-      cell: DateInputCell,
+      cell: DateCell,
       enableColumnFilter: false,
       meta: { filterKey: "dataExportacao" },
     },
     {
       accessorKey: "createdAt",
       header: "Criado em",
-      cell: DateInputCell,
+      cell: DateCell,
       enableColumnFilter: false,
       meta: { filterKey: "createdAt" },
     },
     {
       accessorKey: "updatedAt",
       header: "Atualizado em",
-      cell: DateInputCell,
+      cell: DateCell,
       enableColumnFilter: false,
       meta: { filterKey: "updatedAt" },
     },

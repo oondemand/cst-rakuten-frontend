@@ -1,7 +1,7 @@
 import { NumericFormat } from "react-number-format";
 import { useEffect, useState } from "react";
 
-export const DisabledCurrencyInputCell = ({ getValue, row, column, table }) => {
+export const DisabledCurrencyCell = ({ getValue, row, column, table }) => {
   const initialValue = getValue();
   const [value, setValue] = useState("");
 
