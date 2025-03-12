@@ -110,6 +110,7 @@ export const DataGrid = ({
           stickyHeader
           {...columnSizeVars}
           width={`${table.getTotalSize()}px`}
+          striped
         >
           <Table.Header>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -198,7 +199,7 @@ export const DataGrid = ({
             <Flex alignItems="center" gap="1">
               <Text>Page</Text>
               <strong>
-                {table.getState().pagination.pageIndex + 1} of{" "}
+                {table.getState().pagination.pageIndex + 1} de{" "}
                 {table.getPageCount()}
               </strong>
             </Flex>

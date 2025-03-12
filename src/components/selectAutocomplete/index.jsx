@@ -21,7 +21,7 @@ export const SelectAutocomplete = ({
       chakraStyles={{
         control: (base) => ({
           ...base,
-          backgroundColor: "white",
+          backgroundColor: "transparent",
           scrollbarWidth: "thin",
           fontSize: "sm",
         }),

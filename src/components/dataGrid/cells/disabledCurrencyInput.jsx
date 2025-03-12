@@ -21,6 +21,7 @@ export const DisabledCurrencyInputCell = ({ getValue, row, column, table }) => {
         outline: "none",
         cursor: "not-allowed",
         width: "100%",
+        color: "gray",
         backgroundColor: "transparent",
       }}
       disabled={true}
