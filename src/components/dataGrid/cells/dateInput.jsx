@@ -35,7 +35,7 @@ export const DateInputCell = ({ getValue, row, column, table, ...rest }) => {
       variant="subtle"
       display="flex"
       fontSize="md"
-      size="2xs"
+      size="xs"
       bg="transparent"
       focusRingColor="brand.500"
       value={value}

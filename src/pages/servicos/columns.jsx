@@ -1,16 +1,12 @@
 import React from "react";
-import { CpfCnpjCell } from "../../components/dataGrid/cells/cpfCnpj";
-import { SelectAutoCompleteCell } from "../../components/dataGrid/cells/selectAutoComplete";
 
-import { DefaultCell } from "../../components/dataGrid/cells/default";
-import { SelectCell } from "../../components/dataGrid/cells/select";
-import { TableActions } from "./tableActions";
 import { SelectListaCell } from "../../components/dataGrid/cells/selectLista";
 import { DateInputCell } from "../../components/dataGrid/cells/dateInput";
 import { CompetenciaInputCell } from "../../components/dataGrid/cells/competenciaInput";
 import { CurrencyInputCell } from "../../components/dataGrid/cells/currencyInput";
 import { DisabledCurrencyInputCell } from "../../components/dataGrid/cells/disabledCurrencyInput";
 import { DisabledDefaultCell } from "../../components/dataGrid/cells/disabledDefaultCell";
+import { SelectPrestadorCell } from "../../components/dataGrid/cells/selectPrestador";
 
 export const makeServicoDynamicColumns = ({}) => {
   return [
@@ -30,14 +26,14 @@ export const makeServicoDynamicColumns = ({}) => {
       enableColumnFilter: true,
       meta: { filterKey: "tipoDocumentoFiscal" },
     },
-    // {
-    //   accessorKey: "prestador",
-    //   header: "Prestador",
-    //   enableSorting: false,
-    //   cell: SelectPrestadorCell,
-    //   enableColumnFilter: false,
-    //   meta: { filterKey: "prestador.nome" },
-    // },
+    {
+      accessorKey: "prestador",
+      header: "Prestador",
+      enableSorting: false,
+      cell: SelectPrestadorCell,
+      enableColumnFilter: false,
+      meta: { filterKey: "prestador.nome" },
+    },
     {
       accessorKey: "dataProvisaoContabil",
       header: "Data Provisão Contábil",

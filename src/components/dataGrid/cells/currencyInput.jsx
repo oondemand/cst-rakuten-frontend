@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { NumericFormat } from "react-number-format";
 import { parseBRLCurrencyToNumber } from "../../../utils/currency";
+import { Input } from "@chakra-ui/react";
 
 export const CurrencyInputCell = ({
   getValue,
@@ -41,10 +42,17 @@ export const CurrencyInputCell = ({
       allowNegative
       prefix="R$ "
       placeholder="R$ 0,00"
-      style={{
-        outline: "none",
-        backgroundColor: "transparent",
-      }}
+      customInput={(props) => (
+        <Input
+          {...props}
+          variant="subtle"
+          display="flex"
+          fontSize="md"
+          size="xs"
+          bg="transparent"
+          focusRingColor="brand.500"
+        />
+      )}
       value={value}
       onChange={(e) => setValue(e.target.value)}
       onBlur={onBlur}

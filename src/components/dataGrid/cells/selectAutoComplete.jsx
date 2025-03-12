@@ -15,11 +15,6 @@ export const SelectAutoCompleteCell = ({
 
   const onBlur = async () => {
     if (value && value !== options.find((e) => e?.value === initialValue)) {
-      console.log(
-        { data: { [column.columnDef.key]: value.value } },
-        options,
-        initialValue
-      );
       try {
         await table.options.meta?.updateData({
           prestadorId: row.original._id,
@@ -33,7 +28,9 @@ export const SelectAutoCompleteCell = ({
   };
 
   useEffect(() => {
-    const value = options.find((e) => e?.value === initialValue);
+    const value = options.find(
+      (e) => e?.value?.toString() === initialValue?.toString()
+    );
     setValue(value);
   }, [initialValue]);
   return (
