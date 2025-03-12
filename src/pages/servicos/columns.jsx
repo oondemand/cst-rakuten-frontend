@@ -10,12 +10,12 @@ import { SelectPrestadorCell } from "../../components/dataGrid/cells/selectPrest
 
 export const makeServicoDynamicColumns = ({}) => {
   return [
-    // {
-    //   accessorKey: "acoes",
-    //   header: "Ações",
-    //   enableSorting: false,
-    //   cell: TableActions,
-    // },
+    {
+      accessorKey: "acoes",
+      header: "Ações",
+      enableSorting: false,
+      cell: TableActions,
+    },
     {
       accessorKey: "tipoDocumentoFiscal",
       header: "Documento Fiscal",
