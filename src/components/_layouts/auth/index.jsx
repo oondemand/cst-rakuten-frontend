@@ -98,8 +98,8 @@ export const AuthLayout = () => {
         >
           <Link to="/">
             <Box w="120px">
-              <Text>oondemand</Text>
-              {/* <img src="/logo_rakuten_purple.png" alt="RAKUTEN" /> */}
+              {/* <Text>oondemand</Text> */}
+              <img src="/logo_rakuten_purple.png" alt="RAKUTEN" />
             </Box>
           </Link>
         </Flex>
