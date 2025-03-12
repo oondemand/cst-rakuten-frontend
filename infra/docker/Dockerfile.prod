@@ -4,12 +4,10 @@ FROM node:18-alpine AS build
 # Definindo a variável de ambientes com o valor do argumento
 ARG VITE_SERVICE_VERSION
 ARG VITE_API_URL
-ARG MODE
 
 # Definindo o argumento, que pode ser passado durante o build
 ENV VITE_SERVICE_VERSION=${VITE_SERVICE_VERSION}
 ENV VITE_API_URL=${VITE_API_URL}
-ENV MODE="prod"
 
 RUN echo "A versão da aplicação é: $VITE_SERVICE_VERSION e a URL da API é: $VITE_API_URL"
 
