@@ -1,0 +1,47 @@
+# Etapa 1: Construir o projeto
+FROM node:18-alpine AS build
+
+# Definindo a variável de ambientes com o valor do argumento
+ARG VITE_SERVICE_VERSION
+ARG VITE_API_URL
+ARG MODE
+
+# Definindo o argumento, que pode ser passado durante o build
+ENV VITE_SERVICE_VERSION=${VITE_SERVICE_VERSION}
+ENV VITE_API_URL=${VITE_API_URL}
+ENV MODE="prod"
+
+RUN echo "A versão da aplicação é: $VITE_SERVICE_VERSION e a URL da API é: $VITE_API_URL"
+
+# Define o diretório de trabalho dentro do container
+WORKDIR /app
+
+# Copia os arquivos package.json para o diretório de trabalho
+COPY package.json ./
+
+# Instala as dependências
+RUN npm install
+
+# Copia o restante dos arquivos do projeto para o diretório de trabalho
+COPY . .
+
+# Executa o build da aplicação React
+RUN npm run build 
+
+# Etapa 2: Usar uma imagem leve para o resultado
+FROM node:18-alpine
+
+# Define o diretório de trabalho onde os arquivos estáticos ficarão
+WORKDIR /app
+
+# Copia os arquivos de build da etapa anterior
+COPY --from=build /app/build ./build
+
+# Expõe a porta em que o container vai rodar
+EXPOSE 3000
+
+# Instala o pacote `serve` para servir os arquivos estáticos
+RUN npm install -g serve
+
+# Comando para iniciar a aplicação
+CMD ["serve", "-s", "build", "-l", "3000"]
