@@ -3,20 +3,15 @@ import { CpfCnpjCell } from "../../components/dataGrid/cells/cpfCnpj";
 import { SelectAutoCompleteCell } from "../../components/dataGrid/cells/selectAutoComplete";
 
 import { DefaultCell } from "../../components/dataGrid/cells/default";
-import { SelectCell } from "../../components/dataGrid/cells/select";
 import { TableActions } from "./tableActions";
 import { SelectListaCell } from "../../components/dataGrid/cells/selectLista";
 import { DateInputCell } from "../../components/dataGrid/cells/dateInput";
 import { PisPasepCell } from "../../components/dataGrid/cells/pisPasepCell";
 import { LISTA_PAISES_OMIE } from "../../constants/omie";
+import { SelectBancoCell } from "../../components/dataGrid/cells/selectBancoCell";
+import { SelectEstadoCell } from "../../components/dataGrid/cells/selectEstadoCell";
 
-export const makePrestadorDynamicColumns = ({
-  bancos,
-  prestadorTipos,
-  statusOptions,
-  estados,
-  prestadorTipoConta,
-}) => {
+export const makePrestadorDynamicColumns = () => {
   return [
     {
       accessorKey: "acoes",
@@ -75,13 +70,13 @@ export const makePrestadorDynamicColumns = ({
       enableColumnFilter: true,
       meta: { filterKey: "documento" },
     },
-    // {
-    //   accessorKey: "dadosBancarios.banco",
-    //   header: "Banco",
-    //   cell: (props) => <SelectBancoCell {...props} />,
-    //   enableColumnFilter: false,
-    //   meta: { filterKey: "dadosBancarios.banco" },
-    // },
+    {
+      accessorKey: "dadosBancarios.banco",
+      header: "Banco",
+      cell: SelectBancoCell,
+      enableColumnFilter: false,
+      meta: { filterKey: "dadosBancarios.banco" },
+    },
     {
       accessorKey: "dadosBancarios.agencia",
       header: "Agência",
@@ -153,13 +148,13 @@ export const makePrestadorDynamicColumns = ({
       enableColumnFilter: true,
       meta: { filterKey: "endereco.cidade" },
     },
-    // {
-    //   accessorKey: "endereco.estado",
-    //   header: "Estado",
-    //   cell: SelectEstadoCell,
-    //   enableColumnFilter: false,
-    //   meta: { filterKey: "endereco.estado" },
-    // },
+    {
+      accessorKey: "endereco.estado",
+      header: "Estado",
+      cell: SelectEstadoCell,
+      enableColumnFilter: false,
+      meta: { filterKey: "endereco.estado" },
+    },
     {
       accessorKey: "endereco.pais.cod",
       header: "País",
@@ -172,8 +167,15 @@ export const makePrestadorDynamicColumns = ({
           }))}
         />
       ),
-      enableColumnFilter: false,
-      meta: { filterKey: "endereco.pais.cod" },
+      enableColumnFilter: true,
+      meta: {
+        filterKey: "endereco.pais.cod",
+        filterVariant: "select",
+        filterOptions: LISTA_PAISES_OMIE.map((e) => ({
+          value: e.cCodigo,
+          label: e.cDescricao,
+        })),
+      },
     },
     {
       accessorKey: "pessoaFisica.dataNascimento",

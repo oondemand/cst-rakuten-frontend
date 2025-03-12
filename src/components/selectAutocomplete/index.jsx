@@ -24,6 +24,7 @@ export const SelectAutocomplete = ({
           backgroundColor: "transparent",
           scrollbarWidth: "thin",
           fontSize: "sm",
+          cursor: "pointer",
         }),
         menu: (base) => ({
           ...base,
