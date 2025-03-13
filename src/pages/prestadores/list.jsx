@@ -15,11 +15,8 @@ import { makePrestadorDynamicColumns } from "./columns";
 import { api } from "../../config/api";
 import { toaster } from "../../components/ui/toaster";
 import { queryClient } from "../../config/react-query";
-import { useListas } from "../../hooks/useListas";
 
 import { VisibilityControlDialog } from "../../components/vibilityControlDialog";
-import { usePrestadorForm } from "../../hooks/usePrestadorForm";
-import { PrestadoresDialog } from "./dialog";
 
 export const PrestadoresList = () => {
   const { filters, resetFilters, setFilters } = useFilters({
@@ -29,8 +26,6 @@ export const PrestadoresList = () => {
   const { columnVisibility, setColumnVisibility } = useColumnVisibility({
     key: "PRESTADORES",
   });
-
-  const { onOpen } = usePrestadorForm();
 
   const {
     columnSizing,
@@ -47,26 +42,13 @@ export const PrestadoresList = () => {
     placeholderData: keepPreviousData,
   });
 
-  const { bancos, estados, prestadorTipoConta, prestadorTipos, status } =
-    useListas();
-
   const paginationState = {
     pageIndex: filters.pageIndex ?? 0,
     pageSize: filters.pageSize ?? 10,
   };
 
   const sortingState = sortByToState(filters.sortBy);
-  const columns = useMemo(
-    () =>
-      makePrestadorDynamicColumns({
-        bancos,
-        estados,
-        prestadorTipos,
-        statusOptions: status,
-        prestadorTipoConta,
-      }),
-    [bancos, estados, prestadorTipos, status, prestadorTipoConta]
-  );
+  const columns = useMemo(() => makePrestadorDynamicColumns(), []);
 
   const { mutateAsync: updatePrestadorMutation } = useMutation({
     mutationFn: async ({ id, data }) =>
@@ -115,7 +97,7 @@ export const PrestadoresList = () => {
         scrollbarWidth="thin"
       >
         <Box>
-          {/* <Flex gap="2" alignItems="center">
+          <Flex gap="2" alignItems="center">
             <DebouncedInput
               value={filters.searchTerm}
               debounce={700}
@@ -141,7 +123,7 @@ export const PrestadoresList = () => {
               Limpar filtros
             </Button>
             {(isLoading || isFetching) && <Spinner size="md" />}
-          </Flex> */}
+          </Flex>
           <Box mt="4">
             <Flex
               w="full"
@@ -150,8 +132,8 @@ export const PrestadoresList = () => {
               pb="2"
               gap="4"
             >
-              <PrestadoresDialog />
-              {/* <VisibilityControlDialog
+              {/* <PrestadoresDialog /> */}
+              <VisibilityControlDialog
                 fields={columns.map((e) => ({
                   label: e.header,
                   accessorKey: e.accessorKey.replaceAll(".", "_"),
@@ -159,7 +141,7 @@ export const PrestadoresList = () => {
                 title="Ocultar colunas"
                 setVisibilityState={setColumnVisibility}
                 visibilityState={columnVisibility}
-              /> */}
+              />
             </Flex>
 
             <DataGrid

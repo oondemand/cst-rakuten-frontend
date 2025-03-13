@@ -34,11 +34,17 @@ export function createChakraStyles(...props) {
       scrollbarWidth: "thin",
       border: "none",
       outline: "none",
+      overflow: "hidden",
+      textOverflow: "ellipsis",
+      whiteSpace: "nowrap",
     }),
     menuList: (base) => ({
       ...base,
       scrollbarWidth: "thin",
       backgroundColor: "white",
+      overflow: "hidden",
+      textOverflow: "ellipsis",
+      whiteSpace: "nowrap",
     }),
     placeholder: (base) => ({
       ...base,

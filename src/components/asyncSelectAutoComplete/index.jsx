@@ -69,6 +69,7 @@ export const AsyncSelectAutocomplete = ({
           fontWeight: "normal",
           fontSize: "xs",
         }),
+
         loadingIndicator: (base) => ({
           ...base,
           width: "10px",
