@@ -14,12 +14,6 @@ export const SelectEstadoField = ({ cod, ...props }) => {
 
   const options = data?.data.map((e) => ({ value: e?.sigla, label: e?.nome }));
 
-  const getValue = (value) => {
-    options?.find((item) => {
-      return item?.value === value;
-    }) ?? "";
-  };
-
   return (
     <Box>
       <Box>
@@ -29,11 +23,10 @@ export const SelectEstadoField = ({ cod, ...props }) => {
           control={props.methods.control}
           render={({ field }) => (
             <Select
-              value={getValue(field.value)}
-              inputValue={getValue(field.value)}
+              value={options?.find((item) => item?.value == field?.value) ?? ""}
               name={field.name}
               onBlur={field.onBlur}
-              onChange={(e) => field.onChange(e?.value)}
+              onChange={(e) => field.onChange(e?.value ?? "")}
               cacheOptions
               isClearable
               options={options}

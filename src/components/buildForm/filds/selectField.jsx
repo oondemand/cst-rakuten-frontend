@@ -4,12 +4,6 @@ import { Controller } from "react-hook-form";
 import { createChakraStyles } from "./chakraStyles";
 
 export const SelectField = ({ options, ...props }) => {
-  const getValue = (value) => {
-    options?.find((item) => {
-      return item?.value === value;
-    }) ?? "";
-  };
-
   return (
     <Box>
       <Box>
@@ -20,14 +14,14 @@ export const SelectField = ({ options, ...props }) => {
           render={({ field }) => {
             return (
               <Select
-                value={getValue(field.value)}
-                inputValue={getValue(field.value)}
+              value={options?.find((item) => item?.value == field?.value) ?? ""}
+                // inputValue={field.value}
                 name={field.name}
                 onBlur={field.onBlur}
                 onChange={(e) => {
-                  field.onChange(e?.value);
+                  field.onChange(e?.value ?? "");
                 }}
-                cacheOptions
+                // cacheOptions
                 isClearable
                 options={options}
                 chakraStyles={createChakraStyles()}

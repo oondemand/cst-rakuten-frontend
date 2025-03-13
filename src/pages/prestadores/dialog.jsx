@@ -1,7 +1,7 @@
 import { Box, Button, Flex } from "@chakra-ui/react";
 import { CloseButton } from "../../components/ui/close-button";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { queryClient } from "../../config/react-query";
 
@@ -101,6 +101,10 @@ export const PrestadoresDialog = ({
 
   const fields = useMemo(() => createDynamicFormFields(), []);
 
+  useEffect(() => {
+    setData(defaultValues);
+  }, [defaultValues]);
+
   return (
     <Box>
       <Box onClick={() => setOpen(true)} asChild>
@@ -135,16 +139,14 @@ export const PrestadoresDialog = ({
               </DialogTitle>
             </DialogHeader>
             <DialogBody>
-              <Box>
-                <BuildForm
-                  visibleState={inputsVisibility}
-                  fields={fields}
-                  gridColumns={4}
-                  gap={6}
-                  data={data}
-                  onSubmit={onSubmit}
-                />
-              </Box>
+              <BuildForm
+                visibleState={inputsVisibility}
+                fields={fields}
+                gridColumns={4}
+                gap={6}
+                data={data}
+                onSubmit={onSubmit}
+              />
             </DialogBody>
             <DialogCloseTrigger asChild>
               <CloseButton size="sm" />

@@ -1,7 +1,7 @@
-import { Box, Button } from "@chakra-ui/react";
+import { Box, Button, Flex } from "@chakra-ui/react";
 import { CloseButton } from "../../components/ui/close-button";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { queryClient } from "../../config/react-query";
 
@@ -18,8 +18,6 @@ import {
   DialogCloseTrigger,
   DialogContent,
   DialogHeader,
-  DialogTitle,
-  DialogTrigger,
 } from "../../components/ui/dialog";
 
 const DefaultTrigger = (props) => {
@@ -109,6 +107,10 @@ export const ServicosDialog = ({
 
   const fields = useMemo(() => createDynamicFormFields(), []);
 
+  useEffect(() => {
+    setData(defaultValues);
+  }, [defaultValues]);
+
   return (
     <Box>
       <Box onClick={() => setOpen(true)} asChild>
@@ -130,25 +132,25 @@ export const ServicosDialog = ({
             rounded="lg"
           >
             <DialogHeader>
-              <DialogTitle>{label}</DialogTitle>
-            </DialogHeader>
-            <DialogBody>
-              <Box>
+              <Flex gap="4">
+                {label}
                 <VisibilityControlDialog
                   fields={fields}
                   setVisibilityState={setInputsVisibility}
                   visibilityState={inputsVisibility}
                   title="Ocultar campos"
                 />
-                <BuildForm
-                  visibleState={inputsVisibility}
-                  fields={fields}
-                  gridColumns={4}
-                  gap={6}
-                  data={data}
-                  onSubmit={onSubmit}
-                />
-              </Box>
+              </Flex>
+            </DialogHeader>
+            <DialogBody>
+              <BuildForm
+                visibleState={inputsVisibility}
+                fields={fields}
+                gridColumns={4}
+                gap={6}
+                data={data}
+                onSubmit={onSubmit}
+              />
             </DialogBody>
             <DialogCloseTrigger asChild>
               <CloseButton size="sm" />

@@ -12,7 +12,7 @@ export const DeleteServicoAction = ({ id }) => {
   const { mutateAsync: deleteServicoMutation } = useMutation({
     mutationFn: async () => await api.delete(`servicos/${id}`),
     onSuccess() {
-      queryClient.refetchQueries(["listar-servicos", { filters }]);
+      queryClient.refetchQueries(["listar-servicos"]);
       toaster.create({
         title: "Serviço excluído com sucesso",
         type: "success",

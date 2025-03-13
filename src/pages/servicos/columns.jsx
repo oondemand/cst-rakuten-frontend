@@ -22,7 +22,7 @@ export const makeServicoDynamicColumns = () => {
       enableSorting: false,
       cell: (props) => (
         <TableActionsCell>
-          <DeleteServicoAction />
+          <DeleteServicoAction id={props.row.original?._id} />
           <ServicosDialog
             trigger={
               <IconButton variant="surface" colorPalette="gray" size="2xs">
@@ -32,6 +32,10 @@ export const makeServicoDynamicColumns = () => {
             label="Serviço"
             defaultValues={{
               ...props.row.original,
+              prestador: {
+                label: `${props.row.original?.prestador?.nome}-${props.row.original?.prestador?.sid}-${props.row.original?.prestador?.documento}`,
+                value: props.row.original?.prestador?._id,
+              },
               dataProvisaoContabil: formatDate(
                 props.row.original?.dataProvisaoContabil
               ),

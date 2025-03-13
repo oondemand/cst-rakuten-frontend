@@ -58,6 +58,8 @@ export const SelectPrestadorField = ({ ...props }) => {
           name={props.field.name}
           control={props.methods.control}
           render={({ field }) => {
+            console.log("Prestador value", field.value);
+
             return (
               <AsyncSelect
                 key={field.name}

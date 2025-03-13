@@ -31,12 +31,12 @@ export const SelectBancoField = ({ cod, ...props }) => {
           render={({ field }) => (
             <Select
               components={{ MenuList }}
-              value={getValue(field.value)}
-              inputValue={getValue(field.value)}
+              value={options?.find((item) => item?.value == field?.value) ?? ""}
+              // inputValue={getValue(field.value)}
               name={field.name}
               onBlur={field.onBlur}
               onChange={(e) => {
-                field.onChange(e?.value?.value);
+                field.onChange(e?.value ?? "");
               }}
               cacheOptions
               isClearable
