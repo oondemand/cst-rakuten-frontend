@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { api } from "../../../config/api";
 import { SelectAutocomplete } from "../../selectAutocomplete";
+import { MenuList } from "../../menuList";
 
 export const SelectBancoCell = ({ getValue, row, column, table, ...rest }) => {
   const { data } = useQuery({
@@ -45,6 +46,7 @@ export const SelectBancoCell = ({ getValue, row, column, table, ...rest }) => {
   }, [initialValue, data]);
   return (
     <SelectAutocomplete
+      components={{ MenuList }}
       placeholder={value}
       onBlur={onBlur}
       value={value}

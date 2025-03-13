@@ -27,9 +27,10 @@ export const SelectListaCell = ({
     })) || [];
 
   const findItemByInitialValue = (options) => {
-    return options.find(
-      (option) => option.label === initialValue || option.value === initialValue
-    );
+    return options.find((option) => {
+      console.log("LOG", option, initialValue);
+      return option.label === initialValue || option.value === initialValue;
+    });
   };
 
   const handleUpdateError = () => {

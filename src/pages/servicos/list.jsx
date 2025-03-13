@@ -19,6 +19,8 @@ import { useListas } from "../../hooks/useListas";
 
 import { VisibilityControlDialog } from "../../components/vibilityControlDialog";
 import { useServicoForm } from "../../hooks/useServicosForm";
+import { ServicoDialog } from "../../components/servicoDialog";
+import { ServicosDialog } from "./dialog";
 
 export const ServicosList = () => {
   const { filters, resetFilters, setFilters } = useFilters({
@@ -28,8 +30,6 @@ export const ServicosList = () => {
   const { columnVisibility, setColumnVisibility } = useColumnVisibility({
     key: "SERVICOS",
   });
-
-  const { onOpen } = useServicoForm();
 
   const {
     columnSizing,
@@ -105,7 +105,6 @@ export const ServicosList = () => {
               value={filters.searchTerm}
               debounce={700}
               onChange={(value) => {
-                console.log("Changing", value);
                 setFilters((prev) => ({
                   ...prev,
                   searchTerm: value,
@@ -136,14 +135,7 @@ export const ServicosList = () => {
               pb="2"
               gap="4"
             >
-              <Button
-                onClick={() => onOpen("Criar servico")}
-                variant="subtle"
-                color="brand.500"
-                fontWeight="semibold"
-              >
-                Criar servico
-              </Button>
+              {/* <ServicosDialog /> */}
               <VisibilityControlDialog
                 fields={columns.map((e) => ({
                   label: e.header,

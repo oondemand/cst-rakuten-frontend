@@ -7,7 +7,6 @@ import { useVirtualizer } from "@tanstack/react-virtual";
 import "./custom-scrollbar.css";
 
 import { SquarePlus } from "lucide-react";
-import { TicketModal } from "../ticketModal";
 import { CreateTicketModal } from "../ticketModal/modalCreate";
 
 const _Etapa = ({ etapa, tickets }) => {

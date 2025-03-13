@@ -19,6 +19,7 @@ import { useListas } from "../../hooks/useListas";
 
 import { VisibilityControlDialog } from "../../components/vibilityControlDialog";
 import { usePrestadorForm } from "../../hooks/usePrestadorForm";
+import { PrestadoresDialog } from "./dialog";
 
 export const PrestadoresList = () => {
   const { filters, resetFilters, setFilters } = useFilters({
@@ -114,7 +115,7 @@ export const PrestadoresList = () => {
         scrollbarWidth="thin"
       >
         <Box>
-          <Flex gap="2" alignItems="center">
+          {/* <Flex gap="2" alignItems="center">
             <DebouncedInput
               value={filters.searchTerm}
               debounce={700}
@@ -140,7 +141,7 @@ export const PrestadoresList = () => {
               Limpar filtros
             </Button>
             {(isLoading || isFetching) && <Spinner size="md" />}
-          </Flex>
+          </Flex> */}
           <Box mt="4">
             <Flex
               w="full"
@@ -149,15 +150,8 @@ export const PrestadoresList = () => {
               pb="2"
               gap="4"
             >
-              <Button
-                onClick={() => onOpen("Criar prestador")}
-                variant="subtle"
-                color="brand.500"
-                fontWeight="semibold"
-              >
-                Criar prestador
-              </Button>
-              <VisibilityControlDialog
+              <PrestadoresDialog />
+              {/* <VisibilityControlDialog
                 fields={columns.map((e) => ({
                   label: e.header,
                   accessorKey: e.accessorKey.replaceAll(".", "_"),
@@ -165,7 +159,7 @@ export const PrestadoresList = () => {
                 title="Ocultar colunas"
                 setVisibilityState={setColumnVisibility}
                 visibilityState={columnVisibility}
-              />
+              /> */}
             </Flex>
 
             <DataGrid

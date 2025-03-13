@@ -51,7 +51,6 @@ export const SelectPrestadorCell = ({
 
     const options = await debounceRequest(async () => {
       const prestadores = await fetchPrestadores(inputValue);
-      console.log("Prestadores", prestadores);
       return prestadores.map(createPrestadorOption);
     }, 1000);
 
