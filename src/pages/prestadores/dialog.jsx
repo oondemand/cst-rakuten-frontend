@@ -112,7 +112,15 @@ export const PrestadoresDialog = ({
           open={open}
           onOpenChange={(e) => setOpen(e.open)}
         >
-          <DialogContent w="1250px" h="80%" pt="6" px="2" rounded="lg">
+          <DialogContent
+            overflow="auto"
+            scrollbarWidth="thin"
+            w="1250px"
+            h="80%"
+            pt="6"
+            px="2"
+            rounded="lg"
+          >
             <DialogHeader>
               <DialogTitle>
                 <Flex gap="4">

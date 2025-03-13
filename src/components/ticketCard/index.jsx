@@ -126,11 +126,11 @@ const _TicketCard = ({ ticket, onClick, isEspecial, index }) => {
               gap="2"
             >
               <Flex alignItems="center" gap="2">
-                <Badge>
-                  <Text fontSize="xs">
+                {/* <Badge> */}
+                {/* <Text fontSize="xs">
                     {ticket?.prestador?.tipoDocumentoFiscal}
-                  </Text>
-                </Badge>
+                  </Text> */}
+                {/* </Badge> */}
                 <Tooltip
                   showArrow
                   content={<ServicesCard servicos={ticket?.servicos} />}
@@ -177,7 +177,7 @@ const _TicketCard = ({ ticket, onClick, isEspecial, index }) => {
                       fontWeight={400}
                       fontSize="xs"
                     >
-                      {ticket?.arquivos?.length}
+                      {ticket?.arquivos?.length ?? 0}
                     </Text>
                   </Flex>
                 </Tooltip>

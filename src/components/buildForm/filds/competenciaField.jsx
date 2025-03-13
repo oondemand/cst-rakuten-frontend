@@ -10,7 +10,8 @@ export const CompetenciaField = ({ ...props }) => {
         {props.label}
       </Text>
       <Input
-        fontSize="md"
+        size="sm"
+        fontSize="sm"
         variant="flushed"
         {...registerWithMask(props.accessorKey, "99/9999")}
       />

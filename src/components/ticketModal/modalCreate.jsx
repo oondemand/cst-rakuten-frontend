@@ -199,7 +199,7 @@ export const CreateTicketModal = ({ open, setOpen }) => {
 
   return (
     <DialogRoot
-      placement="center"
+      // placement="center"
       size="cover"
       open={open}
       onOpenChange={({ open }) => {
@@ -207,7 +207,15 @@ export const CreateTicketModal = ({ open, setOpen }) => {
         setOpen(open);
       }}
     >
-      <DialogContent w="750px" rounded="lg" pb="4" pt="1">
+      <DialogContent
+        overflow="auto"
+        scrollbarWidth="thin"
+        w="1000px"
+        h="80%"
+        pt="6"
+        px="2"
+        rounded="lg"
+      >
         <DialogTitle
           asChild
           borderBottom="1px solid"

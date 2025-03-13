@@ -88,9 +88,9 @@ export const TicketModal = ({ open, setOpen, ticket = null }) => {
                 </Text>
               </Box>
             </GridItem>
-            <GridItem colSpan={3} mt="6">
+            {/* <GridItem colSpan={3} mt="6">
               <PrestadorForm prestador={ticket?.prestador} />
-            </GridItem>
+            </GridItem> */}
           </Grid>
         </DialogBody>
         <DialogCloseTrigger />

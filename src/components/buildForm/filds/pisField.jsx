@@ -12,7 +12,7 @@ export const PisPasepField = ({ ...props }) => {
       <Input
         fontSize="md"
         variant="flushed"
-        ref={registerWithMask("999.99999.99-9")}
+        {...registerWithMask(props.accessorKey, "999.99999.99-9")}
       />
       <Text mt="0.5" fontSize="xs" color="red.400">
         {props.error}

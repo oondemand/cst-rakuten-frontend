@@ -6,9 +6,6 @@ import { AuthLayout } from "./components/_layouts/auth";
 import { PrestadoresList } from "./pages/prestadores/list";
 import { ServicosList } from "./pages/servicos/list";
 
-import { ServicoDialogProvider } from "./hooks/useServicosForm";
-import { PrestadorDialogProvider } from "./hooks/usePrestadorForm";
-
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -20,19 +17,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/prestadores",
-        element: (
-          <PrestadorDialogProvider>
-            <PrestadoresList />
-          </PrestadorDialogProvider>
-        ),
+        element: <PrestadoresList />,
       },
       {
         path: "/servicos/todos",
-        element: (
-          <ServicoDialogProvider>
-            <ServicosList />
-          </ServicoDialogProvider>
-        ),
+        element: <ServicosList />,
       },
       {
         path: "/servicos/provisionamento",

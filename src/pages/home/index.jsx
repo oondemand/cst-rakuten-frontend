@@ -14,9 +14,10 @@ import { Etapa } from "../../components/etapaCard";
 import { TicketService } from "../../service/ticket";
 import { Filter } from "lucide-react";
 import { DebouncedInput } from "../../components/DebouncedInput";
+import { useStateWithStorage } from "../../hooks/useStateStorage";
 
 export const Home = () => {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useStateWithStorage("searchTerm");
 
   const {
     data: etapas,
@@ -77,7 +78,7 @@ export const Home = () => {
             placeIcon="right"
             iconSize={16}
             iconColor="purple"
-            value={undefined}
+            value={searchTerm}
             onChange={setSearchTerm}
           />
         </Flex>

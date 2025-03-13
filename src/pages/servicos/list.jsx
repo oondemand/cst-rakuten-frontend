@@ -18,7 +18,6 @@ import { queryClient } from "../../config/react-query";
 import { useListas } from "../../hooks/useListas";
 
 import { VisibilityControlDialog } from "../../components/vibilityControlDialog";
-import { useServicoForm } from "../../hooks/useServicosForm";
 import { ServicoDialog } from "../../components/servicoDialog";
 import { ServicosDialog } from "./dialog";
 

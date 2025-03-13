@@ -27,7 +27,9 @@ export const ServicesCard = ({ servicos = [] }) => {
         </Flex>
         {formattedServices.map((item) => (
           <Flex key={item._id} py="0.1" gap="2" color="gray.400">
-            <Text>{item.competencia}</Text>
+            <Text>
+              {item?.competencia?.mes}/{item?.competencia?.ano}
+            </Text>
             <Text fontWeight={400}>RS {currency.format(item.valor)}</Text>
           </Flex>
         ))}

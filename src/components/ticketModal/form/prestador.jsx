@@ -38,8 +38,8 @@ export const PrestadorForm = ({ prestador, onBlurFn }) => {
         />
       </Flex>
       <BuildForm
-        fieldsWidth="245px"
-        flexStyles={{ display: "flex" }}
+        // fieldsWidth="245px"
+        // flexStyles={{ display: "flex" }}
         fields={fields}
         data={prestador}
         visibleState={inputsVisibility}
