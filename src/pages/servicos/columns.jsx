@@ -7,15 +7,43 @@ import { CurrencyCell } from "../../components/dataGrid/cells/currencyCell";
 import { DisabledCurrencyCell } from "../../components/dataGrid/cells/disabledCurrencyCell";
 import { DisabledDefaultCell } from "../../components/dataGrid/cells/disabledDefaultCell";
 import { SelectPrestadorCell } from "../../components/dataGrid/cells/selectPrestador";
+import { ServicosDialog } from "./dialog";
+import { formatDate } from "../../utils/formatting";
+import { IconButton } from "@chakra-ui/react";
+import { Pencil } from "lucide-react";
+import { TableActionsCell } from "../../components/dataGrid/cells/tableActionsCell";
+import { DeleteServicoAction } from "../../components/dataGrid/actions/deleteServicoButton";
 
-export const makeServicoDynamicColumns = ({}) => {
+export const makeServicoDynamicColumns = () => {
   return [
-    // {
-    //   accessorKey: "acoes",
-    //   header: "Ações",
-    //   enableSorting: false,
-    //   cell: TableActions,
-    // },
+    {
+      accessorKey: "acoes",
+      header: "Ações",
+      enableSorting: false,
+      cell: (props) => (
+        <TableActionsCell>
+          <DeleteServicoAction />
+          <ServicosDialog
+            trigger={
+              <IconButton variant="surface" colorPalette="gray" size="2xs">
+                <Pencil />
+              </IconButton>
+            }
+            label="Serviço"
+            defaultValues={{
+              ...props.row.original,
+              dataProvisaoContabil: formatDate(
+                props.row.original?.dataProvisaoContabil
+              ),
+              dataRegistro: formatDate(props.row.original?.dataRegistro),
+              competencia: `${props.row.original.competencia.mes
+                .toString()
+                .padStart(2, "0")}/${props.row.original.competencia.ano}`,
+            }}
+          />
+        </TableActionsCell>
+      ),
+    },
     {
       accessorKey: "tipoDocumentoFiscal",
       header: "Documento Fiscal",

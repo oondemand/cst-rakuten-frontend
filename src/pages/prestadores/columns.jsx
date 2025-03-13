@@ -3,13 +3,18 @@ import { CpfCnpjCell } from "../../components/dataGrid/cells/cpfCnpjCell";
 import { SelectAutoCompleteCell } from "../../components/dataGrid/cells/selectAutoComplete";
 
 import { DefaultCell } from "../../components/dataGrid/cells/default";
-import { TableActions } from "./tableActions";
 import { SelectListaCell } from "../../components/dataGrid/cells/selectLista";
 import { DateCell } from "../../components/dataGrid/cells/dateCell";
 import { PisPasepCell } from "../../components/dataGrid/cells/pisPasepCell";
 import { LISTA_PAISES_OMIE } from "../../constants/omie";
 import { SelectBancoCell } from "../../components/dataGrid/cells/selectBancoCell";
 import { SelectEstadoCell } from "../../components/dataGrid/cells/selectEstadoCell";
+import { DeletePrestadorAction } from "../../components/dataGrid/actions/deletePrestadorButton";
+import { TableActionsCell } from "../../components/dataGrid/cells/tableActionsCell";
+import { PrestadoresDialog } from "./dialog";
+import { IconButton } from "@chakra-ui/react";
+import { Pencil } from "lucide-react";
+import { formatDate } from "../../utils/formatting";
 
 export const makePrestadorDynamicColumns = () => {
   return [
@@ -17,7 +22,28 @@ export const makePrestadorDynamicColumns = () => {
       accessorKey: "acoes",
       header: "Ações",
       enableSorting: false,
-      cell: TableActions,
+      cell: (props) => (
+        <TableActionsCell>
+          <DeletePrestadorAction id={props.row.original?._id} />
+          <PrestadoresDialog
+            trigger={
+              <IconButton variant="surface" colorPalette="gray" size="2xs">
+                <Pencil />
+              </IconButton>
+            }
+            label="Prestador"
+            defaultValues={{
+              ...props.row.original,
+              pessoaFisica: {
+                ...props.row.original.pessoaFisica,
+                dataNascimento: formatDate(
+                  props?.row?.original?.pessoaFisica?.dataNascimento
+                ),
+              },
+            }}
+          />
+        </TableActionsCell>
+      ),
     },
     {
       accessorKey: "sciUnico",

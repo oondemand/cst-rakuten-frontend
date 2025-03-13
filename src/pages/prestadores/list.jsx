@@ -17,6 +17,7 @@ import { toaster } from "../../components/ui/toaster";
 import { queryClient } from "../../config/react-query";
 
 import { VisibilityControlDialog } from "../../components/vibilityControlDialog";
+import { PrestadoresDialog } from "./dialog";
 
 export const PrestadoresList = () => {
   const { filters, resetFilters, setFilters } = useFilters({
@@ -132,7 +133,7 @@ export const PrestadoresList = () => {
               pb="2"
               gap="4"
             >
-              {/* <PrestadoresDialog /> */}
+              <PrestadoresDialog />
               <VisibilityControlDialog
                 fields={columns.map((e) => ({
                   label: e.header,

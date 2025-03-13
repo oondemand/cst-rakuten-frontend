@@ -135,7 +135,7 @@ export const ServicosList = () => {
               pb="2"
               gap="4"
             >
-              {/* <ServicosDialog /> */}
+              <ServicosDialog />
               <VisibilityControlDialog
                 fields={columns.map((e) => ({
                   label: e.header,

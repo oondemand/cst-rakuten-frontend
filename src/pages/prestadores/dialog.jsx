@@ -1,4 +1,5 @@
-import { Box, Button } from "@chakra-ui/react";
+import { Box, Button, Flex } from "@chakra-ui/react";
+import { CloseButton } from "../../components/ui/close-button";
 
 import { useMemo, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
@@ -8,28 +9,55 @@ import { createDynamicFormFields } from "./formFields";
 import { BuildForm } from "../../components/buildForm/index";
 import { VisibilityControlDialog } from "../../components/vibilityControlDialog";
 import { useVisibleInputForm } from "../../hooks/useVisibleInputForms";
-import { api } from "../../config/api";
 import { toaster } from "../../components/ui/toaster";
+import { PrestadorService } from "../../service/prestador";
+
+import {
+  DialogRoot,
+  DialogBody,
+  DialogCloseTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "../../components/ui/dialog";
+
+const DefaultTrigger = (props) => {
+  return (
+    <Button
+      {...props}
+      size="sm"
+      variant="subtle"
+      fontWeight="semibold"
+      color="brand.500"
+      _hover={{ backgroundColor: "gray.50" }}
+    >
+      Criar um prestador
+    </Button>
+  );
+};
 
 export const PrestadoresDialog = ({
-  initialData = null,
+  defaultValues = null,
+  trigger,
   label = "Criar prestador",
 }) => {
-  const [data, setData] = useState(initialData);
+  const [data, setData] = useState(defaultValues);
+  const [open, setOpen] = useState(false);
   const { inputsVisibility, setInputsVisibility } = useVisibleInputForm({
     key: "PRESTADORES",
   });
 
   const { mutateAsync: updatePrestadorMutation } = useMutation({
     mutationFn: async ({ id, body }) =>
-      await api.patch(`prestadores/${data._id}`, body),
+      await PrestadorService.atualizarPrestador({ body, id }),
     onSuccess(data) {
-      setData((prev) => data.data.prestador);
+      setData((prev) => data.prestador);
+      queryClient.invalidateQueries(["listar-prestadores"]);
       toaster.create({
         title: "Prestador atualizado com sucesso",
         type: "success",
       });
-      queryClient.invalidateQueries(["listar-prestadores"]);
     },
     onError: (error) => {
       toaster.create({
@@ -40,10 +68,11 @@ export const PrestadoresDialog = ({
   });
 
   const { mutateAsync: createPrestadorMutation } = useMutation({
-    mutationFn: async ({ body }) => await api.post(`prestadores`, body),
+    mutationFn: async ({ body }) =>
+      await PrestadorService.criarPrestador({ body }),
     onSuccess(data) {
-      setData((prev) => data.data.prestador);
-
+      setData((prev) => data.prestador);
+      queryClient.invalidateQueries(["listar-prestadores"]);
       toaster.create({
         title: "Prestador criado com sucesso",
         type: "success",
@@ -72,70 +101,49 @@ export const PrestadoresDialog = ({
 
   const fields = useMemo(() => createDynamicFormFields(), []);
 
-  // function onCloseModal() {
-  //   queryClient.refetchQueries(["listar-prestadores"]);
-  //   !initialData && setData();
-  //   onClose();
-  // }
-
   return (
     <Box>
-      <VisibilityControlDialog
-        fields={fields}
-        setVisibilityState={setInputsVisibility}
-        visibilityState={inputsVisibility}
-        title="Ocultar campos"
-      />
-      <BuildForm
-        visibleState={inputsVisibility}
-        fields={fields}
-        gridColumns={4}
-        gap={6}
-        data={data}
-        onSubmit={onSubmit}
-      />
+      <Box onClick={() => setOpen(true)} asChild>
+        {trigger ? trigger : <DefaultTrigger />}
+      </Box>
+      {open && (
+        <DialogRoot
+          size="cover"
+          open={open}
+          onOpenChange={(e) => setOpen(e.open)}
+        >
+          <DialogContent w="1250px" h="80%" pt="6" px="2" rounded="lg">
+            <DialogHeader>
+              <DialogTitle>
+                <Flex gap="4">
+                  {label}
+                  <VisibilityControlDialog
+                    fields={fields}
+                    setVisibilityState={setInputsVisibility}
+                    visibilityState={inputsVisibility}
+                    title="Ocultar campos"
+                  />
+                </Flex>
+              </DialogTitle>
+            </DialogHeader>
+            <DialogBody>
+              <Box>
+                <BuildForm
+                  visibleState={inputsVisibility}
+                  fields={fields}
+                  gridColumns={4}
+                  gap={6}
+                  data={data}
+                  onSubmit={onSubmit}
+                />
+              </Box>
+            </DialogBody>
+            <DialogCloseTrigger asChild>
+              <CloseButton size="sm" />
+            </DialogCloseTrigger>
+          </DialogContent>
+        </DialogRoot>
+      )}
     </Box>
-    // <>
-    //   <Button
-    //     onClick={() => {
-    //       onOpen();
-    //     }}
-    //     size="sm"
-    //     variant="subtle"
-    //     fontWeight="semibold"
-    //     _hover={{ backgroundColor: "gray.50" }}
-    //   >
-    //     {label}
-    //   </Button>
-
-    //   {isOpen && (
-    //     <AlertDialog
-    //       isOpen={isOpen}
-    //       onClose={onCloseModal}
-    //       leastDestructiveRef={cancelRef}
-    //       isCentered
-    //       size="6xl"
-    //     >
-    //       <AlertDialogOverlay>
-    //         <AlertDialogContent>
-    //           <AlertDialogHeader
-    //             display="flex"
-    //             gap="2"
-    //             alignItems="center"
-    //             fontSize="lg"
-    //             fontWeight="bold"
-    //           >
-    //             Criar serviço
-
-    //           </AlertDialogHeader>
-    //           <AlertDialogBody pb="8">
-
-    //           </AlertDialogBody>
-    //           <AlertDialogCloseButton />
-    //         </AlertDialogContent>
-    //       </AlertDialogOverlay>
-    //     </AlertDialog>
-    //   )}
-    // </>
   );
 };
