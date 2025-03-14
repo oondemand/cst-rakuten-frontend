@@ -45,6 +45,7 @@ import { createDynamicFormFields } from "../../pages/prestadores/formFields";
 import { useListas } from "../../hooks/useListas";
 import { VisibilityControlDialog } from "../vibilityControlDialog";
 import { TicketModal } from "../ticketModal";
+import { CreateTicketModal } from "../ticketModal/modalCreate";
 
 const _TicketCard = ({ ticket, onClick, isEspecial, index }) => {
   const [open, setOpen] = useState(false);
@@ -53,6 +54,12 @@ const _TicketCard = ({ ticket, onClick, isEspecial, index }) => {
     "aguardando-inicio": "yellow.400",
     trabalhando: "green.400",
     revisao: "red.500",
+  };
+
+  const ticketTypeCarMap = {
+    pj: "NF",
+    ext: "INV",
+    pf: "RPA",
   };
 
   const valorTotal = ticket.servicos.reduce((acc, curr) => {
@@ -126,11 +133,11 @@ const _TicketCard = ({ ticket, onClick, isEspecial, index }) => {
               gap="2"
             >
               <Flex alignItems="center" gap="2">
-                {/* <Badge> */}
-                {/* <Text fontSize="xs">
-                    {ticket?.prestador?.tipoDocumentoFiscal}
-                  </Text> */}
-                {/* </Badge> */}
+                <Badge>
+                  <Text fontSize="xs">
+                    {ticketTypeCarMap[ticket?.prestador?.tipo]}
+                  </Text>
+                </Badge>
                 <Tooltip
                   showArrow
                   content={<ServicesCard servicos={ticket?.servicos} />}
@@ -197,10 +204,15 @@ const _TicketCard = ({ ticket, onClick, isEspecial, index }) => {
       </Box>
 
       {open && (
-        <TicketModal.root open={open} ticket={ticket} setOpen={setOpen}>
-          <TicketModal.prestadorForm prestador={ticket?.prestador} />
-          <TicketModal.servicesList servicos={ticket?.servicos} />
-        </TicketModal.root>
+        <CreateTicketModal
+          defaultValue={ticket}
+          open={open}
+          setOpen={setOpen}
+        />
+        // <TicketModal.root open={open} ticket={ticket} setOpen={setOpen}>
+        //   <TicketModal.prestadorForm prestador={ticket?.prestador} />
+        //   <TicketModal.servicesList servicos={ticket?.servicos} />
+        // </TicketModal.root>
       )}
     </Box>
   );

@@ -5,7 +5,13 @@ export const DefaultField = ({ inputStyle, ...props }) => {
       <Text fontSize="sm" color="gray.700">
         {props.label}
       </Text>
-      <Input {...props.field} size="sm" fontSize="sm" variant="flushed" />
+      <Input
+        {...props.field}
+        disabled={props?.disabled}
+        size="sm"
+        fontSize="sm"
+        variant="flushed"
+      />
       <Text mt="0.5" fontSize="xs" color="red.400">
         {props.error}
       </Text>

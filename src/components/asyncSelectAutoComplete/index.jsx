@@ -48,7 +48,7 @@ export const AsyncSelectAutocomplete = ({
       isClearable={true}
       variant="subtle"
       onBlur={onBlur}
-      size="xs"
+      size="sm"
       value={value ?? ""}
       onChange={setValue}
       loadOptions={loadOptions}
@@ -62,6 +62,7 @@ export const AsyncSelectAutocomplete = ({
           outline: "none",
           focusRingColor: "transparent",
           fontSize: "xs",
+          rounded: "none",
         }),
         menu: (base) => ({
           ...base,

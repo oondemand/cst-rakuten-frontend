@@ -33,6 +33,9 @@ export const SelectListaField = ({ cod, ...props }) => {
           render={({ field }) => {
             return (
               <Select
+                fontSize="sm"
+                size="sm"
+                disabled={props?.disabled}
                 value={
                   options?.find((item) => item?.value == field?.value) ?? ""
                 }

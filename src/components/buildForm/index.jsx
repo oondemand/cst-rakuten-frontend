@@ -57,6 +57,7 @@ export const BuildForm = ({
   data,
   gap,
   gridColumns = 4,
+  disabled,
   ...props
 }) => {
   const schema = buildNestedSchema(fields);
@@ -66,7 +67,7 @@ export const BuildForm = ({
     resolver: zodResolver(schema),
     shouldFocusError: false,
 
-    defaultValues: {
+    values: {
       ...data,
     },
   });
@@ -80,7 +81,11 @@ export const BuildForm = ({
   return (
     <FormProvider {...methods}>
       <form onBlur={handleSubmit(onSubmit)}>
-        <Grid templateColumns={`repeat(${gridColumns}, 1fr)`} gap={gap}>
+        <Grid
+          alignItems="baseline"
+          templateColumns={`repeat(${gridColumns}, 1fr)`}
+          gap={gap}
+        >
           {fields.map((field) => {
             const { render, ...rest } = field;
 
@@ -102,6 +107,7 @@ export const BuildForm = ({
                   field: register(field.accessorKey),
                   error: getNestedValue(errors, field.accessorKey)?.message,
                   methods,
+                  disabled,
                   ...rest,
                   ...props,
                   ...methods,

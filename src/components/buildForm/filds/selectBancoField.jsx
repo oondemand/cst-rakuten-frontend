@@ -30,9 +30,11 @@ export const SelectBancoField = ({ cod, ...props }) => {
           control={props.methods.control}
           render={({ field }) => (
             <Select
+              fontSize="sm"
+              size="sm"
+              disabled={props?.disabled}
               components={{ MenuList }}
               value={options?.find((item) => item?.value == field?.value) ?? ""}
-              // inputValue={getValue(field.value)}
               name={field.name}
               onBlur={field.onBlur}
               onChange={(e) => {

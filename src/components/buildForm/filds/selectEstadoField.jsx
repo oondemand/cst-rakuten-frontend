@@ -23,6 +23,9 @@ export const SelectEstadoField = ({ cod, ...props }) => {
           control={props.methods.control}
           render={({ field }) => (
             <Select
+              fontSize="sm"
+              size="sm"
+              disabled={props?.disabled}
               value={options?.find((item) => item?.value == field?.value) ?? ""}
               name={field.name}
               onBlur={field.onBlur}

@@ -16,6 +16,7 @@ import {
   DialogBody,
   DialogCloseTrigger,
   DialogContent,
+  DialogFooter,
   DialogRoot,
   DialogTitle,
 } from "../ui/dialog";
@@ -35,25 +36,14 @@ import { toaster } from "../ui/toaster";
 import { PrestadorService } from "../../service/prestador";
 import { PlusSquare } from "lucide-react";
 import { ServicoService } from "../../service/servico";
+import { TicketStatus } from "./ticketStatus";
+import { TicketActions } from "./ticketActions";
 
-export const fetchOptions = async (inputValue) => {
-  return await api.get(`/prestadores?searchTerm=${inputValue}`);
-};
+export const CreateTicketModal = ({ open, setOpen, defaultValue }) => {
+  const [ticket, setTicket] = useState(defaultValue);
+  // const [servicos, setServicos] = useState([]);
 
-export const CreateTicketModal = ({ open, setOpen }) => {
-  const [ticket, setTicket] = useState(null);
-  const [prestador, setPrestador] = useState(null);
-  const [servicos, setServicos] = useState([]);
-
-  const obterPrestadores = async (inputValue) => {
-    const {
-      data: { prestadores },
-    } = await fetchOptions(inputValue);
-
-    return prestadores.map((item) => {
-      return { ...item, value: item._id, label: item.nome };
-    });
-  };
+  console.log("Ticket", ticket);
 
   const { mutateAsync: createTicketMutation } = useMutation({
     mutationFn: TicketService.adicionarTicket,
@@ -80,38 +70,19 @@ export const CreateTicketModal = ({ open, setOpen }) => {
     },
   });
 
-  const { mutateAsync: createPrestadorMutation } = useMutation({
-    mutationFn: PrestadorService.criarPrestador,
-    onSuccess: (data) => {
-      setTicket((prev) => ({ ...prev, prestador: data?.prestador }));
-    },
-  });
+  // const { mutateAsync: createServiceMutation } = useMutation({
+  //   mutationFn: async ({ body }) => await ServicoService.criarServico({ body }),
+  // });
 
-  const { mutateAsync: updatePrestadorMutation } = useMutation({
-    mutationFn: async ({ id, body }) =>
-      await PrestadorService.atualizarPrestador({ id, body }),
-    onSuccess: (data) => {
-      setTicket((prev) => ({ ...prev, prestador: data?.prestador }));
-      toaster.create({
-        title: "Prestador atualizado com sucesso",
-        type: "success",
-      });
-    },
-  });
-
-  const { mutateAsync: createServiceMutation } = useMutation({
-    mutationFn: async ({ body }) => await ServicoService.criarServico({ body }),
-  });
-
-  const { mutateAsync: updateServicoMutation } = useMutation({
-    mutationFn: async ({ id, body }) =>
-      await ServicoService.atualizarServico({ id, body }),
-    onSuccess: () =>
-      toaster.create({
-        title: "Serviço atualizado com sucesso",
-        type: "success",
-      }),
-  });
+  // const { mutateAsync: updateServicoMutation } = useMutation({
+  //   mutationFn: async ({ id, body }) =>
+  //     await ServicoService.atualizarServico({ id, body }),
+  //   onSuccess: () =>
+  //     toaster.create({
+  //       title: "Serviço atualizado com sucesso",
+  //       type: "success",
+  //     }),
+  // });
 
   const onInputTicketFieldBlur = async ({ target: { name, value } }) => {
     if (value !== "" && !ticket) {
@@ -128,82 +99,49 @@ export const CreateTicketModal = ({ open, setOpen }) => {
     }
   };
 
-  const handlePrestadorChange = async (e) => {
-    setPrestador(e);
+  // const adicionarServico = async () => {
+  //   const anoCompetencia = 2024;
+  //   const mesCompetencia = 12;
 
-    if (e && e.value !== ticket?.prestador?._id) {
-      return await updateTicketMutation({
-        id: ticket?._id,
-        body: {
-          prestador: e.value,
-        },
-      });
-    }
-  };
+  //   const { servico } = await createServiceMutation({
+  //     body: { anoCompetencia, mesCompetencia },
+  //   });
 
-  const handlePrestadorFormBlur = async (body) => {
-    if (!ticket?.prestador) {
-      const { prestador } = await createPrestadorMutation(body);
-      if (prestador) {
-        return await updateTicketMutation({
-          id: ticket._id,
-          body: {
-            prestador: prestador?._id,
-          },
-        });
-      }
-    }
+  //   const response = await updateTicketMutation({
+  //     id: ticket._id,
+  //     body: { servicos: [...ticket.servicos, servico] },
+  //   });
 
-    return await updatePrestadorMutation({
-      id: ticket.prestador._id,
-      ...body,
-    });
-  };
+  //   setServicos((prev) => [...prev, servico]);
+  // };
 
-  const adicionarServico = async () => {
-    const anoCompetencia = 2024;
-    const mesCompetencia = 12;
+  // const atualizarServico = (id, campo, valor) => {
+  //   const servicosAtualizados = servicos.map((servico) =>
+  //     servico.id === id ? { ...servico, [campo]: valor } : servico
+  //   );
 
-    const { servico } = await createServiceMutation({
-      body: { anoCompetencia, mesCompetencia },
-    });
+  //   setServicos(servicosAtualizados);
+  // };
 
-    const response = await updateTicketMutation({
-      id: ticket._id,
-      body: { servicos: [...ticket.servicos, servico] },
-    });
+  // const handleServicoBlur = async (id, campo, valor) => {
+  //   const servico = ticket.servicos.find((servico) => servico._id === id);
 
-    setServicos((prev) => [...prev, servico]);
-  };
+  //   if (valor !== servico[campo]) {
+  //     await updateServicoMutation({
+  //       id,
+  //       body: { [campo]: valor },
+  //     });
 
-  const atualizarServico = (id, campo, valor) => {
-    const servicosAtualizados = servicos.map((servico) =>
-      servico.id === id ? { ...servico, [campo]: valor } : servico
-    );
-
-    setServicos(servicosAtualizados);
-  };
-
-  const handleServicoBlur = async (id, campo, valor) => {
-    const servico = ticket.servicos.find((servico) => servico._id === id);
-
-    if (valor !== servico[campo]) {
-      await updateServicoMutation({
-        id,
-        body: { [campo]: valor },
-      });
-
-      servico[campo] = valor;
-    }
-  };
+  //     servico[campo] = valor;
+  //   }
+  // };
 
   return (
     <DialogRoot
-      // placement="center"
       size="cover"
       open={open}
       onOpenChange={({ open }) => {
-        queryClient.refetchQueries(["listar-tickets"]);
+        queryClient.invalidateQueries(["listar-tickets"]);
         setOpen(open);
       }}
     >
@@ -211,7 +149,7 @@ export const CreateTicketModal = ({ open, setOpen }) => {
         overflow="auto"
         scrollbarWidth="thin"
         w="1000px"
-        h="80%"
+        h="95%"
         pt="6"
         px="2"
         rounded="lg"
@@ -222,7 +160,7 @@ export const CreateTicketModal = ({ open, setOpen }) => {
           w="full"
           borderColor="gray.200"
         >
-          <Flex gap="4" alignItems="center" py="2" px="4">
+          <Flex gap="4" alignItems="center" mt="-4" py="2" px="4">
             <Oondemand />
             <Heading fontSize="sm">Criar novo ticket</Heading>
           </Flex>
@@ -250,20 +188,16 @@ export const CreateTicketModal = ({ open, setOpen }) => {
               size="sm"
               placeholder="Titulo..."
               px="0"
+              defaultValue={ticket?.titulo}
             />
-            <ButtonGroup size="2xs">
-              <Button rounded="lg" disabled colorPalette="yellow">
-                Aguardando início
-              </Button>
-              <Button rounded="lg" disabled={false} colorPalette="green">
-                Trabalhando
-              </Button>
-              <Button rounded="lg" disabled colorPalette="red">
-                Revisão
-              </Button>
-            </ButtonGroup>
+            <TicketStatus
+              ticketId={ticket?._id}
+              ticketStatus={ticket?.status}
+              updateTicketMutation={updateTicketMutation}
+            />
           </Flex>
           <Textarea
+            defaultValue={ticket?.observacao}
             name="observacao"
             disabled={!ticket}
             onBlur={onInputTicketFieldBlur}
@@ -275,49 +209,13 @@ export const CreateTicketModal = ({ open, setOpen }) => {
             h="24"
             mt="3"
           />
-          <Grid templateColumns="repeat(4, 1fr)" gap="4">
-            <GridItem colSpan={1} mt="6">
-              <Box w="100px">
-                <Text color="gray.600" fontSize="sm">
-                  Dados do Prestador
-                </Text>
-              </Box>
-            </GridItem>
-            <GridItem colSpan={3} mt="6">
-              <Box
-                mt="4"
-                w="full"
-                h="1"
-                borderBottom="2px solid"
-                borderColor="gray.100"
-              />
 
-              <Box w="full" mt="6">
-                <Text color="gray.600" fontSize="xs" mb="2">
-                  Selecionar prestador
-                </Text>
-                <Flex gap="4">
-                  <AsyncSelectAutocomplete
-                    disabled={!ticket}
-                    queryFn={obterPrestadores}
-                    value={prestador}
-                    setValue={handlePrestadorChange}
-                    placeholder="Digite para buscar..."
-                  />
-                </Flex>
-              </Box>
+          <PrestadorForm
+            ticket={ticket}
+            updateTicketMutation={updateTicketMutation}
+          />
 
-              <Text fontSize="xs" mt="6">
-                {prestador ? "Detalhes do prestador" : "Adicionar novo"}
-              </Text>
-
-              <PrestadorForm
-                prestador={ticket?.prestador}
-                onBlurFn={handlePrestadorFormBlur}
-              />
-            </GridItem>
-          </Grid>
-          <Grid templateColumns="repeat(4, 1fr)" gap="4">
+          {/* <Grid templateColumns="repeat(4, 1fr)" gap="4">
             <GridItem colSpan={1} mt="6">
               <Box w="100px">
                 <Text color="gray.600" fontSize="sm">
@@ -391,8 +289,13 @@ export const CreateTicketModal = ({ open, setOpen }) => {
                 Adicionar serviço
               </Button>
             </GridItem>
-          </Grid>
+          </Grid> */}
         </DialogBody>
+        {defaultValue && (
+          <DialogFooter justifyContent="start">
+            <TicketActions />
+          </DialogFooter>
+        )}
         <DialogCloseTrigger />
       </DialogContent>
     </DialogRoot>

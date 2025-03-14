@@ -60,6 +60,9 @@ export const SelectPrestadorField = ({ ...props }) => {
           render={({ field }) => {
             return (
               <AsyncSelect
+                fontSize="sm"
+                size="sm"
+                disabled={props?.disabled}
                 key={field.name}
                 value={field.value}
                 name={field.name}

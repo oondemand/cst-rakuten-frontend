@@ -10,7 +10,9 @@ export const CepField = ({ ...props }) => {
         {props.label}
       </Text>
       <Input
-        fontSize="md"
+        disabled={props.disabled}
+        fontSize="sm"
+        size="sm"
         variant="flushed"
         {...registerWithMask(props.accessorKey, "99999-999")}
       />

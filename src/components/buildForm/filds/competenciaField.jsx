@@ -13,6 +13,7 @@ export const CompetenciaField = ({ ...props }) => {
         size="sm"
         fontSize="sm"
         variant="flushed"
+        disabled={props.disabled}
         {...registerWithMask(props.accessorKey, "99/9999")}
       />
       <Text mt="0.5" fontSize="xs" color="red.400">

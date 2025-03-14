@@ -19,8 +19,10 @@ export const CpfCnpjField = ({ ...props }) => {
         {props.label}
       </Text>
       <Input
-        fontSize="md"
+        fontSize="sm"
+        size="sm"
         variant="flushed"
+        disabled={props.disabled}
         {...registerWithMask(props.accessorKey, rowMaskMap[tipo] ?? null)}
       />
       <Text mt="0.5" fontSize="xs" color="red.400">

@@ -14,14 +14,19 @@ export const SelectField = ({ options, ...props }) => {
           render={({ field }) => {
             return (
               <Select
-              value={options?.find((item) => item?.value == field?.value) ?? ""}
+                fontSize="sm"
+                size="sm"
+                disabled={props?.disabled}
+                value={
+                  options?.find((item) => item?.value == field?.value) ?? ""
+                }
                 // inputValue={field.value}
                 name={field.name}
                 onBlur={field.onBlur}
                 onChange={(e) => {
                   field.onChange(e?.value ?? "");
                 }}
-                // cacheOptions
+                cacheOptions
                 isClearable
                 options={options}
                 chakraStyles={createChakraStyles()}
