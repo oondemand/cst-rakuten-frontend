@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 
 import { Flex, Spinner, Box, Button } from "@chakra-ui/react";
 import { useQuery, keepPreviousData, useMutation } from "@tanstack/react-query";
-import { PrestadorService } from "../../service/prestador";
+import { importarPrestadores, PrestadorService } from "../../service/prestador";
 import { DebouncedInput } from "../../components/DebouncedInput";
 import { DataGrid } from "../../components/dataGrid";
 import { useFilters } from "../../hooks/useFilters";
@@ -18,6 +18,10 @@ import { queryClient } from "../../config/react-query";
 
 import { VisibilityControlDialog } from "../../components/vibilityControlDialog";
 import { PrestadoresDialog } from "./dialog";
+import { ExportData } from "../../components/dataGrid/exportData";
+
+import { formatDate } from "../../utils/formatting";
+import { ImportDataDialog } from "../../components/dataGrid/importDataDialog";
 
 export const PrestadoresList = () => {
   const { filters, resetFilters, setFilters } = useFilters({
@@ -50,6 +54,15 @@ export const PrestadoresList = () => {
 
   const sortingState = sortByToState(filters.sortBy);
   const columns = useMemo(() => makePrestadorDynamicColumns(), []);
+  const modeloDeExportacao = columns
+    .filter(
+      (e) =>
+        !["dataExportacao", "createdAt", "updatedAt"].includes(e.accessorKey)
+    )
+    .map((e) => ({
+      accessorKey: e.accessorKey,
+      header: e.header,
+    }));
 
   const { mutateAsync: updatePrestadorMutation } = useMutation({
     mutationFn: async ({ id, data }) =>
@@ -69,22 +82,41 @@ export const PrestadoresList = () => {
     },
   });
 
-  const { mutateAsync: deletePrestadorMutation } = useMutation({
-    mutationFn: async ({ id }) => await api.delete(`prestadores/${id}`),
+  const { mutateAsync: importPrestadoresMutation } = useMutation({
+    mutationFn: async ({ files }) => await importarPrestadores({ files }),
     onSuccess() {
       queryClient.refetchQueries(["listar-prestadores", { filters }]);
       toaster.create({
-        title: "Prestador excluído com sucesso",
-        type: "success",
+        title: "Arquivo enviado",
+        description: "Aguardando processamento.",
+        type: "info",
       });
     },
     onError: (error) => {
       toaster.create({
-        title: "Ouve um erro ao excluir prestador",
+        title: "Ouve um erro ao enviar arquivo!",
         type: "error",
       });
     },
   });
+
+  const getAllPrestadoresWithFilters = async (pageSize) => {
+    const { prestadores } = await PrestadorService.listarPrestadores({
+      filters: {
+        ...filters,
+        pageSize: pageSize ? pageSize : data?.pagination?.totalItems,
+        pageIndex: 0,
+      },
+    });
+
+    return prestadores.map((e) => ({
+      ...e,
+      pessoaFisica: {
+        ...e.pessoaFisica,
+        dataNascimento: formatDate(e?.pessoaFisica?.dataNascimento),
+      },
+    }));
+  };
 
   return (
     <>
@@ -134,6 +166,20 @@ export const PrestadoresList = () => {
               gap="4"
             >
               <PrestadoresDialog />
+              <ExportData
+                columns={modeloDeExportacao}
+                dataToExport={getAllPrestadoresWithFilters}
+              />
+              <ExportData
+                label="Exportar modelo"
+                columns={modeloDeExportacao}
+                dataToExport={() => getAllPrestadoresWithFilters(1)}
+              />
+              <ImportDataDialog
+                handleImport={async ({ files }) => {
+                  await importPrestadoresMutation({ files });
+                }}
+              />
               <VisibilityControlDialog
                 fields={columns.map((e) => ({
                   label: e.header,
@@ -163,11 +209,6 @@ export const PrestadoresList = () => {
                   data: values.data,
                 });
               }}
-              onDeleteData={async (values) =>
-                await deletePrestadorMutation({
-                  id: values.prestadorId,
-                })
-              }
               onFilterChange={(value) => {
                 setFilters((prev) => ({ ...prev, ...value, pageIndex: 0 }));
               }}

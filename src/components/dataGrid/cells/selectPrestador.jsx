@@ -21,7 +21,6 @@ export const SelectPrestadorCell = ({
       const { data } = await api.get(`/prestadores?searchTerm=${inputValue}`, {
         signal: abortControllerRef.current.signal,
       });
-      console.log("DATA", data);
       return data?.prestadores || [];
     } catch (error) {
       if (error.name !== "AbortError") {

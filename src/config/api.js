@@ -11,9 +11,9 @@ api.interceptors.request.use(async (req) => {
 
   if (token) {
     req.headers = {
-      ...req.headers,
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
+      ...req.headers,
     };
   }
 

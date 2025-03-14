@@ -70,23 +70,6 @@ export const ServicosList = () => {
     },
   });
 
-  const { mutateAsync: deleteServicoMutation } = useMutation({
-    mutationFn: async ({ id }) => await api.delete(`servicos/${id}`),
-    onSuccess() {
-      queryClient.refetchQueries(["listar-servicos", { filters }]);
-      toaster.create({
-        title: "Serviço excluído com sucesso",
-        type: "success",
-      });
-    },
-    onError: (error) => {
-      toaster.create({
-        title: "Ouve um erro ao excluir serviço",
-        type: "error",
-      });
-    },
-  });
-
   return (
     <>
       <Flex
@@ -164,11 +147,6 @@ export const ServicosList = () => {
                   data: values.data,
                 });
               }}
-              onDeleteData={async (values) =>
-                await deleteServicoMutation({
-                  id: values.prestadorId,
-                })
-              }
               onFilterChange={(value) => {
                 setFilters((prev) => ({ ...prev, ...value, pageIndex: 0 }));
               }}

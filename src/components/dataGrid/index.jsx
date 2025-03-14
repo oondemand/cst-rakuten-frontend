@@ -57,7 +57,6 @@ export const DataGrid = ({
   setColumnSizingInfo,
   setColumnSizing,
   onUpdateData,
-  onDeleteData,
 }) => {
   const table = useReactTable({
     data,
@@ -86,7 +85,6 @@ export const DataGrid = ({
     onColumnSizingChange: setColumnSizing,
     meta: {
       updateData: async (...props) => await onUpdateData(...props),
-      deleteData: async (...props) => await onDeleteData(...props),
     },
   });
 

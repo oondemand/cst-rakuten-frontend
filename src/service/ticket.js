@@ -6,8 +6,6 @@ const adicionarTicket = async (ticket) => {
 };
 
 const alterarTicket = async ({ id, body }) => {
-  console.log("Importante", id, body);
-
   const response = await api.patch(`tickets/${id}`, body);
   return response.data;
 };
