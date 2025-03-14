@@ -55,7 +55,24 @@ export const TicketModal = ({ open, setOpen, ticket = null }) => {
           color="gray.600"
           maxH="600px"
           overflowY="auto"
-          scrollbarWidth="thin"
+          css={{
+            // Estilização do scrollbar (WebKit)
+            "&::-webkit-scrollbar": {
+              width: "6px",
+              height: "8px", // Só é necessário para scroll horizontal
+            },
+            "&::-webkit-scrollbar-thumb": {
+              backgroundColor: "#c2c2c2", // Use cores do tema se possível (ex.: "gray.300")
+              borderRadius: "4px",
+            },
+            "&::-webkit-scrollbar-track": {
+              backgroundColor: "#dbdbdb",
+            },
+            // Corner (opcional)
+            "&::-webkit-scrollbar-corner": {
+              backgroundColor: "transparent",
+            },
+          }}
         >
           <Flex mt="7" justifyContent="space-between">
             <Text fontSize="sm">{ticket?.titulo}</Text>

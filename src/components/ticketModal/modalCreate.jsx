@@ -43,8 +43,6 @@ export const CreateTicketModal = ({ open, setOpen, defaultValue }) => {
   const [ticket, setTicket] = useState(defaultValue);
   // const [servicos, setServicos] = useState([]);
 
-  console.log("Ticket", ticket);
-
   const { mutateAsync: createTicketMutation } = useMutation({
     mutationFn: TicketService.adicionarTicket,
     onSuccess: (data) => {
@@ -171,7 +169,22 @@ export const CreateTicketModal = ({ open, setOpen, defaultValue }) => {
           color="gray.600"
           maxH="600px"
           overflowY="auto"
-          scrollbarWidth="thin"
+          css={{
+            "&::-webkit-scrollbar": {
+              width: "6px",
+              height: "8px",
+            },
+            "&::-webkit-scrollbar-thumb": {
+              backgroundColor: "gray.200",
+              borderRadius: "1px",
+            },
+            "&::-webkit-scrollbar-track": {
+              backgroundColor: "transparent",
+            },
+            "&::-webkit-scrollbar-corner": {
+              backgroundColor: "transparent",
+            },
+          }}
         >
           <Flex mt="7" w="full" gap="4" justifyContent="space-between">
             <Input
@@ -293,7 +306,11 @@ export const CreateTicketModal = ({ open, setOpen, defaultValue }) => {
         </DialogBody>
         {defaultValue && (
           <DialogFooter justifyContent="start">
-            <TicketActions />
+            <TicketActions
+              updateTicketMutation={updateTicketMutation}
+              ticketId={ticket._id}
+              etapa={ticket?.etapa}
+            />
           </DialogFooter>
         )}
         <DialogCloseTrigger />

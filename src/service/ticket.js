@@ -20,12 +20,12 @@ const listarTickets = async (filtro) => {
   return data;
 };
 
-const aprovarTicket = async (id) => {
+const aprovarTicket = async ({ id }) => {
   const response = await api.post(`/aprovacoes/${id}/aprovar`);
   return response.data;
 };
 
-const reprovarTicket = async (id) => {
+const reprovarTicket = async ({ id }) => {
   const response = await api.post(`/aprovacoes/${id}/recusar`);
   return response.data;
 };
@@ -64,4 +64,6 @@ export const TicketService = {
   listarTickets,
   adicionarTicket,
   alterarTicket,
+  aprovarTicket,
+  reprovarTicket,
 };

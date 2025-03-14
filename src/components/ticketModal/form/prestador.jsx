@@ -1,6 +1,6 @@
 import { Box, Text, Flex, Grid, GridItem } from "@chakra-ui/react";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BuildForm } from "../../buildForm/index";
 import { useVisibleInputForm } from "../../../hooks/useVisibleInputForms";
 import { useMemo } from "react";
@@ -70,7 +70,7 @@ export const PrestadorForm = ({ ticket, updateTicketMutation }) => {
     if (!ticket?.prestador) {
       const { prestador } = await createPrestadorMutation({ body });
 
-      return await updateTicketMutation({
+      await updateTicketMutation({
         id: ticket._id,
         body: {
           prestador: prestador?._id,
@@ -94,6 +94,10 @@ export const PrestadorForm = ({ ticket, updateTicketMutation }) => {
   };
 
   const fields = useMemo(() => createDynamicFormFields(), []);
+
+  useEffect(() => {
+    setPrestador(ticket?.prestador);
+  }, [ticket]);
 
   return (
     <>
