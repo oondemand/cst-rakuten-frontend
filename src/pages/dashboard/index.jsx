@@ -18,7 +18,7 @@ export const Dashboard = () => {
         Visão geral
       </Text>
       <Heading color="gray.700" fontSize="lg">
-        {format(new Date(2014, 1, 11), "MMMM yyyy", { locale: ptBR })}
+        {format(new Date(), "MMMM yyyy", { locale: ptBR })}
       </Heading>
       <Heading color="brand.500" fontSize="3xl" mt="8">
         Bem vindo a central de serviços :)
