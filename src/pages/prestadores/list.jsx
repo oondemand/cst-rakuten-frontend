@@ -166,19 +166,20 @@ export const PrestadoresList = () => {
               gap="4"
             >
               <PrestadoresDialog />
-              <ExportData
-                columns={modeloDeExportacao}
-                dataToExport={getAllPrestadoresWithFilters}
+              <ImportDataDialog
+                accept=".xlsx, .xls, .xlsm, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                handleImport={async ({ files }) => {
+                  await importPrestadoresMutation({ files });
+                }}
               />
               <ExportData
                 label="Exportar modelo"
                 columns={modeloDeExportacao}
                 dataToExport={() => getAllPrestadoresWithFilters(1)}
               />
-              <ImportDataDialog
-                handleImport={async ({ files }) => {
-                  await importPrestadoresMutation({ files });
-                }}
+              <ExportData
+                columns={modeloDeExportacao}
+                dataToExport={getAllPrestadoresWithFilters}
               />
               <VisibilityControlDialog
                 fields={columns.map((e) => ({

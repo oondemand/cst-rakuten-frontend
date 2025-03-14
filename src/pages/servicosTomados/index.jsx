@@ -16,7 +16,7 @@ import { Filter } from "lucide-react";
 import { DebouncedInput } from "../../components/DebouncedInput";
 import { useStateWithStorage } from "../../hooks/useStateStorage";
 
-export const Home = () => {
+export const ServicosTomados = () => {
   const [searchTerm, setSearchTerm] = useStateWithStorage("searchTerm");
 
   const {

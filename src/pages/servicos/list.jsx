@@ -18,8 +18,11 @@ import { queryClient } from "../../config/react-query";
 import { useListas } from "../../hooks/useListas";
 
 import { VisibilityControlDialog } from "../../components/vibilityControlDialog";
-import { ServicoDialog } from "../../components/servicoDialog";
 import { ServicosDialog } from "./dialog";
+import { ExportData } from "../../components/dataGrid/exportData";
+
+import { formatDate } from "../../utils/formatting";
+import { ImportDataDialog } from "../../components/dataGrid/importDataDialog";
 
 export const ServicosList = () => {
   const { filters, resetFilters, setFilters } = useFilters({
@@ -52,6 +55,23 @@ export const ServicosList = () => {
 
   const sortingState = sortByToState(filters.sortBy);
   const columns = useMemo(() => makeServicoDynamicColumns({}), []);
+  const modeloDeExportacao = [
+    {
+      accessorKey: "prestador.nome",
+      header: "Nome Prestador",
+    },
+    {
+      accessorKey: "prestador.sid",
+      header: "SID Prestador",
+    },
+    {
+      accessorKey: "prestador.documento",
+      header: "Documento Prestador",
+    },
+    ...columns
+      .filter((e) => e.accessorKey !== "prestador")
+      .map((e) => ({ accessorKey: e.accessorKey, header: e.header })),
+  ];
 
   const { mutateAsync: updateServicoMutation } = useMutation({
     mutationFn: async ({ id, data }) => await api.patch(`servicos/${id}`, data),
@@ -69,6 +89,44 @@ export const ServicosList = () => {
       });
     },
   });
+
+  const { mutateAsync: importServicosMutation } = useMutation({
+    mutationFn: async ({ files }) =>
+      await ServicoService.importarServicos({ files }),
+    onSuccess() {
+      queryClient.refetchQueries(["listar-servicos", { filters }]);
+      toaster.create({
+        title: "Arquivo enviado",
+        description: "Aguardando processamento.",
+        type: "info",
+      });
+    },
+    onError: (error) => {
+      toaster.create({
+        title: "Ouve um erro ao enviar arquivo!",
+        type: "error",
+      });
+    },
+  });
+
+  const getAllServicosWithFilters = async (pageSize) => {
+    const { servicos } = await ServicoService.listarServicos({
+      filters: {
+        ...filters,
+        pageSize: pageSize ? pageSize : data?.pagination?.totalItems,
+        pageIndex: 0,
+      },
+    });
+
+    return servicos.map((e) => ({
+      ...e,
+      dataProvisaoContabil: formatDate(e?.dataProvisaoContabil),
+      dataRegistro: formatDate(e?.dataRegistro),
+      competencia: `${e?.competencia?.mes.toString().padStart(2, 0)}/${
+        e?.competencia?.ano
+      }`,
+    }));
+  };
 
   return (
     <>
@@ -118,6 +176,21 @@ export const ServicosList = () => {
               gap="4"
             >
               <ServicosDialog />
+              <ImportDataDialog
+                accept=".xlsx, .xls, .xlsm, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                handleImport={async ({ files }) => {
+                  await importServicosMutation({ files });
+                }}
+              />
+              <ExportData
+                label="Exportar modelo"
+                columns={modeloDeExportacao}
+                dataToExport={() => getAllServicosWithFilters(1)}
+              />
+              <ExportData
+                columns={modeloDeExportacao}
+                dataToExport={getAllServicosWithFilters}
+              />
               <VisibilityControlDialog
                 fields={columns.map((e) => ({
                   label: e.header,

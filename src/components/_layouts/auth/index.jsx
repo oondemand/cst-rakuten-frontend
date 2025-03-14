@@ -30,11 +30,11 @@ const navigationItems = [
   },
   {
     title: "Planejamento",
-    href: "/planejamento",
+    // href: "/planejamento",
   },
   {
     title: "Pagos",
-    href: "/pago",
+    // href: "/pago",
   },
   {
     title: "Prestadores",
@@ -44,27 +44,27 @@ const navigationItems = [
   {
     title: "Configurações",
     icon: Settings,
-    href: "/configuracoes",
+    // href: "/configuracoes",
   },
   {
     title: "Usuários",
-    href: "/usuarios",
+    // href: "/usuarios",
   },
   {
     title: "Base omie",
-    href: "/base-omie",
+    // href: "/base-omie",
   },
   {
     title: "Listas",
-    href: "/listas",
+    // href: "/listas",
   },
   {
     title: "Arquivados",
-    href: "/arquivados",
+    // href: "/arquivados",
   },
   {
     title: "Sistema",
-    href: "/sistema",
+    // href: "/sistema",
   },
 ];
 
@@ -107,7 +107,8 @@ export const AuthLayout = () => {
           return (
             <NavLink
               key={`${item.title}-${index}`}
-              to={item.href}
+              to={item?.href ?? "#"}
+              {...(item?.href ? {} : { color: "gray.200" })}
               icon={item.icon}
               title={item.title}
               i={index}

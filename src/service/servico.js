@@ -17,8 +17,24 @@ export const atualizarServico = async ({ id, body }) => {
   return data;
 };
 
+export const importarServicos = async ({ files }) => {
+  const formData = new FormData();
+  for (const file of files) {
+    formData.append("file", file);
+  }
+
+  const response = await api.post("acoes-etapas/importar-servicos", formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+
+  return response;
+};
+
 export const ServicoService = {
   listarServicos,
   criarServico,
   atualizarServico,
+  importarServicos,
 };

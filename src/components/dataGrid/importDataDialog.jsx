@@ -19,7 +19,7 @@ import {
 
 import { useState } from "react";
 
-export const ImportDataDialog = ({ handleImport }) => {
+export const ImportDataDialog = ({ accept, handleImport }) => {
   const [files, setFiles] = useState({});
 
   return (
@@ -30,6 +30,7 @@ export const ImportDataDialog = ({ handleImport }) => {
           variant="subtle"
           color="brand.500"
           colorPalette="gray"
+          fontWeight="semibold"
         >
           Importar arquivo
         </Button>
@@ -46,6 +47,7 @@ export const ImportDataDialog = ({ handleImport }) => {
         </DialogHeader>
         <DialogBody>
           <FileUploadRoot
+            accept={accept}
             onFileAccept={(e) => {
               setFiles(e.files);
             }}
@@ -66,10 +68,11 @@ export const ImportDataDialog = ({ handleImport }) => {
               Cancelar
             </Button>
           </DialogActionTrigger>
+          {/* <DialogActionTrigger asChild> */}
           <Button
             disabled={!files}
-            onClick={() => {
-              handleImport({ files });
+            onClick={async (e) => {
+              await handleImport({ files });
             }}
             colorPalette="gray"
             variant="subtle"
@@ -77,6 +80,7 @@ export const ImportDataDialog = ({ handleImport }) => {
           >
             Enviar
           </Button>
+          {/* </DialogActionTrigger> */}
         </DialogFooter>
         <DialogCloseTrigger />
       </DialogContent>

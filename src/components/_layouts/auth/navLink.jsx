@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Link as ChakraLink } from "@chakra-ui/react";
 import { useLocation } from "react-router-dom";
 
-export const NavLink = ({ to, title, icon, i }) => {
+export const NavLink = ({ to, title, icon, i, ...props }) => {
   const location = useLocation();
 
   return (
@@ -19,8 +19,9 @@ export const NavLink = ({ to, title, icon, i }) => {
       _hover={{ backgroundColor: "gray.50" }}
       bg={location.pathname == to ? "gray.50" : "white"}
       color={
-        location.pathname == to ? "gray.800" : icon ? "gray.500" : "gray.400"
+        location.pathname == to ? "gray.800" : icon ? "gray.500" : "gray.500"
       }
+      {...props}
     >
       <Link to={to}>
         {icon && (
