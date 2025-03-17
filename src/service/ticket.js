@@ -38,11 +38,11 @@ const salvarTicket = async (ticket) => {
   }
 };
 
-const uploadFiles = async (ticketId, files) => {
+const uploadFiles = async ({ ticketId, files }) => {
   const formData = new FormData();
-  files.forEach((e, i) => {
-    formData.append("arquivos", files[i]);
-  });
+  for (const file of files) {
+    formData.append("arquivos", file);
+  }
 
   return await api.post(`/tickets/${ticketId}/upload`, formData, {
     headers: {
@@ -51,8 +51,12 @@ const uploadFiles = async (ticketId, files) => {
   });
 };
 
-const deleteFile = async (fileId) => {
-  return await api.delete(`/tickets/arquivo/${fileId}`);
+const deleteFile = async ({ id }) => {
+  return await api.delete(`/tickets/arquivo/${id}`);
+};
+
+const getFile = async ({ id }) => {
+  return await api.get(`/tickets/arquivo/${id}`);
 };
 
 const listarArquivosDoTicket = async (filtro) => {
@@ -66,4 +70,7 @@ export const TicketService = {
   alterarTicket,
   aprovarTicket,
   reprovarTicket,
+  deleteFile,
+  uploadFiles,
+  getFile,
 };

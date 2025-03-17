@@ -4,7 +4,6 @@ import {
   Flex,
   Heading,
   Button,
-  ButtonGroup,
   Textarea,
   Grid,
   GridItem,
@@ -38,6 +37,7 @@ import { PlusSquare } from "lucide-react";
 import { ServicoService } from "../../service/servico";
 import { TicketStatus } from "./ticketStatus";
 import { TicketActions } from "./ticketActions";
+import { FilesForm } from "./form/files";
 
 export const CreateTicketModal = ({ open, setOpen, defaultValue }) => {
   const [ticket, setTicket] = useState(defaultValue);
@@ -144,8 +144,7 @@ export const CreateTicketModal = ({ open, setOpen, defaultValue }) => {
       }}
     >
       <DialogContent
-        overflow="auto"
-        scrollbarWidth="thin"
+        overflow="hidden"
         w="1000px"
         h="95%"
         pt="6"
@@ -226,6 +225,12 @@ export const CreateTicketModal = ({ open, setOpen, defaultValue }) => {
           <PrestadorForm
             ticket={ticket}
             updateTicketMutation={updateTicketMutation}
+          />
+
+          <FilesForm
+            disabled={!ticket}
+            defaultValues={ticket?.arquivos}
+            ticketId={ticket?._id}
           />
 
           {/* <Grid templateColumns="repeat(4, 1fr)" gap="4">

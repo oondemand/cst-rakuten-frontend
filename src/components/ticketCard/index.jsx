@@ -6,7 +6,6 @@ import {
   Badge,
   Heading,
   Button,
-  ButtonGroup,
   Textarea,
   Grid,
   GridItem,
@@ -44,7 +43,6 @@ import { createDynamicFormFields } from "../../pages/prestadores/formFields";
 
 import { useListas } from "../../hooks/useListas";
 import { VisibilityControlDialog } from "../vibilityControlDialog";
-import { TicketModal } from "../ticketModal";
 import { CreateTicketModal } from "../ticketModal/modalCreate";
 
 const _TicketCard = ({ ticket, onClick, isEspecial, index }) => {

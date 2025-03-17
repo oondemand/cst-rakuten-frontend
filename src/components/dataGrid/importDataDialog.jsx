@@ -18,8 +18,14 @@ import {
 } from "../../components/ui/file-upload";
 
 import { useState } from "react";
+import { Oondemand } from "../svg/oondemand";
 
-export const ImportDataDialog = ({ accept, handleImport }) => {
+export const ImportDataDialog = ({
+  accept,
+  btnTitle = "Importar arquivo",
+  handleImport,
+  ...props
+}) => {
   const [files, setFiles] = useState({});
 
   return (
@@ -31,8 +37,9 @@ export const ImportDataDialog = ({ accept, handleImport }) => {
           color="brand.500"
           colorPalette="gray"
           fontWeight="semibold"
+          {...props}
         >
-          Importar arquivo
+          {btnTitle}
         </Button>
       </DialogTrigger>
       <DialogContent
@@ -42,7 +49,7 @@ export const ImportDataDialog = ({ accept, handleImport }) => {
         px="2"
         rounded="lg"
       >
-        <DialogHeader>
+        <DialogHeader mt="-4" py="2" px="4">
           <DialogTitle>Importar arquivo</DialogTitle>
         </DialogHeader>
         <DialogBody>
