@@ -61,14 +61,14 @@ export const AsyncSelectAutocomplete = ({
           borderBottomColor: "gray.200",
           outline: "none",
           focusRingColor: "transparent",
-          fontSize: "xs",
+          fontSize: "sm",
           rounded: "none",
         }),
         menu: (base) => ({
           ...base,
           scrollbarWidth: "thin",
           fontWeight: "normal",
-          fontSize: "xs",
+          fontSize: "sm",
         }),
 
         loadingIndicator: (base) => ({
@@ -80,7 +80,12 @@ export const AsyncSelectAutocomplete = ({
           ...base,
           scrollbarWidth: "thin",
           fontWeight: "normal",
-          fontSize: "xs",
+          fontSize: "sm",
+        }),
+        placeholder: (base) => ({
+          ...base,
+          color: "gray.400",
+          fontWeight: "normal",
         }),
       }}
     />

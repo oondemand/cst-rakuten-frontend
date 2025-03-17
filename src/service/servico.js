@@ -17,6 +17,12 @@ export const atualizarServico = async ({ id, body }) => {
   return data;
 };
 
+export const deletarServico = async ({ id }) => {
+  const { data } = await api.delete(`servicos/${id}`);
+
+  return data;
+};
+
 export const importarServicos = async ({ files }) => {
   const formData = new FormData();
   for (const file of files) {
@@ -37,4 +43,5 @@ export const ServicoService = {
   criarServico,
   atualizarServico,
   importarServicos,
+  deletarServico,
 };

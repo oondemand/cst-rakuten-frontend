@@ -43,7 +43,6 @@ export const FilesForm = ({ disabled, defaultValues, ticketId }) => {
     onSuccess: ({ data }) => {
       const filteredFiles = files.filter((e) => e?._id !== data?._id);
       setFiles(filteredFiles);
-
       toaster.create({
         title: "Arquivo deletado com sucesso",
         type: "success",

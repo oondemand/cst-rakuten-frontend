@@ -80,7 +80,7 @@ export const TicketActions = ({ ticketId, etapa }) => {
             e.stopPropagation();
             aproveTicketMutation();
           }}
-          disabled={etapa === "aprovacao-pagamento"}
+          // disabled={etapa === "aprovacao-pagamento"}
           variant="surface"
           shadow="xs"
           colorPalette="green"
@@ -89,7 +89,7 @@ export const TicketActions = ({ ticketId, etapa }) => {
           <Check /> Aprovar
         </Button>
         <Button
-          disabled={etapa === "requisicao"}
+          // disabled={etapa === "requisicao"}
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();

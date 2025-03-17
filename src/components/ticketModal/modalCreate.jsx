@@ -164,6 +164,7 @@ export const CreateTicketModal = ({ open, setOpen, defaultValue }) => {
           </Flex>
         </DialogTitle>
         <DialogBody
+          pb="8"
           fontSize="md"
           fontWeight="600"
           color="gray.600"
@@ -176,7 +177,7 @@ export const CreateTicketModal = ({ open, setOpen, defaultValue }) => {
             },
             "&::-webkit-scrollbar-thumb": {
               backgroundColor: "gray.200",
-              borderRadius: "1px",
+              borderRadius: "4px",
             },
             "&::-webkit-scrollbar-track": {
               backgroundColor: "transparent",
@@ -228,13 +229,16 @@ export const CreateTicketModal = ({ open, setOpen, defaultValue }) => {
             updateTicketMutation={updateTicketMutation}
           />
 
+          <ServicoForm
+            ticket={ticket}
+            updateTicketMutation={updateTicketMutation}
+          />
+
           <FilesForm
             disabled={!ticket}
             defaultValues={ticket?.arquivos}
             ticketId={ticket?._id}
           />
-
-          <ServicoForm />
         </DialogBody>
         {defaultValue && (
           <DialogFooter justifyContent="start">

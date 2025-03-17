@@ -119,7 +119,7 @@ export const PrestadorForm = ({ ticket, updateTicketMutation }) => {
           />
 
           <Box w="full" mt="6">
-            <Text color="gray.600" fontSize="xs" mb="2">
+            <Text color="gray.600" fontSize="sm">
               Selecionar prestador
             </Text>
             <Flex gap="4">
@@ -133,7 +133,7 @@ export const PrestadorForm = ({ ticket, updateTicketMutation }) => {
             </Flex>
           </Box>
 
-          <Text fontSize="xs" mt="6">
+          <Text fontSize="sm" color="gray.500" mt="6">
             {prestador ? "Detalhes do prestador" : "Adicionar novo"}
           </Text>
 
