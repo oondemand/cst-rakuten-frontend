@@ -1,9 +1,9 @@
-import { Box, Text, Flex, Badge } from "@chakra-ui/react";
+import { Box, Text, Flex, Badge, Spinner, Button } from "@chakra-ui/react";
 import React, { memo, useState } from "react";
 
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
-import { LucideListCheck, Paperclip } from "lucide-react";
+import { LucideListCheck, Paperclip, RotateCw } from "lucide-react";
 import { Tooltip } from "../../components/ui/tooltip";
 
 import { ServicesCard } from "./servicesCard";
@@ -12,8 +12,18 @@ import { currency } from "../../utils/currency";
 
 import { CreateTicketModal } from "../ticketModal/modalCreate";
 
+const BADGE_MAP = {
+  pago: { color: "green", title: "Pago em" },
+  atrasado: { color: "red", title: "Pago em" },
+  "a vencer": { color: "yellow", title: "Venc." },
+};
+
 const _TicketCard = ({ ticket }) => {
   const [open, setOpen] = useState(false);
+
+  if (ticket?.contaPagarOmie) {
+    console.log("Log importante", ticket?.contaPagarOmie);
+  }
 
   const statusColorMap = {
     "aguardando-inicio": "yellow.400",
@@ -48,7 +58,7 @@ const _TicketCard = ({ ticket }) => {
           boxShadow="0px 1px 2px 0px rgba(0, 0, 0, 0.05)"
           _hover={{ background: "gray.50" }}
         >
-          <Flex w="full" flexDir="column" gap="3">
+          <Flex w="full" flexDir="column" gap="2">
             <Flex w="full" alignItems="baseline" gap="2">
               <Box
                 rounded="full"
@@ -90,7 +100,45 @@ const _TicketCard = ({ ticket }) => {
                   </Text>
                 </Box>
               </Tooltip>
+              {ticket?.contaPagarOmie && (
+                <Button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                  }}
+                  cursor="pointer"
+                  unstyled
+                  color="green.500"
+                >
+                  <RotateCw strokeWidth={2.75} size={14} />
+                </Button>
+              )}
             </Flex>
+
+            {ticket?.contaPagarOmie && (
+              <Flex alignItems="center" justifyContent="space-between">
+                <Text color="gray.400" fontSize="2xs" fontWeight="medium">
+                  {
+                    BADGE_MAP[
+                      ticket?.contaPagarOmie?.status_titulo.toLowerCase()
+                    ].title
+                  }{" "}
+                  {ticket?.contaPagarOmie?.data_vencimento}
+                </Text>
+                <Badge
+                  variant="surface"
+                  colorPalette={
+                    BADGE_MAP[
+                      ticket?.contaPagarOmie?.status_titulo.toLowerCase()
+                    ].color
+                  }
+                  size="xs"
+                >
+                  {ticket?.contaPagarOmie?.status_titulo.toLowerCase()}
+                </Badge>
+              </Flex>
+            )}
+
             <Flex
               w="full"
               alignItems="center"

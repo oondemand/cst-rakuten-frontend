@@ -16,6 +16,11 @@ import { Filter } from "lucide-react";
 import { DebouncedInput } from "../../components/DebouncedInput";
 import { useStateWithStorage } from "../../hooks/useStateStorage";
 
+const etapaIntegracaoOmie = {
+  nome: "Financeiro",
+  codigo: "integracao-omie",
+};
+
 export const ServicosTomados = () => {
   const [searchTerm, setSearchTerm] = useStateWithStorage("searchTerm");
 
@@ -107,6 +112,9 @@ export const ServicosTomados = () => {
                   <Etapa etapa={etapa} tickets={filteredTickets} />
                 </SwiperSlide>
               ))}
+              <SwiperSlide style={{ minWidth: "250px", maxWidth: "250px" }}>
+                <Etapa etapa={etapaIntegracaoOmie} tickets={filteredTickets} />
+              </SwiperSlide>
             </Swiper>
           )}
       </Flex>

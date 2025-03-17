@@ -22,7 +22,7 @@ const _Etapa = ({ etapa, tickets }) => {
   const virtualizer = useVirtualizer({
     count: etapaTickets.length,
     getScrollElement: () => parentRef.current,
-    estimateSize: () => 90,
+    estimateSize: () => (etapa.codigo == "integracao-omie" ? 110 : 85),
     overscan: 1,
   });
 
