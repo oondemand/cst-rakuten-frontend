@@ -19,14 +19,16 @@ import { useConfirmation } from "../../../hooks/useConfirmation";
 import { Tooltip } from "../../ui/tooltip";
 import { ServicoTooltipCard } from "./servicoTooltipCard";
 
-export const fetchOptions = async (inputValue) => {
-  return await api.get(`/servicos?searchTerm=${inputValue}`);
+export const fetchOptions = async (inputValue, prestadorId) => {
+  return await api.get(
+    `/servicos/listar-por-prestador?prestador=${prestadorId}&searchTerm=${inputValue}`
+  );
 };
 
-const obterServicos = async (inputValue) => {
+const obterServicos = async (inputValue, prestadorId) => {
   const {
     data: { servicos },
-  } = await fetchOptions(inputValue);
+  } = await fetchOptions(inputValue, prestadorId);
 
   return servicos.map((item) => {
     const competenciaFormatada = `${item?.competencia?.mes
@@ -41,7 +43,7 @@ const obterServicos = async (inputValue) => {
     return {
       ...item,
       value: item._id,
-      label: `${campanha} ${competenciaFormatada} ${valorFormatado} ${prestadorFormatado}`,
+      label: `${competenciaFormatada} - ${campanha} - ${valorFormatado}`,
     };
   });
 };
@@ -115,7 +117,7 @@ export const ServicoForm = ({ ticket, updateTicketMutation }) => {
           <Flex gap="4">
             <AsyncSelectAutocomplete
               disabled={!ticket}
-              queryFn={obterServicos}
+              queryFn={(value) => obterServicos(value, ticket?.prestador?._id)}
               setValue={handleChangeService}
               placeholder="Digite para buscar..."
             />
