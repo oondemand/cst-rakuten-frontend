@@ -42,7 +42,6 @@ import { ServicoForm } from "./form/servico";
 
 export const CreateTicketModal = ({ open, setOpen, defaultValue }) => {
   const [ticket, setTicket] = useState(defaultValue);
-  // const [servicos, setServicos] = useState([]);
 
   const { mutateAsync: createTicketMutation } = useMutation({
     mutationFn: TicketService.adicionarTicket,
@@ -69,20 +68,6 @@ export const CreateTicketModal = ({ open, setOpen, defaultValue }) => {
     },
   });
 
-  // const { mutateAsync: createServiceMutation } = useMutation({
-  //   mutationFn: async ({ body }) => await ServicoService.criarServico({ body }),
-  // });
-
-  // const { mutateAsync: updateServicoMutation } = useMutation({
-  //   mutationFn: async ({ id, body }) =>
-  //     await ServicoService.atualizarServico({ id, body }),
-  //   onSuccess: () =>
-  //     toaster.create({
-  //       title: "Serviço atualizado com sucesso",
-  //       type: "success",
-  //     }),
-  // });
-
   const onInputTicketFieldBlur = async ({ target: { name, value } }) => {
     if (value !== "" && !ticket) {
       return await createTicketMutation({ [name]: value });
@@ -97,43 +82,6 @@ export const CreateTicketModal = ({ open, setOpen, defaultValue }) => {
       });
     }
   };
-
-  // const adicionarServico = async () => {
-  //   const anoCompetencia = 2024;
-  //   const mesCompetencia = 12;
-
-  //   const { servico } = await createServiceMutation({
-  //     body: { anoCompetencia, mesCompetencia },
-  //   });
-
-  //   const response = await updateTicketMutation({
-  //     id: ticket._id,
-  //     body: { servicos: [...ticket.servicos, servico] },
-  //   });
-
-  //   setServicos((prev) => [...prev, servico]);
-  // };
-
-  // const atualizarServico = (id, campo, valor) => {
-  //   const servicosAtualizados = servicos.map((servico) =>
-  //     servico.id === id ? { ...servico, [campo]: valor } : servico
-  //   );
-
-  //   setServicos(servicosAtualizados);
-  // };
-
-  // const handleServicoBlur = async (id, campo, valor) => {
-  //   const servico = ticket.servicos.find((servico) => servico._id === id);
-
-  //   if (valor !== servico[campo]) {
-  //     await updateServicoMutation({
-  //       id,
-  //       body: { [campo]: valor },
-  //     });
-
-  //     servico[campo] = valor;
-  //   }
-  // };
 
   return (
     <DialogRoot

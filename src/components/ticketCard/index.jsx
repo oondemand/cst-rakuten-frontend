@@ -1,19 +1,5 @@
-import {
-  Box,
-  Text,
-  Flex,
-  Icon,
-  Badge,
-  Heading,
-  Button,
-  Textarea,
-  Grid,
-  GridItem,
-} from "@chakra-ui/react";
+import { Box, Text, Flex, Badge } from "@chakra-ui/react";
 import React, { memo, useState } from "react";
-
-import { useQuery } from "@tanstack/react-query";
-import { api } from "../../config/api";
 
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
@@ -24,28 +10,9 @@ import { ServicesCard } from "./servicesCard";
 import { AnexosCard } from "./arquivosCard";
 import { currency } from "../../utils/currency";
 
-import {
-  DialogBody,
-  DialogCloseTrigger,
-  DialogContent,
-  DialogHeader,
-  DialogRoot,
-  DialogTitle,
-} from "../ui/dialog";
-import { queryClient } from "../../config/react-query";
-
-import { Oondemand } from "../svg/oondemand";
-
-import { BuildForm } from "../buildForm/index";
-import { useVisibleInputForm } from "../../hooks/useVisibleInputForms";
-import { useMemo } from "react";
-import { createDynamicFormFields } from "../../pages/prestadores/formFields";
-
-import { useListas } from "../../hooks/useListas";
-import { VisibilityControlDialog } from "../vibilityControlDialog";
 import { CreateTicketModal } from "../ticketModal/modalCreate";
 
-const _TicketCard = ({ ticket, onClick, isEspecial, index }) => {
+const _TicketCard = ({ ticket }) => {
   const [open, setOpen] = useState(false);
 
   const statusColorMap = {
@@ -207,10 +174,6 @@ const _TicketCard = ({ ticket, onClick, isEspecial, index }) => {
           open={open}
           setOpen={setOpen}
         />
-        // <TicketModal.root open={open} ticket={ticket} setOpen={setOpen}>
-        //   <TicketModal.prestadorForm prestador={ticket?.prestador} />
-        //   <TicketModal.servicesList servicos={ticket?.servicos} />
-        // </TicketModal.root>
       )}
     </Box>
   );

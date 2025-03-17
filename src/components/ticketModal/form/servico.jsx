@@ -214,9 +214,9 @@ export const ServicoForm = ({ ticket, updateTicketMutation }) => {
                         <Button
                           size="xs"
                           variant="ghost"
-                          onClick={() =>
-                            handleDeleteTicket({ id: servico._id })
-                          }
+                          onClick={(e) => {
+                            handleDeleteTicket({ id: servico._id });
+                          }}
                           _hover={{ bg: "transparent" }}
                         >
                           <CircleX size={15} color="red" />
