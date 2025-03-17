@@ -163,7 +163,7 @@ const _TicketCard = ({ ticket, onClick, isEspecial, index }) => {
                 </Tooltip>
                 <Tooltip
                   showArrow
-                  content={<AnexosCard />}
+                  content={<AnexosCard anexos={ticket?.arquivos} />}
                   positioning={{ placement: "bottom" }}
                   openDelay={500}
                   closeDelay={50}

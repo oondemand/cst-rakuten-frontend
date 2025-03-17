@@ -1,25 +1,11 @@
 import { Box, Text, Flex, Grid, GridItem, Button } from "@chakra-ui/react";
 
-import React, { useEffect, useState } from "react";
-import { BuildForm } from "../../buildForm/index";
-import { useVisibleInputForm } from "../../../hooks/useVisibleInputForms";
-import { useMemo } from "react";
-import { createDynamicFormFields } from "../../../pages/prestadores/formFields";
+import React, { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { api } from "../../../config/api";
-import { PrestadorService } from "../../../service/prestador";
-import { AsyncSelectAutocomplete } from "../../asyncSelectAutoComplete";
 
-import { VisibilityControlDialog } from "../../vibilityControlDialog";
-import { formatDate } from "../../../utils/formatting";
 import { toaster } from "../../ui/toaster";
 import { CircleX, Download, Paperclip } from "lucide-react";
-import { ImportDataDialog } from "../../dataGrid/importDataDialog";
-import {
-  FileUploadRoot,
-  FileInput,
-  FileUploadTrigger,
-} from "../../ui/file-upload";
+import { FileUploadRoot, FileUploadTrigger } from "../../ui/file-upload";
 import { TicketService } from "../../../service/ticket";
 import { useConfirmation } from "../../../hooks/useConfirmation";
 import { saveAs } from "file-saver";
@@ -106,8 +92,14 @@ export const FilesForm = ({ disabled, defaultValues, ticketId }) => {
     <>
       <Grid templateColumns="repeat(4, 1fr)" gap="4">
         <GridItem colSpan={1} mt="7">
-          <Text display="flex" alignItems="center" gap="2" color="gray.500">
-            <Paperclip color="purple" size={15} /> Anexos
+          <Text
+            fontSize="14px"
+            display="flex"
+            alignItems="center"
+            gap="2"
+            color="gray.500"
+          >
+            Anexos
           </Text>
         </GridItem>
         <GridItem colSpan={3} mt="6">
@@ -122,8 +114,18 @@ export const FilesForm = ({ disabled, defaultValues, ticketId }) => {
           <Box w="full" mt="6">
             {files?.map((item) => (
               <Flex justifyContent="space-between" mt="4" key={item?._id}>
-                <Text fontSize="sm" color="gray.500" fontWeight="normal">
+                <Text
+                  fontSize="sm"
+                  color="gray.500"
+                  fontWeight="normal"
+                  display="flex"
+                  gap="1.5"
+                  alignItems="center"
+                >
+                  <Paperclip color="purple" size={12} />{" "}
                   {FileTypeMap[item?.tipo]} {item?.nomeOriginal}
+                  {"  "}
+                  {(item?.size / 1024).toFixed(1)} KB
                 </Text>
                 <Flex gap="2">
                   <Button
