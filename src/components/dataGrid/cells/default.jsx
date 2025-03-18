@@ -28,7 +28,7 @@ export const DefaultCell = ({ getValue, row, column, table }) => {
       truncate
       variant="subtle"
       display="flex"
-      fontSize="md"
+      fontSize="sm"
       size="xs"
       bg="transparent"
       focusRingColor="brand.500"

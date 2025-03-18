@@ -7,7 +7,6 @@ import { DateField } from "../../components/buildForm/filds/dateField";
 import { parse, isValid } from "date-fns";
 import { CurrencyField } from "../../components/buildForm/filds/currencyField";
 import { parseBRLCurrencyToNumber } from "../../utils/currency";
-import { DefaultField } from "../../components/buildForm/filds/default";
 
 const currencyValidation = preprocessEmptyToUndefined(
   z.coerce
@@ -108,15 +107,9 @@ export const createDynamicFormFields = () => {
     },
     {
       accessorKey: "valores.revisionMonthProvision",
-      label: "Revisão - Mês Provisão",
-      render: DefaultField,
-      validation: preprocessEmptyToUndefined(
-        z.coerce
-          .number({ message: "Digite um número de 1 a 12." })
-          .min(1, { message: "Digite um número de 1 a 12." })
-          .max(12, { message: "Digite um número de 1 a 12." })
-          .optional()
-      ),
+      label: "Data de revisão",
+      render: DateField,
+      validation: dateValidation,
       colSpan: 1,
     },
     {

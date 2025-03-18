@@ -67,7 +67,7 @@ export const BuildForm = ({
     resolver: zodResolver(schema),
     shouldFocusError: false,
 
-    values: {
+    defaultValues: {
       ...data,
     },
   });

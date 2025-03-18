@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 
-export const useFilters = ({ key }) => {
+export const useFilters = ({ key, defaultValues = {} }) => {
   const user = JSON.parse(localStorage.getItem("usuario"))._id || "default";
   const STORAGE_KEY = `${user}@${key}_TANSTACK_REACT_TABLE_FILTERS`;
 
@@ -9,6 +9,7 @@ export const useFilters = ({ key }) => {
   };
 
   const [filters, setFilters] = useState({
+    ...defaultValues,
     ...getFiltersFromStorage(),
     pageIndex: getFiltersFromStorage()?.pageIndex || 0,
     pageSize: getFiltersFromStorage()?.pageSize || 10,
@@ -17,7 +18,12 @@ export const useFilters = ({ key }) => {
 
   const resetFilters = useCallback(() => {
     localStorage.removeItem(STORAGE_KEY);
-    setFilters({ pageIndex: 0, pageSize: 10, searchTerm: "" });
+    setFilters({
+      ...defaultValues,
+      pageIndex: 0,
+      pageSize: 10,
+      searchTerm: "",
+    });
   }, []);
 
   useEffect(() => {

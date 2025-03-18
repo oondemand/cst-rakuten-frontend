@@ -23,6 +23,7 @@ export const DisabledCurrencyCell = ({ getValue, row, column, table }) => {
         width: "100%",
         color: "gray",
         backgroundColor: "transparent",
+        fontSize: "14px",
       }}
       disabled={true}
       value={value}

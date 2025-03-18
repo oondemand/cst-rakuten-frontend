@@ -12,6 +12,8 @@ import { useVisibleInputForm } from "../../hooks/useVisibleInputForms";
 import { toaster } from "../../components/ui/toaster";
 import { PrestadorService } from "../../service/prestador";
 
+import { formatDate } from "../../utils/formatting";
+
 import {
   DialogRoot,
   DialogBody,
@@ -52,7 +54,15 @@ export const PrestadoresDialog = ({
     mutationFn: async ({ id, body }) =>
       await PrestadorService.atualizarPrestador({ body, id }),
     onSuccess(data) {
-      setData((prev) => data.prestador);
+      setData((prev) => ({
+        ...data?.prestador,
+        pessoaFisica: {
+          ...data?.prestador.pessoaFisica,
+          dataNascimento: formatDate(
+            data?.prestador.pessoaFisica?.dataNascimento
+          ),
+        },
+      }));
       queryClient.invalidateQueries(["listar-prestadores"]);
       toaster.create({
         title: "Prestador atualizado com sucesso",
@@ -71,7 +81,15 @@ export const PrestadoresDialog = ({
     mutationFn: async ({ body }) =>
       await PrestadorService.criarPrestador({ body }),
     onSuccess(data) {
-      setData((prev) => data.prestador);
+      setData((prev) => ({
+        ...data?.prestador,
+        pessoaFisica: {
+          ...data?.prestador.pessoaFisica,
+          dataNascimento: formatDate(
+            data?.prestador.pessoaFisica?.dataNascimento
+          ),
+        },
+      }));
       queryClient.invalidateQueries(["listar-prestadores"]);
       toaster.create({
         title: "Prestador criado com sucesso",

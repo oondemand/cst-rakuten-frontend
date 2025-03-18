@@ -34,7 +34,7 @@ export const DateCell = ({ getValue, row, column, table, ...rest }) => {
       truncate
       variant="subtle"
       display="flex"
-      fontSize="md"
+      fontSize="sm"
       size="xs"
       bg="transparent"
       focusRingColor="brand.500"

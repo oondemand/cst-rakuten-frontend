@@ -29,6 +29,7 @@ export const CurrencyCell = ({ getValue, row, column, table, ...props }) => {
 
   return (
     <NumericFormat
+      width="100%"
       thousandSeparator="."
       decimalSeparator=","
       decimalScale={2}
@@ -36,17 +37,25 @@ export const CurrencyCell = ({ getValue, row, column, table, ...props }) => {
       allowNegative
       prefix="R$ "
       placeholder="R$ 0,00"
-      customInput={(props) => (
-        <Input
-          {...props}
-          variant="subtle"
-          display="flex"
-          fontSize="md"
-          size="xs"
-          bg="transparent"
-          focusRingColor="brand.500"
-        />
-      )}
+      // customInput={(props) => (
+      //   <Input
+      //     {...props}
+      //     variant="subtle"
+      //     display="flex"
+      //     fontSize="md"
+      //     size="xs"
+      //     bg="transparent"
+      //     focusRingColor="brand.500"
+      //   />
+      // )}
+      style={{
+        backgroundColor: "transparent",
+        height: "32px",
+        paddingInline: "8px",
+        outlineColor: "#8528CE",
+        fontSize: "14px",
+        width: "100%",
+      }}
       value={value}
       onChange={(e) => setValue(e.target.value)}
       onBlur={onBlur}

@@ -114,13 +114,13 @@ export const SelectPrestadorCell = ({
           backgroundColor: "transparent",
           scrollbarWidth: "thin",
           fontWeight: "normal",
-          fontSize: "xs",
+          fontSize: "sm",
         }),
         menu: (base) => ({
           ...base,
           scrollbarWidth: "thin",
           fontWeight: "normal",
-          fontSize: "xs",
+          fontSize: "sm",
         }),
         loadingIndicator: (base) => ({
           ...base,
@@ -131,7 +131,7 @@ export const SelectPrestadorCell = ({
           ...base,
           scrollbarWidth: "thin",
           fontWeight: "normal",
-          fontSize: "xs",
+          fontSize: "sm",
         }),
       }}
     />

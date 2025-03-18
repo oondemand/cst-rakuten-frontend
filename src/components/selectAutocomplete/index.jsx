@@ -16,6 +16,7 @@ export const SelectAutocomplete = ({
       options={options}
       onBlur={onBlur}
       size="xs"
+      fontSize="sm"
       value={value ?? ""}
       onChange={setValue}
       chakraStyles={{

@@ -31,7 +31,7 @@ export const PisPasepCell = ({ getValue, row, column, table, ...rest }) => {
       truncate
       variant="subtle"
       display="flex"
-      fontSize="md"
+      fontSize="sm"
       size="2xs"
       bg="transparent"
       focusRingColor="brand.500"

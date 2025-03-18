@@ -27,6 +27,7 @@ import { ImportDataDialog } from "../../components/dataGrid/importDataDialog";
 export const ServicosList = () => {
   const { filters, resetFilters, setFilters } = useFilters({
     key: "SERVICOS",
+    defaultValues: { status: "aberto" },
   });
 
   const { columnVisibility, setColumnVisibility } = useColumnVisibility({

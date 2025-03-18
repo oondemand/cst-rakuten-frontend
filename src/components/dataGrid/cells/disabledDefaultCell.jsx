@@ -14,7 +14,7 @@ export const DisabledDefaultCell = ({ getValue, row, column, table }) => {
       truncate
       variant="subtle"
       display="flex"
-      fontSize="md"
+      fontSize="sm"
       size="2xs"
       focusRingColor="brand.500"
       bg="transparent"

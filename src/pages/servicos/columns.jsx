@@ -43,6 +43,12 @@ export const makeServicoDynamicColumns = () => {
               competencia: `${props.row.original.competencia.mes
                 .toString()
                 .padStart(2, "0")}/${props.row.original.competencia.ano}`,
+              valores: {
+                ...props.row.original?.valores,
+                revisionMonthProvision: formatDate(
+                  props.row.original?.valores?.revisionMonthProvision
+                ),
+              },
             }}
           />
         </TableActionsCell>
@@ -104,7 +110,16 @@ export const makeServicoDynamicColumns = () => {
       enableSorting: false,
       cell: DisabledDefaultCell,
       enableColumnFilter: true,
-      meta: { filterKey: "status" },
+      meta: {
+        filterKey: "status",
+        filterVariant: "select",
+        filterOptions: [
+          { label: "Em aberto", value: "aberto" },
+          { label: "Pendente", value: "pendente" },
+          { label: "Pago", value: "pago" },
+          { label: "Pago externo", value: "pago-externo" },
+        ],
+      },
     },
     {
       accessorKey: "valores.grossValue",
@@ -138,14 +153,14 @@ export const makeServicoDynamicColumns = () => {
       enableColumnFilter: true,
       meta: { filterKey: "valores.paidPlacement" },
     },
-    // {
-    //   accessorKey: "valores.revisionMonthProvision",
-    //   header: "Revisão - Mês Provisão",
-    //   enableSorting: false,
-    //   cell: InputCell,
-    //   enableColumnFilter: true,
-    //   meta: { filterKey: "valores.revisionMonthProvision" },
-    // },
+    {
+      accessorKey: "valores.revisionMonthProvision",
+      header: "Data de revisão",
+      enableSorting: false,
+      cell: DateCell,
+      enableColumnFilter: true,
+      meta: { filterKey: "valores.revisionMonthProvision" },
+    },
     {
       accessorKey: "valores.revisionGrossValue",
       header: "Revisão - Gross Value",
