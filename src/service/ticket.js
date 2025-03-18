@@ -64,6 +64,22 @@ const listarArquivosDoTicket = async (filtro) => {
   return data;
 };
 
+const adicionarServico = async ({ ticketId, servicoId }) => {
+  const { data } = await api.post(
+    `/tickets/adicionar-servico/${ticketId}/${servicoId}`
+  );
+
+  return data;
+};
+
+const removerServico = async ({ ticketId, servicoId }) => {
+  const { data } = await api.post(
+    `/tickets/remover-servico/${ticketId}/${servicoId}`
+  );
+
+  return data;
+};
+
 export const TicketService = {
   listarTickets,
   adicionarTicket,
@@ -73,4 +89,6 @@ export const TicketService = {
   deleteFile,
   uploadFiles,
   getFile,
+  removerServico,
+  adicionarServico,
 };

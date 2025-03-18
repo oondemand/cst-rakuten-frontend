@@ -1,69 +1,75 @@
-import {
-  Box,
-  Text,
-  Grid,
-  GridItem,
-  Flex,
-  Button,
-  Table,
-} from "@chakra-ui/react";
-import { api } from "../../../config/api";
-import { AsyncSelectAutocomplete } from "../../asyncSelectAutoComplete";
+import { Box, Text, Grid, GridItem, Button, Table } from "@chakra-ui/react";
+
 import { currency } from "../../../utils/currency";
 import { useEffect, useState } from "react";
 import { CircleX } from "lucide-react";
 import { ServicoService } from "../../../service/servico";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { toaster } from "../../ui/toaster";
 import { useConfirmation } from "../../../hooks/useConfirmation";
 import { Tooltip } from "../../ui/tooltip";
 import { ServicoTooltipCard } from "./servicoTooltipCard";
+import { TicketService } from "../../../service/ticket";
+import { Select } from "chakra-react-select";
+import { chakraStyles } from "./select-chakra-styles";
 
-export const fetchOptions = async (inputValue, prestadorId) => {
-  return await api.get(
-    `/servicos/listar-por-prestador?prestador=${prestadorId}&searchTerm=${inputValue}`
-  );
-};
-
-const obterServicos = async (inputValue, prestadorId) => {
-  const {
-    data: { servicos },
-  } = await fetchOptions(inputValue, prestadorId);
-
-  return servicos.map((item) => {
-    const competenciaFormatada = `${item?.competencia?.mes
-      .toString()
-      .padStart(2, "0")}/${item?.competencia?.ano}`;
-
-    const valorFormatado = currency.format(item?.valor);
-
-    const prestadorFormatado = `${item?.prestador?.nome} - ${item?.prestador?.sci} - ${item?.prestador?.documento}`;
-    const campanha = item?.campanha;
-
-    return {
-      ...item,
-      value: item._id,
-      label: `${competenciaFormatada} - ${campanha} - ${valorFormatado}`,
-    };
-  });
-};
-
-export const ServicoForm = ({ ticket, updateTicketMutation }) => {
+export const ServicoForm = ({ ticket }) => {
   const [servicos, setServicos] = useState(ticket?.servicos);
   const { requestConfirmation } = useConfirmation();
 
+  const { data, refetch } = useQuery({
+    queryKey: [
+      "listar-servicos-prestador",
+      { prestadorId: ticket?.prestador?._id },
+    ],
+    queryFn: async () =>
+      await ServicoService.listarServicosPorPrestador({
+        prestadorId: ticket?.prestador?._id,
+      }),
+  });
+
+  const options = data?.map((e) => ({
+    label: `${e?.competencia?.mes.toString().padStart(2, "0")}/${
+      e?.competencia?.ano
+    }  ${e?.campanha}  ${currency.format(e?.valor)}`,
+
+    value: e?._id,
+  }));
+
   const { mutateAsync: deleteServicoMutation } = useMutation({
-    mutationFn: async ({ id }) => await ServicoService.deletarServico({ id }),
-    onSuccess: ({ data }) => {
-      setServicos(servicos.filter((e) => e?._id !== data?._id));
+    mutationFn: async ({ servicoId }) =>
+      await TicketService.removerServico({ ticketId: ticket?._id, servicoId }),
+    onSuccess: ({ servicos }) => {
+      setServicos(servicos);
       toaster.create({
-        title: "Serviço deletado com sucesso!",
+        title: "Serviço removido com sucesso!",
         type: "success",
       });
     },
     onError: ({}) => {
       toaster.create({
-        title: "Erro ao deletar serviço",
+        title: "Erro ao remover serviço",
+        type: "error",
+      });
+    },
+  });
+
+  const { mutateAsync: addServicoMutation } = useMutation({
+    mutationFn: async ({ servicoId }) =>
+      await TicketService.adicionarServico({
+        ticketId: ticket?._id,
+        servicoId,
+      }),
+    onSuccess: ({ servicos }) => {
+      setServicos(servicos);
+      toaster.create({
+        title: "Serviço adicionado com sucesso!",
+        type: "success",
+      });
+    },
+    onError: ({}) => {
+      toaster.create({
+        title: "Erro ao adicionar serviço",
         type: "error",
       });
     },
@@ -76,16 +82,15 @@ export const ServicoForm = ({ ticket, updateTicketMutation }) => {
     });
 
     if (action === "confirmed") {
-      await deleteServicoMutation({ id });
+      await deleteServicoMutation({ servicoId: id });
+      refetch();
     }
   };
 
-  const handleChangeService = async (servico) => {
-    if (servico && servico !== "") {
-      await updateTicketMutation({
-        id: ticket?._id,
-        body: { servicos: [...ticket?.servicos, servico?._id] },
-      });
+  const handleChangeService = async ({ value }) => {
+    if (value && value !== "") {
+      await addServicoMutation({ servicoId: value });
+      refetch();
     }
   };
 
@@ -114,14 +119,12 @@ export const ServicoForm = ({ ticket, updateTicketMutation }) => {
           <Text color="gray.600" fontSize="sm">
             Adicionar Serviço
           </Text>
-          <Flex gap="4">
-            <AsyncSelectAutocomplete
-              disabled={!ticket}
-              queryFn={(value) => obterServicos(value, ticket?.prestador?._id)}
-              setValue={handleChangeService}
-              placeholder="Digite para buscar..."
-            />
-          </Flex>
+          <Select
+            options={options}
+            onChange={handleChangeService}
+            value=""
+            chakraStyles={chakraStyles}
+          />
         </Box>
         {servicos && servicos?.length > 0 && (
           <Box
@@ -172,7 +175,7 @@ export const ServicoForm = ({ ticket, updateTicketMutation }) => {
                     key={servico._id}
                     content={<ServicoTooltipCard servico={servico} />}
                     positioning={{ placement: "top" }}
-                    openDelay={700}
+                    openDelay={1000}
                     closeDelay={50}
                     contentProps={{
                       css: {

@@ -2,13 +2,16 @@ import { api } from "../config/api";
 
 export const listarServicos = async ({ filters }) => {
   const { data } = await api.get("/servicos", { params: filters });
+  return data;
+};
 
+export const listarServicosPorPrestador = async ({ prestadorId }) => {
+  const { data } = await api.get(`/servicos/prestador/${prestadorId}`);
   return data;
 };
 
 export const criarServico = async ({ body }) => {
   const { data } = await api.post("/servicos", body);
-
   return data;
 };
 
@@ -19,7 +22,6 @@ export const atualizarServico = async ({ id, body }) => {
 
 export const deletarServico = async ({ id }) => {
   const { data } = await api.delete(`servicos/${id}`);
-
   return data;
 };
 
@@ -44,4 +46,5 @@ export const ServicoService = {
   atualizarServico,
   importarServicos,
   deletarServico,
+  listarServicosPorPrestador,
 };
