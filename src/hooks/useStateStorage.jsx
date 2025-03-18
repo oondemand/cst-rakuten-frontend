@@ -2,7 +2,7 @@ import { useCallback, useState } from "react";
 
 export const useStateWithStorage = (STORAGE_KEY) => {
   const defaultValue = localStorage.getItem(STORAGE_KEY);
-  const [value, setValue] = useState(JSON.parse(defaultValue ?? ""));
+  const [value, setValue] = useState(JSON.parse(defaultValue) ?? "");
 
   const updateValue = useCallback(
     (value) => {
