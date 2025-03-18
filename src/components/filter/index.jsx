@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 import { DebouncedInput } from "../DebouncedInput";
 import { NativeSelectField, NativeSelectRoot } from "../ui/native-select";
 
-export function Filter({ fieldMeta, onChange, value }) {
+export function Filter({ fieldMeta, onChange, value, ...props }) {
   if (fieldMeta.filterVariant && fieldMeta.filterVariant) {
     return (
       <NativeSelectRoot>
         <NativeSelectField
+          {...props}
           size="xs"
           h="28px"
-          focusRingColor="brand.500"
           rounded="sm"
           color="gray.700"
           value={value}
@@ -30,6 +30,7 @@ export function Filter({ fieldMeta, onChange, value }) {
 
   return (
     <DebouncedInput
+      {...props}
       debounce={700}
       size="2xs"
       iconSize={14}

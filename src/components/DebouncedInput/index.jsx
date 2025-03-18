@@ -33,8 +33,8 @@ export function DebouncedInput({
 
   return (
     <InputGroup
+      minW={props?.minW}
       startOffset={startOffset}
-      maxW="md"
       startElement={
         iconVisible && placeIcon == "left" ? (
           <Search size={iconSize} color={iconColor} />
@@ -48,7 +48,6 @@ export function DebouncedInput({
     >
       <Input
         focusRingColor="brand.350"
-        maxW="md"
         size={size}
         {...props}
         value={value}

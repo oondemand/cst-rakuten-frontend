@@ -120,16 +120,22 @@ export const DataGrid = ({
                     <Table.ColumnHeader
                       border="1px solid"
                       borderColor="gray.200"
-                      px="1"
+                      p="0.5"
                       key={header.id}
                       w={`calc(var(--header-${header?.id}-size) * 1px)`}
                       colSpan={header.colSpan}
                       position="relative"
+                      bg="brand.350"
                     >
                       <Flex flexDir="column" p="0.5" gap="0.5">
                         <Flex onClick={header.column.getToggleSortingHandler()}>
                           <Flex alignItems="center" gap="2" cursor="pointer">
-                            <Text textWrap="nowrap" fontSize="sm">
+                            <Text
+                              fontWeight="semibold"
+                              textWrap="nowrap"
+                              color="white"
+                              fontSize="sm"
+                            >
                               {header.isPlaceholder
                                 ? null
                                 : flexRender(
@@ -140,8 +146,8 @@ export const DataGrid = ({
                             <Box
                               rounded="full"
                               p="0.5"
-                              bg="brand.50"
-                              color="brand.500"
+                              bg="zinc.400"
+                              color="white"
                             >
                               {header.column.getCanSort() &&
                                 (sortingIconsMap[header.column.getIsSorted()] ??
@@ -150,14 +156,18 @@ export const DataGrid = ({
                           </Flex>
                         </Flex>
 
+                        {/* <Box minH="28px"> */}
                         {header.column.getCanFilter() &&
                           fieldMeta?.filterKey !== undefined && (
                             <Filter
+                              bg="white"
+                              minW="full"
                               value={filters[fieldMeta?.filterKey] ?? ""}
                               fieldMeta={fieldMeta}
                               onChange={onFilterChange}
                             />
                           )}
+                        {/* </Box> */}
                       </Flex>
                       <Box
                         onMouseDown={header.getResizeHandler()}
