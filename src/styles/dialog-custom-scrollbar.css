@@ -1,0 +1,17 @@
+.dialog-custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 8px;
+}
+
+.dialog-custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #e2e8f0;
+  border-radius: 4px;
+}
+
+.dialog-custom-scrollbar::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.dialog-custom-scrollbar::-webkit-scrollbar-corner {
+  background-color: transparent;
+}

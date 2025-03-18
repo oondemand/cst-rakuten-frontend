@@ -18,6 +18,7 @@ import {
   DialogCloseTrigger,
   DialogContent,
   DialogHeader,
+  DialogTitle,
 } from "../../components/ui/dialog";
 
 const DefaultTrigger = (props) => {
@@ -123,17 +124,16 @@ export const ServicosDialog = ({
           onOpenChange={(e) => setOpen(e.open)}
         >
           <DialogContent
-            overflow="auto"
-            scrollbarWidth="thin"
+            overflow="hidden"
             w="1250px"
             h="80%"
             pt="6"
             px="2"
             rounded="lg"
           >
-            <DialogHeader>
+            <DialogHeader mt="-4" py="2" px="4">
               <Flex gap="4">
-                {label}
+                <DialogTitle>{label}</DialogTitle>
                 <VisibilityControlDialog
                   fields={fields}
                   setVisibilityState={setInputsVisibility}
@@ -142,7 +142,7 @@ export const ServicosDialog = ({
                 />
               </Flex>
             </DialogHeader>
-            <DialogBody>
+            <DialogBody overflowY="auto" className="dialog-custom-scrollbar">
               <BuildForm
                 visibleState={inputsVisibility}
                 fields={fields}

@@ -135,15 +135,14 @@ export const PrestadoresDialog = ({
           onOpenChange={(e) => setOpen(e.open)}
         >
           <DialogContent
-            overflow="auto"
-            scrollbarWidth="thin"
+            overflow="hidden"
             w="1250px"
             h="80%"
             pt="6"
             px="2"
             rounded="lg"
           >
-            <DialogHeader>
+            <DialogHeader mt="-4" py="2" px="4">
               <DialogTitle>
                 <Flex gap="4">
                   {label}
@@ -156,7 +155,7 @@ export const PrestadoresDialog = ({
                 </Flex>
               </DialogTitle>
             </DialogHeader>
-            <DialogBody>
+            <DialogBody overflowY="auto" className="dialog-custom-scrollbar">
               <BuildForm
                 visibleState={inputsVisibility}
                 fields={fields}

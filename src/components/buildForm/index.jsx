@@ -58,19 +58,24 @@ export const BuildForm = ({
   gap,
   gridColumns = 4,
   disabled,
+  shouldUseFormValues = false,
   ...props
 }) => {
   const schema = buildNestedSchema(fields);
 
-  const methods = useForm({
+  const formConfig = {
     mode: "onBlur",
     resolver: zodResolver(schema),
     shouldFocusError: false,
+  };
 
-    defaultValues: {
-      ...data,
-    },
-  });
+  if (shouldUseFormValues) {
+    formConfig.values = { ...data };
+  } else {
+    formConfig.defaultValues = { ...data };
+  }
+
+  const methods = useForm(formConfig);
 
   const {
     register,

@@ -118,22 +118,7 @@ export const CreateTicketModal = ({ open, setOpen, defaultValue }) => {
           color="gray.600"
           maxH="600px"
           overflowY="auto"
-          css={{
-            "&::-webkit-scrollbar": {
-              width: "6px",
-              height: "8px",
-            },
-            "&::-webkit-scrollbar-thumb": {
-              backgroundColor: "gray.200",
-              borderRadius: "4px",
-            },
-            "&::-webkit-scrollbar-track": {
-              backgroundColor: "transparent",
-            },
-            "&::-webkit-scrollbar-corner": {
-              backgroundColor: "transparent",
-            },
-          }}
+          className="dialog-custom-scrollbar"
         >
           <Flex mt="7" w="full" gap="4" justifyContent="space-between">
             <Input

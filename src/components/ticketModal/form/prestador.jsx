@@ -163,6 +163,7 @@ export const PrestadorForm = ({ ticket, updateTicketMutation }) => {
                 ),
               },
             }}
+            shouldUseFormValues={true}
             visibleState={inputsVisibility}
             onSubmit={onSubmitPrestador}
             gridColumns={2}
