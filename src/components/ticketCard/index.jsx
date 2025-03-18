@@ -21,10 +21,6 @@ const BADGE_MAP = {
 const _TicketCard = ({ ticket }) => {
   const [open, setOpen] = useState(false);
 
-  if (ticket?.contaPagarOmie) {
-    console.log("Log importante", ticket?.contaPagarOmie);
-  }
-
   const statusColorMap = {
     "aguardando-inicio": "yellow.400",
     trabalhando: "green.400",
@@ -100,7 +96,7 @@ const _TicketCard = ({ ticket }) => {
                   </Text>
                 </Box>
               </Tooltip>
-              {ticket?.contaPagarOmie && (
+              {/* {ticket?.contaPagarOmie && (
                 <Button
                   onClick={(e) => {
                     e.preventDefault();
@@ -112,7 +108,7 @@ const _TicketCard = ({ ticket }) => {
                 >
                   <RotateCw strokeWidth={2.75} size={14} />
                 </Button>
-              )}
+              )} */}
             </Flex>
 
             {ticket?.contaPagarOmie && (

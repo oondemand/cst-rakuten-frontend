@@ -1,5 +1,4 @@
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
-import { Paperclip } from "lucide-react";
 
 export const AnexosCard = ({ anexos = [] }) => {
   const FileTypeMap = {
@@ -25,14 +24,6 @@ export const AnexosCard = ({ anexos = [] }) => {
             {FileTypeMap[e?.tipo]} {e?.nomeOriginal}{" "}
           </Text>
         ))}
-        {/* <Flex gap="2">
-          <Paperclip size={14} color="purple" />
-          <Text>Prestador</Text>
-        </Flex>
-        <Flex gap="2">
-          <Paperclip size={14} color="purple" />
-          <Text>Fiscais</Text>
-        </Flex> */}
       </Box>
     </Box>
   );
