@@ -66,6 +66,10 @@ const navigationItems = [
     title: "Sistema",
     // href: "/sistema",
   },
+  {
+    title: "Doc",
+    // href: "/sistema",
+  },
 ];
 
 export const AuthLayout = () => {
