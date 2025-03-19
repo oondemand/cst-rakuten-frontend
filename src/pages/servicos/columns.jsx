@@ -26,22 +26,9 @@ export const makeServicoDynamicColumns = () => {
           <DeleteServicoAction id={props.row.original?._id} />
           <ServicosDialog
             trigger={
-              <Tooltip
-                content="Detalhes do servico"
-                positioning={{ placement: "top" }}
-                openDelay={700}
-                closeDelay={50}
-                contentProps={{
-                  css: {
-                    "--tooltip-bg": "white",
-                    color: "gray.600",
-                  },
-                }}
-              >
-                <IconButton variant="surface" colorPalette="gray" size="2xs">
-                  <Pencil />
-                </IconButton>
-              </Tooltip>
+              <IconButton variant="surface" colorPalette="gray" size="2xs">
+                <Pencil />
+              </IconButton>
             }
             label="Serviço"
             defaultValues={{
