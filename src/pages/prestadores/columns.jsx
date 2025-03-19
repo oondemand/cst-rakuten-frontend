@@ -15,6 +15,8 @@ import { PrestadoresDialog } from "./dialog";
 import { IconButton } from "@chakra-ui/react";
 import { Pencil } from "lucide-react";
 import { formatDate } from "../../utils/formatting";
+import { EnviarConvitePrestadorAction } from "../../components/dataGrid/actions/enviarConvite";
+import { Tooltip } from "../../components/ui/tooltip";
 
 export const makePrestadorDynamicColumns = () => {
   return [
@@ -27,9 +29,22 @@ export const makePrestadorDynamicColumns = () => {
           <DeletePrestadorAction id={props.row.original?._id} />
           <PrestadoresDialog
             trigger={
-              <IconButton variant="surface" colorPalette="gray" size="2xs">
-                <Pencil />
-              </IconButton>
+              <Tooltip
+                content="Detalhes do prestador"
+                positioning={{ placement: "top" }}
+                openDelay={700}
+                closeDelay={50}
+                contentProps={{
+                  css: {
+                    "--tooltip-bg": "white",
+                    color: "gray.600",
+                  },
+                }}
+              >
+                <IconButton variant="surface" colorPalette="gray" size="2xs">
+                  <Pencil />
+                </IconButton>
+              </Tooltip>
             }
             label="Prestador"
             defaultValues={{
@@ -42,6 +57,7 @@ export const makePrestadorDynamicColumns = () => {
               },
             }}
           />
+          <EnviarConvitePrestadorAction prestador={props.row.original} />
         </TableActionsCell>
       ),
     },

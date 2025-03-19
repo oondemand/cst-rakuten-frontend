@@ -37,9 +37,14 @@ export const importarPrestadores = async ({ files }) => {
   return response;
 };
 
+export const enviarConvite = async ({ prestador }) => {
+  return await api.post("/usuarios/enviar-convite", { prestador });
+};
+
 export const PrestadorService = {
   listarPrestadores,
   criarPrestador,
   atualizarPrestador,
   importarPrestadores,
+  enviarConvite,
 };

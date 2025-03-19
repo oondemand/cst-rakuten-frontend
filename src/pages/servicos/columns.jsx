@@ -13,6 +13,7 @@ import { IconButton } from "@chakra-ui/react";
 import { Pencil } from "lucide-react";
 import { TableActionsCell } from "../../components/dataGrid/cells/tableActionsCell";
 import { DeleteServicoAction } from "../../components/dataGrid/actions/deleteServicoButton";
+import { Tooltip } from "../../components/ui/tooltip";
 
 export const makeServicoDynamicColumns = () => {
   return [
@@ -25,9 +26,22 @@ export const makeServicoDynamicColumns = () => {
           <DeleteServicoAction id={props.row.original?._id} />
           <ServicosDialog
             trigger={
-              <IconButton variant="surface" colorPalette="gray" size="2xs">
-                <Pencil />
-              </IconButton>
+              <Tooltip
+                content="Detalhes do servico"
+                positioning={{ placement: "top" }}
+                openDelay={700}
+                closeDelay={50}
+                contentProps={{
+                  css: {
+                    "--tooltip-bg": "white",
+                    color: "gray.600",
+                  },
+                }}
+              >
+                <IconButton variant="surface" colorPalette="gray" size="2xs">
+                  <Pencil />
+                </IconButton>
+              </Tooltip>
             }
             label="Serviço"
             defaultValues={{

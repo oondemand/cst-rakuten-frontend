@@ -5,6 +5,7 @@ import { toaster } from "../../ui/toaster";
 import { queryClient } from "../../../config/react-query";
 import { api } from "../../../config/api";
 import { useConfirmation } from "../../../hooks/useConfirmation";
+import { Tooltip } from "../../ui/tooltip";
 
 export const DeleteServicoAction = ({ id }) => {
   const { requestConfirmation } = useConfirmation();
@@ -38,7 +39,18 @@ export const DeleteServicoAction = ({ id }) => {
   };
 
   return (
-    <>
+    <Tooltip
+      content="Excluir servico"
+      positioning={{ placement: "top" }}
+      openDelay={700}
+      closeDelay={50}
+      contentProps={{
+        css: {
+          "--tooltip-bg": "white",
+          color: "gray.600",
+        },
+      }}
+    >
       <IconButton
         variant="surface"
         colorPalette="red"
@@ -47,6 +59,6 @@ export const DeleteServicoAction = ({ id }) => {
       >
         <Trash />
       </IconButton>
-    </>
+    </Tooltip>
   );
 };
