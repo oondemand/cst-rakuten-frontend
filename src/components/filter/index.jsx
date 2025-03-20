@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { Input } from "@chakra-ui/react";
 import { DebouncedInput } from "../DebouncedInput";
 import { NativeSelectField, NativeSelectRoot } from "../ui/native-select";
+import { SelectPrestadorFilter } from "./selectPrestador";
 
 export function Filter({ fieldMeta, onChange, value, ...props }) {
-  if (fieldMeta.filterVariant && fieldMeta.filterVariant) {
+  if (fieldMeta.filterVariant && fieldMeta.filterVariant === "select") {
     return (
       <NativeSelectRoot>
         <NativeSelectField
@@ -25,6 +26,19 @@ export function Filter({ fieldMeta, onChange, value, ...props }) {
           <option value="">Todos</option>
         </NativeSelectField>
       </NativeSelectRoot>
+    );
+  }
+
+  if (
+    fieldMeta.filterVariant &&
+    fieldMeta.filterVariant === "selectPrestador"
+  ) {
+    return (
+      <SelectPrestadorFilter
+        onChange={(e) => {
+          onChange({ [fieldMeta.filterKey]: e?._id });
+        }}
+      />
     );
   }
 

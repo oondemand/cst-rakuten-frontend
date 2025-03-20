@@ -85,8 +85,11 @@ export const makeServicoDynamicColumns = () => {
       header: "Prestador",
       enableSorting: false,
       cell: SelectPrestadorCell,
-      enableColumnFilter: false,
-      meta: { filterKey: "prestador.nome" },
+      enableColumnFilter: true,
+      meta: {
+        filterVariant: "selectPrestador",
+        filterKey: "prestador",
+      },
     },
     {
       accessorKey: "dataProvisaoContabil",

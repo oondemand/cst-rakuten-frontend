@@ -43,7 +43,6 @@ export const AsyncSelectAutocomplete = ({
 
   return (
     <AsyncSelect
-      {...rest}
       defaultInputValue={value}
       isClearable={true}
       variant="subtle"
@@ -88,6 +87,7 @@ export const AsyncSelectAutocomplete = ({
           fontWeight: "normal",
         }),
       }}
+      {...rest}
     />
   );
 };
