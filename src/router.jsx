@@ -6,6 +6,7 @@ import { PrestadoresList } from "./pages/prestadores/list";
 import { ServicosList } from "./pages/servicos/list";
 import { ServicosTomados } from "./pages/servicosTomados";
 import { Dashboard } from "./pages/dashboard";
+import { Doc } from "./pages/doc";
 
 export const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ export const router = createBrowserRouter([
       {
         path: "/servicos/provisionamento",
         element: <div>Serviços/Provisionamento</div>,
+      },
+      {
+        path: "/doc",
+        element: <Doc />,
       },
     ],
   },

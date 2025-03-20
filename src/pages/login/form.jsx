@@ -42,6 +42,8 @@ export const LoginForm = () => {
           title: "Sem permissões para acessar a esteira de serviços!",
           type: "error",
         });
+
+        return;
       }
 
       login(token, user);

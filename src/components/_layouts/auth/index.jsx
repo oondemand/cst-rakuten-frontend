@@ -1,4 +1,4 @@
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Text } from "@chakra-ui/react";
 import { Footer } from "./footer";
 import { Outlet } from "react-router-dom";
 import { useAuth } from "../../../hooks/useAuth";
@@ -6,12 +6,13 @@ import { Navigate } from "react-router-dom";
 
 import { Chart } from "../../svg/chart";
 
-import { Users, Settings } from "lucide-react";
+import { Users, Settings, LogOut } from "lucide-react";
 
 import { NavLink } from "./navLink";
 import { invertedChart } from "../../svg/invertedChart";
 
 import { Link } from "react-router-dom";
+import { useConfirmation } from "../../../hooks/useConfirmation";
 
 const navigationItems = [
   {
@@ -68,16 +69,28 @@ const navigationItems = [
   },
   {
     title: "Doc",
-    // href: "/sistema",
+    href: "/doc",
   },
 ];
 
 export const AuthLayout = () => {
-  const { user, isLoading } = useAuth();
+  const { user, isLoading, logout } = useAuth();
+  const { requestConfirmation } = useConfirmation();
 
   if (!user && isLoading === false) {
     return <Navigate to="/login" replace />;
   }
+
+  const handleLogOut = async () => {
+    const { action } = await requestConfirmation({
+      title: "Tem certeza que deseja sair ?",
+      description: "Você tera que fazer o login novamente.",
+    });
+
+    if (action === "confirmed") {
+      logout();
+    }
+  };
 
   return (
     <Flex direction="row" minHeight="100vh" minW="100vw">
@@ -119,6 +132,21 @@ export const AuthLayout = () => {
             />
           );
         })}
+        <Button
+          onClick={handleLogOut}
+          mt="2"
+          unstyled
+          display="flex"
+          gap="3"
+          textAlign="left"
+          px="4"
+          alignItems="center"
+          color="gray.700"
+          fontSize="sm"
+          cursor="pointer"
+        >
+          <LogOut color="purple" size={18} /> Sair
+        </Button>
       </Flex>
 
       <Flex
