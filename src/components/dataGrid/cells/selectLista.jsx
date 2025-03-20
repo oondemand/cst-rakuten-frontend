@@ -22,13 +22,9 @@ export const SelectListaCell = ({
 
   const options =
     lista?.valores?.map((item) => ({
-      label: item.chave ?? item.valor,
-      value: item.valor ?? item.chave,
+      label: item.valor,
+      value: item.valor,
     })) || [];
-
-  if (cod === "tipo-documento-fiscal") {
-    console.log("options", options);
-  }
 
   const findItemByInitialValue = (options) => {
     return options.find((option) => {

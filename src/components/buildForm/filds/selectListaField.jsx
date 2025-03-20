@@ -13,8 +13,8 @@ export const SelectListaField = ({ cod, ...props }) => {
   });
 
   const options = lista?.valores?.map((e) => ({
-    label: e?.chave ? e.chave : e?.valor,
-    value: e?.valor ? e.valor : e?.chave,
+    label: e?.valor,
+    value: e?.valor,
   }));
 
   const getValue = (value) => {
