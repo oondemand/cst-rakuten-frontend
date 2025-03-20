@@ -14,9 +14,9 @@ export const AuthProvider = ({ children }) => {
         const token = localStorage.getItem("token");
         const localUser = localStorage.getItem("usuario");
 
-        await LoginService.validateToken();
-
         if (token && localUser) setUser(JSON.parse(localUser));
+
+        await LoginService.validateToken();
       } catch (error) {
         console.error("Erro ao inicializar a autenticação:", error);
         logout();

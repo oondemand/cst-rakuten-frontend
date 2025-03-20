@@ -13,7 +13,7 @@ import { IconButton } from "@chakra-ui/react";
 import { Pencil } from "lucide-react";
 import { TableActionsCell } from "../../components/dataGrid/cells/tableActionsCell";
 import { DeleteServicoAction } from "../../components/dataGrid/actions/deleteServicoButton";
-import { Tooltip } from "../../components/ui/tooltip";
+import { SelectAutoCompleteCell } from "../../components/dataGrid/cells/selectAutoComplete";
 
 export const makeServicoDynamicColumns = () => {
   return [
@@ -60,10 +60,25 @@ export const makeServicoDynamicColumns = () => {
       header: "Documento Fiscal",
       enableSorting: false,
       cell: (props) => (
-        <SelectListaCell {...props} cod={"tipo-documento-fiscal"} />
+        <SelectAutoCompleteCell
+          {...props}
+          options={[
+            { label: "INVOICE", value: "INVOICE" },
+            { label: "RPA", value: "RPA" },
+            { label: "NF", value: "NF" },
+          ]}
+        />
       ),
       enableColumnFilter: true,
-      meta: { filterKey: "tipoDocumentoFiscal" },
+      meta: {
+        filterKey: "tipoDocumentoFiscal",
+        filterVariant: "select",
+        filterOptions: [
+          { label: "INVOICE", value: "INVOICE" },
+          { label: "RPA", value: "RPA" },
+          { label: "NF", value: "NF" },
+        ],
+      },
     },
     {
       accessorKey: "prestador",

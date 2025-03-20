@@ -10,7 +10,7 @@ import { TicketService } from "../../../service/ticket";
 import { useConfirmation } from "../../../hooks/useConfirmation";
 import { saveAs } from "file-saver";
 
-export const FilesForm = ({ disabled, defaultValues, ticketId }) => {
+export const FilesForm = ({ onlyReading, defaultValues, ticketId }) => {
   const [files, setFiles] = useState(defaultValues);
   const { requestConfirmation } = useConfirmation();
 
@@ -61,7 +61,7 @@ export const FilesForm = ({ disabled, defaultValues, ticketId }) => {
     rpa: "RPA",
   };
 
-  const handleDeleteTicket = async ({ id }) => {
+  const handleDeleteFileFromTicket = async ({ id }) => {
     const { action } = await requestConfirmation({
       title: "Tem que deseja remover arquivo?",
       description: "Essa ação não pode ser desfeita!",
@@ -136,37 +136,42 @@ export const FilesForm = ({ disabled, defaultValues, ticketId }) => {
                   >
                     <Download size={16} />
                   </Button>
-                  <Button
-                    onClick={async () =>
-                      await handleDeleteTicket({ id: item?._id })
-                    }
-                    color="red"
-                    cursor="pointer"
-                    unstyled
-                  >
-                    <CircleX size={16} />
-                  </Button>
+                  {!onlyReading && (
+                    <Button
+                      disabled={!ticketId}
+                      onClick={async () =>
+                        await handleDeleteFileFromTicket({ id: item?._id })
+                      }
+                      color="red"
+                      cursor="pointer"
+                      unstyled
+                    >
+                      <CircleX size={16} />
+                    </Button>
+                  )}
                 </Flex>
               </Flex>
             ))}
 
-            <FileUploadRoot
-              onFileAccept={async (e) => {
-                await uploadFileMutation({ files: e.files });
-              }}
-            >
-              <FileUploadTrigger>
-                <Button
-                  disabled={disabled}
-                  mt="4"
-                  size="2xs"
-                  variant="surface"
-                  color="gray.600"
-                >
-                  Anexar arquivo
-                </Button>
-              </FileUploadTrigger>
-            </FileUploadRoot>
+            {!onlyReading && (
+              <FileUploadRoot
+                onFileAccept={async (e) => {
+                  await uploadFileMutation({ files: e.files });
+                }}
+              >
+                <FileUploadTrigger>
+                  <Button
+                    disabled={!ticketId}
+                    mt="4"
+                    size="2xs"
+                    variant="surface"
+                    color="gray.600"
+                  >
+                    Anexar arquivo
+                  </Button>
+                </FileUploadTrigger>
+              </FileUploadRoot>
+            )}
           </Box>
         </GridItem>
       </Grid>

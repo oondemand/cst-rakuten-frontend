@@ -156,7 +156,6 @@ export const DataGrid = ({
                           </Flex>
                         </Flex>
 
-                        {/* <Box minH="28px"> */}
                         {header.column.getCanFilter() &&
                           fieldMeta?.filterKey !== undefined && (
                             <Filter
@@ -167,7 +166,6 @@ export const DataGrid = ({
                               onChange={onFilterChange}
                             />
                           )}
-                        {/* </Box> */}
                       </Flex>
                       <Box
                         onMouseDown={header.getResizeHandler()}

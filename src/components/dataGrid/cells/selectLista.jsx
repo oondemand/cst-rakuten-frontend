@@ -26,6 +26,10 @@ export const SelectListaCell = ({
       value: item.valor ?? item.chave,
     })) || [];
 
+  if (cod === "tipo-documento-fiscal") {
+    console.log("options", options);
+  }
+
   const findItemByInitialValue = (options) => {
     return options.find((option) => {
       return option.label === initialValue || option.value === initialValue;

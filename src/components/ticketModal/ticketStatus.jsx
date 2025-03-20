@@ -5,6 +5,7 @@ export const TicketStatus = ({
   updateTicketMutation,
   ticketStatus,
   ticketId,
+  disabled,
 }) => {
   const handleChangeStatus = async (status) => {
     if (ticketStatus !== status) {
@@ -20,7 +21,7 @@ export const TicketStatus = ({
       <Button
         onClick={async () => await handleChangeStatus("aguardando-inicio")}
         opacity={ticketStatus === "aguardando-inicio" ? "1" : "0.5"}
-        disabled={!ticketId || !ticketStatus}
+        disabled={disabled || !ticketId || !ticketStatus}
         rounded="lg"
         shadow="xs"
         colorPalette="yellow"
@@ -30,7 +31,7 @@ export const TicketStatus = ({
       <Button
         onClick={async () => await handleChangeStatus("trabalhando")}
         opacity={ticketStatus === "trabalhando" ? "1" : "0.5"}
-        disabled={!ticketId || !ticketStatus}
+        disabled={disabled || !ticketId || !ticketStatus}
         rounded="lg"
         shadow="xs"
         colorPalette="green"
@@ -40,7 +41,7 @@ export const TicketStatus = ({
       <Button
         onClick={async () => await handleChangeStatus("revisao")}
         opacity={ticketStatus === "revisao" ? "1" : "0.5"}
-        disabled={!ticketId || !ticketStatus}
+        disabled={disabled || !ticketId || !ticketStatus}
         rounded="lg"
         shadow="xs"
         colorPalette="red"

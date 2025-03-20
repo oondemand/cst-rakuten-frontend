@@ -13,7 +13,7 @@ import { TicketService } from "../../../service/ticket";
 import { Select } from "chakra-react-select";
 import { chakraStyles } from "./select-chakra-styles";
 
-export const ServicoForm = ({ ticket }) => {
+export const ServicoForm = ({ ticket, onlyReading }) => {
   const [servicos, setServicos] = useState(ticket?.servicos);
   const { requestConfirmation } = useConfirmation();
 
@@ -115,17 +115,20 @@ export const ServicoForm = ({ ticket }) => {
           borderBottom="2px solid"
           borderColor="gray.100"
         />
-        <Box px="1" mt="8">
-          <Text color="gray.600" fontSize="sm">
-            Adicionar Serviço
-          </Text>
-          <Select
-            options={options}
-            onChange={handleChangeService}
-            value=""
-            chakraStyles={chakraStyles}
-          />
-        </Box>
+        {!onlyReading && (
+          <Box px="1" mt="8">
+            <Text color="gray.600" fontSize="sm">
+              Adicionar Serviço
+            </Text>
+            <Select
+              disabled={!ticket}
+              options={options}
+              onChange={handleChangeService}
+              value=""
+              chakraStyles={chakraStyles}
+            />
+          </Box>
+        )}
         {servicos && servicos?.length > 0 && (
           <Box
             mt="6"
@@ -216,16 +219,18 @@ export const ServicoForm = ({ ticket }) => {
                       </Table.Cell>
 
                       <Table.Cell>
-                        <Button
-                          size="xs"
-                          variant="ghost"
-                          onClick={(e) => {
-                            handleDeleteTicket({ id: servico._id });
-                          }}
-                          _hover={{ bg: "transparent" }}
-                        >
-                          <CircleX size={15} color="red" />
-                        </Button>
+                        {!onlyReading && (
+                          <Button
+                            size="xs"
+                            variant="ghost"
+                            onClick={(e) => {
+                              handleDeleteTicket({ id: servico._id });
+                            }}
+                            _hover={{ bg: "transparent" }}
+                          >
+                            <CircleX size={15} color="red" />
+                          </Button>
+                        )}
                       </Table.Cell>
                     </Table.Row>
                   </Tooltip>

@@ -217,6 +217,7 @@ const _TicketCard = ({ ticket }) => {
           defaultValue={ticket}
           open={open}
           setOpen={setOpen}
+          onlyReading={ticket?.etapa === "integracao-omie"}
         />
       )}
     </Box>

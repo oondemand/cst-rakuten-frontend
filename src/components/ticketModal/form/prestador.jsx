@@ -28,7 +28,11 @@ const obterPrestadores = async (inputValue) => {
   });
 };
 
-export const PrestadorForm = ({ ticket, updateTicketMutation }) => {
+export const PrestadorForm = ({
+  ticket,
+  updateTicketMutation,
+  onlyReading,
+}) => {
   const defaultSelectedPrestador = ticket?.prestador
     ? ticket.prestador.nome
     : "";
@@ -110,32 +114,38 @@ export const PrestadorForm = ({ ticket, updateTicketMutation }) => {
           </Box>
         </GridItem>
         <GridItem colSpan={3} mt="6">
-          <Box
-            mt="4"
-            w="full"
-            h="1"
-            borderBottom="2px solid"
-            borderColor="gray.100"
-          />
+          {!onlyReading && (
+            <Box
+              mt="4"
+              w="full"
+              h="1"
+              borderBottom="2px solid"
+              borderColor="gray.100"
+            />
+          )}
 
-          <Box w="full" mt="6">
-            <Text color="gray.600" fontSize="sm">
-              Selecionar prestador
+          {!onlyReading && (
+            <Box w="full" mt="6">
+              <Text color="gray.600" fontSize="sm">
+                Selecionar prestador
+              </Text>
+              <Flex gap="4">
+                <AsyncSelectAutocomplete
+                  disabled={!ticket}
+                  queryFn={obterPrestadores}
+                  value={selectedPrestador}
+                  setValue={handlePrestadorChange}
+                  placeholder="Digite para buscar..."
+                />
+              </Flex>
+            </Box>
+          )}
+
+          {!onlyReading && (
+            <Text fontSize="sm" color="gray.500" mt="6">
+              {prestador ? "Detalhes do prestador" : "Adicionar novo"}
             </Text>
-            <Flex gap="4">
-              <AsyncSelectAutocomplete
-                disabled={!ticket}
-                queryFn={obterPrestadores}
-                value={selectedPrestador}
-                setValue={handlePrestadorChange}
-                placeholder="Digite para buscar..."
-              />
-            </Flex>
-          </Box>
-
-          <Text fontSize="sm" color="gray.500" mt="6">
-            {prestador ? "Detalhes do prestador" : "Adicionar novo"}
-          </Text>
+          )}
 
           <Flex alignItems="center" gap="4" mb="6">
             <Box
@@ -152,7 +162,7 @@ export const PrestadorForm = ({ ticket, updateTicketMutation }) => {
             />
           </Flex>
           <BuildForm
-            disabled={!ticket}
+            disabled={!ticket || onlyReading}
             fields={fields}
             data={{
               ...prestador,

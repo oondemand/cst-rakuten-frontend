@@ -40,7 +40,12 @@ import { TicketActions } from "./ticketActions";
 import { FilesForm } from "./form/files";
 import { ServicoForm } from "./form/servico";
 
-export const CreateTicketModal = ({ open, setOpen, defaultValue }) => {
+export const CreateTicketModal = ({
+  open,
+  setOpen,
+  defaultValue,
+  onlyReading,
+}) => {
   const [ticket, setTicket] = useState(defaultValue);
 
   const { mutateAsync: createTicketMutation } = useMutation({
@@ -136,8 +141,10 @@ export const CreateTicketModal = ({ open, setOpen, defaultValue }) => {
               placeholder="Titulo..."
               px="0"
               defaultValue={ticket?.titulo}
+              disabled={onlyReading}
             />
             <TicketStatus
+              disabled={onlyReading}
               ticketId={ticket?._id}
               ticketStatus={ticket?.status}
               updateTicketMutation={updateTicketMutation}
@@ -146,7 +153,7 @@ export const CreateTicketModal = ({ open, setOpen, defaultValue }) => {
           <Textarea
             defaultValue={ticket?.observacao}
             name="observacao"
-            disabled={!ticket}
+            disabled={onlyReading || !ticket}
             onBlur={onInputTicketFieldBlur}
             color="gray.600"
             fontWeight="medium"
@@ -158,17 +165,19 @@ export const CreateTicketModal = ({ open, setOpen, defaultValue }) => {
           />
 
           <PrestadorForm
+            onlyReading={onlyReading}
             ticket={ticket}
             updateTicketMutation={updateTicketMutation}
           />
 
           <ServicoForm
+            onlyReading={onlyReading}
             ticket={ticket}
             updateTicketMutation={updateTicketMutation}
           />
 
           <FilesForm
-            disabled={!ticket}
+            onlyReading={onlyReading}
             defaultValues={ticket?.arquivos}
             ticketId={ticket?._id}
           />
