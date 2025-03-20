@@ -11,53 +11,57 @@ export const TicketActions = ({ ticketId, etapa }) => {
   const { setOpen } = useDialogContext();
   const { requestConfirmation } = useConfirmation();
 
-  const { mutateAsync: arquiveTicketMutation } = useMutation({
-    mutationFn: async () =>
-      await TicketService.alterarTicket({
-        id: ticketId,
-        body: {
-          status: "arquivado",
-        },
-      }),
-    onSuccess: () => {
-      toaster.create({
-        title: "Ticket arquivado com sucesso!",
-        type: "info",
-      });
-    },
-    onError: () => {
-      toaster.error({ title: "Ouve um erro ao arquivar o ticket!" });
-    },
-  });
+  const { mutateAsync: arquiveTicketMutation, isPending: isArquivePending } =
+    useMutation({
+      mutationFn: async () =>
+        await TicketService.alterarTicket({
+          id: ticketId,
+          body: {
+            status: "arquivado",
+          },
+        }),
+      onSuccess: () => {
+        toaster.create({
+          title: "Ticket arquivado com sucesso!",
+          type: "info",
+        });
+      },
+      onError: () => {
+        toaster.error({ title: "Ouve um erro ao arquivar o ticket!" });
+      },
+    });
 
-  const { mutateAsync: aproveTicketMutation } = useMutation({
-    mutationFn: async () => await TicketService.aprovarTicket({ id: ticketId }),
-    onSuccess: () => {
-      queryClient.invalidateQueries(["listar-tickets"]);
-      toaster.create({
-        title: "Ticket aprovado com sucesso!",
-        type: "success",
-      });
-    },
-    onError: () => {
-      toaster.error({ title: "Ouve um erro ao aprovar o ticket!" });
-    },
-  });
+  const { mutateAsync: aproveTicketMutation, isPending: isAprovePending } =
+    useMutation({
+      mutationFn: async () =>
+        await TicketService.aprovarTicket({ id: ticketId }),
+      onSuccess: () => {
+        queryClient.invalidateQueries(["listar-tickets"]);
+        toaster.create({
+          title: "Ticket aprovado com sucesso!",
+          type: "success",
+        });
+      },
+      onError: () => {
+        toaster.error({ title: "Ouve um erro ao aprovar o ticket!" });
+      },
+    });
 
-  const { mutateAsync: reproveTicketMutation } = useMutation({
-    mutationFn: async () =>
-      await TicketService.reprovarTicket({ id: ticketId }),
-    onSuccess: () => {
-      queryClient.invalidateQueries(["listar-tickets"]);
-      toaster.create({
-        title: "Ticket reprovado com sucesso!",
-        type: "success",
-      });
-    },
-    onError: () => {
-      toaster.error({ title: "Ouve um erro ao reprovar o ticket!" });
-    },
-  });
+  const { mutateAsync: reproveTicketMutation, isPending: isReprovePending } =
+    useMutation({
+      mutationFn: async () =>
+        await TicketService.reprovarTicket({ id: ticketId }),
+      onSuccess: () => {
+        queryClient.invalidateQueries(["listar-tickets"]);
+        toaster.create({
+          title: "Ticket reprovado com sucesso!",
+          type: "success",
+        });
+      },
+      onError: () => {
+        toaster.error({ title: "Ouve um erro ao reprovar o ticket!" });
+      },
+    });
 
   const handleArquiveTicket = async () => {
     const { action } = await requestConfirmation({
@@ -75,12 +79,11 @@ export const TicketActions = ({ ticketId, etapa }) => {
     <Flex alignItems="center" w="full" justifyContent="space-between">
       <Flex gap="2">
         <Button
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            aproveTicketMutation();
+          onClick={async (e) => {
+            await aproveTicketMutation();
+            setOpen(false);
           }}
-          // disabled={etapa === "aprovacao-pagamento"}
+          disabled={etapa === "integracao-omie" || isAprovePending}
           variant="surface"
           shadow="xs"
           colorPalette="green"
@@ -89,11 +92,14 @@ export const TicketActions = ({ ticketId, etapa }) => {
           <Check /> Aprovar
         </Button>
         <Button
-          // disabled={etapa === "requisicao"}
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            reproveTicketMutation();
+          disabled={
+            etapa === "requisicao" ||
+            etapa === "integracao-omie" ||
+            isReprovePending
+          }
+          onClick={async (e) => {
+            await reproveTicketMutation();
+            setOpen(false);
           }}
           colorPalette="red"
           variant="surface"
@@ -103,10 +109,10 @@ export const TicketActions = ({ ticketId, etapa }) => {
           <X /> Reprovar
         </Button>
         <Button
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            handleArquiveTicket();
+          disabled={isArquivePending}
+          onClick={async (e) => {
+            await handleArquiveTicket();
+            setOpen(false);
           }}
           variant="surface"
           shadow="xs"
@@ -117,8 +123,6 @@ export const TicketActions = ({ ticketId, etapa }) => {
       </Flex>
       <Button
         onClick={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
           setOpen(false);
         }}
         variant="surface"

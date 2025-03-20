@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
+import { LoginService } from "../service/auth";
 
 const AuthContext = createContext();
 
@@ -8,10 +9,12 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     setIsLoading(true);
-    const initializeAuth = () => {
+    const initializeAuth = async () => {
       try {
         const token = localStorage.getItem("token");
         const localUser = localStorage.getItem("usuario");
+
+        await LoginService.validateToken();
 
         if (token && localUser) setUser(JSON.parse(localUser));
       } catch (error) {

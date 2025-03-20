@@ -204,12 +204,12 @@ export const DataGrid = ({
 
         <Flex mt="4" alignItems="flex-end" gap="6">
           <Flex flexDir="column" gap="2">
-            <Flex alignItems="center" gap="1">
+            <Flex alignItems="center" gap="1" fontSize="sm">
               <Text>Page</Text>
-              <strong>
+              <Text fontWeight="semibold">
                 {table.getState().pagination.pageIndex + 1} de{" "}
                 {table.getPageCount()}
-              </strong>
+              </Text>
             </Flex>
             <Flex gap="2">
               <Button
@@ -250,12 +250,12 @@ export const DataGrid = ({
           <Flex gap="4" align="flex-end">
             <SelectRoot
               w="100px"
-              size="sm"
+              size="xs"
               value={[table.getState().pagination.pageSize]}
               onValueChange={({ value }) => table.setPageSize(Number(...value))}
               collection={pageSizeOptions}
             >
-              <SelectLabel fontSize="md">Mostrar</SelectLabel>
+              <SelectLabel fontSize="sm">Mostrar</SelectLabel>
               <SelectTrigger>
                 <SelectValueText />
               </SelectTrigger>
@@ -269,11 +269,13 @@ export const DataGrid = ({
             </SelectRoot>
 
             <Flex flexDir="column" gap="1">
-              <Text>Ir para a página:</Text>
+              <Text fontSize="sm" fontWeight="medium">
+                Ir para a página:
+              </Text>
               <DebouncedInput
                 debounce={1500}
                 iconVisible={false}
-                size="sm"
+                size="xs"
                 value={
                   (table.getState().pagination.pageIndex + 1).toString() ?? ""
                 }
