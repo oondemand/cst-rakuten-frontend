@@ -75,7 +75,6 @@ export const FilesForm = ({ onlyReading, defaultValues, ticketId }) => {
   const handleDownloadFile = async ({ id }) => {
     try {
       const { data } = await TicketService.getFile({ id });
-      console.log("data", data);
 
       if (data) {
         const byteArray = new Uint8Array(data?.buffer?.data);
