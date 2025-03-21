@@ -31,7 +31,7 @@ export const ServicoForm = ({ ticket, onlyReading }) => {
   const options = data?.map((e) => ({
     label: `${e?.competencia?.mes.toString().padStart(2, "0")}/${
       e?.competencia?.ano
-    }  ${e?.campanha}  ${currency.format(e?.valor)}`,
+    }  ${e?.campanha ?? ""}  ${currency.format(e?.valor)}`,
 
     value: e?._id,
   }));
