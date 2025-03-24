@@ -67,8 +67,8 @@ export const DataGrid = ({
       pagination,
       sorting,
       columnVisibility,
-      // columnSizing,
-      // columnSizingInfo,
+      columnSizing,
+      columnSizingInfo,
     },
     onColumnVisibilityChange: setColumnVisibility,
     onSortingChange,
@@ -80,10 +80,10 @@ export const DataGrid = ({
     manualFiltering: true,
     manualSorting: true,
     ...paginationOptions,
-    enableColumnResizing: false,
-    // columnResizeMode: "onChange",
-    // onColumnSizingInfoChange: setColumnSizingInfo,
-    // onColumnSizingChange: setColumnSizing,
+    enableColumnResizing: true,
+    columnResizeMode: "onChange",
+    onColumnSizingInfoChange: setColumnSizingInfo,
+    onColumnSizingChange: setColumnSizing,
     meta: {
       updateData: async (...props) => await onUpdateData(...props),
     },
@@ -91,20 +91,10 @@ export const DataGrid = ({
 
   const columnSizeVars = useMemo(() => {
     const headers = table.getFlatHeaders();
-
     const colSizes = {};
     for (const header of headers) {
-      console.log(
-        "RUN",
-        header?.id,
-        header?.getSize(),
-        header?.column?.getSize()
-      );
-
       colSizes[`--header-${header.id}-size`] = header.getSize();
       colSizes[`--col-${header.column.id}-size`] = header.column.getSize();
-
-      console.log(colSizes);
     }
     return colSizes;
   }, [table.getState().columnSizingInfo, table.getState().columnSizing]);

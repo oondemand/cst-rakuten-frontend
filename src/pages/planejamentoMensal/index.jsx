@@ -10,7 +10,7 @@ export function PlanejamentoMensal() {
   );
 
   return (
-    <Flex flex="1" flexDir="column" py="8" px="6" bg="#F8F9FA">
+    <Flex flex="1" flexDir="column" py="8" px="6" bg="#F8F9FA" overflow="auto">
       <Flex gap="8">
         <Box w="80" bg="brand.500" color="white" p="7" rounded="2xl">
           <Heading size="3xl" mb="4" fontWeight="bold">
