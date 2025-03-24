@@ -108,20 +108,20 @@ export const makeServicoDynamicColumns = () => {
       meta: { filterKey: "dataRegistro" },
     },
     {
-      accessorKey: "competencia",
-      header: "Competência",
-      enableSorting: false,
-      cell: CompetenciaCell,
-      enableColumnFilter: true,
-      meta: { filterKey: "competencia.mes" },
-    },
-    {
       accessorKey: "campanha",
       header: "Campanha",
       enableSorting: false,
       cell: (props) => <SelectListaCell {...props} cod={"campanha"} />,
       enableColumnFilter: true,
       meta: { filterKey: "campanha" },
+    },
+    {
+      accessorKey: "competencia",
+      header: "Competência",
+      enableSorting: false,
+      cell: CompetenciaCell,
+      enableColumnFilter: true,
+      meta: { filterKey: "competencia.mes" },
     },
     {
       accessorKey: "status",
@@ -173,6 +173,14 @@ export const makeServicoDynamicColumns = () => {
       meta: { filterKey: "valores.paidPlacement" },
     },
     {
+      accessorKey: "valores.totalServico",
+      header: "Total Serviço",
+      enableSorting: false,
+      cell: DisabledCurrencyCell,
+      enableColumnFilter: false,
+      meta: { filterKey: "valores.totalServico" },
+    },
+    {
       accessorKey: "valores.revisionMonthProvision",
       header: "Data de revisão",
       enableSorting: false,
@@ -211,14 +219,6 @@ export const makeServicoDynamicColumns = () => {
       cell: CurrencyCell,
       enableColumnFilter: true,
       meta: { filterKey: "valores.revisionPaidPlacement" },
-    },
-    {
-      accessorKey: "valores.totalServico",
-      header: "Total Serviço",
-      enableSorting: false,
-      cell: DisabledCurrencyCell,
-      enableColumnFilter: false,
-      meta: { filterKey: "valores.totalServico" },
     },
     {
       accessorKey: "valores.totalRevisao",
