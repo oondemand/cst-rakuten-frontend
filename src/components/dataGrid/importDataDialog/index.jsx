@@ -1,4 +1,4 @@
-import { Button, Box, Icon } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 import {
   DialogRoot,
   DialogBody,
@@ -9,16 +9,15 @@ import {
   DialogTrigger,
   DialogFooter,
   DialogActionTrigger,
-} from "../../components/ui/dialog";
+} from "../../../components/ui/dialog";
 
 import {
   FileUploadRoot,
   FileUploadDropzone,
   FileUploadList,
-} from "../../components/ui/file-upload";
+} from "../../../components/ui/file-upload";
 
 import { useState } from "react";
-import { Oondemand } from "../svg/oondemand";
 
 export const ImportDataDialog = ({
   accept,

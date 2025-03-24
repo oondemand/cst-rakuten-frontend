@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
-import { PiggyBank } from "lucide-react";
+
 
 export const Dashboard = () => {
   return (
