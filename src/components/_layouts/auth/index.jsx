@@ -31,7 +31,7 @@ const navigationItems = [
   },
   {
     title: "Planejamento",
-    href: "/planejamento",
+    // href: "/planejamento",
   },
   {
     title: "Pagos",
