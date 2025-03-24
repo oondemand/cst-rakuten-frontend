@@ -2,7 +2,7 @@ import React from "react";
 import { CpfCnpjCell } from "../../components/dataGrid/cells/cpfCnpjCell";
 import { SelectAutoCompleteCell } from "../../components/dataGrid/cells/selectAutoComplete";
 
-import { DefaultEditableCell } from "../../components/dataGrid/cells/default";
+import { DefaultEditableCell } from "../../components/dataGrid/cells/defaultEditable";
 import { SelectListaCell } from "../../components/dataGrid/cells/selectLista";
 import { DateCell } from "../../components/dataGrid/cells/dateCell";
 import { PisPasepCell } from "../../components/dataGrid/cells/pisPasepCell";

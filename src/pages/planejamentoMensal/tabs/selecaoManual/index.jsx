@@ -44,7 +44,7 @@ export const SelecaoManualTab = () => {
 
   return (
     <>
-      <Box bg="white" p="4" rounded="lg">
+      <Box bg="white" py="4" px="2" rounded="lg">
         <Flex
           w="full"
           alignItems="center"

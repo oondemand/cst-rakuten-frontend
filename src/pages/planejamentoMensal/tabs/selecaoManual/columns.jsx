@@ -2,6 +2,7 @@ import { CompetenciaCell } from "../../../../components/dataGrid/cells/competenc
 import { DisabledDefaultCell } from "../../../../components/dataGrid/cells/disabledDefaultCell";
 import { DisabledCurrencyCell } from "../../../../components/dataGrid/cells/disabledCurrencyCell";
 import { Text, Box, Flex } from "@chakra-ui/react";
+import { currency } from "../../../../utils/currency";
 
 export const makeServicoDynamicColumns = () => {
   return [
@@ -9,6 +10,7 @@ export const makeServicoDynamicColumns = () => {
       accessorKey: "acoes",
       header: "Ações",
       enableSorting: false,
+      size: 50,
       cell: (props) => (
         <Flex minH="8">
           <Text alignSelf="center" fontSize="sm" truncate>
@@ -83,11 +85,11 @@ export const makeServicoDynamicColumns = () => {
       cell: (props) => (
         <Flex minH="8">
           <Text alignSelf="center" fontSize="sm" truncate>
-            {props.getValue()}
+            {props.getValue()?.toUpperCase()}
           </Text>
         </Flex>
       ),
-      size: 200,
+      size: 50,
     },
     {
       accessorKey: "prestador.documento",
@@ -105,7 +107,14 @@ export const makeServicoDynamicColumns = () => {
       accessorKey: "competencia",
       header: "Competência",
       enableSorting: false,
-      // cell: (props) => <Flex minH="8"><Text  alignSelf="center" truncate>{props.getValue()}</Text></Flex>,
+      cell: (props) => (
+        <Flex minH="8">
+          <Text alignSelf="center" fontSize="sm" truncate>
+            {props.getValue()?.mes?.toString()?.padStart(2, "0")}/
+            {props.getValue()?.ano}
+          </Text>
+        </Flex>
+      ),
     },
     {
       accessorKey: "status",
@@ -222,9 +231,15 @@ export const makeServicoDynamicColumns = () => {
       accessorKey: "valor",
       header: "Valor total",
       enableSorting: false,
-      cell: DisabledCurrencyCell,
-      enableColumnFilter: false,
       meta: { filterKey: "valor" },
+      enableColumnFilter: false,
+      cell: (props) => (
+        <Flex minH="8">
+          <Text alignSelf="center" fontSize="sm" truncate>
+            {currency.format(props.getValue())}
+          </Text>
+        </Flex>
+      ),
     },
   ];
 };
