@@ -1,6 +1,7 @@
 import { CompetenciaCell } from "../../../../components/dataGrid/cells/competenciaCell";
 import { DisabledDefaultCell } from "../../../../components/dataGrid/cells/disabledDefaultCell";
 import { DisabledCurrencyCell } from "../../../../components/dataGrid/cells/disabledCurrencyCell";
+import { Text, Box, Flex } from "@chakra-ui/react";
 
 export const makeServicoDynamicColumns = () => {
   return [
@@ -8,7 +9,13 @@ export const makeServicoDynamicColumns = () => {
       accessorKey: "acoes",
       header: "Ações",
       enableSorting: false,
-      cell: () => <></>,
+      cell: (props) => (
+        <Flex minH="8">
+          <Text alignSelf="center" fontSize="sm" truncate>
+            {props.getValue()}
+          </Text>
+        </Flex>
+      ),
       // cell: (props) => (
       //   <TableActionsCell>
       //     <DeleteServicoAction id={props.row.original?._id} />
@@ -47,33 +54,70 @@ export const makeServicoDynamicColumns = () => {
       accessorKey: "prestador.sid",
       header: "Sid",
       enableSorting: false,
+      cell: (props) => (
+        <Flex minH="8">
+          <Text alignSelf="center" fontSize="sm" truncate>
+            {props.getValue()}
+          </Text>
+        </Flex>
+      ),
+      size: 80,
     },
     {
       accessorKey: "prestador.nome",
       header: "Nome",
       enableSorting: false,
+      cell: (props) => (
+        <Flex minH="8">
+          <Text alignSelf="center" fontSize="sm" truncate>
+            {props.getValue()}
+          </Text>
+        </Flex>
+      ),
+      size: 400,
     },
     {
       accessorKey: "prestador.tipo",
       header: "Tipo",
       enableSorting: false,
+      cell: (props) => (
+        <Flex minH="8">
+          <Text alignSelf="center" fontSize="sm" truncate>
+            {props.getValue()}
+          </Text>
+        </Flex>
+      ),
+      size: 200,
     },
     {
       accessorKey: "prestador.documento",
       header: "Documento",
       enableSorting: false,
+      cell: (props) => (
+        <Flex minH="8">
+          <Text alignSelf="center" fontSize="sm" truncate>
+            {props.getValue()}
+          </Text>
+        </Flex>
+      ),
     },
     {
       accessorKey: "competencia",
       header: "Competência",
       enableSorting: false,
-      cell: CompetenciaCell,
+      // cell: (props) => <Flex minH="8"><Text  alignSelf="center" truncate>{props.getValue()}</Text></Flex>,
     },
     {
       accessorKey: "status",
       header: "Status",
       enableSorting: false,
-      cell: DisabledDefaultCell,
+      cell: (props) => (
+        <Flex minH="8">
+          <Text alignSelf="center" fontSize="sm" truncate>
+            {props.getValue()}
+          </Text>
+        </Flex>
+      ),
       enableColumnFilter: true,
       meta: {
         filterKey: "status",

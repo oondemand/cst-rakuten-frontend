@@ -58,6 +58,7 @@ export const DataGrid = ({
   setColumnSizing,
   onUpdateData,
   striped = true,
+  enableColumnResizing = true,
 }) => {
   const table = useReactTable({
     data,
@@ -73,14 +74,14 @@ export const DataGrid = ({
     onColumnVisibilityChange: setColumnVisibility,
     onSortingChange,
     defaultColumn: {
-      minSize: 60,
+      minSize: 50,
       maxSize: 800,
     },
     ...paginationOptions,
     manualPagination: true,
     manualFiltering: true,
     manualSorting: true,
-    enableColumnResizing: true,
+    enableColumnResizing,
     columnResizeMode: "onChange",
     onColumnSizingInfoChange: setColumnSizingInfo,
     onColumnSizingChange: setColumnSizing,

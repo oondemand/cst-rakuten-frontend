@@ -4,26 +4,29 @@ import { ServicoService } from "../../../../service/servico";
 import { sortByToState, stateToSortBy } from "../../../../utils/sorting";
 import { useMemo } from "react";
 import { makeServicoDynamicColumns } from "./columns";
-import { Flex, Box } from "@chakra-ui/react";
+import { Flex, Box, Text } from "@chakra-ui/react";
 import { DataGrid } from "../../../../components/dataGrid";
+import { useColumnVisibility } from "../../../../hooks/useColumnVisibility";
+import { useColumnSizing } from "../../../../hooks/useColumnSizing";
+import { VisibilityControlDialog } from "../../../../components/vibilityControlDialog";
 
 export const SelecaoManualTab = () => {
   const { filters, resetFilters, setFilters } = useFilters({
-    key: "SERVICOS",
+    key: "PLANEJAMENTO_MENSAL",
   });
 
-  // const { columnVisibility, setColumnVisibility } = useColumnVisibility({
-  //   key: "SERVICOS",
-  // });
+  const { columnVisibility, setColumnVisibility } = useColumnVisibility({
+    key: "PLANEJAMENTO_MENSAL",
+  });
 
-  // const {
-  //   columnSizing,
-  //   columnSizingInfo,
-  //   setColumnSizing,
-  //   setColumnSizingInfo,
-  // } = useColumnSizing({
-  //   key: "SERVICOS",
-  // });
+  const {
+    columnSizing,
+    columnSizingInfo,
+    setColumnSizing,
+    setColumnSizingInfo,
+  } = useColumnSizing({
+    key: "PLANEJAMENTO_MENSAL",
+  });
 
   const { data, error, isLoading, isFetching } = useQuery({
     queryKey: ["listar-servicos", { filters }],
@@ -37,121 +40,65 @@ export const SelecaoManualTab = () => {
   };
 
   const sortingState = sortByToState(filters.sortBy);
-  const columns = useMemo(() => makeServicoDynamicColumns({}), []);
-
-  // const { mutateAsync: updateServicoMutation } = useMutation({
-  //   mutationFn: async ({ id, data }) => await api.patch(`servicos/${id}`, data),
-  //   onSuccess() {
-  //     queryClient.refetchQueries(["listar-servicos", { filters }]);
-  //     toaster.create({
-  //       title: "Serviço atualizado com sucesso",
-  //       type: "success",
-  //     });
-  //   },
-  //   onError: (error) => {
-  //     toaster.create({
-  //       title: "Ouve um erro ao atualizar o serviço",
-  //       type: "error",
-  //     });
-  //   },
-  // });
+  const columns = makeServicoDynamicColumns();
 
   return (
     <>
-      <Flex
-        flex="1"
-        py="8"
-        px="6"
-        pb="2"
-        itens="center"
-        overflow="auto"
-        scrollbarWidth="thin"
-      >
-        <Box>
-          {/* <Flex gap="2" alignItems="center">
-            <DebouncedInput
-              value={filters.searchTerm}
-              debounce={700}
-              onChange={(value) => {
-                setFilters((prev) => ({
-                  ...prev,
-                  searchTerm: value,
-                  pageIndex: 0,
-                }));
-              }}
-              size="sm"
-              iconSize={18}
-              startOffset="2px"
-              color="gray.700"
-            />
-            <Button
-              size="sm"
-              variant="subtle"
-              color="brand.500"
-              fontWeight="semibold"
-              onClick={resetFilters}
-            >
-              Limpar filtros
-            </Button>
-            {(isLoading || isFetching) && <Spinner size="md" />}
-          </Flex> */}
-          <Box mt="4">
-            {/* <Flex
-              w="full"
-              alignItems="center"
-              justifyContent="flex-start"
-              pb="2"
-              gap="4"
-            >
-              <VisibilityControlDialog
-                fields={columns.map((e) => ({
-                  label: e.header,
-                  accessorKey: e.accessorKey.replaceAll(".", "_"),
-                }))}
-                title="Ocultar colunas"
-                setVisibilityState={setColumnVisibility}
-                visibilityState={columnVisibility}
-              />
-            </Flex> */}
+      <Box bg="white" p="4" rounded="lg">
+        <Flex
+          w="full"
+          alignItems="center"
+          justifyContent="flex-start"
+          pb="2"
+          gap="4"
+        >
+          <Text fontSize="lg" fontWeight="semibold" color="gray.500">
+            Serviços
+          </Text>
+          <VisibilityControlDialog
+            fields={columns.map((e) => ({
+              label: e.header,
+              accessorKey: e.accessorKey.replaceAll(".", "_"),
+            }))}
+            title="Ocultar colunas"
+            setVisibilityState={setColumnVisibility}
+            visibilityState={columnVisibility}
+          />
+        </Flex>
 
-            <DataGrid
-              filters={filters}
-              sorting={sortingState}
-              columns={columns}
-              pagination={paginationState}
-              data={data?.servicos || []}
-              striped={false}
-              // columnVisibility={columnVisibility}
-              // setColumnVisibility={setColumnVisibility}
-              // columnSizing={columnSizing}
-              // columnSizingInfo={columnSizingInfo}
-              // setColumnSizing={setColumnSizing}
-              // setColumnSizingInfo={setColumnSizingInfo}
-              // onUpdateData={async (values) => {
-              //   await updateServicoMutation({
-              //     id: values.prestadorId,
-              //     data: values.data,
-              //   });
-              // }}
-              onFilterChange={(value) => {
-                setFilters((prev) => ({ ...prev, ...value, pageIndex: 0 }));
-              }}
-              paginationOptions={{
-                onPaginationChange: (pagination) => {
-                  setFilters(pagination);
-                },
-                rowCount: data?.pagination?.totalItems,
-              }}
-              onSortingChange={(updaterOrValue) => {
-                return setFilters((prev) => ({
-                  ...prev,
-                  sortBy: stateToSortBy(updaterOrValue(sortingState)),
-                }));
-              }}
-            />
-          </Box>
-        </Box>
-      </Flex>
+        {data && (
+          <DataGrid
+            filters={filters}
+            sorting={sortingState}
+            columns={columns}
+            pagination={paginationState}
+            data={data?.servicos || []}
+            striped={false}
+            columnVisibility={columnVisibility}
+            setColumnVisibility={setColumnVisibility}
+            columnSizing={columnSizing}
+            columnSizingInfo={columnSizingInfo}
+            setColumnSizing={setColumnSizing}
+            setColumnSizingInfo={setColumnSizingInfo}
+            enableColumnResizing={false}
+            onFilterChange={(value) => {
+              setFilters((prev) => ({ ...prev, ...value, pageIndex: 0 }));
+            }}
+            paginationOptions={{
+              onPaginationChange: (pagination) => {
+                setFilters(pagination);
+              },
+              rowCount: data?.pagination?.totalItems,
+            }}
+            onSortingChange={(updaterOrValue) => {
+              return setFilters((prev) => ({
+                ...prev,
+                sortBy: stateToSortBy(updaterOrValue(sortingState)),
+              }));
+            }}
+          />
+        )}
+      </Box>
     </>
   );
 };

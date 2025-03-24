@@ -85,8 +85,8 @@ export function PlanejamentoMensal() {
           </Flex>
         </Flex>
       </Flex>
-      <Flex mt="8">
-        <Box w="250px" />
+      <Flex mt="6">
+        {/* <Box w="250px" /> */}
 
         <Tabs.Root
           value={tab}
@@ -125,7 +125,7 @@ export function PlanejamentoMensal() {
               Importar planilha
             </Tabs.Trigger>
           </Tabs.List>
-          <Tabs.Content value="selecao-manual">
+          <Tabs.Content value="selecao-manual" p="0">
             <SelecaoManualTab />
           </Tabs.Content>
           <Tabs.Content value="sincronizar">Sincronizar</Tabs.Content>
