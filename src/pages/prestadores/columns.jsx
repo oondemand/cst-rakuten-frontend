@@ -2,7 +2,7 @@ import React from "react";
 import { CpfCnpjCell } from "../../components/dataGrid/cells/cpfCnpjCell";
 import { SelectAutoCompleteCell } from "../../components/dataGrid/cells/selectAutoComplete";
 
-import { DefaultCell } from "../../components/dataGrid/cells/default";
+import { DefaultEditableCell } from "../../components/dataGrid/cells/default";
 import { SelectListaCell } from "../../components/dataGrid/cells/selectLista";
 import { DateCell } from "../../components/dataGrid/cells/dateCell";
 import { PisPasepCell } from "../../components/dataGrid/cells/pisPasepCell";
@@ -51,7 +51,7 @@ export const makePrestadorDynamicColumns = () => {
     {
       accessorKey: "sciUnico",
       header: "SCI Único",
-      cell: DefaultCell,
+      cell: DefaultEditableCell,
       enableColumnFilter: true,
       meta: { filterKey: "sciUnico" },
     },
@@ -65,14 +65,14 @@ export const makePrestadorDynamicColumns = () => {
     {
       accessorKey: "nome",
       header: "Nome Completo",
-      cell: DefaultCell,
+      cell: DefaultEditableCell,
       enableColumnFilter: true,
       meta: { filterKey: "nome" },
     },
     {
       accessorKey: "sid",
       header: "SID",
-      cell: DefaultCell,
+      cell: DefaultEditableCell,
       enableColumnFilter: true,
       meta: { filterKey: "sid" },
     },
@@ -109,14 +109,14 @@ export const makePrestadorDynamicColumns = () => {
     {
       accessorKey: "dadosBancarios.agencia",
       header: "Agência",
-      cell: DefaultCell,
+      cell: DefaultEditableCell,
       enableColumnFilter: true,
       meta: { filterKey: "dadosBancarios.agencia" },
     },
     {
       accessorKey: "dadosBancarios.conta",
       header: "Conta Bancária",
-      cell: DefaultCell,
+      cell: DefaultEditableCell,
       enableColumnFilter: true,
       meta: { filterKey: "dadosBancarios.conta" },
     },
@@ -138,42 +138,42 @@ export const makePrestadorDynamicColumns = () => {
     {
       accessorKey: "email",
       header: "E-mail",
-      cell: DefaultCell,
+      cell: DefaultEditableCell,
       enableColumnFilter: true,
       meta: { filterKey: "email" },
     },
     {
       accessorKey: "endereco.cep",
       header: "CEP",
-      cell: DefaultCell,
+      cell: DefaultEditableCell,
       enableColumnFilter: true,
       meta: { filterKey: "endereco.cep" },
     },
     {
       accessorKey: "endereco.rua",
       header: "Rua",
-      cell: DefaultCell,
+      cell: DefaultEditableCell,
       enableColumnFilter: true,
       meta: { filterKey: "endereco.rua" },
     },
     {
       accessorKey: "endereco.numero",
       header: "Número",
-      cell: DefaultCell,
+      cell: DefaultEditableCell,
       enableColumnFilter: true,
       meta: { filterKey: "endereco.numero" },
     },
     {
       accessorKey: "endereco.complemento",
       header: "Complemento",
-      cell: DefaultCell,
+      cell: DefaultEditableCell,
       enableColumnFilter: true,
       meta: { filterKey: "endereco.complemento" },
     },
     {
       accessorKey: "endereco.cidade",
       header: "Cidade",
-      cell: DefaultCell,
+      cell: DefaultEditableCell,
       enableColumnFilter: true,
       meta: { filterKey: "endereco.cidade" },
     },
@@ -223,14 +223,14 @@ export const makePrestadorDynamicColumns = () => {
     {
       accessorKey: "pessoaFisica.nomeMae",
       header: "Nome da Mãe",
-      cell: DefaultCell,
+      cell: DefaultEditableCell,
       enableColumnFilter: true,
       meta: { filterKey: "pessoaFisica.nomeMae" },
     },
     {
       accessorKey: "pessoaJuridica.nomeFantasia",
       header: "Nome Fantasia",
-      cell: DefaultCell,
+      cell: DefaultEditableCell,
       enableColumnFilter: true,
       meta: { filterKey: "pessoaJuridica.nomeFantasia" },
     },
