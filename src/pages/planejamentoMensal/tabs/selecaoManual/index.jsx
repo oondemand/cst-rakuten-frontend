@@ -44,29 +44,38 @@ export const SelecaoManualTab = () => {
 
   return (
     <>
-      <Box bg="white" py="4" px="2" rounded="lg">
-        <Flex
-          w="full"
-          alignItems="center"
-          justifyContent="flex-start"
-          pb="2"
-          gap="4"
+      {data && (
+        <Box
+          bg="white"
+          py="4"
+          px="2"
+          rounded="lg"
+          data-state="open"
+          _open={{
+            animation: "fade-in 300ms ease-out",
+          }}
         >
-          <Text fontSize="lg" fontWeight="semibold" color="gray.500">
-            Serviços
-          </Text>
-          <VisibilityControlDialog
-            fields={columns.map((e) => ({
-              label: e.header,
-              accessorKey: e.accessorKey.replaceAll(".", "_"),
-            }))}
-            title="Ocultar colunas"
-            setVisibilityState={setColumnVisibility}
-            visibilityState={columnVisibility}
-          />
-        </Flex>
+          <Flex
+            w="full"
+            alignItems="center"
+            justifyContent="flex-start"
+            pb="2"
+            gap="4"
+          >
+            <Text fontSize="lg" fontWeight="semibold" color="gray.500">
+              Serviços
+            </Text>
+            <VisibilityControlDialog
+              fields={columns.map((e) => ({
+                label: e.header,
+                accessorKey: e.accessorKey.replaceAll(".", "_"),
+              }))}
+              title="Ocultar colunas"
+              setVisibilityState={setColumnVisibility}
+              visibilityState={columnVisibility}
+            />
+          </Flex>
 
-        {data && (
           <DataGrid
             filters={filters}
             sorting={sortingState}
@@ -97,8 +106,8 @@ export const SelecaoManualTab = () => {
               }));
             }}
           />
-        )}
-      </Box>
+        </Box>
+      )}
     </>
   );
 };
