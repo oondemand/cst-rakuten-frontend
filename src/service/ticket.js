@@ -72,11 +72,8 @@ const adicionarServico = async ({ ticketId, servicoId }) => {
   return data;
 };
 
-const removerServico = async ({ ticketId, servicoId }) => {
-  const { data } = await api.post(
-    `/tickets/remover-servico/${ticketId}/${servicoId}`
-  );
-
+const removerServico = async ({ servicoId }) => {
+  const { data } = await api.post(`/tickets/remover-servico/${servicoId}`);
   return data;
 };
 

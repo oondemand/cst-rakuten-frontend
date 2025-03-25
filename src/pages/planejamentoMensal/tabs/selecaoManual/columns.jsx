@@ -1,6 +1,6 @@
 import { Text, Box, Flex } from "@chakra-ui/react";
 import { currency } from "../../../../utils/currency";
-import { CheckAction } from "../../../../components/dataGrid/actions/checkbox";
+import { CheckActionCell } from "../../../../components/dataGrid/actions/checkbox-cell";
 
 export const makeServicoDynamicColumns = () => {
   return [
@@ -9,7 +9,7 @@ export const makeServicoDynamicColumns = () => {
       header: "Ações",
       enableSorting: false,
       size: 50,
-      cell: (props) => <CheckAction {...props} />,
+      cell: (props) => <CheckActionCell {...props} />,
     },
     {
       accessorKey: "prestador.sid",

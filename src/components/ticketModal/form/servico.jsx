@@ -38,7 +38,7 @@ export const ServicoForm = ({ ticket, onlyReading }) => {
 
   const { mutateAsync: deleteServicoMutation } = useMutation({
     mutationFn: async ({ servicoId }) =>
-      await TicketService.removerServico({ ticketId: ticket?._id, servicoId }),
+      await TicketService.removerServico({ servicoId }),
     onSuccess: ({ servicos }) => {
       setServicos(servicos);
       toaster.create({
