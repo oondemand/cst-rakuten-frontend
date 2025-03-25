@@ -2,6 +2,7 @@ import { Box, Flex, Heading, Tabs, Text } from "@chakra-ui/react";
 import { Target } from "lucide-react";
 import { useStateWithStorage } from "../../hooks/useStateStorage";
 import { SelecaoManualTab } from "./tabs/selecaoManual";
+import { SincronizacaoTab } from "./tabs/sincronicao";
 
 export function PlanejamentoMensal() {
   const [tab, setTab] = useStateWithStorage(
@@ -128,8 +129,10 @@ export function PlanejamentoMensal() {
           <Tabs.Content value="selecao-manual" p="0">
             <SelecaoManualTab />
           </Tabs.Content>
-          <Tabs.Content value="sincronizar">Sincronizar</Tabs.Content>
-          <Tabs.Content value="importar-planilha">
+          <Tabs.Content value="sincronizar" p="0">
+            <SincronizacaoTab />
+          </Tabs.Content>
+          <Tabs.Content value="importar-planilha" p="0">
             Importar planilha
           </Tabs.Content>
         </Tabs.Root>
