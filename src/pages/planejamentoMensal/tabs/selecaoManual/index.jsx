@@ -9,6 +9,7 @@ import { DataGrid } from "../../../../components/dataGrid";
 import { useColumnVisibility } from "../../../../hooks/useColumnVisibility";
 import { useColumnSizing } from "../../../../hooks/useColumnSizing";
 import { VisibilityControlDialog } from "../../../../components/vibilityControlDialog";
+import { PlanejamentoService } from "../../../../service/planejamento";
 
 export const SelecaoManualTab = () => {
   const { filters, resetFilters, setFilters } = useFilters({
@@ -30,7 +31,7 @@ export const SelecaoManualTab = () => {
 
   const { data, error, isLoading, isFetching } = useQuery({
     queryKey: ["listar-servicos", { filters }],
-    queryFn: async () => await ServicoService.listarServicos({ filters }),
+    queryFn: async () => await PlanejamentoService.listarServicos({ filters }),
     placeholderData: keepPreviousData,
   });
 

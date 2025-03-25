@@ -68,7 +68,17 @@ export const makeServicoDynamicColumns = () => {
           </Text>
         </Flex>
       ),
-      size: 50,
+      size: 120,
+      enableColumnFilter: true,
+      meta: {
+        filterKey: "prestador.tipo",
+        filterVariant: "select",
+        filterOptions: [
+          { label: "PJ", value: "pj" },
+          { label: "PF", value: "pf" },
+          { label: "EXT", value: "ext" },
+        ],
+      },
     },
     {
       accessorKey: "competencia",
@@ -82,6 +92,10 @@ export const makeServicoDynamicColumns = () => {
           </Text>
         </Flex>
       ),
+      enableColumnFilter: true,
+      meta: {
+        filterKey: "competencia.mes",
+      },
     },
     {
       accessorKey: "status",
