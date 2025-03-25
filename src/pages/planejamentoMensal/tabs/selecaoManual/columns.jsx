@@ -1,6 +1,7 @@
 import { Text, Box, Flex } from "@chakra-ui/react";
 import { currency } from "../../../../utils/currency";
 import { CheckActionCell } from "../../../../components/dataGrid/actions/checkbox-cell";
+import { DefaultCell } from "../../../../components/dataGrid/cells/default";
 
 export const makeServicoDynamicColumns = () => {
   return [
@@ -15,13 +16,7 @@ export const makeServicoDynamicColumns = () => {
       accessorKey: "prestador.sid",
       header: "Sid",
       enableSorting: false,
-      cell: (props) => (
-        <Flex minH="8">
-          <Text alignSelf="center" fontSize="sm" truncate>
-            {props.getValue()}
-          </Text>
-        </Flex>
-      ),
+      cell: DefaultCell,
       size: 120,
       enableColumnFilter: true,
       meta: {
@@ -92,13 +87,7 @@ export const makeServicoDynamicColumns = () => {
       accessorKey: "status",
       header: "Status",
       enableSorting: false,
-      cell: (props) => (
-        <Flex minH="8">
-          <Text alignSelf="center" fontSize="sm" truncate>
-            {props.getValue()}
-          </Text>
-        </Flex>
-      ),
+      cell: DefaultCell,
       enableColumnFilter: true,
       meta: {
         filterKey: "status",

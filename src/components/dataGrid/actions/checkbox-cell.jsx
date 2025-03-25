@@ -3,13 +3,16 @@ import { useState } from "react";
 import { toaster } from "../../ui/toaster";
 import { useMutation } from "@tanstack/react-query";
 import { TicketService } from "../../../service/ticket";
+import { ServicoService } from "../../../service/servico";
+import { queryClient } from "../../../config/react-query";
+import { useConfirmation } from "../../../hooks/useConfirmation";
 
 export const CheckActionCell = ({ ...props }) => {
-  const defaultValue = ["pendente", "processando"].includes(
+  const { requestConfirmation } = useConfirmation();
+
+  const checked = ["pendente", "processando"].includes(
     props.row.original.status
   );
-
-  const [checkbox, setCheckbox] = useState(defaultValue);
 
   const colorPalletMaps = {
     aberto: "",
@@ -17,30 +20,70 @@ export const CheckActionCell = ({ ...props }) => {
     processando: "purple",
   };
 
-  // const { mutateAsync: deleteServicoMutation } = useMutation({
-  //   mutationFn: async ({ servicoId }) =>
-  //     await TicketService.removerServico({ ticketId: ticket?._id, servicoId }),
-  //   onSuccess: ({ servicos }) => {
-  //     toaster.create({
-  //       title: "Serviço removido com sucesso!",
-  //       type: "success",
-  //     });
-  //   },
-  //   onError: ({}) => {
-  //     toaster.create({
-  //       title: "Erro ao remover serviço",
-  //       type: "error",
-  //     });
-  //   },
-  // });
+  const { mutateAsync: deleteServicoMutation } = useMutation({
+    mutationFn: async ({ servicoId }) =>
+      await TicketService.removerServico({ servicoId }),
+    onSuccess: (data) => {
+      queryClient.invalidateQueries(["listar-servicos"]);
+    },
+    onError: ({}) => {
+      // toaster.create({
+      //   title: "Erro ao remover serviço",
+      //   type: "error",
+      // });
+    },
+  });
+
+  const { mutateAsync: updateServicoMutation } = useMutation({
+    mutationFn: async ({ id, body }) =>
+      await ServicoService.atualizarServico({ id, body }),
+    onSuccess(data) {
+      queryClient.invalidateQueries(["listar-servicos"]);
+    },
+    onError: (error) => {
+      // toaster.create({
+      //   title: "Ouve um erro ao atualizar o serviço",
+      //   type: "error",
+      // });
+    },
+  });
+
+  const handleCheckChange = async (e) => {
+    if (props.row.original.status === "processando") {
+      const { action } = await requestConfirmation({
+        title: "Tem certeza ?",
+        description: "Essa operação ira remover o serviço do ticket.",
+      });
+
+      if (action === "confirmed") {
+        return await deleteServicoMutation({
+          servicoId: props.row.original._id,
+        });
+      }
+    }
+
+    if (props.row.original.status === "aberto") {
+      return await updateServicoMutation({
+        id: props.row.original._id,
+        body: { status: "pendente" },
+      });
+    }
+
+    if (props.row.original.status === "pendente") {
+      return await updateServicoMutation({
+        id: props.row.original._id,
+        body: { status: "aberto" },
+      });
+    }
+  };
 
   return (
     <Flex w="full" placeContent="center">
       <Checkbox.Root
         colorPalette={colorPalletMaps[props.row.original.status]}
         variant="subtle"
-        checked={checkbox}
-        onChange={(e) => setCheckbox(e.target.checked)}
+        checked={checked}
+        onChange={handleCheckChange}
       >
         <Checkbox.HiddenInput />
         <Checkbox.Control>

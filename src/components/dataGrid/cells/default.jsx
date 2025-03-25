@@ -5,13 +5,15 @@ export const DefaultCell = (props) => {
   const initialValue = props.getValue();
   const [value, setValue] = useState(initialValue);
 
-  console.log("REST", initialValue, value);
   useEffect(() => {
     setValue(initialValue);
   }, [initialValue]);
-  <Flex minH="8">
-    <Text alignSelf="center" fontSize="sm" truncate>
-      {value}
-    </Text>
-  </Flex>;
+
+  return (
+    <Flex minH="8">
+      <Text alignSelf="center" fontSize="sm" truncate>
+        {value}
+      </Text>
+    </Flex>
+  );
 };
