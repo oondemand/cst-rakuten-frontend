@@ -77,10 +77,6 @@ const removerServico = async ({ servicoId }) => {
   return data;
 };
 
-const sincronizarEsteira = async () => {
-  return api.post("/tickets/sincronizar-esteira");
-};
-
 export const TicketService = {
   listarTickets,
   adicionarTicket,
@@ -92,5 +88,4 @@ export const TicketService = {
   getFile,
   removerServico,
   adicionarServico,
-  sincronizarEsteira,
 };

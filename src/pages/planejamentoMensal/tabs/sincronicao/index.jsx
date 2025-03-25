@@ -4,13 +4,13 @@ import { useConfirmation } from "../../../../hooks/useConfirmation";
 
 import { toaster } from "../../../../components/ui/toaster";
 import { useMutation } from "@tanstack/react-query";
-import { TicketService } from "../../../../service/ticket";
+import { PlanejamentoService } from "../../../../service/planejamento";
 
 export const SincronizacaoTab = () => {
   const { requestConfirmation } = useConfirmation();
 
   const { mutateAsync: syncEsteiraMutation, isPending } = useMutation({
-    mutationFn: TicketService.sincronizarEsteira,
+    mutationFn: PlanejamentoService.sincronizarEsteira,
     onSuccess: () => {
       toaster.create({
         title: "A esteira foi sincronizada com sucesso!",
