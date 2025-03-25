@@ -1,5 +1,4 @@
-import { Box, Checkbox, Flex } from "@chakra-ui/react";
-import { useState } from "react";
+import { Checkbox, Flex } from "@chakra-ui/react";
 import { toaster } from "../../ui/toaster";
 import { useMutation } from "@tanstack/react-query";
 import { TicketService } from "../../../service/ticket";
@@ -23,28 +22,28 @@ export const CheckActionCell = ({ ...props }) => {
   const { mutateAsync: deleteServicoMutation } = useMutation({
     mutationFn: async ({ servicoId }) =>
       await TicketService.removerServico({ servicoId }),
-    onSuccess: (data) => {
+    onSuccess: () => {
       queryClient.invalidateQueries(["listar-servicos"]);
     },
     onError: ({}) => {
-      // toaster.create({
-      //   title: "Erro ao remover serviço",
-      //   type: "error",
-      // });
+      toaster.create({
+        title: "Ouve um erro inesperado ao realizar operação!",
+        type: "error",
+      });
     },
   });
 
   const { mutateAsync: updateServicoMutation } = useMutation({
     mutationFn: async ({ id, body }) =>
       await ServicoService.atualizarServico({ id, body }),
-    onSuccess(data) {
+    onSuccess() {
       queryClient.invalidateQueries(["listar-servicos"]);
     },
     onError: (error) => {
-      // toaster.create({
-      //   title: "Ouve um erro ao atualizar o serviço",
-      //   type: "error",
-      // });
+      toaster.create({
+        title: "Ouve um erro inesperado ao realizar operação!",
+        type: "error",
+      });
     },
   });
 
