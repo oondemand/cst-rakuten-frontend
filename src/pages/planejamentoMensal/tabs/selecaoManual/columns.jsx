@@ -1,5 +1,6 @@
 import { Text, Box, Flex } from "@chakra-ui/react";
 import { currency } from "../../../../utils/currency";
+import { CheckAction } from "../../../../components/dataGrid/actions/checkbox";
 
 export const makeServicoDynamicColumns = () => {
   return [
@@ -8,13 +9,7 @@ export const makeServicoDynamicColumns = () => {
       header: "Ações",
       enableSorting: false,
       size: 50,
-      cell: (props) => (
-        <Flex minH="8">
-          <Text alignSelf="center" fontSize="sm" truncate>
-            {props.getValue()}
-          </Text>
-        </Flex>
-      ),
+      cell: (props) => <CheckAction {...props} />,
     },
     {
       accessorKey: "prestador.sid",
@@ -27,7 +22,11 @@ export const makeServicoDynamicColumns = () => {
           </Text>
         </Flex>
       ),
-      size: 80,
+      size: 120,
+      enableColumnFilter: true,
+      meta: {
+        filterKey: "prestador.sid",
+      },
     },
     {
       accessorKey: "prestador.nome",
@@ -41,6 +40,27 @@ export const makeServicoDynamicColumns = () => {
         </Flex>
       ),
       size: 400,
+      enableColumnFilter: true,
+      meta: {
+        filterKey: "prestador.nome",
+      },
+    },
+
+    {
+      accessorKey: "prestador.documento",
+      header: "Documento",
+      enableSorting: false,
+      cell: (props) => (
+        <Flex minH="8">
+          <Text alignSelf="center" fontSize="sm" truncate>
+            {props.getValue()}
+          </Text>
+        </Flex>
+      ),
+      enableColumnFilter: true,
+      meta: {
+        filterKey: "prestador.documento",
+      },
     },
     {
       accessorKey: "prestador.tipo",
@@ -54,18 +74,6 @@ export const makeServicoDynamicColumns = () => {
         </Flex>
       ),
       size: 50,
-    },
-    {
-      accessorKey: "prestador.documento",
-      header: "Documento",
-      enableSorting: false,
-      cell: (props) => (
-        <Flex minH="8">
-          <Text alignSelf="center" fontSize="sm" truncate>
-            {props.getValue()}
-          </Text>
-        </Flex>
-      ),
     },
     {
       accessorKey: "competencia",
