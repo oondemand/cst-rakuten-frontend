@@ -6,13 +6,15 @@ import { SelectListaField } from "../../components/buildForm/filds/selectListaFi
 import { DateField } from "../../components/buildForm/filds/dateField";
 import { parse, isValid } from "date-fns";
 import { CurrencyField } from "../../components/buildForm/filds/currencyField";
-import { parseBRLCurrencyToNumber } from "../../utils/currency";
 
 const currencyValidation = preprocessEmptyToUndefined(
   z.coerce
     .string()
     .transform((value) => {
-      return parseBRLCurrencyToNumber(value);
+      const isNegative = value.includes("-");
+      const numero = Number(value.replace("-", "").trim());
+
+      return isNegative ? -numero : numero;
     })
     .optional()
 );
