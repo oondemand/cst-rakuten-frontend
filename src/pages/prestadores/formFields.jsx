@@ -110,13 +110,6 @@ export const createDynamicFormFields = () => {
       colSpan: 1,
     },
     {
-      accessorKey: "pessoaFisica.nomeMae",
-      label: "Nome da Mãe",
-      render: DefaultField,
-      validation: z.string().optional(),
-      colSpan: 1,
-    },
-    {
       accessorKey: "pessoaJuridica.nomeFantasia",
       label: "Nome Fantasia",
       render: DefaultField,

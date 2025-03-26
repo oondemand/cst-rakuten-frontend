@@ -221,13 +221,6 @@ export const makePrestadorDynamicColumns = () => {
       meta: { filterKey: "pessoaFisica.pis" },
     },
     {
-      accessorKey: "pessoaFisica.nomeMae",
-      header: "Nome da Mãe",
-      cell: DefaultEditableCell,
-      enableColumnFilter: true,
-      meta: { filterKey: "pessoaFisica.nomeMae" },
-    },
-    {
       accessorKey: "pessoaJuridica.nomeFantasia",
       header: "Nome Fantasia",
       cell: DefaultEditableCell,
