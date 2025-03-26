@@ -52,6 +52,7 @@ export const createDynamicFormFields = () => {
           .string()
           .regex(/^\d{5,}$/)
           .optional()
+          .nullable()
       ),
       colSpan: 1,
     },
