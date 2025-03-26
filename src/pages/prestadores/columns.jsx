@@ -258,13 +258,6 @@ export const makePrestadorDynamicColumns = () => {
       },
     },
     {
-      accessorKey: "dataExportacao",
-      header: "Data de Exportação",
-      cell: DateCell,
-      enableColumnFilter: false,
-      meta: { filterKey: "dataExportacao" },
-    },
-    {
       accessorKey: "createdAt",
       header: "Criado em",
       cell: DateCell,
