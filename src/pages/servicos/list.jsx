@@ -23,8 +23,11 @@ import { ExportData } from "../../components/dataGrid/exportData";
 
 import { formatDate } from "../../utils/formatting";
 import { ImportDataDialog } from "../../components/dataGrid/importDataDialog";
+import { useNavigate } from "react-router-dom";
 
 export const ServicosList = () => {
+  const navigate = useNavigate();
+
   const { filters, resetFilters, setFilters } = useFilters({
     key: "SERVICOS",
   });
@@ -176,12 +179,22 @@ export const ServicosList = () => {
               gap="4"
             >
               <ServicosDialog />
-              <ImportDataDialog
+              {/* <ImportDataDialog
                 accept=".xlsx, .xls, .xlsm, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
                 handleImport={async ({ files }) => {
                   await importServicosMutation({ files });
                 }}
-              />
+              /> */}
+              <Button
+                size="sm"
+                variant="subtle"
+                fontWeight="semibold"
+                color="brand.500"
+                onClick={() => navigate("/importacao")}
+                _hover={{ backgroundColor: "gray.50" }}
+              >
+                Importar Serviços
+              </Button>
               <ExportData
                 label="Exportar modelo"
                 columns={modeloDeExportacao}

@@ -8,6 +8,7 @@ import { ServicosTomados } from "./pages/servicosTomados";
 import { Dashboard } from "./pages/dashboard";
 import { Doc } from "./pages/doc";
 import { PlanejamentoMensal } from "./pages/planejamentoMensal";
+import { ImportPage } from "./pages/importacao";
 
 export const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ export const router = createBrowserRouter([
       {
         path: "/servicos/todos",
         element: <ServicosList />,
+      },
+      {
+        path: "/importacao",
+        element: <ImportPage />,
       },
       {
         path: "/doc",
