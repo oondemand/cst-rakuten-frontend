@@ -12,8 +12,12 @@ const currencyValidation = preprocessEmptyToUndefined(
   z.coerce
     .string()
     .transform((value) => {
+      console.log("VALUE", value);
+
       const isNegative = value.includes("-");
-      const numero = Number(value.replace("-", "").trim());
+      const numero = Number(
+        value.replace("-", "").replaceAll("R$", "").replaceAll(",", ".").trim()
+      );
 
       return isNegative ? -numero : numero;
     })
