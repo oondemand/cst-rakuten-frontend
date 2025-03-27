@@ -90,7 +90,15 @@ export const makePrestadorDynamicColumns = () => {
         />
       ),
       enableColumnFilter: true,
-      meta: { filterKey: "tipo" },
+      meta: {
+        filterKey: "tipo",
+        filterVariant: "select",
+        filterOptions: [
+          { label: "Pessoa física", value: "pf" },
+          { label: "Pessoa jurídica", value: "pj" },
+          { label: "Exterior", value: "ext" },
+        ],
+      },
     },
     {
       accessorKey: "documento",
