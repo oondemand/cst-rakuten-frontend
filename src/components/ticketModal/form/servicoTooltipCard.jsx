@@ -1,4 +1,4 @@
-import { Box, Text, Grid, GridItem } from "@chakra-ui/react";
+import { Box, Text, Grid, GridItem, Flex } from "@chakra-ui/react";
 import { currency } from "../../../utils/currency";
 
 export const ServicoTooltipCard = ({ servico }) => {
@@ -57,7 +57,7 @@ export const ServicoTooltipCard = ({ servico }) => {
             fontWeight="normal"
             color="gray.400"
           >
-            {currency.format(servico?.valores?.grossValue)}
+            {currency.format(servico?.valores?.grossValue ?? 0)}
           </Text>
         </GridItem>
         <GridItem>
@@ -68,7 +68,7 @@ export const ServicoTooltipCard = ({ servico }) => {
             fontWeight="normal"
             color="gray.400"
           >
-            {currency.format(servico?.valores?.bonus)}
+            {currency.format(servico?.valores?.bonus ?? 0)}
           </Text>
         </GridItem>
         <GridItem>
@@ -79,7 +79,7 @@ export const ServicoTooltipCard = ({ servico }) => {
             fontWeight="normal"
             color="gray.400"
           >
-            {currency.format(servico?.valores?.ajusteComercial)}
+            {currency.format(servico?.valores?.ajusteComercial ?? 0)}
           </Text>
         </GridItem>
         <GridItem>
@@ -90,12 +90,12 @@ export const ServicoTooltipCard = ({ servico }) => {
             fontWeight="normal"
             color="gray.400"
           >
-            {currency.format(servico?.valores?.paidPlacement)}
+            {currency.format(servico?.valores?.paidPlacement ?? 0)}
           </Text>
         </GridItem>
         <GridItem>
           <Text truncate fontSize="xs">
-            {currency.format(servico?.valores?.totalServico)}
+            {currency.format(servico?.valores?.totalServico ?? 0)}
           </Text>
         </GridItem>
 
@@ -112,7 +112,7 @@ export const ServicoTooltipCard = ({ servico }) => {
             fontWeight="normal"
             color="gray.400"
           >
-            {currency.format(servico?.valores?.revisionGrossValue)}
+            {currency.format(servico?.valores?.revisionGrossValue ?? 0)}
           </Text>
         </GridItem>
         <GridItem>
@@ -123,7 +123,7 @@ export const ServicoTooltipCard = ({ servico }) => {
             fontWeight="normal"
             color="gray.400"
           >
-            {currency.format(servico?.valores?.revisionProvisionBonus)}
+            {currency.format(servico?.valores?.revisionProvisionBonus ?? 0)}
           </Text>
         </GridItem>
         <GridItem>
@@ -134,7 +134,7 @@ export const ServicoTooltipCard = ({ servico }) => {
             fontWeight="normal"
             color="gray.400"
           >
-            {currency.format(servico?.valores?.revisionComissaoPlataforma)}
+            {currency.format(servico?.valores?.revisionComissaoPlataforma ?? 0)}
           </Text>
         </GridItem>
         <GridItem>
@@ -145,13 +145,33 @@ export const ServicoTooltipCard = ({ servico }) => {
             fontWeight="normal"
             color="gray.400"
           >
-            {currency.format(servico?.valores?.revisionPaidPlacement)}
+            {currency.format(servico?.valores?.revisionPaidPlacement ?? 0)}
           </Text>
         </GridItem>
         <GridItem>
           <Text truncate fontSize="xs">
-            {currency.format(servico?.valores?.totalRevisao)}
+            {currency.format(servico?.valores?.totalRevisao ?? 0)}
           </Text>
+        </GridItem>
+
+        <GridItem mt="4" colSpan={4} />
+        <GridItem mt="4">
+          <Text truncate fontSize="xs">
+            Imposto
+          </Text>
+        </GridItem>
+        <GridItem mt="4">
+          <Text>{currency.format(servico?.valores?.imposto ?? 0)}</Text>
+        </GridItem>
+
+        <GridItem colSpan={4} />
+        <GridItem>
+          <Text truncate fontSize="xs">
+            Total
+          </Text>
+        </GridItem>
+        <GridItem>
+          <Text>{currency.format(servico?.valor ?? 0)}</Text>
         </GridItem>
       </Grid>
     </Box>
