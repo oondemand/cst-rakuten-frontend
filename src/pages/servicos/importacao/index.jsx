@@ -146,7 +146,7 @@ export const ImportServicosPage = () => {
                     <Accordion.ItemBody>
                       {importacao?.detalhes && (
                         <Box>
-                          <Flex mt="4" gap="8">
+                          <Flex mt="1" gap="8">
                             <Box>
                               <Text fontSize="sm" color="gray.600">
                                 Total de linhas lidas
