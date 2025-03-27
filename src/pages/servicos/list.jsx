@@ -190,7 +190,7 @@ export const ServicosList = () => {
                 variant="subtle"
                 fontWeight="semibold"
                 color="brand.500"
-                onClick={() => navigate("/importacao")}
+                onClick={() => navigate("/servicos/importacao")}
                 _hover={{ backgroundColor: "gray.50" }}
               >
                 Importar Serviços

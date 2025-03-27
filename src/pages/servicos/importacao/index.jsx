@@ -3,19 +3,19 @@ import { Button, Flex, Text, Box, Accordion, Spinner } from "@chakra-ui/react";
 import {
   FileUploadRoot,
   FileUploadTrigger,
-} from "../../components/ui/file-upload";
+} from "../../../components/ui/file-upload";
 
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { ServicoService } from "../../service/servico";
-import { queryClient } from "../../config/react-query";
-import { toaster } from "../../components/ui/toaster";
+import { useMutation, useQuery, keepPreviousData } from "@tanstack/react-query";
+import { ServicoService } from "../../../service/servico";
+import { queryClient } from "../../../config/react-query";
+import { toaster } from "../../../components/ui/toaster";
 import { Download, Upload } from "lucide-react";
-import { api } from "../../config/api";
+import { api } from "../../../config/api";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { useState } from "react";
 
-export const ImportPage = () => {
+export const ImportServicosPage = () => {
   const [open, setOpen] = useState([0]);
 
   const { mutateAsync: importServicosMutation, isPending } = useMutation({
@@ -23,6 +23,7 @@ export const ImportPage = () => {
       await ServicoService.importarServicos({ files }),
     onSuccess() {
       queryClient.refetchQueries(["listar-servicos"]);
+      queryClient.invalidateQueries(["list-servicos-importados"]);
       toaster.create({
         title: "Arquivo enviado com sucesso",
         description: "Aguardando processamento.",
@@ -43,14 +44,15 @@ export const ImportPage = () => {
       const { data } = await api.get("/importacoes?tipo=servico");
       return data;
     },
+    placeholderData: keepPreviousData,
     refetchInterval: ({ state }) => {
       const hasPendingImports = state?.data?.importacoes?.some((importacao) => {
         return !importacao?.detalhes;
       });
 
-      const pollingTime = 15000; // 15s
+      const pollingTime = 30000; // 30s
 
-      return hasPendingImports ? pollingTime : false; //
+      return hasPendingImports ? pollingTime : false;
     },
   });
 
@@ -94,7 +96,6 @@ export const ImportPage = () => {
             accept=".xlsx, .xls, .xlsm, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
             onFileAccept={async (e) => {
               await importServicosMutation({ files: e.files });
-              queryClient.invalidateQueries(["list-servicos-importados"]);
             }}
             maxFiles={1}
           >
@@ -255,6 +256,7 @@ export const ImportPage = () => {
 
                       {!importacao?.detalhes && (
                         <Flex gap="4" alignItems="center">
+                          <Spinner size="sm" color="gray.400" />
                           <Text
                             fontSize="lg"
                             fontWeight="semibold"
@@ -262,7 +264,6 @@ export const ImportPage = () => {
                           >
                             Processando
                           </Text>
-                          <Spinner />
                         </Flex>
                       )}
                     </Accordion.ItemBody>

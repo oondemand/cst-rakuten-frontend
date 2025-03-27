@@ -8,7 +8,8 @@ import { ServicosTomados } from "./pages/servicosTomados";
 import { Dashboard } from "./pages/dashboard";
 import { Doc } from "./pages/doc";
 import { PlanejamentoMensal } from "./pages/planejamentoMensal";
-import { ImportPage } from "./pages/importacao";
+import { ImportServicosPage } from "./pages/servicos/importacao";
+import { ImportPrestadoresPage } from "./pages/prestadores/importacao";
 
 export const router = createBrowserRouter([
   {
@@ -32,12 +33,16 @@ export const router = createBrowserRouter([
         element: <PrestadoresList />,
       },
       {
+        path: "/prestadores/importacao",
+        element: <ImportPrestadoresPage />,
+      },
+      {
         path: "/servicos/todos",
         element: <ServicosList />,
       },
       {
-        path: "/importacao",
-        element: <ImportPage />,
+        path: "/servicos/importacao",
+        element: <ImportServicosPage />,
       },
       {
         path: "/doc",
