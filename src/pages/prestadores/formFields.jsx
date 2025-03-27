@@ -177,6 +177,7 @@ export const createDynamicFormFields = () => {
         value: e.cCodigo,
         label: e.cDescricao,
       })),
+      defaultValue: "1058",
     },
     {
       accessorKey: "dadosBancarios.banco",

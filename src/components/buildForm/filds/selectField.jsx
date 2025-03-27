@@ -11,6 +11,7 @@ export const SelectField = ({ options, ...props }) => {
         <Controller
           name={props.field.name}
           control={props.methods.control}
+          defaultValue={props.defaultValue}
           render={({ field }) => {
             return (
               <Select

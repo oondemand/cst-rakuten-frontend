@@ -80,6 +80,7 @@ export const PrestadoresDialog = ({
   const { mutateAsync: createPrestadorMutation } = useMutation({
     mutationFn: async ({ body }) =>
       await PrestadorService.criarPrestador({ body }),
+
     onSuccess(data) {
       setData((prev) => ({
         ...data?.prestador,
@@ -105,9 +106,16 @@ export const PrestadoresDialog = ({
   });
 
   const onSubmit = async (values) => {
+    const {
+      endereco: { pais, ...rest },
+    } = values;
+
+    console.log("LOG", pais, rest, values);
+
     const body = {
       ...values,
       email: values?.email === "" ? null : values?.email,
+      endereco: { ...rest, ...(pais.cod ? { pais } : {}) },
     };
 
     if (!data) {
