@@ -81,8 +81,6 @@ export const ServicosDialog = ({
     },
 
     onError: (error) => {
-      console.log("ERROR", error);
-
       if (error?.response?.data?.message === "Serviço existente") {
         return toaster.create({
           title: "Ouve um erro ao criar um serviço",

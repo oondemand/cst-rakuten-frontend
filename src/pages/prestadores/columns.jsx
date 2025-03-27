@@ -243,11 +243,9 @@ export const makePrestadorDynamicColumns = () => {
           {...props}
           options={[
             { label: "Ativo", value: "ativo" },
-            { label: "Em-analise", value: "em-analise" },
             { label: "Pendente de revisão", value: "pendente-de-revisao" },
             { label: "Inativo", value: "inativo" },
             { label: "Arquivado", value: "arquivado" },
-            { label: "Aguardado codigo sci", value: "aguardando-codigo-sci" },
           ]}
         />
       ),
@@ -257,11 +255,9 @@ export const makePrestadorDynamicColumns = () => {
         filterVariant: "select",
         filterOptions: [
           { label: "Ativo", value: "ativo" },
-          { label: "Em-analise", value: "em-analise" },
           { label: "Pendente de revisão", value: "pendente-de-revisao" },
           { label: "Inativo", value: "inativo" },
           { label: "Arquivado", value: "arquivado" },
-          { label: "Aguardado codigo sci", value: "aguardando-codigo-sci" },
         ],
       },
     },
