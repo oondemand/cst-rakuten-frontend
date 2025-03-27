@@ -124,7 +124,10 @@ export const ImportServicosPage = () => {
                 onValueChange={(e) => setOpen(e.value)}
               >
                 <Accordion.Item value={index}>
-                  <Accordion.ItemTrigger justifyContent="space-between">
+                  <Accordion.ItemTrigger
+                    justifyContent="space-between"
+                    alignItems="start"
+                  >
                     <Flex gap="4" alignItems="start">
                       <Box>
                         <Text fontWeight="semibold" fontSize="lg">
