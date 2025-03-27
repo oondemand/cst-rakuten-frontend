@@ -136,11 +136,13 @@ export const ServicoForm = ({ ticket, onlyReading }) => {
             borderColor="gray.100"
             rounded="2xl"
             p="4"
-            pl="32"
+            pl="24"
           >
             <Table.Root variant="simple" size="xs" justifyItems="right">
               <Table.Header>
                 <Table.Row>
+                  <Table.ColumnHeader />
+
                   <Table.ColumnHeader
                     width="25%"
                     color="gray.500"
@@ -191,6 +193,18 @@ export const ServicoForm = ({ ticket, onlyReading }) => {
                     }}
                   >
                     <Table.Row>
+                      <Table.Cell>
+                        <Text
+                          fontSize="xs"
+                          color="gray.400"
+                          mr="6"
+                          px="1"
+                          borderColor="gray.200"
+                          rounded="xs"
+                        >
+                          {servico?.tipoDocumentoFiscal}
+                        </Text>
+                      </Table.Cell>
                       <Table.Cell>
                         <Text fontSize="xs" color="gray.400">
                           {servico?.competencia?.mes
