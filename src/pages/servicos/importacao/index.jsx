@@ -125,15 +125,19 @@ export const ImportServicosPage = () => {
               >
                 <Accordion.Item value={index}>
                   <Accordion.ItemTrigger justifyContent="space-between">
-                    <Flex gap="4" alignItems="end">
-                      <Text fontWeight="semibold" fontSize="lg">
-                        Resumo importação:
-                      </Text>
+                    <Flex gap="4" alignItems="start">
+                      <Box>
+                        <Text fontWeight="semibold" fontSize="lg">
+                          Resumo importação:
+                        </Text>
+                        <Text fontSize="sm" mt="1" color="gray.400">
+                          {format(importacao?.createdAt, "MMMM dd yyyy", {
+                            locale: ptBR,
+                          })}
+                        </Text>
+                      </Box>
                       <Text color="gray.500">
-                        {importacao?.arquivoOriginal?.nome} -{" "}
-                        {format(importacao?.createdAt, "dd/MM/yyyy", {
-                          locale: ptBR,
-                        })}
+                        {importacao?.arquivoOriginal?.nome}
                       </Text>
                     </Flex>
                     <Accordion.ItemIndicator />
