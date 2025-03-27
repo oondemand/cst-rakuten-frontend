@@ -151,13 +151,6 @@ export const createDynamicFormFields = () => {
       colSpan: 1,
     },
     {
-      accessorKey: "valores.imposto",
-      label: "Imposto",
-      render: CurrencyField,
-      validation: currencyValidation,
-      colSpan: 1,
-    },
-    {
       accessorKey: "valores.totalServico",
       label: "Total Serviço",
       render: CurrencyField,
@@ -168,6 +161,13 @@ export const createDynamicFormFields = () => {
       label: "Total Revisão",
       render: CurrencyField,
       disabled: true,
+    },
+    {
+      accessorKey: "valores.imposto",
+      label: "Imposto",
+      render: CurrencyField,
+      validation: currencyValidation,
+      colSpan: 1,
     },
     {
       accessorKey: "valor",
