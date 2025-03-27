@@ -41,7 +41,7 @@ export const ImportPrestadoresPage = () => {
   const { data } = useQuery({
     queryKey: ["list-prestadores-importados"],
     queryFn: async () => {
-      const { data } = await api.get("/importacoes?tipo=prestador");
+      const { data } = await api.get("/importacoes?tipo=prestador&pageSize=5");
       return data;
     },
     placeholderData: keepPreviousData,

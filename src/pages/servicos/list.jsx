@@ -179,12 +179,6 @@ export const ServicosList = () => {
               gap="4"
             >
               <ServicosDialog />
-              {/* <ImportDataDialog
-                accept=".xlsx, .xls, .xlsm, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
-                handleImport={async ({ files }) => {
-                  await importServicosMutation({ files });
-                }}
-              /> */}
               <Button
                 size="sm"
                 variant="subtle"

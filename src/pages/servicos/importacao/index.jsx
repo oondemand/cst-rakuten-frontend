@@ -41,7 +41,7 @@ export const ImportServicosPage = () => {
   const { data } = useQuery({
     queryKey: ["list-servicos-importados"],
     queryFn: async () => {
-      const { data } = await api.get("/importacoes?tipo=servico");
+      const { data } = await api.get("/importacoes?tipo=servico&pageSize=5");
       return data;
     },
     placeholderData: keepPreviousData,
