@@ -66,9 +66,14 @@ export const PrestadorForm = ({
   });
 
   const onSubmitPrestador = async (values) => {
+    const {
+      endereco: { pais, ...rest },
+    } = values;
+
     const body = {
       ...values,
       email: values?.email === "" ? null : values?.email,
+      endereco: { ...rest, ...(pais.cod ? { pais } : {}) },
     };
 
     if (!ticket?.prestador) {

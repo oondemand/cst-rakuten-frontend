@@ -50,7 +50,7 @@ export const createDynamicFormFields = () => {
       validation: preprocessEmptyToUndefined(
         z.coerce
           .string()
-          .regex(/^\d{5,}$/)
+          .regex(/^\d{5,}$/, "O sci deve ter 5 dígitos.")
           .optional()
           .nullable()
       ),
