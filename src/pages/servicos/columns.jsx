@@ -14,6 +14,7 @@ import { Pencil } from "lucide-react";
 import { TableActionsCell } from "../../components/dataGrid/cells/tableActionsCell";
 import { DeleteServicoAction } from "../../components/dataGrid/actions/deleteServicoButton";
 import { SelectAutoCompleteCell } from "../../components/dataGrid/cells/selectAutoComplete";
+import { DefaultEditableCell } from "../../components/dataGrid/cells/defaultEditable";
 
 export const makeServicoDynamicColumns = () => {
   return [
@@ -54,6 +55,16 @@ export const makeServicoDynamicColumns = () => {
           />
         </TableActionsCell>
       ),
+    },
+    {
+      accessorKey: "notaFiscal",
+      header: "Nota fiscal",
+      cell: DefaultEditableCell,
+      enableColumnFilter: true,
+      enableSorting: false,
+      meta: {
+        filterKey: "notaFiscal",
+      },
     },
     {
       accessorKey: "tipoDocumentoFiscal",
@@ -220,6 +231,14 @@ export const makeServicoDynamicColumns = () => {
       cell: DisabledCurrencyCell,
       enableColumnFilter: false,
       meta: { filterKey: "valores.totalRevisao" },
+    },
+    {
+      accessorKey: "valores.imposto",
+      header: "Imposto",
+      enableSorting: false,
+      cell: CurrencyCell,
+      enableColumnFilter: true,
+      meta: { filterKey: "valores.imposto" },
     },
     {
       accessorKey: "valor",

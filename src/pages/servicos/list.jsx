@@ -125,6 +125,7 @@ export const ServicosList = () => {
       ...e,
       dataProvisaoContabil: formatDate(e?.dataProvisaoContabil),
       dataRegistro: formatDate(e?.dataRegistro),
+      revisionMonthProvision: formatDate(e?.revisionMonthProvision),
       competencia: `${e?.competencia?.mes.toString().padStart(2, 0)}/${
         e?.competencia?.ano
       }`,
