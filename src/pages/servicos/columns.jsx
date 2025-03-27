@@ -60,14 +60,7 @@ export const makeServicoDynamicColumns = () => {
       header: "Documento Fiscal",
       enableSorting: false,
       cell: (props) => (
-        <SelectAutoCompleteCell
-          {...props}
-          options={[
-            { label: "INVOICE", value: "INVOICE" },
-            { label: "RPA", value: "RPA" },
-            { label: "NF", value: "NF" },
-          ]}
-        />
+        <SelectListaCell {...props} cod={"tipo-documento-fiscal"} />
       ),
       enableColumnFilter: true,
       meta: {
