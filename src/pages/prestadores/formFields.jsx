@@ -47,13 +47,9 @@ export const createDynamicFormFields = () => {
       accessorKey: "sciUnico",
       label: "SCI Único",
       render: DefaultField,
-      validation: preprocessEmptyToUndefined(
-        z.coerce
-          .string()
-          .regex(/^\d{5,}$/, "O sci deve ter 5 dígitos.")
-          .optional()
-          .nullable()
-      ),
+      validation: z.coerce
+        .string()
+        .regex(/^(?:\d{5})?$/, "O sci deve ter 5 dígitos."),
       colSpan: 1,
     },
     {

@@ -70,6 +70,8 @@ export const PrestadorForm = ({
       endereco: { pais, ...rest },
     } = values;
 
+    console.log("Values", values);
+
     const body = {
       ...values,
       email: values?.email === "" ? null : values?.email,
