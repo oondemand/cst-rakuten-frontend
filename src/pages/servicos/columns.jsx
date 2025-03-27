@@ -81,6 +81,8 @@ export const makeServicoDynamicColumns = () => {
           { label: "INVOICE", value: "INVOICE" },
           { label: "RPA", value: "RPA" },
           { label: "NF", value: "NF" },
+          { label: "RECIBO", value: "RECIBO" },
+          { label: "FATURA", value: "FATURA" },
         ],
       },
     },
