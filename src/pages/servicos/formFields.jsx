@@ -6,6 +6,7 @@ import { SelectListaField } from "../../components/buildForm/filds/selectListaFi
 import { DateField } from "../../components/buildForm/filds/dateField";
 import { parse, isValid } from "date-fns";
 import { CurrencyField } from "../../components/buildForm/filds/currencyField";
+import { DefaultField } from "../../components/buildForm/filds/default";
 
 const currencyValidation = preprocessEmptyToUndefined(
   z.coerce
@@ -55,6 +56,13 @@ export const createDynamicFormFields = () => {
       label: "Competência",
       render: CompetenciaField,
       validation: z.string().min(7, { message: "Data inválida" }),
+      colSpan: 1,
+    },
+    {
+      accessorKey: "notaFiscal",
+      label: "Nota Fiscal",
+      render: DefaultField,
+      validation: z.string().optional(),
       colSpan: 1,
     },
     {
@@ -138,6 +146,13 @@ export const createDynamicFormFields = () => {
     {
       accessorKey: "valores.revisionPaidPlacement",
       label: "Revisão - Paid Placement",
+      render: CurrencyField,
+      validation: currencyValidation,
+      colSpan: 1,
+    },
+    {
+      accessorKey: "valores.imposto",
+      label: "Imposto",
       render: CurrencyField,
       validation: currencyValidation,
       colSpan: 1,
