@@ -2,6 +2,7 @@ import { Text, Box, Flex } from "@chakra-ui/react";
 import { currency } from "../../../../utils/currency";
 import { CheckActionCell } from "../../../../components/dataGrid/actions/checkbox-cell";
 import { DefaultCell } from "../../../../components/dataGrid/cells/default";
+import { DateCell } from "../../../../components/dataGrid/cells/dateCell";
 
 export const makeServicoDynamicColumns = () => {
   return [
@@ -96,6 +97,14 @@ export const makeServicoDynamicColumns = () => {
       meta: {
         filterKey: "competencia.mes",
       },
+    },
+    {
+      accessorKey: "dataRegistro",
+      header: "Data Registro",
+      enableSorting: false,
+      cell: DateCell,
+      enableColumnFilter: false,
+      meta: { filterKey: "dataRegistro" },
     },
     {
       accessorKey: "status",

@@ -13,6 +13,7 @@ import { TicketService } from "../../../service/ticket";
 import { Select } from "chakra-react-select";
 import { chakraStyles } from "./select-chakra-styles";
 import { format } from "date-fns";
+import { ptBR } from "date-fns/locale";
 
 export const ServicoForm = ({ ticket, onlyReading }) => {
   const [servicos, setServicos] = useState(ticket?.servicos);
