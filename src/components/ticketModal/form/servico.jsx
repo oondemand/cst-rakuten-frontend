@@ -46,7 +46,7 @@ export const ServicoForm = ({ ticket, onlyReading }) => {
         type: "success",
       });
     },
-    onError: ({}) => {
+    onError: (error) => {
       toaster.create({
         title: "Erro ao remover serviço",
         type: "error",
@@ -67,7 +67,16 @@ export const ServicoForm = ({ ticket, onlyReading }) => {
         type: "success",
       });
     },
-    onError: ({}) => {
+    onError: (error) => {
+      console.log("->", error);
+
+      if (error?.response?.data?.message === "Data registro conflitante.") {
+        return toaster.create({
+          title: "Erro ao adicionar serviço",
+          description: "As datas de registro dos serviços devem ser iguais.",
+          type: "error",
+        });
+      }
       toaster.create({
         title: "Erro ao adicionar serviço",
         type: "error",
