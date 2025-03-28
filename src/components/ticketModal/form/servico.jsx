@@ -20,11 +20,15 @@ export const ServicoForm = ({ ticket, onlyReading }) => {
   const { data, refetch } = useQuery({
     queryKey: [
       "listar-servicos-prestador",
-      { prestadorId: ticket?.prestador?._id },
+      {
+        prestadorId: ticket?.prestador?._id,
+        dataRegistro: ticket?.dataRegistro,
+      },
     ],
     queryFn: async () =>
       await ServicoService.listarServicosPorPrestador({
         prestadorId: ticket?.prestador?._id,
+        dataRegistro: ticket?.dataRegistro ?? "",
       }),
   });
 
@@ -68,8 +72,6 @@ export const ServicoForm = ({ ticket, onlyReading }) => {
       });
     },
     onError: (error) => {
-      console.log("->", error);
-
       if (error?.response?.data?.message === "Data registro conflitante.") {
         return toaster.create({
           title: "Erro ao adicionar serviço",
