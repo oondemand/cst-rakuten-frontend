@@ -34,12 +34,12 @@ export const ServicoForm = ({ ticket, onlyReading }) => {
   });
 
   const options = data?.map((e) => ({
-    label: `${e?.tipoDocumentoFiscal} COMP. ${e?.competencia?.mes
+    label: `${e?.tipoDocumentoFiscal ?? ""} COMP. ${e?.competencia?.mes
       .toString()
       .padStart(2, "0")}/${e?.competencia?.ano}   REGIST. ${format(
       e?.dataRegistro,
       "dd/MM/yyyy"
-    )} ${e?.campanha ?? ""}  ${currency.format(e?.valor)}`,
+    )} ${e?.campanha ?? ""}  ${currency.format(e?.valor ?? 0)}`,
 
     value: e?._id,
   }));
