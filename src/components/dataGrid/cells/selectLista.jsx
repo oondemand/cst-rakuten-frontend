@@ -28,7 +28,10 @@ export const SelectListaCell = ({
 
   const findItemByInitialValue = (options) => {
     return options.find((option) => {
-      return option.label === initialValue || option.value === initialValue;
+      return (
+        option.label?.toLowerCase() === initialValue?.toLowerCase() ||
+        option.value?.toLowerCase() === initialValue?.toLowerCase()
+      );
     });
   };
 

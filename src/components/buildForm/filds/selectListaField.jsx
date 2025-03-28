@@ -37,7 +37,10 @@ export const SelectListaField = ({ cod, ...props }) => {
                 size="sm"
                 disabled={props?.disabled}
                 value={
-                  options?.find((item) => item?.value == field?.value) ?? ""
+                  options?.find(
+                    (item) =>
+                      item?.value?.toLowerCase() == field?.value?.toLowerCase()
+                  ) ?? ""
                 }
                 // inputValue={field.value}
                 name={field.name}
