@@ -3,6 +3,7 @@ import { currency } from "../../../../utils/currency";
 import { CheckActionCell } from "../../../../components/dataGrid/actions/checkbox-cell";
 import { DefaultCell } from "../../../../components/dataGrid/cells/default";
 import { DateCell } from "../../../../components/dataGrid/cells/dateCell";
+import { formatDateToDDMMYYYY } from "../../../../utils/formatting";
 
 export const makeServicoDynamicColumns = () => {
   return [
@@ -102,7 +103,13 @@ export const makeServicoDynamicColumns = () => {
       accessorKey: "dataRegistro",
       header: "Data Registro",
       enableSorting: false,
-      cell: DateCell,
+      cell: (props) => (
+        <Flex minH="8">
+          <Text alignSelf="center" fontSize="sm" truncate>
+            {formatDateToDDMMYYYY(props.getValue())}
+          </Text>
+        </Flex>
+      ),
       enableColumnFilter: false,
       meta: { filterKey: "dataRegistro" },
     },
