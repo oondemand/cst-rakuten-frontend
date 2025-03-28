@@ -1,4 +1,12 @@
-import { Box, Text, Grid, GridItem, Button, Table } from "@chakra-ui/react";
+import {
+  Box,
+  Text,
+  Grid,
+  GridItem,
+  Button,
+  Table,
+  Flex,
+} from "@chakra-ui/react";
 
 import { currency } from "../../../utils/currency";
 import { useEffect, useState } from "react";
@@ -12,8 +20,7 @@ import { ServicoTooltipCard } from "./servicoTooltipCard";
 import { TicketService } from "../../../service/ticket";
 import { Select } from "chakra-react-select";
 import { chakraStyles } from "./select-chakra-styles";
-import { format } from "date-fns";
-import { ptBR } from "date-fns/locale";
+import { formatDateToDDMMYYYY } from "../../../utils/formatting";
 
 export const ServicoForm = ({ ticket, onlyReading }) => {
   const [servicos, setServicos] = useState(ticket?.servicos);
@@ -37,10 +44,11 @@ export const ServicoForm = ({ ticket, onlyReading }) => {
   const options = data?.map((e) => ({
     label: `${e?.tipoDocumentoFiscal ?? ""} COMP. ${e?.competencia?.mes
       .toString()
-      .padStart(2, "0")}/${e?.competencia?.ano}   REGIST. ${format(
-      e?.dataRegistro,
-      "dd/MM/yyyy"
-    )} ${e?.campanha ?? ""}  ${currency.format(e?.valor ?? 0)}`,
+      .padStart(2, "0")}/${
+      e?.competencia?.ano
+    }   REGIST. ${formatDateToDDMMYYYY(e?.dataRegistro, "dd/MM/yyyy")} ${
+      e?.campanha ?? ""
+    }  ${currency.format(e?.valor ?? 0)}`,
 
     value: e?._id,
   }));
@@ -133,9 +141,14 @@ export const ServicoForm = ({ ticket, onlyReading }) => {
         />
         {!onlyReading && (
           <Box px="1" mt="8">
-            <Text color="gray.600" fontSize="sm">
-              Adicionar Serviço
-            </Text>
+            <Flex gap="4">
+              <Text color="gray.600" fontSize="sm">
+                Adicionar Serviço
+              </Text>
+              {/* <Text color="gray.400" fontSize="xs">
+                {formatDateToDDMMYYYY(ticket?.dataRegistro)}
+              </Text> */}
+            </Flex>
             <Select
               disabled={!ticket}
               options={options}

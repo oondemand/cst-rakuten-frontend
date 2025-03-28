@@ -20,7 +20,7 @@ import { VisibilityControlDialog } from "../../components/vibilityControlDialog"
 import { PrestadoresDialog } from "./dialog";
 import { ExportData } from "../../components/dataGrid/exportData";
 
-import { formatDate } from "../../utils/formatting";
+import { formatDateToDDMMYYYY } from "../../utils/formatting";
 import { ImportDataDialog } from "../../components/dataGrid/importDataDialog";
 import { useNavigate } from "react-router-dom";
 
@@ -115,7 +115,7 @@ export const PrestadoresList = () => {
       ...e,
       pessoaFisica: {
         ...e.pessoaFisica,
-        dataNascimento: formatDate(e?.pessoaFisica?.dataNascimento),
+        dataNascimento: formatDateToDDMMYYYY(e?.pessoaFisica?.dataNascimento),
       },
     }));
   };

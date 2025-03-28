@@ -122,6 +122,7 @@ export function PlanejamentoMensal() {
               color="white"
               bg="blue.500"
               value="importar-planilha"
+              disabled
             >
               Importar planilha
             </Tabs.Trigger>

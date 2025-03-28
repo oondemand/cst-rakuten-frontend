@@ -14,7 +14,7 @@ import { TableActionsCell } from "../../components/dataGrid/cells/tableActionsCe
 import { PrestadoresDialog } from "./dialog";
 import { IconButton } from "@chakra-ui/react";
 import { Pencil } from "lucide-react";
-import { formatDate } from "../../utils/formatting";
+import { formatDateToDDMMYYYY } from "../../utils/formatting";
 import { EnviarConvitePrestadorAction } from "../../components/dataGrid/actions/enviarConvite";
 import { Tooltip } from "../../components/ui/tooltip";
 
@@ -38,7 +38,7 @@ export const makePrestadorDynamicColumns = () => {
               ...props.row.original,
               pessoaFisica: {
                 ...props.row.original.pessoaFisica,
-                dataNascimento: formatDate(
+                dataNascimento: formatDateToDDMMYYYY(
                   props?.row?.original?.pessoaFisica?.dataNascimento
                 ),
               },

@@ -8,7 +8,7 @@ import { DisabledCurrencyCell } from "../../components/dataGrid/cells/disabledCu
 import { DisabledDefaultCell } from "../../components/dataGrid/cells/disabledDefaultCell";
 import { SelectPrestadorCell } from "../../components/dataGrid/cells/selectPrestador";
 import { ServicosDialog } from "./dialog";
-import { formatDate } from "../../utils/formatting";
+import { formatDateToDDMMYYYY } from "../../utils/formatting";
 import { IconButton } from "@chakra-ui/react";
 import { Pencil } from "lucide-react";
 import { TableActionsCell } from "../../components/dataGrid/cells/tableActionsCell";
@@ -38,16 +38,16 @@ export const makeServicoDynamicColumns = () => {
                 label: `${props.row.original?.prestador?.nome}-${props.row.original?.prestador?.sid}-${props.row.original?.prestador?.documento}`,
                 value: props.row.original?.prestador?._id,
               },
-              dataProvisaoContabil: formatDate(
+              dataProvisaoContabil: formatDateToDDMMYYYY(
                 props.row.original?.dataProvisaoContabil
               ),
-              dataRegistro: formatDate(props.row.original?.dataRegistro),
+              dataRegistro: formatDateToDDMMYYYY(props.row.original?.dataRegistro),
               competencia: `${props.row.original.competencia.mes
                 .toString()
                 .padStart(2, "0")}/${props.row.original.competencia.ano}`,
               valores: {
                 ...props.row.original?.valores,
-                revisionMonthProvision: formatDate(
+                revisionMonthProvision: formatDateToDDMMYYYY(
                   props.row.original?.valores?.revisionMonthProvision
                 ),
               },

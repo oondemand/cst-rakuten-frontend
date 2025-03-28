@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import { Input } from "@chakra-ui/react";
 import { withMask } from "use-mask-input";
 import { parse } from "date-fns";
+import { formatDateToDDMMYYYY } from "../../../utils/formatting";
 
 export const DateCell = ({ getValue, row, column, table, ...rest }) => {
-  const initialValue = new Date(getValue()).toLocaleDateString();
+  const initialValue = formatDateToDDMMYYYY(getValue());
   const [value, setValue] = useState("");
 
   const onBlur = async () => {

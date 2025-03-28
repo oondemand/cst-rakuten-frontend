@@ -37,6 +37,10 @@ export const SincronizacaoTab = () => {
       minW="970px"
       rounded="lg"
       justifyContent="space-between"
+      data-state="open"
+      _open={{
+        animation: "fade-in 300ms ease-out",
+      }}
     >
       <Box w="56">
         <Text fontWeight="bold" fontSize="lg" color="gray.700">

@@ -12,7 +12,7 @@ import { useVisibleInputForm } from "../../hooks/useVisibleInputForms";
 import { toaster } from "../../components/ui/toaster";
 import { PrestadorService } from "../../service/prestador";
 
-import { formatDate } from "../../utils/formatting";
+import { formatDateToDDMMYYYY } from "../../utils/formatting";
 
 import {
   DialogRoot,
@@ -58,7 +58,7 @@ export const PrestadoresDialog = ({
         ...data?.prestador,
         pessoaFisica: {
           ...data?.prestador.pessoaFisica,
-          dataNascimento: formatDate(
+          dataNascimento: formatDateToDDMMYYYY(
             data?.prestador.pessoaFisica?.dataNascimento
           ),
         },
@@ -86,7 +86,7 @@ export const PrestadoresDialog = ({
         ...data?.prestador,
         pessoaFisica: {
           ...data?.prestador.pessoaFisica,
-          dataNascimento: formatDate(
+          dataNascimento: formatDateToDDMMYYYY(
             data?.prestador.pessoaFisica?.dataNascimento
           ),
         },

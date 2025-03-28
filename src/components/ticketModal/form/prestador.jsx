@@ -11,7 +11,7 @@ import { PrestadorService } from "../../../service/prestador";
 import { AsyncSelectAutocomplete } from "../../asyncSelectAutoComplete";
 
 import { VisibilityControlDialog } from "../../vibilityControlDialog";
-import { formatDate } from "../../../utils/formatting";
+import { formatDateToDDMMYYYY } from "../../../utils/formatting";
 import { toaster } from "../../ui/toaster";
 
 export const fetchOptions = async (inputValue) => {
@@ -175,7 +175,7 @@ export const PrestadorForm = ({
               ...prestador,
               pessoaFisica: {
                 ...prestador?.pessoaFisica,
-                dataNascimento: formatDate(
+                dataNascimento: formatDateToDDMMYYYY(
                   prestador?.pessoaFisica?.dataNascimento
                 ),
               },

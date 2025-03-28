@@ -1,7 +1,6 @@
 import { Box, Text, Flex, Badge, Spinner, Button } from "@chakra-ui/react";
 import React, { memo, useState } from "react";
 
-import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { LucideListCheck, Paperclip, RotateCw } from "lucide-react";
 import { Tooltip } from "../../components/ui/tooltip";
@@ -11,6 +10,7 @@ import { AnexosCard } from "./arquivosCard";
 import { currency } from "../../utils/currency";
 
 import { CreateTicketModal } from "../ticketModal/modalCreate";
+import { formatDateToDDMMYYYY } from "../../utils/formatting";
 
 const BADGE_MAP = {
   pago: { color: "green", title: "Pago em" },
@@ -90,7 +90,7 @@ const _TicketCard = ({ ticket }) => {
                     fontSize="2xs"
                     color="gray.400"
                   >
-                    {format(ticket?.createdAt, "MMMM 'de' yyyy", {
+                    {formatDateToDDMMYYYY(ticket?.createdAt, "MMMM 'de' yyyy", {
                       locale: ptBR,
                     })}
                   </Text>

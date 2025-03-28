@@ -21,7 +21,7 @@ import { VisibilityControlDialog } from "../../components/vibilityControlDialog"
 import { ServicosDialog } from "./dialog";
 import { ExportData } from "../../components/dataGrid/exportData";
 
-import { formatDate } from "../../utils/formatting";
+import { formatDateToDDMMYYYY } from "../../utils/formatting";
 import { ImportDataDialog } from "../../components/dataGrid/importDataDialog";
 import { useNavigate } from "react-router-dom";
 
@@ -123,9 +123,9 @@ export const ServicosList = () => {
 
     return servicos.map((e) => ({
       ...e,
-      dataProvisaoContabil: formatDate(e?.dataProvisaoContabil),
-      dataRegistro: formatDate(e?.dataRegistro),
-      revisionMonthProvision: formatDate(e?.revisionMonthProvision),
+      dataProvisaoContabil: formatDateToDDMMYYYY(e?.dataProvisaoContabil),
+      dataRegistro: formatDateToDDMMYYYY(e?.dataRegistro),
+      revisionMonthProvision: formatDateToDDMMYYYY(e?.revisionMonthProvision),
       competencia: `${e?.competencia?.mes.toString().padStart(2, 0)}/${
         e?.competencia?.ano
       }`,
