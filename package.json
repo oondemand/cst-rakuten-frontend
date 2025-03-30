@@ -1,7 +1,7 @@
 {
   "name": "esteira-servicos",
   "private": true,
-  "version": "0.1.38",
+  "version": "0.1.39",
   "type": "module",
   "scripts": {
     "release": "release-it",
