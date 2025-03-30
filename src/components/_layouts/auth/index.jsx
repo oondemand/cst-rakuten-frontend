@@ -21,12 +21,12 @@ const navigationItems = [
     href: "/",
   },
   {
-    title: "Serviços Tomados",
+    title: "Central Serviços Tomados",
     icon: invertedChart,
     href: "/servicos-tomados",
   },
   {
-    title: "Todos Serviços",
+    title: "Serviços",
     href: "/servicos/todos",
   },
   {

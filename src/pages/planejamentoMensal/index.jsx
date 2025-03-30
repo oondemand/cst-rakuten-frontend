@@ -42,7 +42,7 @@ export function PlanejamentoMensal() {
                 Valor provisionado
               </Text>
               <Text fontWeight="semibold" fontSize="3xl" color="brand.500">
-                R$ 7.000.000
+                -
               </Text>
             </Box>
           </Flex>
@@ -62,7 +62,7 @@ export function PlanejamentoMensal() {
                 Quantidade de Serviços
               </Text>
               <Text fontWeight="semibold" fontSize="3xl" color="brand.500">
-                95
+                -
               </Text>
             </Box>
 
@@ -71,7 +71,7 @@ export function PlanejamentoMensal() {
                 Quantidade de Prestadores
               </Text>
               <Text fontWeight="semibold" fontSize="3xl" color="brand.500">
-                82
+                -
               </Text>
             </Box>
 
@@ -80,7 +80,7 @@ export function PlanejamentoMensal() {
                 Valor Previsto
               </Text>
               <Text fontWeight="semibold" fontSize="3xl" color="brand.500">
-                R$ 1.503.000
+                -
               </Text>
             </Box>
           </Flex>
