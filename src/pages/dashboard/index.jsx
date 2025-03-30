@@ -28,15 +28,15 @@ export const Dashboard = () => {
     return acc + cur.total;
   }, 0);
 
-  console.log('valoresPorStatus', valoresPorStatus);
+  const quantidadeTotalServicos = valoresPorStatus?.reduce((acc, cur) => {
+    return acc + cur.count;
+  }, 0);
 
-    const valoresMapeados = valoresPorStatus?.reduce((acc, cur) => {
+  const valoresMapeados = valoresPorStatus?.reduce((acc, cur) => {
     acc[cur.status] = { total: cur.total, count: cur.count };
     return acc;
   }, {});
-  
-  console.log("valoresMapeados", valoresMapeados);
-  
+
   return (
     <Flex flex="1" flexDir="column" py="8" px="6" bg="#F8F9FA">
       <Text color="gray.400" fontSize="xs">
@@ -60,8 +60,11 @@ export const Dashboard = () => {
           <Text color="white" mt="4" fontSize="3xl" fontWeight="bold">
             {currency.format(valorTotalTodosServicos ?? 0)}
           </Text>
+          <Text color="gray.200" fontSize="sm" mt="2">
+            {quantidadeTotalServicos ?? 0} serviços
+          </Text>
         </Box>
-  
+
         <Box mt="6" w="72" bg="white" p="6" rounded="2xl">
           <Box display="inline-block" bg="brand.500" rounded="2xl" p="2.5">
             <FileCheck2 size={24} color="white" />
@@ -78,7 +81,7 @@ export const Dashboard = () => {
             </Text>
           </Box>
         </Box>
-  
+
         <Box mt="6" w="72" bg="white" p="6" rounded="2xl">
           <Box display="inline-block" bg="brand.500" rounded="2xl" p="2.5">
             <FileCheck2 size={24} color="white" />
@@ -95,7 +98,7 @@ export const Dashboard = () => {
             </Text>
           </Box>
         </Box>
-  
+
         <Box mt="6" w="72" bg="white" p="6" rounded="2xl">
           <Box display="inline-block" bg="brand.500" rounded="2xl" p="2.5">
             <FileCheck2 size={24} color="white" />
