@@ -37,6 +37,14 @@ export const Dashboard = () => {
     return acc;
   }, {});
 
+  const valorProvisionado =
+    (valoresMapeados?.pendente?.total ?? 0) +
+    (valoresMapeados?.processando?.total ?? 0);
+
+  const quantidadeProvisionada =
+    (valoresMapeados?.pendente?.count ?? 0) +
+    (valoresMapeados?.processando?.count ?? 0);
+
   return (
     <Flex flex="1" flexDir="column" py="8" px="6" bg="#F8F9FA">
       <Text color="gray.400" fontSize="xs">
@@ -149,6 +157,28 @@ export const Dashboard = () => {
             </Text>
           </Box>
         </Box>
+      </Flex>
+      <Flex gap="8">
+        <Box mt="6" w="80" bg="brand.500" p="6" rounded="2xl">
+          <Flex>
+            <Flex alignItems="center" gap="4">
+              <Box bg="white" rounded="lg" p="1">
+                <PiggyBank size={36} color="purple" />
+              </Box>
+              <Text color="gray.100" fontWeight="medium">
+                Valor Provisionado <br /> (pendentes e processando)
+              </Text>
+            </Flex>
+          </Flex>
+          <Text color="white" mt="4" fontSize="3xl" fontWeight="bold">
+            {currency.format(valorProvisionado)}
+          </Text>
+          <Text color="gray.200" fontSize="sm" mt="2">
+            {quantidadeProvisionada} serviços
+          </Text>
+        </Box>
+
+
       </Flex>
     </Flex>
   );
