@@ -20,15 +20,23 @@ export const Dashboard = () => {
   const { data: valoresPorStatus } = useQuery({
     queryFn: DashboardService.obterValoresPorStatus,
     queryKey: ["dashboard"],
-    staleTime: 1000 * 60, //1m
-    placeholderData: keepPreviousData,
+    staleTime: 1000 * 60, // 1 minuto
+    placeholderData: [],
   });
 
-  const valorTotalTodosServicos = valoresPorStatus?.reduce((cur, acc) => {
-    cur = cur + acc.total;
-    return cur;
+  const valorTotalTodosServicos = valoresPorStatus?.reduce((acc, cur) => {
+    return acc + cur.total;
   }, 0);
 
+  console.log('valoresPorStatus', valoresPorStatus);
+
+    const valoresMapeados = valoresPorStatus?.reduce((acc, cur) => {
+    acc[cur.status] = { total: cur.total, count: cur.count };
+    return acc;
+  }, {});
+  
+  console.log("valoresMapeados", valoresMapeados);
+  
   return (
     <Flex flex="1" flexDir="column" py="8" px="6" bg="#F8F9FA">
       <Text color="gray.400" fontSize="xs">
@@ -53,17 +61,54 @@ export const Dashboard = () => {
             {currency.format(valorTotalTodosServicos ?? 0)}
           </Text>
         </Box>
-
-        {/* <Box mt="6" w="72" bg="white" p="6" rounded="2xl">
+  
+        <Box mt="6" w="72" bg="white" p="6" rounded="2xl">
           <Box display="inline-block" bg="brand.500" rounded="2xl" p="2.5">
             <FileCheck2 size={24} color="white" />
           </Box>
           <Box>
             <Text fontSize="sm" color="gray.400" fontWeight="medium">
-              Total pago
+              Pago Externo
             </Text>
             <Text color="gray.700" mt="1" fontWeight="bold">
-              R$ 10.000.000
+              {currency.format(valoresMapeados?.["pago-externo"]?.total ?? 0)}
+            </Text>
+            <Text color="gray.500" fontSize="sm" mt="1">
+              {valoresMapeados?.["pago-externo"]?.count ?? 0} serviços
+            </Text>
+          </Box>
+        </Box>
+  
+        <Box mt="6" w="72" bg="white" p="6" rounded="2xl">
+          <Box display="inline-block" bg="brand.500" rounded="2xl" p="2.5">
+            <FileCheck2 size={24} color="white" />
+          </Box>
+          <Box>
+            <Text fontSize="sm" color="gray.400" fontWeight="medium">
+              Pago
+            </Text>
+            <Text color="gray.700" mt="1" fontWeight="bold">
+              {currency.format(valoresMapeados?.pago?.total ?? 0)}
+            </Text>
+            <Text color="gray.500" fontSize="sm" mt="1">
+              {valoresMapeados?.pago?.count ?? 0} serviços
+            </Text>
+          </Box>
+        </Box>
+  
+        <Box mt="6" w="72" bg="white" p="6" rounded="2xl">
+          <Box display="inline-block" bg="brand.500" rounded="2xl" p="2.5">
+            <FileCheck2 size={24} color="white" />
+          </Box>
+          <Box>
+            <Text fontSize="sm" color="gray.400" fontWeight="medium">
+              Aberto
+            </Text>
+            <Text color="gray.700" mt="1" fontWeight="bold">
+              {currency.format(valoresMapeados?.aberto?.total ?? 0)}
+            </Text>
+            <Text color="gray.500" fontSize="sm" mt="1">
+              {valoresMapeados?.aberto?.count ?? 0} serviços
             </Text>
           </Box>
         </Box>
@@ -74,10 +119,13 @@ export const Dashboard = () => {
           </Box>
           <Box>
             <Text fontSize="sm" color="gray.400" fontWeight="medium">
-              Total pago
+              Pendente
             </Text>
             <Text color="gray.700" mt="1" fontWeight="bold">
-              R$ 10.000.000
+              {currency.format(valoresMapeados?.pendente?.total ?? 0)}
+            </Text>
+            <Text color="gray.500" fontSize="sm" mt="1">
+              {valoresMapeados?.pendente?.count ?? 0} serviços
             </Text>
           </Box>
         </Box>
@@ -88,13 +136,16 @@ export const Dashboard = () => {
           </Box>
           <Box>
             <Text fontSize="sm" color="gray.400" fontWeight="medium">
-              Total pago
+              Processando
             </Text>
             <Text color="gray.700" mt="1" fontWeight="bold">
-              R$ 10.000.000
+              {currency.format(valoresMapeados?.processando?.total ?? 0)}
+            </Text>
+            <Text color="gray.500" fontSize="sm" mt="1">
+              {valoresMapeados?.processando?.count ?? 0} serviços
             </Text>
           </Box>
-        </Box> */}
+        </Box>
       </Flex>
     </Flex>
   );
