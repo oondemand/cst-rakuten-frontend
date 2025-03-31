@@ -49,7 +49,7 @@ const navigationItems = [
   },
   {
     title: "Usuários",
-    // href: "/usuarios",
+    href: "/usuarios",
   },
   // {
   //   title: "Base omie",

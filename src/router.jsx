@@ -10,6 +10,7 @@ import { Doc } from "./pages/doc";
 import { PlanejamentoMensal } from "./pages/planejamentoMensal";
 import { ImportServicosPage } from "./pages/servicos/importacao";
 import { ImportPrestadoresPage } from "./pages/prestadores/importacao";
+import { UsuariosPage } from "./pages/usuarios";
 
 export const router = createBrowserRouter([
   {
@@ -43,6 +44,10 @@ export const router = createBrowserRouter([
       {
         path: "/servicos/importacao",
         element: <ImportServicosPage />,
+      },
+      {
+        path: "/usuarios",
+        element: <UsuariosPage />,
       },
       {
         path: "/doc",
