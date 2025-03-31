@@ -85,7 +85,7 @@ export const UsuariosPage = () => {
           <Text fontSize="lg" color="gray.700" fontWeight="semibold">
             Usuarios
           </Text>
-          <Box mt="4" bg="white" py="6" px="4" rounded="2xl">
+          <Box mt="4" bg="white" py="6" px="4" rounded="lg" shadow="xs">
             <Flex
               w="full"
               alignItems="center"

@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 
-import { Flex, Spinner, Box, Button } from "@chakra-ui/react";
+import { Flex, Spinner, Box, Button, Text } from "@chakra-ui/react";
 import { useQuery, keepPreviousData, useMutation } from "@tanstack/react-query";
 import { importarPrestadores, PrestadorService } from "../../service/prestador";
 import { DebouncedInput } from "../../components/DebouncedInput";
@@ -130,22 +130,26 @@ export const PrestadoresList = () => {
         itens="center"
         overflow="auto"
         scrollbarWidth="thin"
+        bg="#F8F9FA"
       >
         <Box>
-          <Flex gap="2" alignItems="center">
+          <Text fontSize="lg" color="gray.700" fontWeight="semibold">
+            Prestadores
+          </Text>
+          {/* <Flex gap="2" alignItems="center">
             <DebouncedInput
-              value={filters.searchTerm}
-              debounce={700}
-              onChange={(value) =>
-                setFilters((prev) => ({
-                  ...prev,
-                  searchTerm: value,
-                  pageIndex: 0,
+            value={filters.searchTerm}
+            debounce={700}
+            onChange={(value) =>
+              setFilters((prev) => ({
+                ...prev,
+                searchTerm: value,
+                pageIndex: 0,
                 }))
-              }
-              size="sm"
-              iconSize={18}
-              startOffset="2px"
+                }
+                size="sm"
+                iconSize={18}
+                startOffset="2px"
               color="gray.700"
             />
             <Button
@@ -158,8 +162,8 @@ export const PrestadoresList = () => {
               Limpar filtros
             </Button>
             {(isLoading || isFetching) && <Spinner size="md" />}
-          </Flex>
-          <Box mt="4">
+          </Flex> */}
+          <Box mt="4" bg="white" py="6" px="4" rounded="lg" shadow="xs">
             <Flex
               w="full"
               alignItems="center"
@@ -167,6 +171,32 @@ export const PrestadoresList = () => {
               pb="2"
               gap="4"
             >
+              <DebouncedInput
+                value={filters.searchTerm}
+                debounce={700}
+                onChange={(value) => {
+                  setFilters((prev) => ({
+                    ...prev,
+                    searchTerm: value,
+                    pageIndex: 0,
+                  }));
+                }}
+                size="sm"
+                iconSize={18}
+                startOffset="2px"
+                color="gray.700"
+              />
+              <Button
+                size="sm"
+                variant="subtle"
+                color="brand.500"
+                fontWeight="semibold"
+                onClick={resetFilters}
+                minW="32"
+              >
+                {(isLoading || isFetching) && <Spinner size="md" />}
+                {!isLoading && !isFetching && "Limpar filtros"}
+              </Button>
               <PrestadoresDialog />
               <Button
                 size="sm"
