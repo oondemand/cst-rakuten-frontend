@@ -168,162 +168,170 @@ export const Dashboard = () => {
         </Box> */}
       </Flex>
       <Flex gap="10" mt="8">
-        <Box>
-          <Box maxW="600px" bg="white" p="4" rounded="2xl">
-            <Text fontWeight="semibold">Tickets por status</Text>
-            <Table.Root mt="4">
-              <Table.Header>
-                <Table.Row>
-                  <Table.ColumnHeader
-                    fontSize="xs"
-                    color="gray.500"
-                    fontWeight="light"
-                    py="1"
-                  >
-                    STATUS
-                  </Table.ColumnHeader>
-                  <Table.ColumnHeader
-                    fontSize="xs"
-                    color="gray.500"
-                    fontWeight="light"
-                    py="1"
-                  >
-                    QUANTIDADE
-                  </Table.ColumnHeader>
-                </Table.Row>
-              </Table.Header>
-              <Table.Body>
-                {ticketsPorStatus?.map((item) => (
+        {ticketsPorStatus.length > 0 && (
+          <Box>
+            <Box maxW="600px" bg="white" p="4" rounded="2xl">
+              <Text fontWeight="semibold">Tickets por status</Text>
+              <Table.Root mt="4">
+                <Table.Header>
                   <Table.Row>
-                    <Table.Cell
-                      display="flex"
-                      gap="2"
-                      alignItems="center"
-                      border="none"
+                    <Table.ColumnHeader
+                      fontSize="xs"
+                      color="gray.500"
+                      fontWeight="light"
+                      py="1"
                     >
-                      <Box
-                        h="3"
-                        w="3"
-                        rounded="full"
-                        bg={ticketStatusColorMap[item.status]}
-                      />
-                      {item.status}
-                    </Table.Cell>
-                    <Table.Cell border="none">{item.count}</Table.Cell>
+                      STATUS
+                    </Table.ColumnHeader>
+                    <Table.ColumnHeader
+                      fontSize="xs"
+                      color="gray.500"
+                      fontWeight="light"
+                      py="1"
+                    >
+                      QUANTIDADE
+                    </Table.ColumnHeader>
                   </Table.Row>
-                ))}
-              </Table.Body>
-            </Table.Root>
+                </Table.Header>
+                <Table.Body>
+                  {ticketsPorStatus?.map((item) => (
+                    <Table.Row>
+                      <Table.Cell
+                        display="flex"
+                        gap="2"
+                        alignItems="center"
+                        border="none"
+                      >
+                        <Box
+                          h="3"
+                          w="3"
+                          rounded="full"
+                          bg={ticketStatusColorMap[item.status]}
+                        />
+                        {item.status}
+                      </Table.Cell>
+                      <Table.Cell border="none">{item.count}</Table.Cell>
+                    </Table.Row>
+                  ))}
+                </Table.Body>
+              </Table.Root>
+            </Box>
           </Box>
-        </Box>
+        )}
 
-        <Box>
-          <Box maxW="600px" bg="white" p="4" rounded="2xl">
-            <Text fontWeight="semibold">Tickets por etapa</Text>
-            <Table.Root mt="4">
-              <Table.Header>
-                <Table.Row>
-                  <Table.ColumnHeader
-                    fontSize="xs"
-                    color="gray.500"
-                    fontWeight="light"
-                    py="1"
-                  >
-                    ETAPA
-                  </Table.ColumnHeader>
-                  <Table.ColumnHeader
-                    fontSize="xs"
-                    color="gray.500"
-                    fontWeight="light"
-                    py="1"
-                  >
-                    QUANTIDADE
-                  </Table.ColumnHeader>
-                </Table.Row>
-              </Table.Header>
-              <Table.Body>
-                {ticketsPorEtapa?.map((item) => (
+        {ticketsPorEtapa.length > 0 && (
+          <Box>
+            <Box maxW="600px" bg="white" p="4" rounded="2xl">
+              <Text fontWeight="semibold">Tickets por etapa</Text>
+              <Table.Root mt="4">
+                <Table.Header>
                   <Table.Row>
-                    <Table.Cell
-                      display="flex"
-                      gap="2"
-                      alignItems="center"
-                      border="none"
+                    <Table.ColumnHeader
+                      fontSize="xs"
+                      color="gray.500"
+                      fontWeight="light"
+                      py="1"
                     >
-                      {ticketEtapaMap[item.etapa].toLowerCase()}
-                    </Table.Cell>
-                    <Table.Cell border="none">{item.count}</Table.Cell>
+                      ETAPA
+                    </Table.ColumnHeader>
+                    <Table.ColumnHeader
+                      fontSize="xs"
+                      color="gray.500"
+                      fontWeight="light"
+                      py="1"
+                    >
+                      QUANTIDADE
+                    </Table.ColumnHeader>
                   </Table.Row>
-                ))}
-              </Table.Body>
-            </Table.Root>
+                </Table.Header>
+                <Table.Body>
+                  {ticketsPorEtapa?.map((item) => (
+                    <Table.Row>
+                      <Table.Cell
+                        display="flex"
+                        gap="2"
+                        alignItems="center"
+                        border="none"
+                      >
+                        {ticketEtapaMap[item.etapa].toLowerCase()}
+                      </Table.Cell>
+                      <Table.Cell border="none">{item.count}</Table.Cell>
+                    </Table.Row>
+                  ))}
+                </Table.Body>
+              </Table.Root>
+            </Box>
           </Box>
-        </Box>
+        )}
 
-        <Box>
-          <Box maxW="600px" bg="white" p="4" rounded="2xl">
-            <Flex justifyContent="space-between" alignItems="center">
-              <Text fontWeight="semibold">Serviços por status</Text>
-              {/* <Text color="gray.400" fontWeight="medium">
+        {valoresPorStatus.length > 0 && (
+          <Box>
+            <Box maxW="600px" bg="white" p="4" rounded="2xl">
+              <Flex justifyContent="space-between" alignItems="center">
+                <Text fontWeight="semibold">Serviços por status</Text>
+                {/* <Text color="gray.400" fontWeight="medium">
                 {quantidadeTotalDeServicos} Serviços
               </Text> */}
-            </Flex>
-            <Table.Root mt="4">
-              <Table.Header>
-                <Table.Row>
-                  <Table.ColumnHeader
-                    fontSize="xs"
-                    color="gray.500"
-                    fontWeight="light"
-                    py="1"
-                  >
-                    STATUS
-                  </Table.ColumnHeader>
-                  <Table.ColumnHeader
-                    fontSize="xs"
-                    color="gray.500"
-                    fontWeight="light"
-                    py="1"
-                  >
-                    QUANTIDADE
-                  </Table.ColumnHeader>
-                  <Table.ColumnHeader
-                    fontSize="xs"
-                    color="gray.500"
-                    fontWeight="light"
-                    py="1"
-                  >
-                    VALOR TOTAL
-                  </Table.ColumnHeader>
-                </Table.Row>
-              </Table.Header>
-              <Table.Body>
-                {valoresPorStatus?.map((item) => (
+              </Flex>
+              <Table.Root mt="4">
+                <Table.Header>
                   <Table.Row>
-                    <Table.Cell
-                      display="flex"
-                      gap="2"
-                      alignItems="center"
-                      border="none"
+                    <Table.ColumnHeader
+                      fontSize="xs"
+                      color="gray.500"
+                      fontWeight="light"
+                      py="1"
                     >
-                      <Box
-                        h="3"
-                        w="3"
-                        rounded="full"
-                        bg={servicoStatusColorMap[item.status]}
-                      />
-                      {item.status}
-                    </Table.Cell>
-                    <Table.Cell border="none">{item.count}</Table.Cell>
-                    <Table.Cell truncate border="none">
-                      <Text truncate>{currency.format(item?.total ?? 0)}</Text>
-                    </Table.Cell>
+                      STATUS
+                    </Table.ColumnHeader>
+                    <Table.ColumnHeader
+                      fontSize="xs"
+                      color="gray.500"
+                      fontWeight="light"
+                      py="1"
+                    >
+                      QUANTIDADE
+                    </Table.ColumnHeader>
+                    <Table.ColumnHeader
+                      fontSize="xs"
+                      color="gray.500"
+                      fontWeight="light"
+                      py="1"
+                    >
+                      VALOR TOTAL
+                    </Table.ColumnHeader>
                   </Table.Row>
-                ))}
-              </Table.Body>
-            </Table.Root>
+                </Table.Header>
+                <Table.Body>
+                  {valoresPorStatus?.map((item) => (
+                    <Table.Row>
+                      <Table.Cell
+                        display="flex"
+                        gap="2"
+                        alignItems="center"
+                        border="none"
+                      >
+                        <Box
+                          h="3"
+                          w="3"
+                          rounded="full"
+                          bg={servicoStatusColorMap[item.status]}
+                        />
+                        {item.status}
+                      </Table.Cell>
+                      <Table.Cell border="none">{item.count}</Table.Cell>
+                      <Table.Cell truncate border="none">
+                        <Text truncate>
+                          {currency.format(item?.total ?? 0)}
+                        </Text>
+                      </Table.Cell>
+                    </Table.Row>
+                  ))}
+                </Table.Body>
+              </Table.Root>
+            </Box>
           </Box>
-        </Box>
+        )}
       </Flex>
     </Flex>
   );
