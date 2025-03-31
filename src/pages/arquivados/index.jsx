@@ -120,7 +120,7 @@ export const ArquivadosPage = () => {
               sorting={sortingState}
               columns={columns}
               pagination={paginationState}
-              data={data || []}
+              data={data?.tickets || []}
               columnVisibility={columnVisibility}
               setColumnVisibility={setColumnVisibility}
               columnSizing={columnSizing}
