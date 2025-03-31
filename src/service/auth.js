@@ -23,9 +23,18 @@ const esqueciMinhaSenha = async (email) => {
   return await api.post("/auth/esqueci-minha-senha", { email });
 };
 
+const criarNovaSenha = async (values) => {
+  console.log("VALUES ->", values);
+
+  const code = localStorage.getItem("code");
+  const { data } = await api.post("/auth/alterar-senha", { ...values, code });
+  return data;
+};
+
 export const LoginService = {
   validateToken,
   logIn,
   firstAccess,
   esqueciMinhaSenha,
+  criarNovaSenha,
 };

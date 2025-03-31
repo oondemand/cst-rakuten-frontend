@@ -11,6 +11,7 @@ import { PlanejamentoMensal } from "./pages/planejamentoMensal";
 import { ImportServicosPage } from "./pages/servicos/importacao";
 import { ImportPrestadoresPage } from "./pages/prestadores/importacao";
 import { UsuariosPage } from "./pages/usuarios/index";
+import { AlterarSenha } from "./pages/alterarSenha";
 
 export const router = createBrowserRouter([
   {
@@ -59,6 +60,9 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
-    children: [{ path: "/login", element: <LoginPage /> }],
+    children: [
+      { path: "/login", element: <LoginPage /> },
+      { path: "/alterar-senha", element: <AlterarSenha /> },
+    ],
   },
 ]);
