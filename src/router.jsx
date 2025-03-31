@@ -12,6 +12,7 @@ import { ImportServicosPage } from "./pages/servicos/importacao";
 import { ImportPrestadoresPage } from "./pages/prestadores/importacao";
 import { UsuariosPage } from "./pages/usuarios/index";
 import { AlterarSenha } from "./pages/alterarSenha";
+import { ArquivadosPage } from "./pages/arquivados";
 
 export const router = createBrowserRouter([
   {
@@ -49,6 +50,10 @@ export const router = createBrowserRouter([
       {
         path: "/usuarios",
         element: <UsuariosPage />,
+      },
+      {
+        path: "/arquivados",
+        element: <ArquivadosPage />,
       },
       {
         path: "/doc",

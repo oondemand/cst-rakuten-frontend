@@ -77,6 +77,11 @@ const removerServico = async ({ servicoId }) => {
   return data;
 };
 
+const listarTicketsArquivados = async () => {
+  const { data } = await api.get("tickets/arquivados");
+  return data;
+};
+
 export const TicketService = {
   listarTickets,
   adicionarTicket,
@@ -88,4 +93,5 @@ export const TicketService = {
   getFile,
   removerServico,
   adicionarServico,
+  listarTicketsArquivados,
 };

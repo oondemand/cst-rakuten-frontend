@@ -61,7 +61,7 @@ const navigationItems = [
   // },
   {
     title: "Arquivados",
-    // href: "/arquivados",
+    href: "/arquivados",
   },
   {
     title: "Sistema",
