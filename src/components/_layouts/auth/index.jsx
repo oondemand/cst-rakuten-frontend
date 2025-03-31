@@ -33,10 +33,10 @@ const navigationItems = [
     title: "Planejamento",
     href: "/planejamento",
   },
-  {
-    title: "Pagos",
-    // href: "/pago",
-  },
+  // {
+  //   title: "Pagos",
+  //   href: "/pago",
+  // },
   {
     title: "Prestadores",
     icon: Users,
@@ -51,14 +51,14 @@ const navigationItems = [
     title: "Usuários",
     // href: "/usuarios",
   },
-  {
-    title: "Base omie",
-    // href: "/base-omie",
-  },
-  {
-    title: "Listas",
-    // href: "/listas",
-  },
+  // {
+  //   title: "Base omie",
+  //   href: "/base-omie",
+  // },
+  // {
+  //   title: "Listas",
+  //   href: "/listas",
+  // },
   {
     title: "Arquivados",
     // href: "/arquivados",
@@ -125,7 +125,7 @@ export const AuthLayout = () => {
             <NavLink
               key={`${item.title}-${index}`}
               to={item?.href ?? "#"}
-              {...(item?.href ? {} : { color: "gray.200" })}
+              // {...(item?.href ? {} : { color: "gray.200" })}
               icon={item.icon}
               title={item.title}
               i={index}
