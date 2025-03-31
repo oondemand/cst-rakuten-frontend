@@ -39,9 +39,8 @@ export const Dashboard = () => {
     placeholderData: keepPreviousData,
   });
 
-  const valorTotalTodosServicos = valoresPorStatus?.reduce((cur, acc) => {
-    cur = cur + acc.total;
-    return cur;
+  const valorTotalTodosServicos = valoresPorStatus?.reduce((acc, cur) => {
+    return acc + cur.total;
   }, 0);
 
   const servicoStatusColorMap = {
@@ -89,6 +88,9 @@ export const Dashboard = () => {
           <Text color="white" mt="4" fontSize="3xl" fontWeight="bold">
             {currency.format(valorTotalTodosServicos ?? 0)}
           </Text>
+          <Text color="gray.200" fontSize="sm" mt="2">
+            {quantidadeTotalServicos ?? 0} serviços
+          </Text>
         </Box>
 
         <Box mt="6" w="72" bg="white" p="6" rounded="2xl">
@@ -97,7 +99,7 @@ export const Dashboard = () => {
           </Box>
           <Box>
             <Text fontSize="sm" color="gray.400" fontWeight="medium">
-              Total pago
+              Pago Externo
             </Text>
             <Text color="gray.700" mt="1" fontWeight="bold">
               {currency.format(
@@ -298,4 +300,4 @@ export const Dashboard = () => {
       </Flex>
     </Flex>
   );
-};
+}; 
