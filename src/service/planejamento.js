@@ -5,8 +5,9 @@ const sincronizarEsteira = async () => {
 };
 
 const listarServicos = async ({ filters }) => {
+  const { searchTerm, ...rest } = filters;
   const { data } = await api.get("/planejamento/listar-servicos", {
-    params: filters,
+    params: rest,
   });
 
   return data;

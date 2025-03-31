@@ -4,7 +4,7 @@ import { ServicoService } from "../../../../service/servico";
 import { sortByToState, stateToSortBy } from "../../../../utils/sorting";
 import { useMemo } from "react";
 import { makeServicoDynamicColumns } from "./columns";
-import { Flex, Box, Text } from "@chakra-ui/react";
+import { Flex, Box, Text, Button, Spinner } from "@chakra-ui/react";
 import { DataGrid } from "../../../../components/dataGrid";
 import { useColumnVisibility } from "../../../../hooks/useColumnVisibility";
 import { useColumnSizing } from "../../../../hooks/useColumnSizing";
@@ -30,7 +30,7 @@ export const SelecaoManualTab = () => {
   });
 
   const { data, error, isLoading, isFetching } = useQuery({
-    queryKey: ["listar-servicos", { filters }],
+    queryKey: ["planejamento-mensal-listar-servicos", { filters }],
     queryFn: async () => await PlanejamentoService.listarServicos({ filters }),
     placeholderData: keepPreviousData,
   });
@@ -65,6 +65,17 @@ export const SelecaoManualTab = () => {
           <Text fontSize="lg" fontWeight="semibold" color="gray.500">
             Serviços
           </Text>
+          <Button
+            size="sm"
+            variant="subtle"
+            color="brand.500"
+            fontWeight="semibold"
+            onClick={resetFilters}
+            minW="32"
+          >
+            {(isLoading || isFetching) && <Spinner size="md" />}
+            {!isLoading && !isFetching && "Limpar filtros"}
+          </Button>
           <VisibilityControlDialog
             fields={columns.map((e) => ({
               label: e.header,
