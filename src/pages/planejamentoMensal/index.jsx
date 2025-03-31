@@ -3,12 +3,23 @@ import { Target } from "lucide-react";
 import { useStateWithStorage } from "../../hooks/useStateStorage";
 import { SelecaoManualTab } from "./tabs/selecaoManual";
 import { SincronizacaoTab } from "./tabs/sincronicao";
+import { useQuery, keepPreviousData } from "@tanstack/react-query";
+import { PlanejamentoService } from "../../service/planejamento";
+import { currency } from "../../utils/currency";
 
 export function PlanejamentoMensal() {
   const [tab, setTab] = useStateWithStorage(
     "PLANEJAMENTO_MENSAL_TAB",
     "selecao-manual"
   );
+
+  const { data, error, isLoading, isFetching } = useQuery({
+    queryKey: ["planejamento-estatisticas"],
+    queryFn: async () => await PlanejamentoService.estatisticas(),
+    placeholderData: keepPreviousData,
+  });
+
+  console.log("DATA->", data);
 
   return (
     <Flex flex="1" flexDir="column" py="8" px="6" bg="#F8F9FA" overflow="auto">
@@ -42,7 +53,10 @@ export function PlanejamentoMensal() {
                 Valor provisionado
               </Text>
               <Text fontWeight="semibold" fontSize="3xl" color="brand.500">
-                -
+                {currency.format(
+                  (data?.find((e) => e.status === "pendente")?.total ?? 0) +
+                    (data?.find((e) => e.status === "processando")?.total ?? 0)
+                )}
               </Text>
             </Box>
           </Flex>
@@ -62,7 +76,8 @@ export function PlanejamentoMensal() {
                 Quantidade de Serviços
               </Text>
               <Text fontWeight="semibold" fontSize="3xl" color="brand.500">
-                -
+                {(data?.find((e) => e.status === "pendente")?.count ?? 0) +
+                  (data?.find((e) => e.status === "processando")?.count ?? 0)}
               </Text>
             </Box>
 
@@ -71,18 +86,21 @@ export function PlanejamentoMensal() {
                 Quantidade de Prestadores
               </Text>
               <Text fontWeight="semibold" fontSize="3xl" color="brand.500">
-                -
+                {(data?.find((e) => e.status === "pendente")
+                  ?.prestadoresCount ?? 0) +
+                  (data?.find((e) => e.status === "processando")
+                    ?.prestadoresCount ?? 0)}
               </Text>
             </Box>
 
-            <Box>
+            {/* <Box>
               <Text fontSize="sm" color="gray.500">
                 Valor Previsto
               </Text>
               <Text fontWeight="semibold" fontSize="3xl" color="brand.500">
                 -
               </Text>
-            </Box>
+            </Box> */}
           </Flex>
         </Flex>
       </Flex>

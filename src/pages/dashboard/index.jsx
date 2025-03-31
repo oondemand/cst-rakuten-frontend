@@ -96,9 +96,6 @@ export const Dashboard = () => {
           <Text color="white" mt="4" fontSize="3xl" fontWeight="bold">
             {currency.format(valorTotalTodosServicos ?? 0)}
           </Text>
-          {/* <Text color="gray.200" fontSize="sm" mt="2">
-            {quantidadeTotalDeServicos ?? 0} serviços
-          </Text> */}
         </Box>
 
         <Box mt="6" w="72" bg="white" p="6" rounded="2xl">
