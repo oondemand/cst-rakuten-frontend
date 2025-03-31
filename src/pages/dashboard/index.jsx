@@ -168,7 +168,7 @@ export const Dashboard = () => {
         </Box> */}
       </Flex>
       <Flex gap="10" mt="8">
-        {ticketsPorStatus.length > 0 && (
+        {ticketsPorStatus?.length > 0 && (
           <Box>
             <Box maxW="600px" bg="white" p="4" rounded="2xl">
               <Text fontWeight="semibold">Tickets por status</Text>
@@ -219,7 +219,7 @@ export const Dashboard = () => {
           </Box>
         )}
 
-        {ticketsPorEtapa.length > 0 && (
+        {ticketsPorEtapa?.length > 0 && (
           <Box>
             <Box maxW="600px" bg="white" p="4" rounded="2xl">
               <Text fontWeight="semibold">Tickets por etapa</Text>
@@ -264,7 +264,7 @@ export const Dashboard = () => {
           </Box>
         )}
 
-        {valoresPorStatus.length > 0 && (
+        {valoresPorStatus?.length > 0 && (
           <Box>
             <Box maxW="600px" bg="white" p="4" rounded="2xl">
               <Flex justifyContent="space-between" alignItems="center">
