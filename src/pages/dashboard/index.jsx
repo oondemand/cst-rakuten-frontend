@@ -65,6 +65,14 @@ export const Dashboard = () => {
     arquivado: "gray.500",
   };
 
+  const ticketEtapaMap = {
+    "geracao-rpa": "Geração RPA",
+    "aprovacao-cadastro": "Aprovacao cadastro",
+    "integracao-omie": "Financeiro",
+    "aprovacao-fiscal": "Aprovacao fiscal",
+    requisicao: "Requisicao",
+  };
+
   return (
     <Flex flex="1" flexDir="column" py="8" px="6" bg="#F8F9FA">
       <Text color="gray.400" fontSize="xs">
@@ -242,7 +250,7 @@ export const Dashboard = () => {
                       alignItems="center"
                       border="none"
                     >
-                      {item.etapa.replaceAll("-", " ")}
+                      {ticketEtapaMap[item.etapa].toLowerCase()}
                     </Table.Cell>
                     <Table.Cell border="none">{item.count}</Table.Cell>
                   </Table.Row>
