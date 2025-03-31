@@ -12,7 +12,7 @@ import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 
-import { FileCheck2, PiggyBank } from "lucide-react";
+import { FileCheck2, PiggyBank, RotateCcw, Wallet } from "lucide-react";
 import { DashboardService } from "../../service/dashboard";
 
 import { currency } from "../../utils/currency";
@@ -43,6 +43,10 @@ export const Dashboard = () => {
     return acc + cur.total;
   }, 0);
 
+  const quantidadeTotalDeServicos = valoresPorStatus?.reduce((acc, cur) => {
+    return acc + cur.count;
+  }, 0);
+
   const servicoStatusColorMap = {
     processando: "purple.500",
     aberto: "blue.500",
@@ -60,10 +64,6 @@ export const Dashboard = () => {
     concluido: "blue.500",
     arquivado: "gray.500",
   };
-
-  const etapaMap = {};
-
-  console.log("Tickets", ticketsPorEtapa);
 
   return (
     <Flex flex="1" flexDir="column" py="8" px="6" bg="#F8F9FA">
@@ -88,9 +88,23 @@ export const Dashboard = () => {
           <Text color="white" mt="4" fontSize="3xl" fontWeight="bold">
             {currency.format(valorTotalTodosServicos ?? 0)}
           </Text>
-          <Text color="gray.200" fontSize="sm" mt="2">
-            {quantidadeTotalServicos ?? 0} serviços
-          </Text>
+          {/* <Text color="gray.200" fontSize="sm" mt="2">
+            {quantidadeTotalDeServicos ?? 0} serviços
+          </Text> */}
+        </Box>
+
+        <Box mt="6" w="72" bg="white" p="6" rounded="2xl">
+          <Box display="inline-block" bg="brand.500" rounded="2xl" p="2.5">
+            <Wallet size={24} color="white" />
+          </Box>
+          <Box>
+            <Text fontSize="sm" color="gray.400" fontWeight="medium">
+              Total de serviços
+            </Text>
+            <Text color="gray.700" mt="1" fontWeight="bold">
+              {quantidadeTotalDeServicos}
+            </Text>
+          </Box>
         </Box>
 
         <Box mt="6" w="72" bg="white" p="6" rounded="2xl">
@@ -99,7 +113,7 @@ export const Dashboard = () => {
           </Box>
           <Box>
             <Text fontSize="sm" color="gray.400" fontWeight="medium">
-              Pago Externo
+              Pago
             </Text>
             <Text color="gray.700" mt="1" fontWeight="bold">
               {currency.format(
@@ -114,7 +128,7 @@ export const Dashboard = () => {
 
         <Box mt="6" w="72" bg="white" p="6" rounded="2xl">
           <Box display="inline-block" bg="brand.500" rounded="2xl" p="2.5">
-            <FileCheck2 size={24} color="white" />
+            <RotateCcw size={24} color="white" />
           </Box>
           <Box>
             <Text fontSize="sm" color="gray.400" fontWeight="medium">
@@ -129,9 +143,9 @@ export const Dashboard = () => {
           </Box>
         </Box>
 
-        <Box mt="6" w="72" bg="white" p="6" rounded="2xl">
+        {/* <Box mt="6" w="72" bg="white" p="6" rounded="2xl">
           <Box display="inline-block" bg="brand.500" rounded="2xl" p="2.5">
-            <FileCheck2 size={24} color="white" />
+            <Wallet size={24} color="white" />
           </Box>
           <Box>
             <Text fontSize="sm" color="gray.400" fontWeight="medium">
@@ -143,7 +157,7 @@ export const Dashboard = () => {
               )}
             </Text>
           </Box>
-        </Box>
+        </Box> */}
       </Flex>
       <Flex gap="10" mt="8">
         <Box>
@@ -240,7 +254,12 @@ export const Dashboard = () => {
 
         <Box>
           <Box maxW="600px" bg="white" p="4" rounded="2xl">
-            <Text fontWeight="semibold">Serviços por status</Text>
+            <Flex justifyContent="space-between" alignItems="center">
+              <Text fontWeight="semibold">Serviços por status</Text>
+              {/* <Text color="gray.400" fontWeight="medium">
+                {quantidadeTotalDeServicos} Serviços
+              </Text> */}
+            </Flex>
             <Table.Root mt="4">
               <Table.Header>
                 <Table.Row>
@@ -300,4 +319,4 @@ export const Dashboard = () => {
       </Flex>
     </Flex>
   );
-}; 
+};
