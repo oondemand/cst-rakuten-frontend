@@ -19,8 +19,13 @@ const firstAccess = async ({ body, code }) => {
   });
 };
 
+const esqueciMinhaSenha = async (email) => {
+  return await api.post("/auth/esqueci-minha-senha", { email });
+};
+
 export const LoginService = {
   validateToken,
   logIn,
   firstAccess,
+  esqueciMinhaSenha,
 };

@@ -10,7 +10,7 @@ import { Doc } from "./pages/doc";
 import { PlanejamentoMensal } from "./pages/planejamentoMensal";
 import { ImportServicosPage } from "./pages/servicos/importacao";
 import { ImportPrestadoresPage } from "./pages/prestadores/importacao";
-import { UsuariosPage } from "./pages/usuarios";
+import { UsuariosPage } from "./pages/usuarios/index";
 
 export const router = createBrowserRouter([
   {
