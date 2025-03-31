@@ -132,7 +132,10 @@ export const ServicosDialog = ({
         <DialogRoot
           size="cover"
           open={open}
-          onOpenChange={(e) => setOpen(e.open)}
+          onOpenChange={(e) => {
+            setOpen(e.open);
+            setData(defaultValues);
+          }}
         >
           <DialogContent
             overflow="hidden"
