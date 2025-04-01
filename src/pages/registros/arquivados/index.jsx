@@ -16,7 +16,7 @@ import { toaster } from "../../components/ui/toaster";
 import { queryClient } from "../../config/react-query";
 
 import { VisibilityControlDialog } from "../../components/vibilityControlDialog";
-import { TicketService } from "../../service/ticket";
+import { TicketService } from "../../../../service/ticket";
 
 export const ArquivadosPage = () => {
   const { filters, resetFilters, setFilters } = useFilters({

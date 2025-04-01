@@ -55,17 +55,17 @@ const navigationItems = [
   //   title: "Base omie",
   //   href: "/base-omie",
   // },
-  // {
-  //   title: "Listas",
-  //   href: "/listas",
-  // },
   {
-    title: "Arquivados",
-    href: "/arquivados",
+    title: "Listas",
+    href: "/listas",
+  },
+  {
+    title: "Registros",
+    href: "/registros",
   },
   {
     title: "Sistema",
-    href: "/sistema",
+    // href: "/sistema",
   },
   {
     title: "Doc",

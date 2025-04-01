@@ -1,9 +1,10 @@
 import { Flex, Tabs } from "@chakra-ui/react";
 import { useStateWithStorage } from "../../hooks/useStateStorage";
-import { RegistrosTab } from "./tab/registros";
+import { RastreabilidadeTab } from "./tab/rastreabilidade";
+import { ArquivadosTab } from "./tab/arquivados";
 
-export function SistemaPage() {
-  const [tab, setTab] = useStateWithStorage("SISTEMA-TAB", "listas");
+export function RegistrosPage() {
+  const [tab, setTab] = useStateWithStorage("SISTEMA-TAB", "rastreabilidade");
 
   return (
     <Flex flex="1" flexDir="column" py="8" px="6" bg="#F8F9FA" overflow="auto">
@@ -19,27 +20,25 @@ export function SistemaPage() {
               h="6"
               rounded="lg"
               color="gray.500"
-              // bg="blue.500"
-              value="listas"
+              value="arquivados"
             >
-              Listas
+              Arquivados
             </Tabs.Trigger>
             <Tabs.Trigger
               fontSize="xs"
               h="6"
               rounded="lg"
               color="gray.500"
-              // bg="blue.500"
-              value="registros"
+              value="rastreabilidade"
             >
-              Registros
+              Rastreabilidade
             </Tabs.Trigger>
           </Tabs.List>
-          <Tabs.Content value="listas" p="0">
-            Listas
+          <Tabs.Content value="arquivados" p="0">
+            <ArquivadosTab />
           </Tabs.Content>
-          <Tabs.Content value="registros" p="0">
-            <RegistrosTab />
+          <Tabs.Content value="rastreabilidade" p="0">
+            <RastreabilidadeTab />
           </Tabs.Content>
         </Tabs.Root>
       </Flex>

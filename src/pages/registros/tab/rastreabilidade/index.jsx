@@ -19,7 +19,7 @@ import { VisibilityControlDialog } from "../../../../components/vibilityControlD
 import { TicketService } from "../../../../service/ticket";
 import { RegistroService } from "../../../../service/registros";
 
-export const RegistrosTab = () => {
+export const RastreabilidadeTab = () => {
   const { filters, resetFilters, setFilters } = useFilters({
     key: "REGISTROS-TAB",
   });
