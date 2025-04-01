@@ -5,6 +5,12 @@ const getListByCode = async ({ cod }) => {
   return data;
 };
 
+const getListas = async () => {
+  const { data } = await api.get(`/listas`);
+  return data;
+};
+
 export const ListaService = {
   getListByCode,
+  getListas,
 };

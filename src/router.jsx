@@ -13,6 +13,7 @@ import { ImportPrestadoresPage } from "./pages/prestadores/importacao";
 import { UsuariosPage } from "./pages/usuarios/index";
 import { AlterarSenha } from "./pages/alterarSenha";
 import { RegistrosPage } from "./pages/registros";
+import { Listas } from "./pages/listas";
 
 export const router = createBrowserRouter([
   {
@@ -55,6 +56,7 @@ export const router = createBrowserRouter([
         path: "/registros",
         element: <RegistrosPage />,
       },
+      { path: "/listas", element: <Listas /> },
       {
         path: "/doc",
         element: <Doc />,

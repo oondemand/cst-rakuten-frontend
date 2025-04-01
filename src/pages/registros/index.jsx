@@ -4,7 +4,7 @@ import { RastreabilidadeTab } from "./tab/rastreabilidade";
 import { ArquivadosTab } from "./tab/arquivados";
 
 export function RegistrosPage() {
-  const [tab, setTab] = useStateWithStorage("SISTEMA-TAB", "rastreabilidade");
+  const [tab, setTab] = useStateWithStorage("REGISTROS-TAB", "rastreabilidade");
 
   return (
     <Flex flex="1" flexDir="column" py="8" px="6" bg="#F8F9FA" overflow="auto">
