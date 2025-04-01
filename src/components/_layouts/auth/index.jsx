@@ -65,7 +65,7 @@ const navigationItems = [
   },
   {
     title: "Sistema",
-    // href: "/sistema",
+    href: "/sistema",
   },
   {
     title: "Doc",

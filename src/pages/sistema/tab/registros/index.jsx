@@ -1,23 +1,31 @@
-import { useFilters } from "../../../../hooks/useFilters";
-import { useQuery, keepPreviousData } from "@tanstack/react-query";
-import { ServicoService } from "../../../../service/servico";
-import { sortByToState, stateToSortBy } from "../../../../utils/sorting";
-import { useMemo } from "react";
-import { makeServicoDynamicColumns } from "./columns";
-import { Flex, Box, Text, Button, Spinner } from "@chakra-ui/react";
+import React, { useMemo } from "react";
+
+import { Flex, Spinner, Box, Button, Text } from "@chakra-ui/react";
+import { useQuery, keepPreviousData, useMutation } from "@tanstack/react-query";
+import { DebouncedInput } from "../../../../components/DebouncedInput";
 import { DataGrid } from "../../../../components/dataGrid";
+import { useFilters } from "../../../../hooks/useFilters";
+import { sortByToState, stateToSortBy } from "../../../../utils/sorting";
 import { useColumnVisibility } from "../../../../hooks/useColumnVisibility";
 import { useColumnSizing } from "../../../../hooks/useColumnSizing";
-import { VisibilityControlDialog } from "../../../../components/vibilityControlDialog";
-import { PlanejamentoService } from "../../../../service/planejamento";
 
-export const SelecaoManualTab = () => {
+import { makeTicketsArquivadosDynamicColumns } from "./columns";
+
+import { api } from "../../../../config/api";
+import { toaster } from "../../../../components/ui/toaster";
+import { queryClient } from "../../../../config/react-query";
+
+import { VisibilityControlDialog } from "../../../../components/vibilityControlDialog";
+import { TicketService } from "../../../../service/ticket";
+import { RegistroService } from "../../../../service/registros";
+
+export const RegistrosTab = () => {
   const { filters, resetFilters, setFilters } = useFilters({
-    key: "PLANEJAMENTO_MENSAL",
+    key: "REGISTROS-TAB",
   });
 
   const { columnVisibility, setColumnVisibility } = useColumnVisibility({
-    key: "PLANEJAMENTO_MENSAL",
+    key: "REGISTROS-TAB",
   });
 
   const {
@@ -26,12 +34,12 @@ export const SelecaoManualTab = () => {
     setColumnSizing,
     setColumnSizingInfo,
   } = useColumnSizing({
-    key: "PLANEJAMENTO_MENSAL",
+    key: "REGISTROS-TAB",
   });
 
   const { data, error, isLoading, isFetching } = useQuery({
-    queryKey: ["planejamento-mensal-listar-servicos", { filters }],
-    queryFn: async () => await PlanejamentoService.listarServicos({ filters }),
+    queryKey: ["listar-registros-tab", { filters }],
+    queryFn: async () => await RegistroService.obterTodosRegistros({ filters }),
     placeholderData: keepPreviousData,
   });
 
@@ -41,21 +49,13 @@ export const SelecaoManualTab = () => {
   };
 
   const sortingState = sortByToState(filters.sortBy);
-  const columns = makeServicoDynamicColumns();
+  const columns = useMemo(() => makeTicketsArquivadosDynamicColumns({}), []);
+
+  console.log("DATA ->", data);
 
   return (
     <>
-      <Box
-        bg="white"
-        py="4"
-        px="2"
-        rounded="lg"
-        data-state="open"
-        shadow="xs"
-        _open={{
-          animation: "fade-in 300ms ease-out",
-        }}
-      >
+      <Box bg="white" py="6" px="4" rounded="lg" shadow="xs">
         <Flex
           w="full"
           alignItems="center"
@@ -63,9 +63,21 @@ export const SelecaoManualTab = () => {
           pb="2"
           gap="4"
         >
-          <Text fontSize="lg" fontWeight="semibold" color="gray.500">
-            Serviços
-          </Text>
+          <DebouncedInput
+            value={filters.searchTerm}
+            debounce={700}
+            onChange={(value) => {
+              setFilters((prev) => ({
+                ...prev,
+                searchTerm: value,
+                pageIndex: 0,
+              }));
+            }}
+            size="sm"
+            iconSize={18}
+            startOffset="2px"
+            color="gray.700"
+          />
           <Button
             size="sm"
             variant="subtle"
@@ -77,6 +89,7 @@ export const SelecaoManualTab = () => {
             {(isLoading || isFetching) && <Spinner size="md" />}
             {!isLoading && !isFetching && "Limpar filtros"}
           </Button>
+
           <VisibilityControlDialog
             fields={columns.map((e) => ({
               label: e.header,
@@ -93,15 +106,13 @@ export const SelecaoManualTab = () => {
           sorting={sortingState}
           columns={columns}
           pagination={paginationState}
-          data={data?.servicos || []}
-          striped={false}
+          data={data?.registros || []}
           columnVisibility={columnVisibility}
           setColumnVisibility={setColumnVisibility}
           columnSizing={columnSizing}
           columnSizingInfo={columnSizingInfo}
           setColumnSizing={setColumnSizing}
           setColumnSizingInfo={setColumnSizingInfo}
-          enableColumnResizing={false}
           onFilterChange={(value) => {
             setFilters((prev) => ({ ...prev, ...value, pageIndex: 0 }));
           }}

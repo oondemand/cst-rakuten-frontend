@@ -13,6 +13,7 @@ import { ImportPrestadoresPage } from "./pages/prestadores/importacao";
 import { UsuariosPage } from "./pages/usuarios/index";
 import { AlterarSenha } from "./pages/alterarSenha";
 import { ArquivadosPage } from "./pages/arquivados";
+import { SistemaPage } from "./pages/sistema";
 
 export const router = createBrowserRouter([
   {
@@ -54,6 +55,10 @@ export const router = createBrowserRouter([
       {
         path: "/arquivados",
         element: <ArquivadosPage />,
+      },
+      {
+        path: "/sistema",
+        element: <SistemaPage />,
       },
       {
         path: "/doc",
