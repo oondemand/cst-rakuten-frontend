@@ -49,7 +49,10 @@ export const FORMS = [
         accessorKey: "sci.dias_pagamento",
         label: "Dias de pagamento",
         render: DefaultField,
-        validation: z.string().min(1, "Dias pagamento é um campo obrigatório!"),
+        validation: z.coerce
+          .number()
+          .nonnegative()
+          .min(1, "Dias de pagamento é um campo obrigatório!"),
         colSpan: 1,
       },
       {

@@ -6,6 +6,8 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { SistemaService } from "../../service/sistema";
 import { toaster } from "../../components/ui/toaster";
 import { formatDate } from "../../utils/formatting";
+import { TesteEnvioEmailDialog } from "./dialog";
+import { queryClient } from "../../config/react-query";
 
 export const SistemaPage = () => {
   const forms = useMemo(() => FORMS, []);
@@ -19,15 +21,21 @@ export const SistemaPage = () => {
     mutationFn: async ({ body, id }) =>
       SistemaService.atualizarConfiguracoesSistema({ body, id }),
     onSuccess: () => {
+      queryClient.invalidateQueries(["list-sistema"]);
       toaster.create({
         title: "Configuração atualizada com sucesso!",
         type: "success",
       });
     },
+    onError: () => {
+      toaster.create({
+        title: "Ouve um erro inesperado ao atualizar configuração!",
+        type: "error",
+      });
+    },
   });
 
   const onSubmit = (values) => {
-    console.log("DATA ->", values);
     return updateConfigMutation({ body: values, id: data?._id });
   };
 
@@ -57,11 +65,7 @@ export const SistemaPage = () => {
                     fields={form.fields}
                     gap={6}
                   />
-                  {form.title === "Geral" && (
-                    <Button variant="surface" mt="8">
-                      Testar envio de email
-                    </Button>
-                  )}
+                  {form.title === "Geral" && <TesteEnvioEmailDialog />}
                 </Box>
               </Box>
             </Box>

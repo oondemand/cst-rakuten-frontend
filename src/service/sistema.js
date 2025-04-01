@@ -10,7 +10,12 @@ const atualizarConfiguracoesSistema = async ({ id, body }) => {
   return data;
 };
 
+const testarEnvioEmail = async ({ body }) => {
+  return await api.post(`/sistema/teste-email`, body);
+};
+
 export const SistemaService = {
   obterConfiguracoesSistema,
   atualizarConfiguracoesSistema,
+  testarEnvioEmail,
 };
