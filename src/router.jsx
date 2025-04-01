@@ -14,53 +14,25 @@ import { UsuariosPage } from "./pages/usuarios/index";
 import { AlterarSenha } from "./pages/alterarSenha";
 import { RegistrosPage } from "./pages/registros";
 import { Listas } from "./pages/listas";
+import { SistemaPage } from "./pages/sistema";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <AuthLayout />,
     children: [
-      {
-        path: "/",
-        element: <Dashboard />,
-      },
-      {
-        path: "/servicos-tomados",
-        element: <ServicosTomados />,
-      },
-      {
-        path: "/planejamento",
-        element: <PlanejamentoMensal />,
-      },
-      {
-        path: "/prestadores",
-        element: <PrestadoresList />,
-      },
-      {
-        path: "/prestadores/importacao",
-        element: <ImportPrestadoresPage />,
-      },
-      {
-        path: "/servicos/todos",
-        element: <ServicosList />,
-      },
-      {
-        path: "/servicos/importacao",
-        element: <ImportServicosPage />,
-      },
-      {
-        path: "/usuarios",
-        element: <UsuariosPage />,
-      },
-      {
-        path: "/registros",
-        element: <RegistrosPage />,
-      },
+      { path: "/", element: <Dashboard /> },
+      { path: "/servicos-tomados", element: <ServicosTomados /> },
+      { path: "/planejamento", element: <PlanejamentoMensal /> },
+      { path: "/prestadores", element: <PrestadoresList /> },
+      { path: "/prestadores/importacao", element: <ImportPrestadoresPage /> },
+      { path: "/servicos/todos", element: <ServicosList /> },
+      { path: "/servicos/importacao", element: <ImportServicosPage /> },
+      { path: "/usuarios", element: <UsuariosPage /> },
+      { path: "/registros", element: <RegistrosPage /> },
       { path: "/listas", element: <Listas /> },
-      {
-        path: "/doc",
-        element: <Doc />,
-      },
+      { path: "/sistema", element: <SistemaPage /> },
+      { path: "/doc", element: <Doc /> },
     ],
   },
 
