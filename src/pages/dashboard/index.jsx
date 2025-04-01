@@ -51,7 +51,6 @@ export const Dashboard = () => {
     processando: "purple.500",
     aberto: "blue.500",
     pendente: "orange.500",
-    aberto: "blue.500",
     pago: "green.500",
     "pago-externo": "green.200",
     arquivado: "gray.500",
@@ -147,22 +146,6 @@ export const Dashboard = () => {
             </Text>
           </Box>
         </Box>
-
-        {/* <Box mt="6" w="72" bg="white" p="6" rounded="2xl">
-          <Box display="inline-block" bg="brand.500" rounded="2xl" p="2.5">
-            <Wallet size={24} color="white" />
-          </Box>
-          <Box>
-            <Text fontSize="sm" color="gray.400" fontWeight="medium">
-              Aberto
-            </Text>
-            <Text color="gray.700" mt="1" fontWeight="bold">
-              {currency.format(
-                valoresPorStatus?.find((e) => e.status === "aberto")?.total ?? 0
-              )}
-            </Text>
-          </Box>
-        </Box> */}
       </Flex>
       <Flex gap="10" mt="8">
         {ticketsPorStatus?.length > 0 && (
@@ -266,9 +249,6 @@ export const Dashboard = () => {
             <Box maxW="600px" bg="white" p="4" rounded="2xl">
               <Flex justifyContent="space-between" alignItems="center">
                 <Text fontWeight="semibold">Serviços por status</Text>
-                {/* <Text color="gray.400" fontWeight="medium">
-                {quantidadeTotalDeServicos} Serviços
-              </Text> */}
               </Flex>
               <Table.Root mt="4">
                 <Table.Header>
