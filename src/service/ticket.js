@@ -77,8 +77,8 @@ const removerServico = async ({ servicoId }) => {
   return data;
 };
 
-const listarTicketsArquivados = async () => {
-  const { data } = await api.get("tickets/arquivados");
+const listarTicketsArquivados = async ({ filters }) => {
+  const { data } = await api.get("tickets/arquivados", { params: filters });
   return data;
 };
 

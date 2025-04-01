@@ -15,7 +15,7 @@ export const RestaurarTicketAction = ({ ticket }) => {
     mutationFn: async () =>
       await TicketService.alterarTicket({
         id: ticket._id,
-        body: { status: "revisao", etapa: "requisicao" },
+        body: { status: "revisao" },
       }),
     onSuccess() {
       queryClient.invalidateQueries(["listar-tickets-arquivados"]);
