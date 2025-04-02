@@ -6,10 +6,9 @@ import {
 } from "../../components/ui/file-upload";
 
 import { useMutation, useQuery, keepPreviousData } from "@tanstack/react-query";
-// import { ServicoService } from "../../../service/servico";
-// import { queryClient } from "../../../config/react-query";
+import { queryClient } from "../../config/react-query";
 import { Download, Upload } from "lucide-react";
-// import { api } from "../../../config/api";
+import { api } from "../../config/api";
 import { ptBR } from "date-fns/locale";
 
 import { useState } from "react";
@@ -49,43 +48,43 @@ export const IntegracaoRpaPage = () => {
     },
   });
 
-  // const { mutateAsync: importServicosMutation, isPending } = useMutation({
-  //   mutationFn: async ({ files }) =>
-  //     await ServicoService.importarServicos({ files }),
-  //   onSuccess() {
-  //     queryClient.refetchQueries(["listar-servicos"]);
-  //     queryClient.invalidateQueries(["list-servicos-importados"]);
-  //     toaster.create({
-  //       title: "Arquivo enviado com sucesso",
-  //       description: "Aguardando processamento.",
-  //       type: "success",
-  //     });
-  //   },
-  //   onError: (error) => {
-  //     toaster.create({
-  //       title: "Ouve um erro ao enviar arquivo!",
-  //       type: "error",
-  //     });
-  //   },
-  // });
+  const { mutateAsync: importRpasMutation, isPending } = useMutation({
+    mutationFn: async ({ files }) =>
+      await IntegracaoRpaService.importarRPAs({ files }),
+    onSuccess() {
+      queryClient.refetchQueries(["listar-tickets"]);
+      queryClient.invalidateQueries(["list-rpas-importadas"]);
+      toaster.create({
+        title: "Arquivo enviado com sucesso",
+        description: "Aguardando processamento.",
+        type: "success",
+      });
+    },
+    onError: (error) => {
+      toaster.create({
+        title: "Ouve um erro ao enviar arquivo!",
+        type: "error",
+      });
+    },
+  });
 
-  // const { data } = useQuery({
-  //   queryKey: ["list-servicos-importados"],
-  //   queryFn: async () => {
-  //     const { data } = await api.get("/importacoes?tipo=servico&pageSize=5");
-  //     return data;
-  //   },
-  //   placeholderData: keepPreviousData,
-  //   refetchInterval: ({ state }) => {
-  //     const hasPendingImports = state?.data?.importacoes?.some((importacao) => {
-  //       return !importacao?.detalhes;
-  //     });
+  const { data } = useQuery({
+    queryKey: ["list-rpas-importadas"],
+    queryFn: async () => {
+      const { data } = await api.get("/importacoes?tipo=rpa&pageSize=5");
+      return data;
+    },
+    placeholderData: keepPreviousData,
+    refetchInterval: ({ state }) => {
+      const hasPendingImports = state?.data?.importacoes?.some((importacao) => {
+        return !importacao?.detalhes;
+      });
 
-  //     const pollingTime = 30000; // 30s
+      const pollingTime = 30000; // 30s
 
-  //     return hasPendingImports ? pollingTime : false;
-  //   },
-  // });
+      return hasPendingImports ? pollingTime : false;
+    },
+  });
 
   const handleDownloadFile = async ({ buffer, name, type }) => {
     try {
@@ -161,6 +160,7 @@ export const IntegracaoRpaPage = () => {
               alignItems="center"
               gap="2"
               cursor="pointer"
+              disabled={onExportServicosMutationIsPending}
             >
               <Download size={14} /> Exportar serviços
             </Button>
@@ -168,15 +168,15 @@ export const IntegracaoRpaPage = () => {
         </Box>
         <Box>
           <FileUploadRoot
-            accept=".xlsx, .xls, .xlsm, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
-            // onFileAccept={async (e) => {
-            //   await importServicosMutation({ files: e.files });
-            // }}
+            accept="application/zip, application/x-zip-compressed, application/pdf"
+            onFileAccept={async (e) => {
+              await importRpasMutation({ files: e.files });
+            }}
             maxFiles={1}
           >
             <FileUploadTrigger>
               <Button
-                // disabled={isPending}
+                disabled={isPending}
                 colorPalette="cyan"
                 fontWeight="bold"
               >
@@ -187,7 +187,7 @@ export const IntegracaoRpaPage = () => {
         </Box>
       </Flex>
 
-      {/* {data?.importacoes &&
+      {data?.importacoes &&
         data?.importacoes?.length > 0 &&
         data?.importacoes.map((importacao, index) => {
           return (
@@ -227,40 +227,19 @@ export const IntegracaoRpaPage = () => {
                           <Flex mt="1" gap="8">
                             <Box>
                               <Text fontSize="sm" color="gray.600">
-                                Total de linhas lidas
+                                Total de arquivos encontrados
                               </Text>
                               <Text fontSize="2xl" fontWeight="bold">
                                 {data
-                                  ? importacao.detalhes?.totalDeLinhasLidas
+                                  ? importacao.detalhes
+                                      ?.totalDeArquivosEncontrados
                                   : "..."}
                               </Text>
                             </Box>
 
                             <Box>
                               <Text fontSize="sm" color="gray.600">
-                                Total de Serviços criados
-                              </Text>
-                              <Text fontSize="2xl" fontWeight="bold">
-                                {data
-                                  ? importacao.detalhes?.novosServicos
-                                  : "..."}
-                              </Text>
-                            </Box>
-
-                            <Box>
-                              <Text fontSize="sm" color="gray.600">
-                                Total de novos prestadores
-                              </Text>
-                              <Text fontSize="2xl" fontWeight="bold">
-                                {data
-                                  ? importacao.detalhes?.novosPrestadores
-                                  : "..."}
-                              </Text>
-                            </Box>
-
-                            <Box>
-                              <Text fontSize="sm" color="gray.600">
-                                Linhas com erros
+                                Arquivos com erro
                               </Text>
                               <Text
                                 fontSize="2xl"
@@ -268,7 +247,7 @@ export const IntegracaoRpaPage = () => {
                                 fontWeight="bold"
                               >
                                 {data
-                                  ? importacao.detalhes?.linhasLidasComErro
+                                  ? importacao.detalhes?.arquivosComErro
                                   : "..."}
                               </Text>
                             </Box>
@@ -293,25 +272,6 @@ export const IntegracaoRpaPage = () => {
                               cursor="pointer"
                             >
                               <Download size={14} /> Arquivo
-                            </Button>
-
-                            <Button
-                              onClick={() => {
-                                handleDownloadFile({
-                                  buffer: importacao?.arquivoErro?.data,
-                                  name: "arquivo-erros",
-                                  type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                                });
-                              }}
-                              unstyled
-                              fontSize="sm"
-                              color="gray.500"
-                              display="flex"
-                              alignItems="center"
-                              gap="2"
-                              cursor="pointer"
-                            >
-                              <Download size={14} /> Arquivo de erro
                             </Button>
 
                             <Button
@@ -354,7 +314,7 @@ export const IntegracaoRpaPage = () => {
               </Accordion.Root>
             </Flex>
           );
-        })} */}
+        })}
     </Flex>
   );
 };

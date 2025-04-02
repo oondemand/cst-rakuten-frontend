@@ -10,7 +10,23 @@ const exportarPrestadores = async () => {
   return { data };
 };
 
+export const importarRPAs = async ({ files }) => {
+  const formData = new FormData();
+  for (const file of files) {
+    formData.append("file", file);
+  }
+
+  const response = await api.post("acoes-etapas/importar-rpas", formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+
+  return response;
+};
+
 export const IntegracaoRpaService = {
   exportarServicos,
   exportarPrestadores,
+  importarRPAs,
 };
