@@ -14,7 +14,12 @@ const currencyValidation = preprocessEmptyToUndefined(
     .transform((value) => {
       const isNegative = value.includes("-");
       const numero = Number(
-        value.replace("-", "").replaceAll("R$", "").replaceAll(",", ".").trim()
+        value
+          .replaceAll(".", "")
+          .replace("-", "")
+          .replaceAll("R$", "")
+          .replaceAll(",", ".")
+          .trim()
       );
       return isNegative ? -numero : numero;
     })
