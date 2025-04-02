@@ -225,19 +225,22 @@ export const Dashboard = () => {
                   </Table.Row>
                 </Table.Header>
                 <Table.Body>
-                  {ticketsPorEtapa?.map((item) => (
-                    <Table.Row>
-                      <Table.Cell
-                        display="flex"
-                        gap="2"
-                        alignItems="center"
-                        border="none"
-                      >
-                        {ticketEtapaMap[item.etapa]?.toLowerCase()}
-                      </Table.Cell>
-                      <Table.Cell border="none">{item.count}</Table.Cell>
-                    </Table.Row>
-                  ))}
+                  {ticketsPorEtapa?.map((item) => {
+                    if (!ticketEtapaMap[item.etapa]) return;
+                    return (
+                      <Table.Row>
+                        <Table.Cell
+                          display="flex"
+                          gap="2"
+                          alignItems="center"
+                          border="none"
+                        >
+                          {ticketEtapaMap[item.etapa]?.toLowerCase()}
+                        </Table.Cell>
+                        <Table.Cell border="none">{item.count}</Table.Cell>
+                      </Table.Row>
+                    );
+                  })}
                 </Table.Body>
               </Table.Root>
             </Box>
