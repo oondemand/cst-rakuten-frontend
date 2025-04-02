@@ -19,32 +19,61 @@ export const ServicosCard = ({ servicos }) => {
       <Grid
         templateColumns="repeat(13, 1fr)"
         gap={2}
-        pb="1"
         borderBottom="1px solid"
         borderColor="gray.100"
       >
         {/* Serviço Original */}
-        <Text minWidth="100px">Competência</Text>
-        <Text minWidth="90px">Principal</Text>
-        <Text minWidth="70px">Bônus</Text>
-        <Text minWidth="110px">Ajuste Com.</Text>
-        <Text minWidth="110px">Paid Place.</Text>
-        <Text minWidth="110px" borderRight="1px solid" borderColor="gray.200">
+        <Text fontSize="sm" minWidth="100px">
+          Competência
+        </Text>
+        <Text fontSize="sm" minWidth="90px">
+          Principal
+        </Text>
+        <Text fontSize="sm" minWidth="70px">
+          Bônus
+        </Text>
+        <Text fontSize="sm" minWidth="110px">
+          Ajuste Com.
+        </Text>
+        <Text fontSize="sm" minWidth="110px">
+          Paid Place.
+        </Text>
+        <Text
+          fontSize="sm"
+          minWidth="110px"
+          borderRight="1px solid"
+          borderColor="gray.200"
+        >
           Total Serviço
         </Text>
 
         {/* Revisão */}
-        <Text minWidth="90px">Rev Principal</Text>
-        <Text minWidth="70px">Rev Bônus</Text>
-        <Text minWidth="110px">Rev Comissão</Text>
-        <Text minWidth="110px">Rev Paid Place.</Text>
-        <Text minWidth="110px" borderRight="1px solid" borderColor="gray.200">
+        <Text fontSize="sm" minWidth="90px">
+          Rev Principal
+        </Text>
+        <Text fontSize="sm" minWidth="70px">
+          Rev Bônus
+        </Text>
+        <Text fontSize="sm" minWidth="110px">
+          Rev Comissão
+        </Text>
+        <Text fontSize="sm" minWidth="110px">
+          Rev Paid Place.
+        </Text>
+        <Text
+          fontSize="sm"
+          minWidth="110px"
+          borderRight="1px solid"
+          borderColor="gray.200"
+        >
           Total Revisão
         </Text>
 
         {/* Totalização */}
-        <Text minWidth="90px">Imposto</Text>
-        <Text minWidth="110px" fontWeight="600">
+        <Text fontSize="sm" minWidth="90px">
+          Imposto
+        </Text>
+        <Text fontSize="sm" minWidth="110px" fontWeight="600">
           Total
         </Text>
       </Grid>
@@ -55,52 +84,62 @@ export const ServicosCard = ({ servicos }) => {
           key={index}
           templateColumns="repeat(13, 1fr)"
           gap={2}
-          py="1"
+          py="0.5"
           borderBottom={index < servicos.length - 1 ? "1px solid" : "none"}
           borderColor="gray.100"
         >
           {/* Serviço Original */}
-          <Text minWidth="100px">
+          <Text fontSize="sm" minWidth="100px">
             {`${item?.competencia?.mes}/${item?.competencia?.ano}`}
           </Text>
-          <Text minWidth="90px">
+          <Text fontSize="sm" minWidth="90px">
             {currency.format(item?.valores?.grossValue ?? 0)}
           </Text>
-          <Text minWidth="70px">
+          <Text fontSize="sm" minWidth="70px">
             {currency.format(item?.valores?.bonus ?? 0)}
           </Text>
-          <Text minWidth="110px">
+          <Text fontSize="sm" minWidth="110px">
             {currency.format(item?.valores?.ajusteComercial ?? 0)}
           </Text>
-          <Text minWidth="110px">
+          <Text fontSize="sm" minWidth="110px">
             {currency.format(item?.valores?.paidPlacement ?? 0)}
           </Text>
-          <Text minWidth="110px" borderRight="1px solid" borderColor="gray.200">
+          <Text
+            fontSize="sm"
+            minWidth="110px"
+            borderRight="1px solid"
+            borderColor="gray.200"
+          >
             {currency.format(item?.valores?.totalServico ?? 0)}
           </Text>
 
           {/* Revisão */}
-          <Text minWidth="90px">
+          <Text fontSize="sm" minWidth="90px">
             {currency.format(item?.valores?.revisionGrossValue ?? 0)}
           </Text>
-          <Text minWidth="70px">
+          <Text fontSize="sm" minWidth="70px">
             {currency.format(item?.valores?.revisionProvisionBonus ?? 0)}
           </Text>
-          <Text minWidth="110px">
+          <Text fontSize="sm" minWidth="110px">
             {currency.format(item?.valores?.revisionComissaoPlataforma ?? 0)}
           </Text>
-          <Text minWidth="110px">
+          <Text fontSize="sm" minWidth="110px">
             {currency.format(item?.valores?.revisionPaidPlacement ?? 0)}
           </Text>
-          <Text minWidth="110px" borderRight="1px solid" borderColor="gray.200">
+          <Text
+            fontSize="sm"
+            minWidth="110px"
+            borderRight="1px solid"
+            borderColor="gray.200"
+          >
             {currency.format(item?.valores?.totalRevisao ?? 0)}
           </Text>
 
           {/* Totalização */}
-          <Text minWidth="90px">
+          <Text fontSize="sm" minWidth="90px">
             {currency.format(item?.valores?.imposto ?? 0)}
           </Text>
-          <Text minWidth="110px" fontWeight="600">
+          <Text fontSize="sm" minWidth="110px" fontWeight="600">
             {currency.format(item?.valor ?? 0)}
           </Text>
         </Grid>
