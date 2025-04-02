@@ -16,55 +16,58 @@ export const Doc = () => {
     <Box
       flex="1"
       pt="8"
-      px="6"
+      pl="6"
       pb="2"
       itens="center"
       overflow="auto"
       scrollbarWidth="thin"
+      bg="#F8F9FA"
     >
-      <Heading>Integração com omie</Heading>
-      <Text my="2">
-        Para integrar a esteira de serviços ao Omie, é essencial configurar os
-        seguintes webhooks:
-      </Text>
-      <Clipboard.Root
-        mt="8"
-        maxW="600px"
-        value="https://sua-api-url.com/webhooks/prestador"
-      >
-        <Clipboard.Label color="gray.700" textStyle="label">
-          Sincronização de prestadores
-        </Clipboard.Label>
-        <InputGroup endElement={<ClipboardIconButton />}>
-          <Clipboard.Input asChild>
-            <Input />
-          </Clipboard.Input>
-        </InputGroup>
-      </Clipboard.Root>
-      <img
-        style={{ scale: "0.8", marginLeft: "-70px" }}
-        src="/integracao-omie-1.png"
-      />
+      <Box bg="white" p="6" roundedLeft="lg" shadow="xs">
+        <Heading>Integração com omie</Heading>
+        <Text my="2">
+          Para integrar a esteira de serviços ao Omie, é essencial configurar os
+          seguintes webhooks:
+        </Text>
+        <Clipboard.Root
+          mt="8"
+          maxW="600px"
+          value="https://sua-api-url.com/webhooks/prestador"
+        >
+          <Clipboard.Label color="gray.700" textStyle="label">
+            Sincronização de prestadores
+          </Clipboard.Label>
+          <InputGroup endElement={<ClipboardIconButton />}>
+            <Clipboard.Input asChild>
+              <Input />
+            </Clipboard.Input>
+          </InputGroup>
+        </Clipboard.Root>
+        <img
+          style={{ scale: "0.8", marginLeft: "-70px" }}
+          src="/integracao-omie-1.png"
+        />
 
-      <Clipboard.Root
-        mt="8"
-        maxW="600px"
-        value="https://sua-api-url.com/webhooks/conta-pagar"
-      >
-        <Clipboard.Label color="gray.700" textStyle="label">
-          Sincronização de contas a pagar
-        </Clipboard.Label>
-        <InputGroup endElement={<ClipboardIconButton />}>
-          <Clipboard.Input asChild>
-            <Input />
-          </Clipboard.Input>
-        </InputGroup>
-      </Clipboard.Root>
-      <img
-        style={{ scale: "0.8", marginLeft: "-70px" }}
-        src="/integracao-omie-2.png"
-      />
-      <Text>Agora, tudo pronto 💜</Text>
+        <Clipboard.Root
+          mt="8"
+          maxW="600px"
+          value="https://sua-api-url.com/webhooks/conta-pagar"
+        >
+          <Clipboard.Label color="gray.700" textStyle="label">
+            Sincronização de contas a pagar
+          </Clipboard.Label>
+          <InputGroup endElement={<ClipboardIconButton />}>
+            <Clipboard.Input asChild>
+              <Input />
+            </Clipboard.Input>
+          </InputGroup>
+        </Clipboard.Root>
+        <img
+          style={{ scale: "0.8", marginLeft: "-70px" }}
+          src="/integracao-omie-2.png"
+        />
+        <Text>Agora, tudo pronto 💜</Text>
+      </Box>
     </Box>
   );
 };

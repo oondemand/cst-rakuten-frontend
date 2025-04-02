@@ -52,7 +52,7 @@ export const IntegracaoRpaPage = () => {
     mutationFn: async ({ files }) =>
       await IntegracaoRpaService.importarRPAs({ files }),
     onSuccess() {
-      queryClient.refetchQueries(["listar-tickets"]);
+      queryClient.invalidateQueries(["listar-tickets"]);
       queryClient.invalidateQueries(["list-rpas-importadas"]);
       toaster.create({
         title: "Arquivo enviado com sucesso",

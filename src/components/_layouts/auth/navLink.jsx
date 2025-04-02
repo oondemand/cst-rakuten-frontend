@@ -23,7 +23,7 @@ export const NavLink = ({ to, title, icon, i, ...props }) => {
       }
       {...props}
     >
-      <Link to={to}>
+      <Link to={to} viewTransition>
         {icon && (
           <Flex
             p="5px"

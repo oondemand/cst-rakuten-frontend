@@ -113,7 +113,7 @@ export const AuthLayout = () => {
           borderBottom="1px solid"
           borderColor="gray.50"
         >
-          <Link to="/">
+          <Link to="/" viewTransition>
             <Box w="120px">
               {/* <Text>oondemand</Text> */}
               <img src="/logo_rakuten_purple.png" alt="RAKUTEN" />
