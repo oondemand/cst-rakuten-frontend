@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 
-import { Flex, Spinner, Box, Button, Text } from "@chakra-ui/react";
-import { useQuery, keepPreviousData, useMutation } from "@tanstack/react-query";
+import { Flex, Spinner, Box, Button } from "@chakra-ui/react";
+import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import { DebouncedInput } from "../../../../components/DebouncedInput";
 import { DataGrid } from "../../../../components/dataGrid";
 import { useFilters } from "../../../../hooks/useFilters";
@@ -11,12 +11,10 @@ import { useColumnSizing } from "../../../../hooks/useColumnSizing";
 
 import { makeTicketsArquivadosDynamicColumns } from "./columns";
 
-import { api } from "../../../../config/api";
-import { toaster } from "../../../../components/ui/toaster";
-import { queryClient } from "../../../../config/react-query";
-
 import { VisibilityControlDialog } from "../../../../components/vibilityControlDialog";
 import { TicketService } from "../../../../service/ticket";
+
+import { MemoizedTableBody } from "./tableBody";
 
 export const ArquivadosTab = () => {
   const { filters, resetFilters, setFilters } = useFilters({
@@ -113,6 +111,7 @@ export const ArquivadosTab = () => {
           columnSizingInfo={columnSizingInfo}
           setColumnSizing={setColumnSizing}
           setColumnSizingInfo={setColumnSizingInfo}
+          TableBody={MemoizedTableBody}
           onFilterChange={(value) => {
             setFilters((prev) => ({ ...prev, ...value, pageIndex: 0 }));
           }}

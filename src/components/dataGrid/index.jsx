@@ -59,6 +59,7 @@ export const DataGrid = ({
   onUpdateData,
   striped = true,
   enableColumnResizing = true,
+  TableBody = MemoizedTableBody,
 }) => {
   const table = useReactTable({
     data,
@@ -195,7 +196,7 @@ export const DataGrid = ({
               </Table.Row>
             ))}
           </Table.Header>
-          <MemoizedTableBody
+          <TableBody
             data={table.options.data}
             columns={table.getVisibleLeafColumns()}
             rows={table.getRowModel().rows}
@@ -312,8 +313,6 @@ const TableBody = ({ rows, columns, data }) => {
     </Table.Body>
   );
 };
-
-// const MemoizedTableBody = TableBody;
 
 const MemoizedTableBody = memo(TableBody, (prev, next) => {
   if (prev.columns.length !== next.columns.length) {

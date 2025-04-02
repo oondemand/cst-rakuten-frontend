@@ -62,7 +62,11 @@ export const RestaurarTicketAction = ({ ticket }) => {
         variant="surface"
         colorPalette="gray"
         size="2xs"
-        onClick={handleDeleteServico}
+        onClick={(e) => {
+          e.stopPropagation();
+          e.preventDefault();
+          handleDeleteServico();
+        }}
       >
         <ArchiveRestore />
       </IconButton>
