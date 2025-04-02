@@ -15,6 +15,7 @@ import { AlterarSenha } from "./pages/alterarSenha";
 import { RegistrosPage } from "./pages/registros";
 import { Listas } from "./pages/listas";
 import { SistemaPage } from "./pages/sistema";
+import { IntegracaoRpaPage } from "./pages/integracaoRpa";
 
 export const router = createBrowserRouter([
   {
@@ -33,6 +34,7 @@ export const router = createBrowserRouter([
       { path: "/listas", element: <Listas /> },
       { path: "/sistema", element: <SistemaPage /> },
       { path: "/doc", element: <Doc /> },
+      { path: "/integracao-rpa", element: <IntegracaoRpaPage /> },
     ],
   },
 

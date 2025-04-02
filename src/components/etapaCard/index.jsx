@@ -1,5 +1,5 @@
 import React, { memo, useState } from "react";
-import { Box, Flex, Heading, Separator, Text } from "@chakra-ui/react";
+import { Box, Flex, Heading, Separator, Text, Button } from "@chakra-ui/react";
 import { TicketCard } from "../ticketCard";
 
 import { useRef, useMemo } from "react";
@@ -8,6 +8,8 @@ import "./custom-scrollbar.css";
 
 import { SquarePlus } from "lucide-react";
 import { CreateTicketModal } from "../ticketModal/modalCreate";
+import { IntegracaoRpaDialog } from "../integracaoRpaDialog";
+import { Tooltip } from "../ui/tooltip";
 
 const _Etapa = ({ etapa, tickets }) => {
   const [open, setOpen] = useState(false);
@@ -32,29 +34,39 @@ const _Etapa = ({ etapa, tickets }) => {
       rounded="lg"
       boxShadow=" 0px 1px 2px 0px rgba(0, 0, 0, 0.05)"
     >
-      <Flex
-        borderBottom="1px solid"
-        borderColor="gray.100"
-        py="2"
-        px="3"
-        alignItems="center"
-        justifyContent="space-between"
-      >
-        <Heading color="gray.700" fontSize="14px">
-          {etapa.nome}
-        </Heading>
-        {etapa.codigo === "requisicao" && (
-          <Text
-            p="1"
-            rounded="full"
-            _hover={{ bg: "gray.200" }}
-            onClick={() => setOpen(true)}
-            color="brand.500"
-          >
-            <SquarePlus size={20} />
-          </Text>
-        )}
-      </Flex>
+      <Box borderBottom="1px solid" borderColor="gray.100" py="2" px="3">
+        <Flex alignItems="center" justifyContent="space-between">
+          <Heading color="gray.700" fontSize="14px">
+            {etapa.nome}
+          </Heading>
+          {etapa.codigo === "requisicao" && (
+            <Tooltip
+              content="Criar ticket"
+              positioning={{ placement: "top" }}
+              openDelay={700}
+              closeDelay={50}
+              contentProps={{
+                css: {
+                  "--tooltip-bg": "white",
+                  color: "gray.600",
+                },
+              }}
+            >
+              <Text
+                p="1"
+                rounded="full"
+                _hover={{ bg: "gray.200" }}
+                onClick={() => setOpen(true)}
+                color="brand.500"
+                cursor="pointer"
+              >
+                <SquarePlus size={20} />
+              </Text>
+            </Tooltip>
+          )}
+          {etapa?.codigo === "geracao-rpa" && <IntegracaoRpaDialog />}
+        </Flex>
+      </Box>
 
       {etapaTickets.length > 0 && (
         <Box
