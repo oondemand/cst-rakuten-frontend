@@ -116,7 +116,7 @@ const _TicketCard = ({ ticket }) => {
                 <Text color="gray.400" fontSize="2xs" fontWeight="medium">
                   {
                     BADGE_MAP[
-                      ticket?.contaPagarOmie?.status_titulo.toLowerCase()
+                      ticket?.contaPagarOmie?.status_titulo?.toLowerCase()
                     ].title
                   }{" "}
                   {ticket?.contaPagarOmie?.data_vencimento}
@@ -125,12 +125,12 @@ const _TicketCard = ({ ticket }) => {
                   variant="surface"
                   colorPalette={
                     BADGE_MAP[
-                      ticket?.contaPagarOmie?.status_titulo.toLowerCase()
+                      ticket?.contaPagarOmie?.status_titulo?.toLowerCase()
                     ].color
                   }
                   size="xs"
                 >
-                  {ticket?.contaPagarOmie?.status_titulo.toLowerCase()}
+                  {ticket?.contaPagarOmie?.status_titulo?.toLowerCase()}
                 </Badge>
               </Flex>
             )}

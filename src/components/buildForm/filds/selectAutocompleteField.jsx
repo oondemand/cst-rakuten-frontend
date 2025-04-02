@@ -32,7 +32,7 @@ export const SelectAutoCompleteField = ({
       <Select
         defaultInputValue={value}
         variant="subtle"
-        placeholder={`Selecione um ${props.label.toLowerCase()}`}
+        placeholder={`Selecione um ${props.label?.toLowerCase()}`}
         options={options}
         onBlur={onblur}
         value={value}

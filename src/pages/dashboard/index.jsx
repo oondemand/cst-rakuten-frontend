@@ -233,7 +233,7 @@ export const Dashboard = () => {
                         alignItems="center"
                         border="none"
                       >
-                        {ticketEtapaMap[item.etapa].toLowerCase()}
+                        {ticketEtapaMap[item.etapa]?.toLowerCase()}
                       </Table.Cell>
                       <Table.Cell border="none">{item.count}</Table.Cell>
                     </Table.Row>
