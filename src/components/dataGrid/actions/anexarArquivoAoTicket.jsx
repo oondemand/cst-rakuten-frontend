@@ -26,27 +26,27 @@ export const AnexarArquivoAoTicketAction = ({ ticket }) => {
   });
 
   return (
-    <Tooltip
-      content="Anexar arquivo"
-      positioning={{ placement: "top" }}
-      openDelay={700}
-      closeDelay={50}
-      contentProps={{
-        css: {
-          "--tooltip-bg": "white",
-          color: "gray.600",
-        },
+    <FileUploadRoot
+      onFileAccept={async (e) => {
+        await uploadFileMutation({ files: e.files });
       }}
     >
-      <FileUploadRoot
-        onFileAccept={async (e) => {
-          await uploadFileMutation({ files: e.files });
+      <FileUploadTrigger
+        onClick={(e) => {
+          e.stopPropagation();
+          e.preventDefault();
         }}
       >
-        <FileUploadTrigger
-          onClick={(e) => {
-            e.stopPropagation();
-            e.preventDefault();
+        <Tooltip
+          content="Anexar arquivo"
+          positioning={{ placement: "top" }}
+          openDelay={700}
+          closeDelay={50}
+          contentProps={{
+            css: {
+              "--tooltip-bg": "white",
+              color: "gray.600",
+            },
           }}
         >
           <IconButton
@@ -57,8 +57,8 @@ export const AnexarArquivoAoTicketAction = ({ ticket }) => {
           >
             <Upload />
           </IconButton>
-        </FileUploadTrigger>
-      </FileUploadRoot>
-    </Tooltip>
+        </Tooltip>
+      </FileUploadTrigger>
+    </FileUploadRoot>
   );
 };
