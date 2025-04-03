@@ -105,8 +105,15 @@ export const FORMS = [
     title: "Geral",
     fields: [
       {
-        accessorKey: "remetente",
-        label: "Remetente",
+        accessorKey: "remetente.nome",
+        label: "Nome remetente",
+        render: DefaultField,
+        validation: z.string().nonempty(),
+        colSpan: 1,
+      },
+      {
+        accessorKey: "remetente.email",
+        label: "Email remetente",
         render: DefaultField,
         validation: z.string().email("Email inválido!").nonempty(),
         colSpan: 1,
