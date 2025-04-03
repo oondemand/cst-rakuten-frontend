@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: cst-rakuten-frontend-service
+  namespace: rakuten
+spec:
+  type: NodePort
+  selector:
+    app: cst-rakuten-frontend
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 3000
