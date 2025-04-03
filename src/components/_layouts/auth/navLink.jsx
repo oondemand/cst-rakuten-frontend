@@ -9,6 +9,7 @@ export const NavLink = ({ to, title, icon, i, ...props }) => {
   return (
     <ChakraLink
       asChild
+      w="full"
       py="1"
       gap="2"
       cursor="pointer"

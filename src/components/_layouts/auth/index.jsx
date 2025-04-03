@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Text, Icon } from "@chakra-ui/react";
 import { Footer } from "./footer";
 import { Outlet } from "react-router-dom";
 import { useAuth } from "../../../hooks/useAuth";
@@ -20,6 +20,12 @@ import { invertedChart } from "../../svg/invertedChart";
 
 import { Link } from "react-router-dom";
 import { useConfirmation } from "../../../hooks/useConfirmation";
+import {
+  AccordionItem,
+  AccordionItemContent,
+  AccordionItemTrigger,
+  AccordionRoot,
+} from "../../ui/accordion";
 
 const navigationItems = [
   {
@@ -55,27 +61,28 @@ const navigationItems = [
   {
     title: "Configurações",
     icon: Settings,
-    subLinks: [],
-  },
-  {
-    title: "Usuários",
-    href: "/usuarios",
-  },
-  {
-    title: "Listas",
-    href: "/listas",
-  },
-  {
-    title: "Registros",
-    href: "/registros",
-  },
-  {
-    title: "Sistema",
-    href: "/sistema",
-  },
-  {
-    title: "Doc",
-    href: "/doc",
+    subLinks: [
+      {
+        title: "Usuários",
+        href: "/usuarios",
+      },
+      {
+        title: "Listas",
+        href: "/listas",
+      },
+      {
+        title: "Registros",
+        href: "/registros",
+      },
+      {
+        title: "Sistema",
+        href: "/sistema",
+      },
+      {
+        title: "Doc",
+        href: "/doc",
+      },
+    ],
   },
 ];
 
@@ -126,6 +133,49 @@ export const AuthLayout = () => {
           </Link>
         </Flex>
         {navigationItems.map((item, index) => {
+          if (item?.subLinks)
+            return (
+              <AccordionRoot collapsible>
+                <AccordionItem border="none">
+                  <AccordionItemTrigger
+                    cursor="pointer"
+                    gap="1"
+                    px="3"
+                    border="none"
+                  >
+                    <Flex rounded="40%" gap="3" bg="white" alignItems="center">
+                      <Icon
+                        as={item?.icon}
+                        w="18px"
+                        h="18px"
+                        color="brand.500"
+                      />
+                      <Text
+                        fontSize="12px"
+                        color="gray.500"
+                        fontWeight="semibold"
+                      >
+                        {item?.title}
+                      </Text>
+                    </Flex>
+                  </AccordionItemTrigger>
+                  <AccordionItemContent w="full">
+                    {item?.subLinks.map((item, i) => (
+                      <Box w="full" pb="2">
+                        <NavLink
+                          key={`${item.title}-${index}`}
+                          to={item?.href ?? "#"}
+                          icon={item.icon}
+                          title={item.title}
+                          i={index}
+                        />
+                      </Box>
+                    ))}
+                  </AccordionItemContent>
+                </AccordionItem>
+              </AccordionRoot>
+            );
+
           return (
             <NavLink
               key={`${item.title}-${index}`}
