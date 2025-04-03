@@ -51,7 +51,7 @@ export const SistemaPage = () => {
         flexWrap="wrap"
         bg="white"
         shadow="xs"
-        rounded="lg"
+        roundedLeft="lg"
       >
         {data &&
           forms.map((form) => (
