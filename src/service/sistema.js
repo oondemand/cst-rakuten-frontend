@@ -14,8 +14,20 @@ const testarEnvioEmail = async ({ body }) => {
   return await api.post(`/sistema/teste-email`, body);
 };
 
+const listarCategorias = async () => {
+  const { data } = await api.get("/sistema/listar-categorias");
+  return data;
+};
+
+const listarContaCorrente = async () => {
+  const { data } = await api.get("/sistema/listar-conta-corrente");
+  return data;
+};
+
 export const SistemaService = {
   obterConfiguracoesSistema,
   atualizarConfiguracoesSistema,
   testarEnvioEmail,
+  listarCategorias,
+  listarContaCorrente,
 };
