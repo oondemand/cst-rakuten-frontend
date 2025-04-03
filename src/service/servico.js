@@ -24,7 +24,6 @@ const atualizarServico = async ({ id, body }) => {
 
 const atualizarStatus = async ({ ids, status }) => {
   const { data } = await api.patch(`servicos`, { ids, status });
-  await new Promise((resolve) => setTimeout(resolve, 5000));
   return data;
 };
 
