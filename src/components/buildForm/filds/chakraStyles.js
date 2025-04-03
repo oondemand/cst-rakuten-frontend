@@ -1,4 +1,4 @@
-export function createChakraStyles(...props) {
+export function createChakraStyles(props) {
   return {
     container: (base) => ({
       ...base,

@@ -25,7 +25,9 @@ export const SelectContaCorrenteField = ({ ...props }) => {
   return (
     <Box>
       <Box>
-        <Text fontSize="sm">{props.label}</Text>
+        <Text color="gray.700" fontSize="sm">
+          {props.label}
+        </Text>
         <Controller
           name={props.field.name}
           control={props.methods.control}

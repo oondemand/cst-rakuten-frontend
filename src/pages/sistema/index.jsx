@@ -40,15 +40,23 @@ export const SistemaPage = () => {
   };
 
   return (
-    <Flex flex="1" flexDir="column" py="8" px="6" bg="#F8F9FA" overflow="auto">
+    <Flex flex="1" flexDir="column" py="8" pl="6" bg="#F8F9FA" overflow="auto">
       <Text fontWeight="semibold" fontSize="lg">
         Configurações de sistema
       </Text>
-      <Flex mt="4" flexWrap="wrap" gap="8">
+      <Flex
+        mt="4"
+        p="6"
+        gap="8"
+        flexWrap="wrap"
+        bg="white"
+        shadow="xs"
+        rounded="lg"
+      >
         {data &&
           forms.map((form) => (
             <Box key={form.title}>
-              <Box shadow="xs" p="6" pb="8" rounded="lg" bg="white">
+              <Box>
                 <Text color="gray.500" fontWeight="medium">
                   {form.title}
                 </Text>

@@ -25,7 +25,9 @@ export const SelectCategoriaField = ({ ...props }) => {
   return (
     <Box>
       <Box>
-        <Text fontSize="sm">{props.label}</Text>
+        <Text color="gray.700" fontSize="sm">
+          {props.label}
+        </Text>
         <Controller
           name={props.field.name}
           control={props.methods.control}
@@ -41,7 +43,19 @@ export const SelectCategoriaField = ({ ...props }) => {
               cacheOptions
               isClearable
               options={options}
-              chakraStyles={createChakraStyles()}
+              chakraStyles={createChakraStyles({
+                control: (base) => ({
+                  display: "flex",
+                  border: "none",
+                  outline: "none !important",
+                  padding: 0,
+                  height: "36px",
+                  borderRadius: "0px",
+                  borderBottom: "1px solid",
+                  borderBottomColor: "#E2E8F0",
+                  w: "300px",
+                }),
+              })}
             />
           )}
         />
