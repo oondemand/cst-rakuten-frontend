@@ -6,7 +6,14 @@ import { Navigate } from "react-router-dom";
 
 import { Chart } from "../../svg/chart";
 
-import { Users, Settings, LogOut } from "lucide-react";
+import {
+  Users,
+  Settings,
+  LogOut,
+  ListChecks,
+  CalendarSync,
+  TicketCheckIcon,
+} from "lucide-react";
 
 import { NavLink } from "./navLink";
 import { invertedChart } from "../../svg/invertedChart";
@@ -28,14 +35,17 @@ const navigationItems = [
   {
     title: "Serviços",
     href: "/servicos/todos",
+    icon: ListChecks,
   },
   {
     title: "Planejamento",
     href: "/planejamento",
+    icon: CalendarSync,
   },
   {
     title: "Pagos",
     href: "/pagos",
+    icon: TicketCheckIcon,
   },
   {
     title: "Prestadores",
@@ -45,16 +55,12 @@ const navigationItems = [
   {
     title: "Configurações",
     icon: Settings,
-    // href: "/configuracoes",
+    subLinks: [],
   },
   {
     title: "Usuários",
     href: "/usuarios",
   },
-  // {
-  //   title: "Base omie",
-  //   href: "/base-omie",
-  // },
   {
     title: "Listas",
     href: "/listas",
@@ -115,7 +121,6 @@ export const AuthLayout = () => {
         >
           <Link to="/" viewTransition>
             <Box w="120px">
-              {/* <Text>oondemand</Text> */}
               <img src="/logo_rakuten_purple.png" alt="RAKUTEN" />
             </Box>
           </Link>
@@ -125,7 +130,6 @@ export const AuthLayout = () => {
             <NavLink
               key={`${item.title}-${index}`}
               to={item?.href ?? "#"}
-              // {...(item?.href ? {} : { color: "gray.200" })}
               icon={item.icon}
               title={item.title}
               i={index}
@@ -151,8 +155,6 @@ export const AuthLayout = () => {
 
       <Flex
         flex="1"
-        // py="8"
-        // px="6"
         flexDir="column"
         height="calc(100vh)"
         paddingBottom="0"
