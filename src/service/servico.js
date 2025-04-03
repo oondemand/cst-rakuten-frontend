@@ -5,8 +5,13 @@ export const listarServicos = async ({ filters }) => {
   return data;
 };
 
-export const listarServicosPorPrestador = async ({ prestadorId, dataRegistro }) => {
-  const { data } = await api.get(`/servicos/prestador/${prestadorId}?dataRegistro=${dataRegistro}`);
+export const listarServicosPorPrestador = async ({
+  prestadorId,
+  dataRegistro,
+}) => {
+  const { data } = await api.get(
+    `/servicos/prestador/${prestadorId}?dataRegistro=${dataRegistro}`
+  );
   return data;
 };
 

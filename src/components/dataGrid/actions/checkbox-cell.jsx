@@ -33,7 +33,7 @@ export const CheckActionCell = ({ ...props }) => {
     },
   });
 
-  const { mutateAsync: updateServicoMutation } = useMutation({
+  const { mutateAsync: updateServicoMutation, isPending } = useMutation({
     mutationFn: async ({ id, body }) =>
       await ServicoService.atualizarServico({ id, body }),
     onSuccess() {
@@ -83,6 +83,9 @@ export const CheckActionCell = ({ ...props }) => {
         variant="subtle"
         checked={checked}
         onChange={handleCheckChange}
+        disabled={isPending}
+        cursor="pointer"
+        _disabled={{ cursor: "not-allowed" }}
       >
         <Checkbox.HiddenInput />
         <Checkbox.Control>

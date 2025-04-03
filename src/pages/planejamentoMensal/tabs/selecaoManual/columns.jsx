@@ -4,12 +4,13 @@ import { CheckActionCell } from "../../../../components/dataGrid/actions/checkbo
 import { DefaultCell } from "../../../../components/dataGrid/cells/default";
 import { DateCell } from "../../../../components/dataGrid/cells/dateCell";
 import { formatDateToDDMMYYYY } from "../../../../utils/formatting";
+import { HeaderCheckActionCell } from "../../../../components/dataGrid/actions/header-checkbox-cell";
 
 export const makeServicoDynamicColumns = () => {
   return [
     {
       accessorKey: "acoes",
-      header: "Ações",
+      header: (props) => <HeaderCheckActionCell {...props} />,
       enableSorting: false,
       size: 50,
       cell: (props) => <CheckActionCell {...props} />,

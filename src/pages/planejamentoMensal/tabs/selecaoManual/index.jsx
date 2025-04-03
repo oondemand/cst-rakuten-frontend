@@ -70,9 +70,10 @@ export const SelecaoManualTab = () => {
             size="sm"
             variant="subtle"
             color="brand.500"
-            fontWeight="semibold"
+            fontWeight="medium"
             onClick={resetFilters}
             minW="32"
+            rounded="md"
           >
             {(isLoading || isFetching) && <Spinner size="md" />}
             {!isLoading && !isFetching && "Limpar filtros"}
