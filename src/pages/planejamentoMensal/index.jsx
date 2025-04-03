@@ -19,8 +19,6 @@ export function PlanejamentoMensal() {
     placeholderData: keepPreviousData,
   });
 
-  console.log("DATA->", data);
-
   return (
     <Flex flex="1" flexDir="column" py="8" px="6" bg="#F8F9FA" overflow="auto">
       <Flex gap="8">
@@ -133,26 +131,12 @@ export function PlanejamentoMensal() {
             >
               Sincronizar
             </Tabs.Trigger>
-            <Tabs.Trigger
-              fontSize="xs"
-              h="6"
-              rounded="lg"
-              color="white"
-              bg="blue.500"
-              value="importar-planilha"
-              disabled
-            >
-              Importar planilha
-            </Tabs.Trigger>
           </Tabs.List>
           <Tabs.Content value="selecao-manual" p="0">
             <SelecaoManualTab />
           </Tabs.Content>
           <Tabs.Content value="sincronizar" p="0">
             <SincronizacaoTab />
-          </Tabs.Content>
-          <Tabs.Content value="importar-planilha" p="0">
-            Importar planilha
           </Tabs.Content>
         </Tabs.Root>
       </Flex>

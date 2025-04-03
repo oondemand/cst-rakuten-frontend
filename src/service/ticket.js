@@ -82,6 +82,11 @@ const listarTicketsArquivados = async ({ filters }) => {
   return data;
 };
 
+const listarTicketsPagos = async ({ filters }) => {
+  const { data } = await api.get("tickets/pagos", { params: filters });
+  return data;
+};
+
 export const TicketService = {
   listarTickets,
   adicionarTicket,
@@ -94,4 +99,5 @@ export const TicketService = {
   removerServico,
   adicionarServico,
   listarTicketsArquivados,
+  listarTicketsPagos,
 };

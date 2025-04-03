@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 
 import { Flex, Spinner, Box, Button, Text } from "@chakra-ui/react";
-import { useQuery, keepPreviousData, useMutation } from "@tanstack/react-query";
+import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import { DebouncedInput } from "../../components/DebouncedInput";
 import { DataGrid } from "../../components/dataGrid";
 import { useFilters } from "../../hooks/useFilters";
@@ -11,20 +11,18 @@ import { useColumnSizing } from "../../hooks/useColumnSizing";
 
 import { makeTicketsArquivadosDynamicColumns } from "./columns";
 
-import { api } from "../../config/api";
-import { toaster } from "../../components/ui/toaster";
-import { queryClient } from "../../config/react-query";
-
 import { VisibilityControlDialog } from "../../components/vibilityControlDialog";
-import { TicketService } from "../../../../service/ticket";
+import { TicketService } from "../../service/ticket";
 
-export const ArquivadosPage = () => {
+import { MemoizedTableBody } from "./tableBody";
+
+export const TicketsPagosPage = () => {
   const { filters, resetFilters, setFilters } = useFilters({
-    key: "TICKETS-ARQUIVADOS",
+    key: "TICKETS-PAGOS",
   });
 
   const { columnVisibility, setColumnVisibility } = useColumnVisibility({
-    key: "TICKETS-ARQUIVADOS",
+    key: "TICKETS-PAGOS",
   });
 
   const {
@@ -33,13 +31,12 @@ export const ArquivadosPage = () => {
     setColumnSizing,
     setColumnSizingInfo,
   } = useColumnSizing({
-    key: "TICKETS-ARQUIVADOS",
+    key: "TICKETS-PAGOS",
   });
 
   const { data, error, isLoading, isFetching } = useQuery({
-    queryKey: ["listar-tickets-arquivados", { filters }],
-    queryFn: async () =>
-      await TicketService.listarTicketsArquivados({ filters }),
+    queryKey: ["listar-tickets-pagos", { filters }],
+    queryFn: async () => await TicketService.listarTicketsPagos({ filters }),
     placeholderData: keepPreviousData,
   });
 
@@ -67,9 +64,9 @@ export const ArquivadosPage = () => {
       >
         <Box>
           <Text fontSize="lg" color="gray.700" fontWeight="semibold">
-            Tickets arquivados
+            Tickets pagos
           </Text>
-          <Box mt="4" bg="white" py="6" px="4" rounded="lg" shadow="xs">
+          <Box bg="white" mt="4" py="6" px="4" rounded="lg" shadow="xs">
             <Flex
               w="full"
               alignItems="center"
@@ -127,6 +124,7 @@ export const ArquivadosPage = () => {
               columnSizingInfo={columnSizingInfo}
               setColumnSizing={setColumnSizing}
               setColumnSizingInfo={setColumnSizingInfo}
+              TableBody={MemoizedTableBody}
               onFilterChange={(value) => {
                 setFilters((prev) => ({ ...prev, ...value, pageIndex: 0 }));
               }}

@@ -33,10 +33,10 @@ const navigationItems = [
     title: "Planejamento",
     href: "/planejamento",
   },
-  // {
-  //   title: "Pagos",
-  //   href: "/pago",
-  // },
+  {
+    title: "Pagos",
+    href: "/pagos",
+  },
   {
     title: "Prestadores",
     icon: Users,
