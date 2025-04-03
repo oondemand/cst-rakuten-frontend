@@ -16,7 +16,7 @@ export const makeTicketsArquivadosDynamicColumns = () => {
       size: 55,
       cell: (props) => (
         <TableActionsCell>
-          <RestaurarTicketAction ticket={props.row.original} />
+          {/* <RestaurarTicketAction ticket={props.row.original} /> */}
         </TableActionsCell>
       ),
     },

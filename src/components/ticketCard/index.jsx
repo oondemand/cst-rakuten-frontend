@@ -11,6 +11,7 @@ import { currency } from "../../utils/currency";
 
 import { CreateTicketModal } from "../ticketModal/modalCreate";
 import { formatDateToDDMMYYYY } from "../../utils/formatting";
+import { format } from "date-fns";
 
 const BADGE_MAP = {
   pago: { color: "green", title: "Pago em" },
@@ -90,7 +91,7 @@ const _TicketCard = ({ ticket }) => {
                     fontSize="2xs"
                     color="gray.400"
                   >
-                    {formatDateToDDMMYYYY(ticket?.createdAt, "MMMM 'de' yyyy", {
+                    {format(ticket?.createdAt, "MMMM 'de' yyyy", {
                       locale: ptBR,
                     })}
                   </Text>
@@ -119,7 +120,9 @@ const _TicketCard = ({ ticket }) => {
                       ticket?.contaPagarOmie?.status_titulo?.toLowerCase()
                     ].title
                   }{" "}
-                  {ticket?.contaPagarOmie?.data_vencimento}
+                  {formatDateToDDMMYYYY(
+                    ticket?.contaPagarOmie?.data_vencimento
+                  )}
                 </Text>
                 <Badge
                   variant="surface"
