@@ -77,7 +77,7 @@ export const makeTicketsArquivadosDynamicColumns = () => {
         <Text fontSize="sm">
           {currency.format(
             props.row.original?.servicos?.reduce((acc, cur) => {
-              return acc + cur.total;
+              return acc + (cur?.total ?? 0);
             }, 0)
           )}
         </Text>
