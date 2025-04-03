@@ -3,7 +3,7 @@ import React from "react";
 import { TableActionsCell } from "../../components/dataGrid/cells/tableActionsCell";
 
 import { DefaultCell } from "../../components/dataGrid/cells/default";
-import { RestaurarTicketAction } from "../../components/dataGrid/actions/restaurarTicketArquivado";
+import { AnexarArquivoAoTicketAction } from "../../components/dataGrid/actions/anexarArquivoAoTicket";
 import { Text } from "@chakra-ui/react";
 import { currency } from "../../utils/currency";
 
@@ -16,7 +16,7 @@ export const makeTicketsArquivadosDynamicColumns = () => {
       size: 55,
       cell: (props) => (
         <TableActionsCell>
-          {/* <RestaurarTicketAction ticket={props.row.original} /> */}
+          <AnexarArquivoAoTicketAction ticket={props.row.original} />
         </TableActionsCell>
       ),
     },
@@ -89,7 +89,7 @@ export const makeTicketsArquivadosDynamicColumns = () => {
       header: "Numero de anexos",
       enableColumnFilter: false,
       cell: (props) => (
-        <Text fontSize="sm">{props.row.original?.anexos?.length}</Text>
+        <Text fontSize="sm">{props.row.original?.arquivos?.length}</Text>
       ),
     },
   ];
