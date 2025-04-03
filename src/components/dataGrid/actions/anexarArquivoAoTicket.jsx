@@ -40,7 +40,7 @@ export const AnexarArquivoAoTicketAction = ({ ticket }) => {
         <Tooltip
           content="Anexar arquivo"
           positioning={{ placement: "top" }}
-          openDelay={700}
+          openDelay={500}
           closeDelay={50}
           contentProps={{
             css: {
