@@ -11,9 +11,9 @@ export const HeaderCheckActionCell = ({ ...props }) => {
     (servico) => !["pendente", "processando"].includes(servico?.status)
   );
 
-  const { mutateAsync: updateServicoMutation, isPending } = useMutation({
-    mutationFn: async ({ id, body }) =>
-      await ServicoService.atualizarServico({ id, body }),
+  const { mutateAsync: updateServicesStatus, isPending } = useMutation({
+    mutationFn: async ({ ids, status }) =>
+      await ServicoService.atualizarStatus({ ids, status }),
     onError: (error) => {
       toaster.create({
         title: "Ouve um erro inesperado ao realizar operação!",
@@ -23,25 +23,23 @@ export const HeaderCheckActionCell = ({ ...props }) => {
   });
 
   const handleCheckChange = async (e) => {
-    for (const servico of data) {
-      if (!checked && servico?.status === "aberto") {
-        await updateServicoMutation({
-          id: servico?._id,
-          body: { status: "pendente" },
-        });
+    if (checked) {
+      const servicesToUpdate = data.filter(
+        (servico) => servico?.status === "pendente"
+      );
 
-        continue;
-      }
+      await updateServicesStatus({ ids: servicesToUpdate, status: "aberto" });
+    }
 
-      if (checked && servico?.status === "pendente") {
-        servico.status = "aberto";
-        await updateServicoMutation({
-          id: servico?._id,
-          body: { status: "aberto" },
-        });
+    if (!checked) {
+      const servicesToUpdate = data.filter(
+        (servico) => servico?.status === "aberto"
+      );
 
-        continue;
-      }
+      await updateServicesStatus({
+        ids: servicesToUpdate,
+        status: "pendente",
+      });
     }
 
     queryClient.invalidateQueries(["listar-servicos"]);
