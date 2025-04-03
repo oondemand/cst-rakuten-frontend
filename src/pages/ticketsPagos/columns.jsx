@@ -84,7 +84,7 @@ export const makeTicketsArquivadosDynamicColumns = () => {
       ),
     },
     {
-      accessorKey: "quantidadeTotalDeServicos",
+      accessorKey: "quantidadeTotalDeAnexos",
       header: "Numero de anexos",
       enableColumnFilter: false,
       cell: (props) => (

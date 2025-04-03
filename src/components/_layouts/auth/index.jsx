@@ -199,7 +199,7 @@ export const AuthLayout = () => {
           fontSize="sm"
           cursor="pointer"
         >
-          <LogOut color="purple" size={18} /> Sair
+          <LogOut color="#8528CE" size={18} /> Sair
         </Button>
       </Flex>
 
