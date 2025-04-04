@@ -4,7 +4,7 @@ import { useMutation } from "@tanstack/react-query";
 import { TicketService } from "../../../service/ticket";
 import { saveAs } from "file-saver";
 
-import { Paperclip, Download, CircleX } from "lucide-react";
+import { Paperclip, Download, CircleX, Eye } from "lucide-react";
 import { toaster } from "../../ui/toaster";
 
 export const FilesDetailsCell = (props) => {
@@ -63,10 +63,17 @@ export const FilesDetailsCell = (props) => {
   return (
     <Popover.Root positioning={{ placement: "top" }}>
       <Popover.Trigger w="full" h="full">
-        <Flex cursor="pointer" justifyContent="center">
-          <Text alignSelf="center" fontSize="sm" truncate>
+        <Flex
+          gap="1"
+          alignItems="center"
+          cursor="pointer"
+          color="gray.500"
+          justifyContent="center"
+        >
+          <Text color="gray.700" alignSelf="center" fontSize="sm" truncate>
             {props.row.original?.arquivos?.length}
           </Text>
+          <Eye size={18} />
         </Flex>
       </Popover.Trigger>
 

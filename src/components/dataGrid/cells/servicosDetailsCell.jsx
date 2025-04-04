@@ -1,15 +1,23 @@
 import { Flex, Text, Popover, Portal } from "@chakra-ui/react";
 
 import { ServicosDetailsCard } from "../../servicosDetailsCard";
+import { Eye } from "lucide-react";
 
 export const ServicosDetailsCell = (props) => {
   return (
     <Popover.Root positioning={{ placement: "top" }}>
       <Popover.Trigger w="full" h="full">
-        <Flex cursor="pointer" justifyContent="center">
-          <Text alignSelf="center" fontSize="sm" truncate>
+        <Flex
+          gap="1"
+          alignItems="center"
+          cursor="pointer"
+          color="gray.500"
+          justifyContent="center"
+        >
+          <Text color="gray.700" alignSelf="center" fontSize="sm" truncate>
             {props.row.original?.servicos?.length}
           </Text>
+          <Eye size={18} />
         </Flex>
       </Popover.Trigger>
 
