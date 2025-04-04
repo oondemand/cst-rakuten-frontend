@@ -53,9 +53,9 @@ export const ServicosTomados = () => {
           const term = searchTerm?.toLowerCase()?.trim();
           return (
             ticket?.titulo?.toLowerCase()?.includes(term) ||
-            ticket?.prestador?.dadosBancarios?.cpfCnpj
+            ticket?.prestador?.documento
               ?.toLowerCase()
-              ?.includes(term)
+              ?.includes(term.replace(/[^a-zA-Z0-9]/g, ""))
           );
         })
       : data;
