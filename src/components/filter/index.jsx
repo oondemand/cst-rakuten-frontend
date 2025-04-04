@@ -36,8 +36,9 @@ export function Filter({ fieldMeta, onChange, value, ...props }) {
     return (
       <SelectPrestadorFilter
         onChange={(e) => {
-          onChange({ [fieldMeta.filterKey]: e?._id });
+          onChange({ [fieldMeta.filterKey]: { _id: e?._id, nome: e?.nome } });
         }}
+        value={value}
       />
     );
   }
