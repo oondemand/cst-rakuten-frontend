@@ -1,17 +1,19 @@
 import { IconButton } from "@chakra-ui/react";
 import { Upload } from "lucide-react";
-import { useMutation } from "@tanstack/react-query";
+import { QueryClient, useMutation } from "@tanstack/react-query";
 import { toaster } from "../../ui/toaster";
 import { Tooltip } from "../../ui/tooltip";
 import { TicketService } from "../../../service/ticket";
 import { useConfirmation } from "../../../hooks/useConfirmation";
 import { FileUploadRoot, FileUploadTrigger } from "../../ui/file-upload";
+import { queryClient } from "../../../config/react-query";
 
 export const AnexarArquivoAoTicketAction = ({ ticket }) => {
   const { mutateAsync: uploadFileMutation, isPending } = useMutation({
     mutationFn: async ({ files }) =>
       await TicketService.uploadFiles({ ticketId: ticket?._id, files }),
     onSuccess: ({ data }) => {
+      queryClient.invalidateQueries(["listar-tickets-pagos"]);
       toaster.create({
         title: "Arquivo anexado com sucesso",
         type: "success",
