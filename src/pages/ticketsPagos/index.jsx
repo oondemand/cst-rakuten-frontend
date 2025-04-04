@@ -14,8 +14,6 @@ import { makeTicketsArquivadosDynamicColumns } from "./columns";
 import { VisibilityControlDialog } from "../../components/vibilityControlDialog";
 import { TicketService } from "../../service/ticket";
 
-import { MemoizedTableBody } from "./tableBody";
-
 export const TicketsPagosPage = () => {
   const { filters, resetFilters, setFilters } = useFilters({
     key: "TICKETS-PAGOS",
@@ -47,8 +45,6 @@ export const TicketsPagosPage = () => {
 
   const sortingState = sortByToState(filters.sortBy);
   const columns = useMemo(() => makeTicketsArquivadosDynamicColumns({}), []);
-
-  console.log("DATA ->", data);
 
   return (
     <>
@@ -124,7 +120,6 @@ export const TicketsPagosPage = () => {
               columnSizingInfo={columnSizingInfo}
               setColumnSizing={setColumnSizing}
               setColumnSizingInfo={setColumnSizingInfo}
-              TableBody={MemoizedTableBody}
               onFilterChange={(value) => {
                 setFilters((prev) => ({ ...prev, ...value, pageIndex: 0 }));
               }}

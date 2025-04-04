@@ -6,6 +6,8 @@ import { DefaultCell } from "../../components/dataGrid/cells/default";
 import { AnexarArquivoAoTicketAction } from "../../components/dataGrid/actions/anexarArquivoAoTicket";
 import { Text } from "@chakra-ui/react";
 import { currency } from "../../utils/currency";
+import { FilesDetailsCell } from "../../components/dataGrid/cells/filesDetailsCell";
+import { ServicosDetailsCell } from "../../components/dataGrid/cells/servicosDetailsCell";
 
 export const makeTicketsArquivadosDynamicColumns = () => {
   return [
@@ -65,9 +67,7 @@ export const makeTicketsArquivadosDynamicColumns = () => {
       accessorKey: "quantidadeTotalDeServicos",
       header: "Numero de serviços",
       enableColumnFilter: false,
-      cell: (props) => (
-        <Text fontSize="sm">{props.row.original?.servicos?.length}</Text>
-      ),
+      cell: ServicosDetailsCell,
     },
     {
       accessorKey: "valorTotalDosServicos",
@@ -88,9 +88,7 @@ export const makeTicketsArquivadosDynamicColumns = () => {
       accessorKey: "quantidadeTotalDeAnexos",
       header: "Numero de anexos",
       enableColumnFilter: false,
-      cell: (props) => (
-        <Text fontSize="sm">{props.row.original?.arquivos?.length}</Text>
-      ),
+      cell: FilesDetailsCell,
     },
   ];
 };

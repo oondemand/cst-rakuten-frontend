@@ -142,4 +142,4 @@
 
 ### Features
 
-* add Docker and Kubernetes configurations for frontend deployment ([7aacf3c](https://github.com/oondemand/cst-rakuten-segeti/commit/7aacf3c20b031764096e9446a5b672bca5aea134))
+- add Docker and Kubernetes configurations for frontend deployment ([7aacf3c](https://github.com/oondemand/cst-rakuten-frontend/commit/7aacf3c20b031764096e9446a5b672bca5aea134))

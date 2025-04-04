@@ -36,8 +36,8 @@ jobs:
       - name: Construir e publicar imagem
         run: |
           docker login --username ${{ secrets.DOCKER_USERNAME }} --password ${{ secrets.GH_PAT }} ghcr.io
-          docker build -f ./infra/docker/Dockerfile.prod --build-arg VITE_SERVICE_VERSION=${{ env.TAG }} --build-arg VITE_API_URL=${{ secrets.VITE_API_URL_HOMOLOG }} --tag ghcr.io/oondemand/cst-rakuten-segeti:${{ env.TAG }}-homolog .
-          docker push ghcr.io/oondemand/cst-rakuten-segeti:${{ env.TAG }}-homolog
+          docker build -f ./infra/docker/Dockerfile.prod --build-arg VITE_SERVICE_VERSION=${{ env.TAG }} --build-arg VITE_API_URL=${{ secrets.VITE_API_URL_HOMOLOG }} --tag ghcr.io/oondemand/cst-rakuten-frontend:${{ env.TAG }}-homolog .
+          docker push ghcr.io/oondemand/cst-rakuten-frontend:${{ env.TAG }}-homolog
 
       - name: Criar kubeconfig
         run: |
