@@ -98,8 +98,6 @@ export const ServicosDialog = ({
   });
 
   const onSubmit = async (values) => {
-    console.log("VALUES:", values);
-
     const competencia = values?.competencia.split("/");
     const mes = Number(competencia?.[0]) || null;
     const ano = Number(competencia?.[1]) || null;
