@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from "react";
+import React from "react";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Navigation } from "swiper/modules";
@@ -7,7 +7,7 @@ import "swiper/css/navigation";
 
 import "../../styles/swiper.css";
 
-import { Flex, Spinner, Box, Heading, Input } from "@chakra-ui/react";
+import { Flex, Spinner, Heading } from "@chakra-ui/react";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { EtapaService } from "../../service/etapa";
 import { Etapa } from "../../components/etapaCard";
