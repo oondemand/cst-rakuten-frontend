@@ -44,21 +44,21 @@ export function Filter({ fieldMeta, onChange, value, ...props }) {
     );
   }
 
-  if (fieldMeta.filterVariant && fieldMeta.filterVariant === "competencia") {
-    return (
-      <DebouncedInput
-        {...props}
-        ref={withMask("99/9999")}
-        debounce={1000}
-        size="2xs"
-        iconSize={14}
-        startOffset="0px"
-        color="gray.700"
-        value={value}
-        onChange={(value) => onChange({ [fieldMeta.filterKey]: value })}
-      />
-    );
-  }
+  // if (fieldMeta.filterVariant && fieldMeta.filterVariant === "competencia") {
+  //   return (
+  //     <DebouncedInput
+  //       {...props}
+  //       ref={withMask("99/9999")}
+  //       debounce={1000}
+  //       size="2xs"
+  //       iconSize={14}
+  //       startOffset="0px"
+  //       color="gray.700"
+  //       value={value}
+  //       onChange={(value) => onChange({ [fieldMeta.filterKey]: value })}
+  //     />
+  //   );
+  // }
 
   return (
     <DebouncedInput

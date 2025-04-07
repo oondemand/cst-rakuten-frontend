@@ -120,7 +120,8 @@ export const makeServicoDynamicColumns = () => {
       ),
       enableColumnFilter: true,
       meta: {
-        filterKey: "competencia.mes",
+        filterKey: "competencia",
+        filterVariant: "competencia",
       },
     },
     {
