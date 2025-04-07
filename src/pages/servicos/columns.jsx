@@ -41,7 +41,9 @@ export const makeServicoDynamicColumns = () => {
               dataProvisaoContabil: formatDateToDDMMYYYY(
                 props.row.original?.dataProvisaoContabil
               ),
-              dataRegistro: formatDateToDDMMYYYY(props.row.original?.dataRegistro),
+              dataRegistro: formatDateToDDMMYYYY(
+                props.row.original?.dataRegistro
+              ),
               competencia: `${props.row.original.competencia.mes
                 .toString()
                 .padStart(2, "0")}/${props.row.original.competencia.ano}`,
@@ -102,7 +104,7 @@ export const makeServicoDynamicColumns = () => {
       header: "Data Provisão Contábil",
       enableSorting: false,
       cell: DateCell,
-      enableColumnFilter: false,
+      enableColumnFilter: true,
       meta: { filterKey: "dataProvisaoContabil" },
     },
     {
@@ -110,7 +112,7 @@ export const makeServicoDynamicColumns = () => {
       header: "Data Registro",
       enableSorting: false,
       cell: DateCell,
-      enableColumnFilter: false,
+      enableColumnFilter: true,
       meta: { filterKey: "dataRegistro" },
     },
     {

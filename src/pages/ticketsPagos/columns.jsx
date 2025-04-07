@@ -8,6 +8,7 @@ import { Text } from "@chakra-ui/react";
 import { currency } from "../../utils/currency";
 import { FilesDetailsCell } from "../../components/dataGrid/cells/filesDetailsCell";
 import { ServicosDetailsCell } from "../../components/dataGrid/cells/servicosDetailsCell";
+import { formatDateToDDMMYYYY } from "../../utils/formatting";
 
 export const makeTicketsArquivadosDynamicColumns = () => {
   return [
@@ -25,13 +26,18 @@ export const makeTicketsArquivadosDynamicColumns = () => {
     {
       accessorKey: "titulo",
       header: "Titulo",
-      enableColumnFilter: false,
       cell: DefaultCell,
+      enableColumnFilter: true,
+      meta: { filterKey: "dataRegistro" },
     },
     {
       accessorKey: "createdAt",
       header: "Criado em",
-      cell: DefaultCell,
+      cell: (props) => (
+        <Text fontSize="sm">
+          {formatDateToDDMMYYYY(props.row.original?.createdAt)}
+        </Text>
+      ),
       enableColumnFilter: false,
       enableSorting: false,
     },

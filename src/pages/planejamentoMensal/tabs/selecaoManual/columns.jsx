@@ -111,7 +111,7 @@ export const makeServicoDynamicColumns = () => {
           </Text>
         </Flex>
       ),
-      enableColumnFilter: false,
+      enableColumnFilter: true,
       meta: { filterKey: "dataRegistro" },
     },
     {
