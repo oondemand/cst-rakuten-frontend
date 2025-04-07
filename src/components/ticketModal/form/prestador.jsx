@@ -24,7 +24,11 @@ const obterPrestadores = async (inputValue) => {
   } = await fetchOptions(inputValue);
 
   return prestadores.map((item) => {
-    return { ...item, value: item._id, label: item.nome };
+    return {
+      ...item,
+      value: item._id,
+      label: `${item.nome} SID. ${item?.sid}  DOC. ${item?.documento}`,
+    };
   });
 };
 
@@ -69,8 +73,6 @@ export const PrestadorForm = ({
     const {
       endereco: { pais, ...rest },
     } = values;
-
-    console.log("Values", values);
 
     const body = {
       ...values,
