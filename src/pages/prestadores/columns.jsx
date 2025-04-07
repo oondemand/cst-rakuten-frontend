@@ -6,7 +6,7 @@ import { DefaultEditableCell } from "../../components/dataGrid/cells/defaultEdit
 import { SelectListaCell } from "../../components/dataGrid/cells/selectLista";
 import { DateCell } from "../../components/dataGrid/cells/dateCell";
 import { PisPasepCell } from "../../components/dataGrid/cells/pisPasepCell";
-import { LISTA_PAISES_OMIE } from "../../constants/omie";
+import { LISTA_ESTADOS, LISTA_PAISES_OMIE } from "../../constants/omie";
 import { SelectBancoCell } from "../../components/dataGrid/cells/selectBancoCell";
 import { SelectEstadoCell } from "../../components/dataGrid/cells/selectEstadoCell";
 import { DeletePrestadorAction } from "../../components/dataGrid/actions/deletePrestadorButton";
@@ -189,8 +189,12 @@ export const makePrestadorDynamicColumns = () => {
       accessorKey: "endereco.estado",
       header: "Estado",
       cell: SelectEstadoCell,
-      enableColumnFilter: false,
-      meta: { filterKey: "endereco.estado" },
+      enableColumnFilter: true,
+      meta: {
+        filterKey: "endereco.estado",
+        filterOptions: LISTA_ESTADOS,
+        filterVariant: "select",
+      },
     },
     {
       accessorKey: "endereco.pais.cod",
@@ -218,7 +222,7 @@ export const makePrestadorDynamicColumns = () => {
       accessorKey: "pessoaFisica.dataNascimento",
       header: "Data de Nascimento",
       cell: DateCell,
-      enableColumnFilter: false,
+      enableColumnFilter: true,
       meta: { filterKey: "pessoaFisica.dataNascimento" },
     },
     {
@@ -265,14 +269,14 @@ export const makePrestadorDynamicColumns = () => {
       accessorKey: "createdAt",
       header: "Criado em",
       cell: DateCell,
-      enableColumnFilter: false,
+      enableColumnFilter: true,
       meta: { filterKey: "createdAt" },
     },
     {
       accessorKey: "updatedAt",
       header: "Atualizado em",
       cell: DateCell,
-      enableColumnFilter: false,
+      enableColumnFilter: true,
       meta: { filterKey: "updatedAt" },
     },
   ];
