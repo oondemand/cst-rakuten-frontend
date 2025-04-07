@@ -28,7 +28,8 @@ export const makeTicketsArquivadosDynamicColumns = () => {
       header: "Titulo",
       cell: DefaultCell,
       enableColumnFilter: true,
-      meta: { filterKey: "dataRegistro" },
+      enableSorting: false,
+      meta: { filterKey: "titulo" },
     },
     {
       accessorKey: "createdAt",
@@ -38,31 +39,39 @@ export const makeTicketsArquivadosDynamicColumns = () => {
           {formatDateToDDMMYYYY(props.row.original?.createdAt)}
         </Text>
       ),
-      enableColumnFilter: false,
       enableSorting: false,
+      enableColumnFilter: true,
+      meta: { filterKey: "createdAt" },
     },
     {
       accessorKey: "prestador.nome",
       header: "Prestador",
-      enableColumnFilter: false,
       cell: DefaultCell,
+      enableColumnFilter: true,
+      enableSorting: false,
+      meta: { filterKey: "prestador.nome" },
     },
     {
       accessorKey: "prestador.sid",
       header: "SID",
-      enableColumnFilter: false,
       cell: DefaultCell,
+      enableColumnFilter: true,
+      enableSorting: false,
+      meta: { filterKey: "prestador.sid" },
     },
     {
       accessorKey: "prestador.documento",
       header: "Documento",
-      enableColumnFilter: false,
       cell: DefaultCell,
+      enableColumnFilter: true,
+      enableSorting: false,
+      meta: { filterKey: "prestador.documento" },
     },
     {
       accessorKey: "tipoDocumento",
       header: "Tipo",
       enableColumnFilter: false,
+      enableSorting: false,
       cell: (props) => (
         <Text fontSize="sm">
           {props.row.original?.servicos?.[0]?.tipoDocumentoFiscal}
@@ -73,12 +82,14 @@ export const makeTicketsArquivadosDynamicColumns = () => {
       accessorKey: "quantidadeTotalDeServicos",
       header: "Numero de serviços",
       enableColumnFilter: false,
+      enableSorting: false,
       cell: ServicosDetailsCell,
     },
     {
       accessorKey: "valorTotalDosServicos",
       header: "Valor total dos serviços",
       enableColumnFilter: false,
+      enableSorting: false,
       cell: (props) => (
         <Text fontSize="sm">
           {currency.format(
@@ -94,6 +105,7 @@ export const makeTicketsArquivadosDynamicColumns = () => {
       accessorKey: "quantidadeTotalDeAnexos",
       header: "Numero de anexos",
       enableColumnFilter: false,
+      enableSorting: false,
       cell: FilesDetailsCell,
     },
   ];
