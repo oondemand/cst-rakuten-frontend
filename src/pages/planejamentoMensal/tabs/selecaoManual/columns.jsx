@@ -84,6 +84,29 @@ export const makeServicoDynamicColumns = () => {
       },
     },
     {
+      accessorKey: "tipoDocumentoFiscal",
+      header: "Documento fiscal",
+      enableSorting: false,
+      cell: (props) => (
+        <Flex minH="8">
+          <Text alignSelf="center" fontSize="sm" truncate>
+            {props.getValue()?.toUpperCase()}
+          </Text>
+        </Flex>
+      ),
+      size: 120,
+      enableColumnFilter: true,
+      meta: {
+        filterKey: "prestador.tipo",
+        filterVariant: "select",
+        filterOptions: [
+          { label: "PJ", value: "pj" },
+          { label: "PF", value: "pf" },
+          { label: "EXT", value: "ext" },
+        ],
+      },
+    },
+    {
       accessorKey: "competencia",
       header: "Competência",
       enableSorting: false,
@@ -97,7 +120,8 @@ export const makeServicoDynamicColumns = () => {
       ),
       enableColumnFilter: true,
       meta: {
-        filterKey: "competencia.mes",
+        filterKey: "competencia",
+        filterVariant: "competencia",
       },
     },
     {

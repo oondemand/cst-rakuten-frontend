@@ -129,7 +129,7 @@ export const makeServicoDynamicColumns = () => {
       enableSorting: false,
       cell: CompetenciaCell,
       enableColumnFilter: true,
-      meta: { filterKey: "competencia.mes" },
+      meta: { filterKey: "competencia", filterVariant: "competencia" },
     },
     {
       accessorKey: "status",
@@ -143,6 +143,7 @@ export const makeServicoDynamicColumns = () => {
         filterOptions: [
           { label: "Em aberto", value: "aberto" },
           { label: "Pendente", value: "pendente" },
+          { label: "Processando", value: "processando" },
           { label: "Pago", value: "pago" },
           { label: "Pago externo", value: "pago-externo" },
         ],

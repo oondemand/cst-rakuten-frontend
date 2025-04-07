@@ -141,7 +141,14 @@ export const makePrestadorDynamicColumns = () => {
         />
       ),
       enableColumnFilter: true,
-      meta: { filterKey: "dadosBancarios.tipoConta" },
+      meta: {
+        filterKey: "dadosBancarios.tipoConta",
+        filterVariant: "select",
+        filterOptions: [
+          { label: "Poupança", value: "poupanca" },
+          { label: "Corrente", value: "corrente" },
+        ],
+      },
     },
     {
       accessorKey: "email",
