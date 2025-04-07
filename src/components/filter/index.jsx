@@ -46,7 +46,7 @@ export function Filter({ fieldMeta, onChange, value, ...props }) {
   return (
     <DebouncedInput
       {...props}
-      debounce={700}
+      debounce={1000}
       size="2xs"
       iconSize={14}
       startOffset="0px"
