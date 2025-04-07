@@ -143,6 +143,7 @@ export const makeServicoDynamicColumns = () => {
         filterOptions: [
           { label: "Em aberto", value: "aberto" },
           { label: "Pendente", value: "pendente" },
+          { label: "Processando", value: "processando" },
           { label: "Pago", value: "pago" },
           { label: "Pago externo", value: "pago-externo" },
         ],
