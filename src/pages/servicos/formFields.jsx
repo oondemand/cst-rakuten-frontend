@@ -13,14 +13,19 @@ const currencyValidation = preprocessEmptyToUndefined(
     .string()
     .transform((value) => {
       const isNegative = value.includes("-");
-      const numero = Number(
-        value
-          .replaceAll(".", "")
-          .replace("-", "")
-          .replaceAll("R$", "")
-          .replaceAll(",", ".")
-          .trim()
-      );
+      const isCurrencyString = value.includes("R$");
+
+      const numericString = isCurrencyString
+        ? value
+            .replaceAll(".", "-")
+            .replaceAll("R$", "")
+            .replaceAll(",", ".")
+            .replaceAll("-", "")
+            .trim()
+        : value.replaceAll("-", "");
+
+      const numero = Number(numericString);
+
       return isNegative ? -numero : numero;
     })
     .optional()
