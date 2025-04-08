@@ -1,8 +1,8 @@
-import { Box, Text, Flex, Badge, Spinner, Button } from "@chakra-ui/react";
+import { Box, Text, Flex, Badge } from "@chakra-ui/react";
 import React, { memo, useState } from "react";
 
 import { ptBR } from "date-fns/locale";
-import { LucideListCheck, Paperclip, RotateCw } from "lucide-react";
+import { LucideListCheck, Paperclip } from "lucide-react";
 import { Tooltip } from "../../components/ui/tooltip";
 
 import { ServicesCard } from "./servicesCard";
@@ -10,7 +10,6 @@ import { AnexosCard } from "./arquivosCard";
 import { currency } from "../../utils/currency";
 
 import { CreateTicketModal } from "../ticketModal/modalCreate";
-import { formatDateToDDMMYYYY } from "../../utils/formatting";
 import { format } from "date-fns";
 
 const BADGE_MAP = {
