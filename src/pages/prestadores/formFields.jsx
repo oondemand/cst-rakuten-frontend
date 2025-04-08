@@ -49,7 +49,7 @@ export const createDynamicFormFields = () => {
       render: DefaultField,
       validation: z.coerce
         .string()
-        .regex(/^(?:\d{5})?$/, "O sci deve ter 5 dígitos.")
+        .length(6, { message: "Código sci deve ter 6 dígitos." })
         .nullable(),
       colSpan: 1,
     },
