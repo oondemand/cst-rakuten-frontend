@@ -120,9 +120,7 @@ const _TicketCard = ({ ticket }) => {
                       ticket?.contaPagarOmie?.status_titulo?.toLowerCase()
                     ].title
                   }{" "}
-                  {formatDateToDDMMYYYY(
-                    ticket?.contaPagarOmie?.data_vencimento
-                  )}
+                  {ticket?.contaPagarOmie?.data_vencimento}
                 </Text>
                 <Badge
                   variant="surface"
