@@ -111,14 +111,12 @@ const _TicketCard = ({ ticket }) => {
               )} */}
             </Flex>
 
-            {ticket?.contaPagarOmie && (
+            {(ticket?.contaPagarOmie || ticket?.status === "concluido") && (
               <Flex alignItems="center" justifyContent="space-between">
                 <Text color="gray.400" fontSize="2xs" fontWeight="medium">
-                  {
-                    BADGE_MAP[
-                      ticket?.contaPagarOmie?.status_titulo?.toLowerCase()
-                    ].title
-                  }{" "}
+                  {BADGE_MAP[
+                    ticket?.contaPagarOmie?.status_titulo?.toLowerCase()
+                  ]?.title ?? "Concluido"}{" "}
                   {ticket?.contaPagarOmie?.data_vencimento}
                 </Text>
                 <Badge
@@ -126,11 +124,12 @@ const _TicketCard = ({ ticket }) => {
                   colorPalette={
                     BADGE_MAP[
                       ticket?.contaPagarOmie?.status_titulo?.toLowerCase()
-                    ].color
+                    ]?.color ?? ""
                   }
                   size="xs"
                 >
-                  {ticket?.contaPagarOmie?.status_titulo?.toLowerCase()}
+                  {ticket?.contaPagarOmie?.status_titulo?.toLowerCase() ??
+                    "Concluido"}
                 </Badge>
               </Flex>
             )}
