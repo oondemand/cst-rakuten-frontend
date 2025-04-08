@@ -78,14 +78,8 @@ export const makeServicoDynamicColumns = () => {
       enableColumnFilter: true,
       meta: {
         filterKey: "tipoDocumentoFiscal",
-        filterVariant: "select",
-        filterOptions: [
-          { label: "INVOICE", value: "INVOICE" },
-          { label: "RPA", value: "RPA" },
-          { label: "NF", value: "NF" },
-          { label: "RECIBO", value: "RECIBO" },
-          { label: "FATURA", value: "FATURA" },
-        ],
+        filterVariant: "selectLista",
+        cod: "tipo-documento-fiscal",
       },
     },
     {

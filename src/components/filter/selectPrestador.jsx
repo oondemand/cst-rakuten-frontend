@@ -23,7 +23,9 @@ const useDebouncedLoadOptions = (delay = 700) => {
         const options = prestadores.map((item) => ({
           ...item,
           value: item._id,
-          label: item.nome,
+          label: `${item.nome} ${item.sid ? `SID. ${item.sid}` : ""} ${`${
+            item.documento ? `DOC. ${item.documento}` : ""
+          }`}`,
         }));
 
         callback(options);

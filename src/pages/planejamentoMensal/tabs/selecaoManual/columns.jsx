@@ -97,13 +97,9 @@ export const makeServicoDynamicColumns = () => {
       size: 120,
       enableColumnFilter: true,
       meta: {
-        filterKey: "prestador.tipo",
-        filterVariant: "select",
-        filterOptions: [
-          { label: "PJ", value: "pj" },
-          { label: "PF", value: "pf" },
-          { label: "EXT", value: "ext" },
-        ],
+        filterKey: "tipoDocumentoFiscal",
+        filterVariant: "selectLista",
+        cod: "tipo-documento-fiscal",
       },
     },
     {

@@ -53,6 +53,7 @@ export const makePrestadorDynamicColumns = () => {
       header: "SCI Único",
       cell: DefaultEditableCell,
       enableColumnFilter: true,
+      enableSorting: false,
       meta: { filterKey: "sciUnico" },
     },
     {
@@ -60,6 +61,7 @@ export const makePrestadorDynamicColumns = () => {
       header: "Manager",
       cell: (props) => <SelectListaCell {...props} cod="manager" />,
       enableColumnFilter: true,
+      enableSorting: false,
       meta: { filterKey: "manager" },
     },
     {
@@ -67,6 +69,7 @@ export const makePrestadorDynamicColumns = () => {
       header: "Nome Completo",
       cell: DefaultEditableCell,
       enableColumnFilter: true,
+      enableSorting: false,
       meta: { filterKey: "nome" },
     },
     {
@@ -74,6 +77,7 @@ export const makePrestadorDynamicColumns = () => {
       header: "SID",
       cell: DefaultEditableCell,
       enableColumnFilter: true,
+      enableSorting: false,
       meta: { filterKey: "sid" },
     },
     {
@@ -90,6 +94,7 @@ export const makePrestadorDynamicColumns = () => {
         />
       ),
       enableColumnFilter: true,
+      enableSorting: false,
       meta: {
         filterKey: "tipo",
         filterVariant: "select",
@@ -105,6 +110,7 @@ export const makePrestadorDynamicColumns = () => {
       header: "Documento",
       cell: (props) => <CpfCnpjCell {...props} />,
       enableColumnFilter: true,
+      enableSorting: false,
       meta: { filterKey: "documento" },
     },
     {
@@ -112,6 +118,7 @@ export const makePrestadorDynamicColumns = () => {
       header: "Banco",
       cell: SelectBancoCell,
       enableColumnFilter: false,
+      enableSorting: false,
       meta: { filterKey: "dadosBancarios.banco" },
     },
     {
@@ -119,6 +126,7 @@ export const makePrestadorDynamicColumns = () => {
       header: "Agência",
       cell: DefaultEditableCell,
       enableColumnFilter: true,
+      enableSorting: false,
       meta: { filterKey: "dadosBancarios.agencia" },
     },
     {
@@ -126,6 +134,7 @@ export const makePrestadorDynamicColumns = () => {
       header: "Conta Bancária",
       cell: DefaultEditableCell,
       enableColumnFilter: true,
+      enableSorting: false,
       meta: { filterKey: "dadosBancarios.conta" },
     },
     {
@@ -141,6 +150,7 @@ export const makePrestadorDynamicColumns = () => {
         />
       ),
       enableColumnFilter: true,
+      enableSorting: false,
       meta: {
         filterKey: "dadosBancarios.tipoConta",
         filterVariant: "select",
@@ -155,6 +165,7 @@ export const makePrestadorDynamicColumns = () => {
       header: "E-mail",
       cell: DefaultEditableCell,
       enableColumnFilter: true,
+      enableSorting: false,
       meta: { filterKey: "email" },
     },
     {
@@ -162,6 +173,7 @@ export const makePrestadorDynamicColumns = () => {
       header: "CEP",
       cell: DefaultEditableCell,
       enableColumnFilter: true,
+      enableSorting: false,
       meta: { filterKey: "endereco.cep" },
     },
     {
@@ -169,6 +181,7 @@ export const makePrestadorDynamicColumns = () => {
       header: "Rua",
       cell: DefaultEditableCell,
       enableColumnFilter: true,
+      enableSorting: false,
       meta: { filterKey: "endereco.rua" },
     },
     {
@@ -176,6 +189,7 @@ export const makePrestadorDynamicColumns = () => {
       header: "Número",
       cell: DefaultEditableCell,
       enableColumnFilter: true,
+      enableSorting: false,
       meta: { filterKey: "endereco.numero" },
     },
     {
@@ -183,6 +197,7 @@ export const makePrestadorDynamicColumns = () => {
       header: "Complemento",
       cell: DefaultEditableCell,
       enableColumnFilter: true,
+      enableSorting: false,
       meta: { filterKey: "endereco.complemento" },
     },
     {
@@ -190,6 +205,7 @@ export const makePrestadorDynamicColumns = () => {
       header: "Cidade",
       cell: DefaultEditableCell,
       enableColumnFilter: true,
+      enableSorting: false,
       meta: { filterKey: "endereco.cidade" },
     },
     {
@@ -197,6 +213,7 @@ export const makePrestadorDynamicColumns = () => {
       header: "Estado",
       cell: SelectEstadoCell,
       enableColumnFilter: true,
+      enableSorting: false,
       meta: {
         filterKey: "endereco.estado",
         filterOptions: LISTA_ESTADOS,
@@ -216,6 +233,7 @@ export const makePrestadorDynamicColumns = () => {
         />
       ),
       enableColumnFilter: true,
+      enableSorting: false,
       meta: {
         filterKey: "endereco.pais.cod",
         filterVariant: "select",
@@ -230,6 +248,7 @@ export const makePrestadorDynamicColumns = () => {
       header: "Data de Nascimento",
       cell: DateCell,
       enableColumnFilter: true,
+      enableSorting: false,
       meta: { filterKey: "pessoaFisica.dataNascimento" },
     },
     {
@@ -237,6 +256,7 @@ export const makePrestadorDynamicColumns = () => {
       header: "PIS",
       cell: PisPasepCell,
       enableColumnFilter: true,
+      enableSorting: false,
       meta: { filterKey: "pessoaFisica.pis" },
     },
     {
@@ -244,6 +264,7 @@ export const makePrestadorDynamicColumns = () => {
       header: "Nome Fantasia",
       cell: DefaultEditableCell,
       enableColumnFilter: true,
+      enableSorting: false,
       meta: { filterKey: "pessoaJuridica.nomeFantasia" },
     },
     {
@@ -261,6 +282,7 @@ export const makePrestadorDynamicColumns = () => {
         />
       ),
       enableColumnFilter: true,
+      enableSorting: false,
       meta: {
         filterKey: "status",
         filterVariant: "select",
@@ -277,6 +299,7 @@ export const makePrestadorDynamicColumns = () => {
       header: "Criado em",
       cell: DateCell,
       enableColumnFilter: true,
+      enableSorting: false,
       meta: { filterKey: "createdAt" },
     },
     {
@@ -284,6 +307,7 @@ export const makePrestadorDynamicColumns = () => {
       header: "Atualizado em",
       cell: DateCell,
       enableColumnFilter: true,
+      enableSorting: false,
       meta: { filterKey: "updatedAt" },
     },
   ];
