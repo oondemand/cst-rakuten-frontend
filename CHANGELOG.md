@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.0.8 (2025-04-08)
+
+### Bug Fixes
+
+* update sci code validation to use regex for 6 digits ([20dba4d](https://github.com/oondemand/cst-rakuten-frontend/commit/20dba4dd7fe5b20a76c5aeb58b0a756e4d35acd2))
+
+## 2.0.7 (2025-04-08)
+
 ## 2.0.6 (2025-04-07)
 
 ## 2.0.5 (2025-04-07)
