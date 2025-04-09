@@ -5,6 +5,7 @@ import { DefaultCell } from "../../../../components/dataGrid/cells/default";
 import { DateCell } from "../../../../components/dataGrid/cells/dateCell";
 import { formatDateToDDMMYYYY } from "../../../../utils/formatting";
 import { HeaderCheckActionCell } from "../../../../components/dataGrid/actions/header-checkbox-cell";
+import { TotalSumFooterCell } from "../../../../components/dataGrid/cells/totalSumFooterCell";
 
 export const makeServicoDynamicColumns = () => {
   return [
@@ -156,6 +157,13 @@ export const makeServicoDynamicColumns = () => {
       enableSorting: false,
       meta: { filterKey: "valor" },
       enableColumnFilter: false,
+      footer: (props) => (
+        <TotalSumFooterCell
+          sum={props.table.options.data?.reduce((acc, cur) => {
+            return acc + (cur?.valor ?? 0);
+          }, 0)}
+        />
+      ),
       cell: (props) => (
         <Flex minH="8">
           <Text alignSelf="center" fontSize="sm" truncate>

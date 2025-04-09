@@ -108,7 +108,6 @@ export const DataGrid = ({
           size="xs"
           overflowY="scroll"
           colorScheme="gray"
-          stickyHeader
           {...columnSizeVars}
           width={`${table.getTotalSize()}px`}
           striped={striped}
@@ -201,6 +200,26 @@ export const DataGrid = ({
             columns={table.getVisibleLeafColumns()}
             rows={table.getRowModel().rows}
           />
+          <Table.Footer>
+            {table.getFooterGroups().map((footerGroup) => (
+              <Table.Row border="transparent" key={footerGroup.id}>
+                {footerGroup.headers.map((header) => (
+                  <Table.Cell
+                    bg="gray.100"
+                    border="transparent"
+                    key={header.id}
+                  >
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(
+                          header.column.columnDef.footer,
+                          header.getContext()
+                        )}
+                  </Table.Cell>
+                ))}
+              </Table.Row>
+            ))}
+          </Table.Footer>
         </Table.Root>
 
         <Flex mt="4" alignItems="flex-end" gap="6">
