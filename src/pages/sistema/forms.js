@@ -9,11 +9,14 @@ const dateValidation = z
   .string()
   .transform((value) => {
     if (!value) return undefined;
-    return parse(value, "dd/MM/yyyy", new Date());
+    return format(parse(value, "dd/MM/yyyy", new Date()), "yyyy/MM/dd");
   })
-  .refine((value) => (value ? isValid(value) : true), {
-    message: "Data inválida ",
-  })
+  .refine(
+    (value) => (value ? isValid(parse(value, "yyyy/MM/dd", new Date())) : true),
+    {
+      message: "Data inválida ",
+    }
+  )
   .optional();
 
 export const FORMS = [

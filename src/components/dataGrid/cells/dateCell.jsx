@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Input } from "@chakra-ui/react";
 import { withMask } from "use-mask-input";
-import { parse } from "date-fns";
+import { parse, format } from "date-fns";
 import { formatDateToDDMMYYYY } from "../../../utils/formatting";
 
 export const DateCell = ({ getValue, row, column, table, ...rest }) => {
@@ -10,7 +10,10 @@ export const DateCell = ({ getValue, row, column, table, ...rest }) => {
 
   const onBlur = async () => {
     if (value !== initialValue) {
-      const newDate = parse(value, "dd/MM/yyyy", new Date());
+      const newDate = format(
+        parse(value, "dd/MM/yyyy", new Date()),
+        "yyyy/MM/dd"
+      );
 
       try {
         await table.options.meta?.updateData({
