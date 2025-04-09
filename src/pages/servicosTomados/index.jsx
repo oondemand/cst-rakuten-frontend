@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from "react";
+import React from "react";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Navigation } from "swiper/modules";
@@ -7,7 +7,7 @@ import "swiper/css/navigation";
 
 import "../../styles/swiper.css";
 
-import { Flex, Spinner, Box, Heading, Input } from "@chakra-ui/react";
+import { Flex, Spinner, Heading } from "@chakra-ui/react";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { EtapaService } from "../../service/etapa";
 import { Etapa } from "../../components/etapaCard";
@@ -53,9 +53,13 @@ export const ServicosTomados = () => {
           const term = searchTerm?.toLowerCase()?.trim();
           return (
             ticket?.titulo?.toLowerCase()?.includes(term) ||
-            ticket?.prestador?.dadosBancarios?.cpfCnpj
+            ticket?.prestador?.documento
               ?.toLowerCase()
-              ?.includes(term)
+              ?.includes(term.replace(/[^a-zA-Z0-9]/g, "")) ||
+            ticket?.prestador?.sid
+              ?.toString()
+              ?.toLowerCase()
+              ?.includes(term.replace(/[^a-zA-Z0-9]/g, ""))
           );
         })
       : data;
@@ -77,7 +81,7 @@ export const ServicosTomados = () => {
             size="xs"
             w="sm"
             bg="white"
-            placeholder="Pesquise por nome, cpf ou cnpj..."
+            placeholder="Pesquise por nome, cpf, cnpj ou sid..."
             rounded="sm"
             _placeholder={{ color: "gray.400" }}
             placeIcon="right"

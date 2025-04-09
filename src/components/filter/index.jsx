@@ -1,6 +1,6 @@
-import { Input } from "@chakra-ui/react";
 import { DebouncedInput } from "../DebouncedInput";
 import { NativeSelectField, NativeSelectRoot } from "../ui/native-select";
+import { SelectListaFilter } from "./selectLista";
 import { SelectPrestadorFilter } from "./selectPrestador";
 
 export function Filter({ fieldMeta, onChange, value, ...props }) {
@@ -36,7 +36,25 @@ export function Filter({ fieldMeta, onChange, value, ...props }) {
     return (
       <SelectPrestadorFilter
         onChange={(e) => {
-          onChange({ [fieldMeta.filterKey]: e?._id });
+          onChange({ [fieldMeta.filterKey]: { _id: e?._id, nome: e?.nome } });
+        }}
+        value={value}
+      />
+    );
+  }
+
+  if (
+    fieldMeta.filterVariant &&
+    fieldMeta.cod &&
+    fieldMeta.filterVariant === "selectLista"
+  ) {
+    return (
+      <SelectListaFilter
+        {...props}
+        value={value}
+        cod={fieldMeta.cod}
+        onChange={(e) => {
+          onChange({ [fieldMeta.filterKey]: e.target.value });
         }}
       />
     );
@@ -45,7 +63,7 @@ export function Filter({ fieldMeta, onChange, value, ...props }) {
   return (
     <DebouncedInput
       {...props}
-      debounce={700}
+      debounce={1000}
       size="2xs"
       iconSize={14}
       startOffset="0px"

@@ -1,35 +1,65 @@
-import { useState } from "react";
+// SelectPrestadorFilter.jsx
+import { useRef } from "react";
+import { AsyncSelect } from "chakra-react-select";
 import { api } from "../../config/api";
-import { AsyncSelectAutocomplete } from "../asyncSelectAutoComplete";
 
-const fetchOptions = async (inputValue) => {
-  return await api.get(`/prestadores?searchTerm=${inputValue}`);
+const useDebouncedLoadOptions = (delay = 700) => {
+  const timeoutRef = useRef(null);
+  const abortControllerRef = useRef(null);
+
+  const debounceLoadOptions = (inputValue, callback) => {
+    clearTimeout(timeoutRef.current);
+    abortControllerRef.current?.abort();
+    abortControllerRef.current = new AbortController();
+
+    timeoutRef.current = setTimeout(async () => {
+      try {
+        const {
+          data: { prestadores },
+        } = await api.get(`/prestadores?searchTerm=${inputValue}`, {
+          signal: abortControllerRef.current.signal,
+        });
+
+        const options = prestadores.map((item) => ({
+          ...item,
+          value: item._id,
+          label: `${item.nome} ${item.sid ? `SID. ${item.sid}` : ""} ${`${
+            item.documento ? `DOC. ${item.documento}` : ""
+          }`}`,
+        }));
+
+        callback(options);
+      } catch (error) {
+        if (error.name !== "AbortError") {
+          console.error("Erro na busca de prestadores:", error);
+          callback([]);
+        }
+      }
+    }, delay);
+  };
+
+  return debounceLoadOptions;
 };
 
-const obterPrestadores = async (inputValue) => {
-  const {
-    data: { prestadores },
-  } = await fetchOptions(inputValue);
-
-  return prestadores.map((item) => {
-    return { ...item, value: item._id, label: item.nome };
-  });
-};
-
-export const SelectPrestadorFilter = ({ onChange }) => {
-  const [selectedPrestador, setSelectPrestador] = useState();
+export const SelectPrestadorFilter = ({ onChange, value }) => {
+  const loadOptions = useDebouncedLoadOptions();
 
   return (
-    <AsyncSelectAutocomplete
-      queryFn={obterPrestadores}
-      value={selectedPrestador}
+    <AsyncSelect
+      loadOptions={(inputValue, callback) => {
+        loadOptions(inputValue, callback);
+      }}
+      isClearable
+      variant="subtle"
+      placeholder="Todos"
+      value={
+        value?.nome && value?._id
+          ? { value: value._id, label: value.nome }
+          : null
+      }
       rounded="lg"
       size="xs"
-      placeholder="Todos"
-      setValue={(e) => {
-        setSelectPrestador(e);
-        onChange(e);
-      }}
+      onChange={onChange}
       chakraStyles={{
         control: (base) => ({
           ...base,
@@ -49,9 +79,7 @@ export const SelectPrestadorFilter = ({ onChange }) => {
           scrollbarWidth: "thin",
           fontWeight: "normal",
           fontSize: "sm",
-          maxHeight: "28px",
         }),
-
         loadingIndicator: (base) => ({
           ...base,
           width: "10px",

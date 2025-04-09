@@ -41,7 +41,9 @@ export const makeServicoDynamicColumns = () => {
               dataProvisaoContabil: formatDateToDDMMYYYY(
                 props.row.original?.dataProvisaoContabil
               ),
-              dataRegistro: formatDateToDDMMYYYY(props.row.original?.dataRegistro),
+              dataRegistro: formatDateToDDMMYYYY(
+                props.row.original?.dataRegistro
+              ),
               competencia: `${props.row.original.competencia.mes
                 .toString()
                 .padStart(2, "0")}/${props.row.original.competencia.ano}`,
@@ -76,14 +78,8 @@ export const makeServicoDynamicColumns = () => {
       enableColumnFilter: true,
       meta: {
         filterKey: "tipoDocumentoFiscal",
-        filterVariant: "select",
-        filterOptions: [
-          { label: "INVOICE", value: "INVOICE" },
-          { label: "RPA", value: "RPA" },
-          { label: "NF", value: "NF" },
-          { label: "RECIBO", value: "RECIBO" },
-          { label: "FATURA", value: "FATURA" },
-        ],
+        filterVariant: "selectLista",
+        cod: "tipo-documento-fiscal",
       },
     },
     {
@@ -102,7 +98,7 @@ export const makeServicoDynamicColumns = () => {
       header: "Data Provisão Contábil",
       enableSorting: false,
       cell: DateCell,
-      enableColumnFilter: false,
+      enableColumnFilter: true,
       meta: { filterKey: "dataProvisaoContabil" },
     },
     {
@@ -110,7 +106,7 @@ export const makeServicoDynamicColumns = () => {
       header: "Data Registro",
       enableSorting: false,
       cell: DateCell,
-      enableColumnFilter: false,
+      enableColumnFilter: true,
       meta: { filterKey: "dataRegistro" },
     },
     {
@@ -127,7 +123,7 @@ export const makeServicoDynamicColumns = () => {
       enableSorting: false,
       cell: CompetenciaCell,
       enableColumnFilter: true,
-      meta: { filterKey: "competencia.mes" },
+      meta: { filterKey: "competencia", filterVariant: "competencia" },
     },
     {
       accessorKey: "status",
@@ -141,6 +137,7 @@ export const makeServicoDynamicColumns = () => {
         filterOptions: [
           { label: "Em aberto", value: "aberto" },
           { label: "Pendente", value: "pendente" },
+          { label: "Processando", value: "processando" },
           { label: "Pago", value: "pago" },
           { label: "Pago externo", value: "pago-externo" },
         ],

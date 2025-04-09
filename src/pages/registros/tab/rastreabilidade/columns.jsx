@@ -21,22 +21,26 @@ export const makeTicketsArquivadosDynamicColumns = () => {
           }}
         />
       ),
-      enableColumnFilter: false,
       enableSorting: false,
+      enableColumnFilter: true,
+      meta: { filterKey: "dataHora" },
     },
     {
       accessorKey: "usuario.nome",
       header: "Usuario",
       cell: DefaultCell,
-      enableColumnFilter: false,
       enableSorting: false,
+      enableColumnFilter: true,
+      meta: { filterKey: "usuario.nome" },
     },
     {
       accessorKey: "tipoRegistroAlterado",
       header: "Tipo de registro",
       cell: DefaultCell,
       enableSorting: false,
+      enableColumnFilter: true,
       meta: {
+        filterKey: "tipoRegistroAlterado",
         filterVariant: "select",
         filterOptions: [
           { value: "usuario", label: "Usuario" },
@@ -48,22 +52,26 @@ export const makeTicketsArquivadosDynamicColumns = () => {
       accessorKey: "idRegistroAlterado",
       header: "Id",
       cell: DefaultCell,
-      enableColumnFilter: false,
       enableSorting: false,
+      enableColumnFilter: true,
+      meta: { filterKey: "idRegistroAlterado" },
     },
     {
       accessorKey: "origem",
       header: "Origem",
       cell: DefaultCell,
-      enableColumnFilter: false,
       enableSorting: false,
+      enableColumnFilter: true,
+      meta: { filterKey: "origem" },
     },
     {
       accessorKey: "acao",
       header: "Ação",
       cell: DefaultCell,
       enableSorting: false,
+      enableColumnFilter: true,
       meta: {
+        filterKey: "acao",
         filterVariant: "select",
         filterOptions: [
           { value: "adicionar", label: "Adicionar" },

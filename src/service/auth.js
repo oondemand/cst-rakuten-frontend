@@ -24,8 +24,6 @@ const esqueciMinhaSenha = async (email) => {
 };
 
 const criarNovaSenha = async (values) => {
-  console.log("VALUES ->", values);
-
   const code = localStorage.getItem("code");
   const { data } = await api.post("/auth/alterar-senha", { ...values, code });
   return data;

@@ -1,5 +1,23 @@
 # Changelog
 
+## 2.0.9 (2025-04-09)
+
+## 2.0.8 (2025-04-08)
+
+### Bug Fixes
+
+* update sci code validation to use regex for 6 digits ([20dba4d](https://github.com/oondemand/cst-rakuten-frontend/commit/20dba4dd7fe5b20a76c5aeb58b0a756e4d35acd2))
+
+## 2.0.7 (2025-04-08)
+
+## 2.0.6 (2025-04-07)
+
+## 2.0.5 (2025-04-07)
+
+## 2.0.4 (2025-04-04)
+
+## 2.0.3 (2025-04-04)
+
 ## 2.0.2 (2025-04-03)
 
 ## 2.0.1 (2025-04-03)
@@ -144,4 +162,4 @@
 
 ### Features
 
-* add Docker and Kubernetes configurations for frontend deployment ([7aacf3c](https://github.com/oondemand/cst-rakuten-segeti/commit/7aacf3c20b031764096e9446a5b672bca5aea134))
+- add Docker and Kubernetes configurations for frontend deployment ([7aacf3c](https://github.com/oondemand/cst-rakuten-frontend/commit/7aacf3c20b031764096e9446a5b672bca5aea134))

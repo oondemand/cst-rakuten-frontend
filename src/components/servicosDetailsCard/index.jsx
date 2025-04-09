@@ -1,28 +1,10 @@
 import { Box, Text, Heading, Grid } from "@chakra-ui/react";
 import { currency } from "../../utils/currency";
 
-export const ServicosCard = ({ servicos }) => {
+export const ServicosDetailsCard = ({ servicos }) => {
   return (
-    <Box width="1400px" p="4" color="gray.700">
-      <Heading
-        size="sm"
-        w="full"
-        pb="3"
-        mb="2"
-        borderBottom="1px solid"
-        borderColor="gray.200"
-      >
-        Serviços
-      </Heading>
-
-      {/* Cabeçalho completo */}
-      <Grid
-        templateColumns="repeat(13, 1fr)"
-        gap={2}
-        borderBottom="1px solid"
-        borderColor="gray.100"
-      >
-        {/* Serviço Original */}
+    <Box width="1400px" pt="2" color="gray.700">
+      <Grid templateColumns="repeat(13, 1fr)" gap={2}>
         <Text fontSize="sm" minWidth="100px">
           Competência
         </Text>
@@ -47,7 +29,6 @@ export const ServicosCard = ({ servicos }) => {
           Total Serviço
         </Text>
 
-        {/* Revisão */}
         <Text fontSize="sm" minWidth="90px">
           Rev Principal
         </Text>
@@ -69,7 +50,6 @@ export const ServicosCard = ({ servicos }) => {
           Total Revisão
         </Text>
 
-        {/* Totalização */}
         <Text fontSize="sm" minWidth="90px">
           Imposto
         </Text>

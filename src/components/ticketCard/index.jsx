@@ -1,8 +1,8 @@
-import { Box, Text, Flex, Badge, Spinner, Button } from "@chakra-ui/react";
+import { Box, Text, Flex, Badge } from "@chakra-ui/react";
 import React, { memo, useState } from "react";
 
 import { ptBR } from "date-fns/locale";
-import { LucideListCheck, Paperclip, RotateCw } from "lucide-react";
+import { LucideListCheck, Paperclip } from "lucide-react";
 import { Tooltip } from "../../components/ui/tooltip";
 
 import { ServicesCard } from "./servicesCard";
@@ -10,7 +10,6 @@ import { AnexosCard } from "./arquivosCard";
 import { currency } from "../../utils/currency";
 
 import { CreateTicketModal } from "../ticketModal/modalCreate";
-import { formatDateToDDMMYYYY } from "../../utils/formatting";
 import { format } from "date-fns";
 
 const BADGE_MAP = {
@@ -112,28 +111,25 @@ const _TicketCard = ({ ticket }) => {
               )} */}
             </Flex>
 
-            {ticket?.contaPagarOmie && (
+            {(ticket?.contaPagarOmie || ticket?.status === "concluido") && (
               <Flex alignItems="center" justifyContent="space-between">
                 <Text color="gray.400" fontSize="2xs" fontWeight="medium">
-                  {
-                    BADGE_MAP[
-                      ticket?.contaPagarOmie?.status_titulo?.toLowerCase()
-                    ].title
-                  }{" "}
-                  {formatDateToDDMMYYYY(
-                    ticket?.contaPagarOmie?.data_vencimento
-                  )}
+                  {BADGE_MAP[
+                    ticket?.contaPagarOmie?.status_titulo?.toLowerCase()
+                  ]?.title ?? "Concluido"}{" "}
+                  {ticket?.contaPagarOmie?.data_vencimento}
                 </Text>
                 <Badge
                   variant="surface"
                   colorPalette={
                     BADGE_MAP[
                       ticket?.contaPagarOmie?.status_titulo?.toLowerCase()
-                    ].color
+                    ]?.color ?? ""
                   }
                   size="xs"
                 >
-                  {ticket?.contaPagarOmie?.status_titulo?.toLowerCase()}
+                  {ticket?.contaPagarOmie?.status_titulo?.toLowerCase() ??
+                    "Concluido"}
                 </Badge>
               </Flex>
             )}

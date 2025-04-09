@@ -47,8 +47,6 @@ export const RastreabilidadeTab = () => {
   const sortingState = sortByToState(filters.sortBy);
   const columns = useMemo(() => makeTicketsArquivadosDynamicColumns({}), []);
 
-  console.log("DATA ->", data);
-
   return (
     <>
       <Box bg="white" py="6" px="4" rounded="lg" shadow="xs">

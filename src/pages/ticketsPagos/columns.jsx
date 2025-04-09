@@ -6,6 +6,9 @@ import { DefaultCell } from "../../components/dataGrid/cells/default";
 import { AnexarArquivoAoTicketAction } from "../../components/dataGrid/actions/anexarArquivoAoTicket";
 import { Text } from "@chakra-ui/react";
 import { currency } from "../../utils/currency";
+import { FilesDetailsCell } from "../../components/dataGrid/cells/filesDetailsCell";
+import { ServicosDetailsCell } from "../../components/dataGrid/cells/servicosDetailsCell";
+import { formatDateToDDMMYYYY } from "../../utils/formatting";
 
 export const makeTicketsArquivadosDynamicColumns = () => {
   return [
@@ -23,38 +26,52 @@ export const makeTicketsArquivadosDynamicColumns = () => {
     {
       accessorKey: "titulo",
       header: "Titulo",
-      enableColumnFilter: false,
       cell: DefaultCell,
+      enableColumnFilter: true,
+      enableSorting: false,
+      meta: { filterKey: "titulo" },
     },
     {
       accessorKey: "createdAt",
       header: "Criado em",
-      cell: DefaultCell,
-      enableColumnFilter: false,
+      cell: (props) => (
+        <Text fontSize="sm">
+          {formatDateToDDMMYYYY(props.row.original?.createdAt)}
+        </Text>
+      ),
       enableSorting: false,
+      enableColumnFilter: true,
+      meta: { filterKey: "createdAt" },
     },
     {
       accessorKey: "prestador.nome",
       header: "Prestador",
-      enableColumnFilter: false,
       cell: DefaultCell,
+      enableColumnFilter: true,
+      enableSorting: false,
+      meta: { filterKey: "prestador.nome" },
     },
     {
       accessorKey: "prestador.sid",
       header: "SID",
-      enableColumnFilter: false,
       cell: DefaultCell,
+      enableColumnFilter: true,
+      enableSorting: false,
+      meta: { filterKey: "prestador.sid" },
     },
     {
       accessorKey: "prestador.documento",
       header: "Documento",
-      enableColumnFilter: false,
       cell: DefaultCell,
+      enableColumnFilter: true,
+      enableSorting: false,
+      meta: { filterKey: "prestador.documento" },
     },
     {
       accessorKey: "tipoDocumento",
       header: "Tipo",
       enableColumnFilter: false,
+      enableSorting: false,
       cell: (props) => (
         <Text fontSize="sm">
           {props.row.original?.servicos?.[0]?.tipoDocumentoFiscal}
@@ -65,14 +82,14 @@ export const makeTicketsArquivadosDynamicColumns = () => {
       accessorKey: "quantidadeTotalDeServicos",
       header: "Numero de serviços",
       enableColumnFilter: false,
-      cell: (props) => (
-        <Text fontSize="sm">{props.row.original?.servicos?.length}</Text>
-      ),
+      enableSorting: false,
+      cell: ServicosDetailsCell,
     },
     {
       accessorKey: "valorTotalDosServicos",
       header: "Valor total dos serviços",
       enableColumnFilter: false,
+      enableSorting: false,
       cell: (props) => (
         <Text fontSize="sm">
           {currency.format(
@@ -88,9 +105,8 @@ export const makeTicketsArquivadosDynamicColumns = () => {
       accessorKey: "quantidadeTotalDeAnexos",
       header: "Numero de anexos",
       enableColumnFilter: false,
-      cell: (props) => (
-        <Text fontSize="sm">{props.row.original?.arquivos?.length}</Text>
-      ),
+      enableSorting: false,
+      cell: FilesDetailsCell,
     },
   ];
 };
