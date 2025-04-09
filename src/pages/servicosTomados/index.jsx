@@ -55,6 +55,10 @@ export const ServicosTomados = () => {
             ticket?.titulo?.toLowerCase()?.includes(term) ||
             ticket?.prestador?.documento
               ?.toLowerCase()
+              ?.includes(term.replace(/[^a-zA-Z0-9]/g, "")) ||
+            ticket?.prestador?.sid
+              ?.toString()
+              ?.toLowerCase()
               ?.includes(term.replace(/[^a-zA-Z0-9]/g, ""))
           );
         })
@@ -77,7 +81,7 @@ export const ServicosTomados = () => {
             size="xs"
             w="sm"
             bg="white"
-            placeholder="Pesquise por nome, cpf ou cnpj..."
+            placeholder="Pesquise por nome, cpf, cnpj ou sid..."
             rounded="sm"
             _placeholder={{ color: "gray.400" }}
             placeIcon="right"
