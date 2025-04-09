@@ -54,16 +54,18 @@ export const PrestadoresDialog = ({
     mutationFn: async ({ id, body }) =>
       await PrestadorService.atualizarPrestador({ body, id }),
     onSuccess(data) {
-      setData((prev) => ({
-        ...data?.prestador,
-        pessoaFisica: {
-          ...data?.prestador.pessoaFisica,
-          dataNascimento: formatDateToDDMMYYYY(
-            data?.prestador.pessoaFisica?.dataNascimento
-          ),
-        },
-      }));
-      queryClient.invalidateQueries(["listar-prestadores"]);
+      if (open) {
+        setData((prev) => ({
+          ...data?.prestador,
+          pessoaFisica: {
+            ...data?.prestador.pessoaFisica,
+            dataNascimento: formatDateToDDMMYYYY(
+              data?.prestador.pessoaFisica?.dataNascimento
+            ),
+          },
+        }));
+      }
+
       toaster.create({
         title: "Prestador atualizado com sucesso",
         type: "success",
@@ -82,15 +84,18 @@ export const PrestadoresDialog = ({
       await PrestadorService.criarPrestador({ body }),
 
     onSuccess(data) {
-      setData((prev) => ({
-        ...data?.prestador,
-        pessoaFisica: {
-          ...data?.prestador.pessoaFisica,
-          dataNascimento: formatDateToDDMMYYYY(
-            data?.prestador.pessoaFisica?.dataNascimento
-          ),
-        },
-      }));
+      if (open) {
+        setData((prev) => ({
+          ...data?.prestador,
+          pessoaFisica: {
+            ...data?.prestador.pessoaFisica,
+            dataNascimento: formatDateToDDMMYYYY(
+              data?.prestador.pessoaFisica?.dataNascimento
+            ),
+          },
+        }));
+      }
+
       queryClient.invalidateQueries(["listar-prestadores"]);
       toaster.create({
         title: "Prestador criado com sucesso",
@@ -139,6 +144,7 @@ export const PrestadoresDialog = ({
           size="cover"
           open={open}
           onOpenChange={(e) => {
+            queryClient.invalidateQueries(["listar-prestadores"]);
             setOpen(e.open);
             setData(defaultValues);
           }}
