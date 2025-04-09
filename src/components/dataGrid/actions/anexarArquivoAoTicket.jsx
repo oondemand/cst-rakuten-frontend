@@ -4,7 +4,6 @@ import { QueryClient, useMutation } from "@tanstack/react-query";
 import { toaster } from "../../ui/toaster";
 import { Tooltip } from "../../ui/tooltip";
 import { TicketService } from "../../../service/ticket";
-import { useConfirmation } from "../../../hooks/useConfirmation";
 import { FileUploadRoot, FileUploadTrigger } from "../../ui/file-upload";
 import { queryClient } from "../../../config/react-query";
 
