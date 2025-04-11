@@ -54,7 +54,7 @@ export const SincronizacaoTab = () => {
         </Text>
       </Box>
 
-      <Button onClick={handleSync} colorPalette="green">
+      <Button disabled={isPending} onClick={handleSync} colorPalette="green">
         <Repeat2 /> Sincronizar esteira
       </Button>
     </Flex>
