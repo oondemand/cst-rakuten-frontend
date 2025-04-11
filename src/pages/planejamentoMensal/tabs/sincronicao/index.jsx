@@ -5,6 +5,7 @@ import { useConfirmation } from "../../../../hooks/useConfirmation";
 import { toaster } from "../../../../components/ui/toaster";
 import { useMutation } from "@tanstack/react-query";
 import { PlanejamentoService } from "../../../../service/planejamento";
+import { queryClient } from "../../../../config/react-query";
 
 export const SincronizacaoTab = () => {
   const { requestConfirmation } = useConfirmation();
@@ -12,6 +13,7 @@ export const SincronizacaoTab = () => {
   const { mutateAsync: syncEsteiraMutation, isPending } = useMutation({
     mutationFn: PlanejamentoService.sincronizarEsteira,
     onSuccess: () => {
+      queryClient.invalidateQueries(["planejamento-mensal-listar-servicos"]);
       toaster.create({
         title: "A esteira foi sincronizada com sucesso!",
         type: "success",
