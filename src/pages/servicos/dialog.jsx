@@ -52,8 +52,7 @@ export const ServicosDialog = ({
     mutationFn: async ({ id, body }) =>
       await ServicoService.atualizarServico({ id, body }),
     onSuccess(data) {
-      setData((prev) => data?.servico);
-      queryClient.invalidateQueries(["listar-servicos"]);
+      if (open) setData((prev) => data?.servico);
 
       toaster.create({
         title: "Servico atualizado com sucesso",
@@ -71,9 +70,8 @@ export const ServicosDialog = ({
   const { mutateAsync: createServicoMutation } = useMutation({
     mutationFn: async ({ body }) => await ServicoService.criarServico({ body }),
     onSuccess(data) {
-      setData((prev) => data?.servico);
+      if (open) setData((prev) => data?.servico);
       queryClient.invalidateQueries(["listar-servicos"]);
-
       toaster.create({
         title: "Serviço criado com sucesso",
         type: "success",
@@ -131,8 +129,9 @@ export const ServicosDialog = ({
           size="cover"
           open={open}
           onOpenChange={(e) => {
+            queryClient.invalidateQueries(["listar-servicos"]);
+            setData((prev) => defaultValues);
             setOpen(e.open);
-            setData(defaultValues);
           }}
         >
           <DialogContent

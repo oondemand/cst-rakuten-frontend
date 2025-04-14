@@ -1,7 +1,7 @@
 import { DefaultField } from "../../components/buildForm/filds/default";
 import { DateField } from "../../components/buildForm/filds/dateField";
 import { coerce, z } from "zod";
-import { parse, isValid } from "date-fns";
+import { parse, isValid, format } from "date-fns";
 import { SelectCategoriaField } from "../../components/buildForm/filds/selectCategoriaField";
 import { SelectContaCorrenteField } from "../../components/buildForm/filds/selectContaCorrenteField";
 
@@ -9,11 +9,14 @@ const dateValidation = z
   .string()
   .transform((value) => {
     if (!value) return undefined;
-    return parse(value, "dd/MM/yyyy", new Date());
+    return format(parse(value, "dd/MM/yyyy", new Date()), "yyyy/MM/dd");
   })
-  .refine((value) => (value ? isValid(value) : true), {
-    message: "Data inválida ",
-  })
+  .refine(
+    (value) => (value ? isValid(parse(value, "yyyy/MM/dd", new Date())) : true),
+    {
+      message: "Data inválida ",
+    }
+  )
   .optional();
 
 export const FORMS = [

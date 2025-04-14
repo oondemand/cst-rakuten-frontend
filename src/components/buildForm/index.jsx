@@ -20,7 +20,7 @@ function buildNestedSchema(fields) {
       const isLast = i === parts.length - 1;
 
       if (isLast) {
-        // Apenas adiciona se validation existir
+        // Apenas adiciona se validation existi
         currentLevel[part] = field.validation;
       } else {
         if (!currentLevel[part] || currentLevel[part] instanceof z.ZodType) {
