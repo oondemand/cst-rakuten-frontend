@@ -79,7 +79,7 @@ export const ServicosList = () => {
   const { mutateAsync: updateServicoMutation } = useMutation({
     mutationFn: async ({ id, data }) => await api.patch(`servicos/${id}`, data),
     onSuccess() {
-      queryClient.refetchQueries(["listar-servicos", { filters }]);
+      queryClient.invalidateQueries(["listar-servicos", { filters }]);
       toaster.create({
         title: "Serviço atualizado com sucesso",
         type: "success",
@@ -88,6 +88,7 @@ export const ServicosList = () => {
     onError: (error) => {
       toaster.create({
         title: "Ouve um erro ao atualizar o serviço",
+        description: error?.response?.data?.message ?? "",
         type: "error",
       });
     },

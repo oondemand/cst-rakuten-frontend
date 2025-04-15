@@ -17,6 +17,7 @@ export const HeaderCheckActionCell = ({ ...props }) => {
     onError: (error) => {
       toaster.create({
         title: "Ouve um erro inesperado ao realizar operação!",
+        description: error?.response?.data?.message ?? "",
         type: "error",
       });
     },
