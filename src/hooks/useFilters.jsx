@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 
 export const useFilters = ({ key, defaultValues = {} }) => {
-  const user = JSON.parse(localStorage.getItem("usuario"))._id || "default";
+  const user = JSON.parse(localStorage.getItem("usuario"))?._id || "default";
   const STORAGE_KEY = `${user}@${key}_TANSTACK_REACT_TABLE_FILTERS`;
 
   const getFiltersFromStorage = () => {

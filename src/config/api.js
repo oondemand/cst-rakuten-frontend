@@ -19,3 +19,21 @@ api.interceptors.request.use(async (req) => {
 
   return req;
 });
+
+api.interceptors.response.use(
+  async (res) => {
+    return res;
+  },
+  (error) => {
+    if (error.response.status === 401) {
+      localStorage.removeItem("usuario");
+      localStorage.removeItem("token");
+
+      if (typeof window !== "undefined") {
+        window.location.href = "/login";
+      }
+    }
+
+    return error;
+  }
+);
