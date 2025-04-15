@@ -9,22 +9,8 @@ import { SelectEstadoField } from "../../components/buildForm/filds/selectEstado
 import { SelectBancoField } from "../../components/buildForm/filds/selectBancoField";
 import { SelectField } from "../../components/buildForm/filds/selectField";
 import { LISTA_PAISES_OMIE } from "../../constants/omie";
-import { parse, isValid } from "date-fns";
 import { PisPasepField } from "../../components/buildForm/filds/pisField";
-
-const dateValidation = z
-  .string()
-  .transform((value) => {
-    if (!value) return undefined;
-    return format(parse(value, "dd/MM/yyyy", new Date()), "yyyy/MM/dd");
-  })
-  .refine(
-    (value) => (value ? isValid(parse(value, "yyyy/MM/dd", new Date())) : true),
-    {
-      message: "Data inválida ",
-    }
-  )
-  .optional();
+import { dateValidation } from "../../utils/zodHelpers";
 
 export const createDynamicFormFields = () => {
   return [

@@ -10,10 +10,10 @@ export const DateCell = ({ getValue, row, column, table, ...rest }) => {
 
   const onBlur = async () => {
     if (value !== initialValue) {
-      const newDate = format(
-        parse(value, "dd/MM/yyyy", new Date()),
-        "yyyy/MM/dd"
-      );
+      const newDate =
+        value === ""
+          ? null
+          : format(parse(value, "dd/MM/yyyy", new Date()), "yyyy/MM/dd");
 
       try {
         await table.options.meta?.updateData({
