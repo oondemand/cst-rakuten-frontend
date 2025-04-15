@@ -79,6 +79,7 @@ export const PrestadoresList = () => {
     onError: (error) => {
       toaster.create({
         title: "Ouve um erro ao atualizar o prestador",
+        description: error?.response?.data?.message ?? "",
         type: "error",
       });
     },
