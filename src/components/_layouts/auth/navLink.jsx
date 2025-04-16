@@ -22,6 +22,10 @@ export const NavLink = ({ to, title, icon, i, ...props }) => {
       color={
         location.pathname == to ? "gray.800" : icon ? "gray.500" : "gray.500"
       }
+      data-state="open"
+      _open={{
+        animation: "fade-in 300ms ease-out",
+      }}
       {...props}
     >
       <Link to={to} viewTransition>

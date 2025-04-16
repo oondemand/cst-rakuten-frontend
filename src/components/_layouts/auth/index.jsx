@@ -208,21 +208,27 @@ export const AuthLayout = () => {
             />
           );
         })}
-        <Button
-          onClick={handleLogOut}
-          mt="2"
-          unstyled
-          display="flex"
-          gap="3"
-          textAlign="left"
-          px="4"
-          alignItems="center"
-          color="gray.700"
-          fontSize="sm"
-          cursor="pointer"
-        >
-          <LogOut color="#8528CE" size={18} /> Sair
-        </Button>
+        {user?.tipo && (
+          <Button
+            onClick={handleLogOut}
+            mt="2"
+            unstyled
+            display="flex"
+            gap="3"
+            textAlign="left"
+            px="4"
+            alignItems="center"
+            color="gray.700"
+            fontSize="sm"
+            cursor="pointer"
+            data-state="open"
+            _open={{
+              animation: "fade-in 300ms ease-out",
+            }}
+          >
+            <LogOut color="#8528CE" size={18} /> Sair
+          </Button>
+        )}
       </Flex>
 
       <Flex
