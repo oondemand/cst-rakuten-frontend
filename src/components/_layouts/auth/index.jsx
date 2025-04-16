@@ -161,9 +161,8 @@ export const AuthLayout = () => {
                   </AccordionItemTrigger>
                   <AccordionItemContent w="full">
                     {item?.subLinks.map((item, i) => (
-                      <Box w="full" pb="2">
+                      <Box key={`${item.title}-${index}`} w="full" pb="2">
                         <NavLink
-                          key={`${item.title}-${index}`}
                           to={item?.href ?? "#"}
                           icon={item.icon}
                           title={item.title}

@@ -34,6 +34,6 @@ api.interceptors.response.use(
       }
     }
 
-    return error;
+    return new Promise((_, reject) => reject(error));
   }
 );
