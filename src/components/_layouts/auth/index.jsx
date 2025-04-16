@@ -1,6 +1,6 @@
 import { Box, Button, Flex, Text, Icon } from "@chakra-ui/react";
 import { Footer } from "./footer";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { useAuth } from "../../../hooks/useAuth";
 import { Navigate } from "react-router-dom";
 
@@ -32,35 +32,42 @@ const navigationItems = [
     title: "Dashboard",
     icon: Chart,
     href: "/",
+    rules: ["admin", "tomador", "contabilidade"],
   },
   {
     title: "Central Serviços Tomados",
     icon: invertedChart,
     href: "/servicos-tomados",
+    rules: ["admin", "tomador", "contabilidade"],
   },
   {
     title: "Serviços",
     href: "/servicos/todos",
     icon: ListChecks,
+    rules: ["admin", "tomador"],
   },
   {
     title: "Planejamento",
     href: "/planejamento",
     icon: CalendarSync,
+    rules: ["admin", "tomador"],
   },
   {
     title: "Pagos",
     href: "/pagos",
     icon: TicketCheckIcon,
+    rules: ["admin", "tomador", "contabilidade"],
   },
   {
     title: "Prestadores",
     icon: Users,
     href: "/prestadores",
+    rules: ["admin", "tomador"],
   },
   {
     title: "Configurações",
     icon: Settings,
+    rules: ["admin"],
     subLinks: [
       {
         title: "Usuários",
@@ -89,6 +96,19 @@ const navigationItems = [
 export const AuthLayout = () => {
   const { user, isLoading, logout } = useAuth();
   const { requestConfirmation } = useConfirmation();
+  const location = useLocation();
+
+  const route = navigationItems.find((e) => {
+    if (e?.subLinks) {
+      return e?.subLinks?.some((e) => location.pathname === e.href);
+    }
+
+    return location.pathname === e.href;
+  });
+
+  if (user && isLoading === false && !route.rules.includes(user.tipo)) {
+    return <Navigate to="/login" />;
+  }
 
   if (!user && isLoading === false) {
     return <Navigate to="/login" replace />;
@@ -133,9 +153,11 @@ export const AuthLayout = () => {
           </Link>
         </Flex>
         {navigationItems.map((item, index) => {
-          if (item?.subLinks)
+          if (!item?.rules.includes(user?.tipo)) return;
+
+          if (item?.subLinks) {
             return (
-              <AccordionRoot collapsible>
+              <AccordionRoot key={`${item.title}-${index}`} collapsible>
                 <AccordionItem border="none">
                   <AccordionItemTrigger
                     cursor="pointer"
@@ -174,6 +196,7 @@ export const AuthLayout = () => {
                 </AccordionItem>
               </AccordionRoot>
             );
+          }
 
           return (
             <NavLink
