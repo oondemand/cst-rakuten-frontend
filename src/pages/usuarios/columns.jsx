@@ -48,8 +48,9 @@ export const makeUsuarioDynamicColumns = () => {
         <SelectAutoCompleteCell
           {...props}
           options={[
-            { label: "Central", value: "central" },
-            { label: "Administrador", value: "admin" },
+            { value: "contabilidade", label: "Contabil" },
+            { value: "tomador", label: "Tomador" },
+            { value: "admin", label: "Administrador" },
           ]}
         />
       ),
@@ -58,8 +59,9 @@ export const makeUsuarioDynamicColumns = () => {
         filterKey: "tipo",
         filterVariant: "select",
         filterOptions: [
-          { label: "Central", value: "central" },
-          { label: "Administrador", value: "admin" },
+          { value: "contabilidade", label: "Contabil" },
+          { value: "tomador", label: "Tomador" },
+          { value: "admin", label: "Administrador" },
         ],
       },
     },
