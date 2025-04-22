@@ -17,6 +17,7 @@ import { Listas } from "./pages/listas";
 import { SistemaPage } from "./pages/sistema";
 import { IntegracaoRpaPage } from "./pages/integracaoRpa";
 import { TicketsPagosPage } from "./pages/ticketsPagos";
+import { AccessDenied } from "./pages/accessDenied";
 
 export const router = createBrowserRouter([
   {
@@ -46,6 +47,7 @@ export const router = createBrowserRouter([
     children: [
       { path: "/login", element: <LoginPage /> },
       { path: "/alterar-senha", element: <AlterarSenha /> },
+      { path: "/acesso-negado", element: <AccessDenied /> },
     ],
   },
 ]);

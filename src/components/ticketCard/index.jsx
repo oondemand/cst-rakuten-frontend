@@ -11,6 +11,7 @@ import { currency } from "../../utils/currency";
 
 import { CreateTicketModal } from "../ticketModal/modalCreate";
 import { format } from "date-fns";
+import { formatDateToDDMMYYYY } from "../../utils/formatting";
 
 const BADGE_MAP = {
   pago: { color: "green", title: "Pago em" },
@@ -20,6 +21,10 @@ const BADGE_MAP = {
 
 const _TicketCard = ({ ticket }) => {
   const [open, setOpen] = useState(false);
+
+  const dataVencimento = ticket?.contaPagarOmie?.data_vencimento?.includes("-")
+    ? formatDateToDDMMYYYY(ticket?.contaPagarOmie?.data_vencimento)
+    : ticket?.contaPagarOmie?.data_vencimento;
 
   const statusColorMap = {
     "aguardando-inicio": "yellow.400",
@@ -117,7 +122,7 @@ const _TicketCard = ({ ticket }) => {
                   {BADGE_MAP[
                     ticket?.contaPagarOmie?.status_titulo?.toLowerCase()
                   ]?.title ?? "Concluido"}{" "}
-                  {ticket?.contaPagarOmie?.data_vencimento}
+                  {dataVencimento}
                 </Text>
                 <Badge
                   variant="surface"

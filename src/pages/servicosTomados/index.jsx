@@ -43,7 +43,7 @@ export const ServicosTomados = () => {
     queryKey: ["listar-tickets"],
     queryFn: async () => TicketService.listarTickets(),
     placeholderData: keepPreviousData,
-    staleTime: 1000 * 60 * 1, // 1 minuto
+    staleTime: 1000 * 30, // 30 sec
     onSuccess: (data) => setTickets(data),
   });
 

@@ -4,9 +4,9 @@ import { z } from "zod";
 import { CompetenciaField } from "../../components/buildForm/filds/competenciaField";
 import { SelectListaField } from "../../components/buildForm/filds/selectListaField";
 import { DateField } from "../../components/buildForm/filds/dateField";
-import { parse, isValid, format } from "date-fns";
 import { CurrencyField } from "../../components/buildForm/filds/currencyField";
 import { DefaultField } from "../../components/buildForm/filds/default";
+import { dateValidation } from "../../utils/zodHelpers";
 
 const currencyValidation = preprocessEmptyToUndefined(
   z.coerce
@@ -30,20 +30,6 @@ const currencyValidation = preprocessEmptyToUndefined(
     })
     .optional()
 );
-
-const dateValidation = z
-  .string()
-  .transform((value) => {
-    if (!value) return undefined;
-    return format(parse(value, "dd/MM/yyyy", new Date()), "yyyy/MM/dd");
-  })
-  .refine(
-    (value) => (value ? isValid(parse(value, "yyyy/MM/dd", new Date())) : true),
-    {
-      message: "Data inválida ",
-    }
-  )
-  .optional();
 
 export const createDynamicFormFields = () => {
   return [

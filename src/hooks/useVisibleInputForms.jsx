@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 export const useVisibleInputForm = ({ key }) => {
-  const user = JSON.parse(localStorage.getItem("usuario"))._id || "default";
+  const user = JSON.parse(localStorage.getItem("usuario"))?._id || "default";
   const STORAGE_KEY = `${user}@${key}_FORM_VISIBLE_INPUTS`;
 
   const getStatusFromStorage = () => {

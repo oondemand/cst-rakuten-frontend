@@ -62,6 +62,7 @@ export const ServicosDialog = ({
     onError: (error) => {
       toaster.create({
         title: "Ouve um erro ao atualizar o serviço",
+        description: error?.response?.data?.message ?? "",
         type: "error",
       });
     },

@@ -57,6 +57,13 @@ export const PrestadorForm = ({
     onSuccess: (data) => {
       setPrestador((prev) => data.prestador);
     },
+    onError: (error) => {
+      toaster.create({
+        title: "Ouve um erro ao criar um prestador",
+        description: error?.response?.data?.message ?? "",
+        type: "error",
+      });
+    },
   });
 
   const { mutateAsync: updatePrestadorMutation } = useMutation({
@@ -66,6 +73,7 @@ export const PrestadorForm = ({
       setPrestador((prev) => data.prestador);
       toaster.create({
         title: "Prestador atualizado com sucesso",
+        description: error?.response?.data?.message ?? "",
         type: "success",
       });
     },

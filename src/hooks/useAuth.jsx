@@ -8,23 +8,27 @@ export const AuthProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    setIsLoading(true);
     const initializeAuth = async () => {
       try {
+        setIsLoading(true);
         const token = localStorage.getItem("token");
         const localUser = localStorage.getItem("usuario");
 
-        if (token && localUser) setUser(JSON.parse(localUser));
-
-        await LoginService.validateToken();
+        if (!token && !localUser) setUser(null);
+        if (token && localUser) {
+          const response = await LoginService.validateToken();
+          localStorage.setItem("usuario", JSON.stringify(response));
+          setUser(response);
+        }
+        setIsLoading(false);
       } catch (error) {
         console.error("Erro ao inicializar a autenticação:", error);
+        setIsLoading(false);
         logout();
       }
     };
 
     initializeAuth();
-    setIsLoading(false);
   }, []);
 
   const login = (token, user) => {

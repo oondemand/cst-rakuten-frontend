@@ -20,7 +20,8 @@ export const createDynamicFormFields = () => {
       validation: z.string({ message: "Tipo é um campo obrigatório" }),
       colSpan: 1,
       options: [
-        { value: "central", label: "Central" },
+        { value: "contabilidade", label: "Contabil" },
+        { value: "tomador", label: "Tomador" },
         { value: "admin", label: "Administrador" },
       ],
     },
