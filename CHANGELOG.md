@@ -1,5 +1,7 @@
 # Changelog
 
+## [2.0.21](https://github.com/oondemand/cst-rakuten-frontend/compare/2.0.20...2.0.21) (2025-04-23)
+
 ## 2.0.20 (2025-04-22)
 
 ## 2.0.19 (2025-04-17)
