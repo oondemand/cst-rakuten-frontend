@@ -55,7 +55,8 @@ export const currencyValidation = preprocessEmptyToUndefined(
 );
 
 export const requiredCurrencyValidation = z.coerce
-  .string("Campo obrigatório")
+  .string()
+  .nonempty("Campo obrigatório")
   .transform((value) => {
     const isNegative = value.includes("-");
     const isCurrencyString = value.includes("R$");
