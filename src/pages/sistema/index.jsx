@@ -47,7 +47,7 @@ export const SistemaPage = () => {
       <Flex
         mt="4"
         p="6"
-        gap="8"
+        gap="16"
         flexWrap="wrap"
         bg="white"
         shadow="xs"
