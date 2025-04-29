@@ -12,7 +12,7 @@ export const DocumentosFiscaisFilesDetailsCell = (props) => {
 
   const arquivo = props.row.original?.arquivo;
 
-  const { mutateAsync: deleteFileMutation } = useMutation({
+  const { mutateAsync: deleteFileMutation, isPending } = useMutation({
     mutationFn: async ({ id }) =>
       await DocumentosFiscaisService.deleteFile({
         id,
@@ -112,6 +112,7 @@ export const DocumentosFiscaisFilesDetailsCell = (props) => {
                       </Button>
 
                       <Button
+                        disabled={isPending}
                         onClick={async () =>
                           await handleDeleteFileFromTicket({ id: arquivo?._id })
                         }

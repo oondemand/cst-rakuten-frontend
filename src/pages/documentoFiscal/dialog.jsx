@@ -106,7 +106,7 @@ export const DocumentosFiscaisDialog = ({
     },
   });
 
-  const { mutateAsync: uploadFileMutation } = useMutation({
+  const { mutateAsync: uploadFileMutation, isPending } = useMutation({
     mutationFn: async ({ files }) =>
       await DocumentosFiscaisService.anexarArquivo({
         id: data?._id,
@@ -258,6 +258,7 @@ export const DocumentosFiscaisDialog = ({
                   >
                     <FileUploadTrigger>
                       <Button
+                        disabled={isPending}
                         mt="4"
                         size="2xs"
                         variant="surface"
