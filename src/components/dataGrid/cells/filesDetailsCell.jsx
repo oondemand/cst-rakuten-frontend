@@ -11,7 +11,8 @@ export const FilesDetailsCell = (props) => {
   const { requestConfirmation } = useConfirmation();
 
   const { mutateAsync: deleteFileMutation } = useMutation({
-    mutationFn: async ({ id }) => await TicketService.deleteFile({ id }),
+    mutationFn: async ({ id }) =>
+      await TicketService.deleteFile({ id, ticketId: props.row.original?._id }),
     onSuccess: ({ data }) => {
       props.row.original.arquivos = props.row.original?.arquivos?.filter(
         (e) => e?._id !== data?._id
