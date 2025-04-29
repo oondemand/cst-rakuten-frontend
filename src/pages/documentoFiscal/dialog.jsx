@@ -153,17 +153,22 @@ export const DocumentosFiscaisDialog = ({
   });
 
   const onSubmit = async (values) => {
-    const competencia = values?.competencia.split("/");
+    const competencia = values?.competencia?.split("/");
     const mes = Number(competencia?.[0]) || null;
     const ano = Number(competencia?.[1]) || null;
 
     const body = {
       ...values,
       prestador: values.prestador.value,
-      competencia: {
-        mes,
-        ano,
-      },
+
+      ...(values?.competencia !== ""
+        ? {
+            competencia: {
+              mes,
+              ano,
+            },
+          }
+        : { competencia: null }),
     };
 
     if (!data) return await createDocumentoFiscalMutation({ body });

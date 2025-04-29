@@ -28,7 +28,7 @@ export const createDynamicFormFields = () => {
       accessorKey: "competencia",
       label: "Competência",
       render: CompetenciaField,
-      validation: z.string().min(7, { message: "Data inválida" }),
+      validation: z.string().optional(),
       colSpan: 1,
     },
     {
