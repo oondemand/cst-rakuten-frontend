@@ -58,6 +58,25 @@ const anexarArquivo = async ({ file, id }) => {
   return response;
 };
 
+export const importarDocumentosFiscais = async ({ files }) => {
+  const formData = new FormData();
+  for (const file of files) {
+    formData.append("file", file);
+  }
+
+  const response = await api.post(
+    "/acoes-etapas/importar-documentos-fiscais",
+    formData,
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    }
+  );
+
+  return response;
+};
+
 export const DocumentosFiscaisService = {
   listarDocumentosFiscais,
   criarDocumentoFiscal,
@@ -67,4 +86,5 @@ export const DocumentosFiscaisService = {
   atualizarStatus,
   anexarArquivo,
   deleteFile,
+  importarDocumentosFiscais,
 };

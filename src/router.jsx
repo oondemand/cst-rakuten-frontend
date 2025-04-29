@@ -19,6 +19,7 @@ import { IntegracaoRpaPage } from "./pages/integracaoRpa";
 import { TicketsPagosPage } from "./pages/ticketsPagos";
 import { AccessDenied } from "./pages/accessDenied";
 import { DocumentosFiscaisList } from "./pages/documentoFiscal";
+import { ImportDocumentosFiscaisPage } from "./pages/documentoFiscal/importacao";
 
 export const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ export const router = createBrowserRouter([
       { path: "/servicos/todos", element: <ServicosList /> },
       { path: "/documentos-fiscais", element: <DocumentosFiscaisList /> },
       { path: "/servicos/importacao", element: <ImportServicosPage /> },
+      {
+        path: "/documentos-fiscais/importacao",
+        element: <ImportDocumentosFiscaisPage />,
+      },
       { path: "/usuarios", element: <UsuariosPage /> },
       { path: "/registros", element: <RegistrosPage /> },
       { path: "/listas", element: <Listas /> },

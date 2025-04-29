@@ -170,7 +170,6 @@ export const DocumentosFiscaisList = () => {
               </Button>
               <DocumentosFiscaisDialog />
               <Button
-                disabled
                 size="sm"
                 variant="subtle"
                 fontWeight="semibold"
