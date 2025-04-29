@@ -35,6 +35,12 @@ const deletarDocumentoFiscal = async ({ id }) => {
   return data;
 };
 
+const deleteFile = async ({ id, documentoFiscalId }) => {
+  return await api.delete(
+    `/documentos-fiscais/excluir-arquivo/${documentoFiscalId}/${id}`
+  );
+};
+
 const anexarArquivo = async ({ file, id }) => {
   const formData = new FormData();
   formData.append("file", file);
@@ -60,4 +66,5 @@ export const DocumentosFiscaisService = {
   listarDocumentosFiscaisPorPrestador,
   atualizarStatus,
   anexarArquivo,
+  deleteFile,
 };

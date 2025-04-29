@@ -89,8 +89,6 @@ export const DocumentoFiscalForm = ({ ticket, onlyReading }) => {
   });
 
   const handleDeleteTicket = async ({ id }) => {
-    console.log("ID:", id);
-
     const { action } = await requestConfirmation({
       title: "Tem certeza que deseja remover esse documento fiscal?",
       description: "Essa ação não pode ser desfeita!",
@@ -110,8 +108,6 @@ export const DocumentoFiscalForm = ({ ticket, onlyReading }) => {
   };
 
   const handleDownloadFile = async ({ id }) => {
-    console.log(id);
-
     try {
       const { data } = await TicketService.getFile({ id });
 

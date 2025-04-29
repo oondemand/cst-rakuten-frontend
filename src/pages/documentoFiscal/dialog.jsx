@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Text, IconButton } from "@chakra-ui/react";
 import { CloseButton } from "../../components/ui/close-button";
 
 import { useMemo, useState, useEffect } from "react";
@@ -11,6 +11,7 @@ import { VisibilityControlDialog } from "../../components/vibilityControlDialog"
 import { useVisibleInputForm } from "../../hooks/useVisibleInputForms";
 import { toaster } from "../../components/ui/toaster";
 import { DocumentosFiscaisService } from "../../service/documentos-fiscais";
+import { TicketService } from "../../service/ticket";
 
 import {
   DialogRoot,
@@ -25,6 +26,8 @@ import {
   FileUploadRoot,
   FileUploadTrigger,
 } from "../../components/ui/file-upload";
+import { Paperclip, CircleX, Download } from "lucide-react";
+import { useConfirmation } from "../../hooks/useConfirmation";
 
 const DefaultTrigger = (props) => {
   return (
@@ -52,6 +55,7 @@ export const DocumentosFiscaisDialog = ({
 
   const [data, setData] = useState(defaultValues);
   const [open, setOpen] = useState(false);
+  const { requestConfirmation } = useConfirmation();
 
   const { mutateAsync: updateDocumentoFiscalMutation } = useMutation({
     mutationFn: async ({ id, body }) =>
@@ -109,11 +113,11 @@ export const DocumentosFiscaisDialog = ({
         file: files[0],
       }),
     onSuccess: ({ data }) => {
-      // const { nomeOriginal, mimetype, size, tipo, _id } = data?.arquivos[0];
-      // setFiles((prev) => [
-      //   ...prev,
-      //   { nomeOriginal, mimetype, size, tipo, _id },
-      // ]);
+      const { nomeOriginal, mimetype, size, tipo, _id } = data;
+      setData((prev) => ({
+        ...prev,
+        arquivo: { nomeOriginal, mimetype, size, tipo, _id },
+      }));
       toaster.create({
         title: "Arquivo anexado com sucesso",
         type: "success",
@@ -122,6 +126,27 @@ export const DocumentosFiscaisDialog = ({
     onError: () => {
       toaster.create({
         title: "Ouve um erro ao anexar arquivo!",
+        type: "error",
+      });
+    },
+  });
+
+  const { mutateAsync: deleteFileFromDocumentoFiscalMutation } = useMutation({
+    mutationFn: async ({ id }) =>
+      await DocumentosFiscaisService.deleteFile({
+        documentoFiscalId: data._id,
+        id,
+      }),
+    onSuccess: () => {
+      setData((prev) => ({ ...prev, arquivo: null }));
+      toaster.create({
+        title: "Arquivo deletado com sucesso!",
+        type: "success",
+      });
+    },
+    onError: (error) => {
+      toaster.create({
+        title: "Erro ao remover arquivo",
         type: "error",
       });
     },
@@ -146,6 +171,31 @@ export const DocumentosFiscaisDialog = ({
   };
 
   const fields = useMemo(() => createDynamicFormFields(), []);
+
+  const handleDownloadFile = async ({ id }) => {
+    try {
+      const { data } = await TicketService.getFile({ id });
+
+      if (data) {
+        const byteArray = new Uint8Array(data?.buffer?.data);
+        const blob = new Blob([byteArray], { type: data?.mimetype });
+        saveAs(blob, data?.nomeOriginal);
+      }
+    } catch (error) {
+      console.log("Error", error);
+    }
+  };
+
+  const handleRemoveFile = async ({ id }) => {
+    const { action } = await requestConfirmation({
+      title: "Tem certeza que excluir arquivo?",
+      description: "Essa operação não pode ser desfeita!",
+    });
+
+    if (action === "confirmed") {
+      await deleteFileFromDocumentoFiscalMutation({ id });
+    }
+  };
 
   useEffect(() => {
     setData(defaultValues);
@@ -212,6 +262,44 @@ export const DocumentosFiscaisDialog = ({
                       </Button>
                     </FileUploadTrigger>
                   </FileUploadRoot>
+                </Box>
+              )}
+              {data && data?.arquivo && (
+                <Box mt="8">
+                  <Text fontWeight="semibold" color="gray.700">
+                    Arquivo
+                  </Text>
+                  <Flex mt="4" gap="3" alignItems="center">
+                    <Paperclip color="purple" size={16} />
+                    <Text color="gray.600">
+                      {data?.arquivo?.nomeOriginal}{" "}
+                      {(data?.arquivo?.size / 1024).toFixed(1)} KB
+                    </Text>
+                    <Flex gap="2">
+                      <Button
+                        onClick={async () =>
+                          await handleDownloadFile({ id: data?.arquivo?._id })
+                        }
+                        color="gray.600"
+                        cursor="pointer"
+                        unstyled
+                      >
+                        <Download size={16} />
+                      </Button>
+                      <Button
+                        onClick={async () =>
+                          await handleRemoveFile({
+                            id: data?.arquivo?._id,
+                          })
+                        }
+                        color="red"
+                        cursor="pointer"
+                        unstyled
+                      >
+                        <CircleX size={16} />
+                      </Button>
+                    </Flex>
+                  </Flex>
                 </Box>
               )}
             </DialogBody>

@@ -51,7 +51,7 @@ const uploadFiles = async ({ ticketId, files }) => {
   });
 };
 
-const deleteFile = async ({ id }) => {
+const deleteFile = async ({ id, ticketId }) => {
   return await api.delete(`/tickets/arquivo/${id}`);
 };
 
