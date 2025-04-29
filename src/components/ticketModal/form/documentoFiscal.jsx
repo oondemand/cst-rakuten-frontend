@@ -110,6 +110,8 @@ export const DocumentoFiscalForm = ({ ticket, onlyReading }) => {
   };
 
   const handleDownloadFile = async ({ id }) => {
+    console.log(id);
+
     try {
       const { data } = await TicketService.getFile({ id });
 
@@ -207,93 +209,93 @@ export const DocumentoFiscalForm = ({ ticket, onlyReading }) => {
               <Table.Body>
                 {documentosFiscais?.map((servico) => {
                   return (
-                    <Tooltip
-                      key={servico._id}
-                      content="Teste"
-                      positioning={{ placement: "top" }}
-                      openDelay={1000}
-                      closeDelay={50}
-                      contentProps={{
-                        css: {
-                          "--tooltip-bg": "transparent",
-                          width: "700px !important",
-                          minWidth: "700px !important",
-                          color: "gray.600",
-                          shadow: "none",
-                        },
-                      }}
-                    >
-                      <Table.Row>
-                        <Table.Cell>
-                          <Text
-                            fontSize="xs"
-                            color="gray.400"
-                            mr="6"
-                            px="1"
-                            borderColor="gray.200"
-                            rounded="xs"
-                          >
-                            {servico?.tipoDocumentoFiscal}
-                          </Text>
-                        </Table.Cell>
-                        <Table.Cell>
-                          <Text fontSize="xs" color="gray.400">
-                            {servico?.competencia?.mes
-                              .toString()
-                              .padStart(2, "0")}
-                            /{servico?.competencia?.ano}
-                          </Text>
-                        </Table.Cell>
+                    // <Tooltip
+                    //   key={servico._id}
+                    //   content="Teste"
+                    //   positioning={{ placement: "top" }}
+                    //   openDelay={1000}
+                    //   closeDelay={50}
+                    //   contentProps={{
+                    //     css: {
+                    //       "--tooltip-bg": "transparent",
+                    //       width: "700px !important",
+                    //       minWidth: "700px !important",
+                    //       color: "gray.600",
+                    //       shadow: "none",
+                    //     },
+                    //   }}
+                    // >
+                    <Table.Row>
+                      <Table.Cell>
+                        <Text
+                          fontSize="xs"
+                          color="gray.400"
+                          mr="6"
+                          px="1"
+                          borderColor="gray.200"
+                          rounded="xs"
+                        >
+                          {servico?.tipoDocumentoFiscal}
+                        </Text>
+                      </Table.Cell>
+                      <Table.Cell>
+                        <Text fontSize="xs" color="gray.400">
+                          {servico?.competencia?.mes
+                            .toString()
+                            .padStart(2, "0")}
+                          /{servico?.competencia?.ano}
+                        </Text>
+                      </Table.Cell>
 
-                        {/* <Table.Cell>
+                      {/* <Table.Cell>
                           <Text fontSize="xs" color="gray.400">
                             {currency.format(servico?.valores?.totalServico)}
                           </Text>
                         </Table.Cell> */}
 
-                        <Table.Cell>
-                          <Text fontSize="xs" color="gray.400">
-                            {currency.format(servico?.valores?.imposto ?? 0)}
-                          </Text>
-                        </Table.Cell>
+                      <Table.Cell>
+                        <Text fontSize="xs" color="gray.400">
+                          {currency.format(servico?.valores?.imposto ?? 0)}
+                        </Text>
+                      </Table.Cell>
 
-                        <Table.Cell>
-                          <Text fontSize="xs" fontWeight="medium">
-                            {currency.format(servico?.valor)}
-                          </Text>
-                        </Table.Cell>
+                      <Table.Cell>
+                        <Text fontSize="xs" fontWeight="medium">
+                          {currency.format(servico?.valor)}
+                        </Text>
+                      </Table.Cell>
 
-                        <Table.Cell>
-                          <Flex>
-                            {servico?.arquivo && (
-                              <Button
-                                onClick={async () =>
-                                  await handleDownloadFile({
-                                    id: servico?.arquivo?._id,
-                                  })
-                                }
-                                cursor="pointer"
-                                unstyled
-                              >
-                                <Download size={16} />
-                              </Button>
-                            )}
-                            {!onlyReading && (
-                              <Button
-                                size="xs"
-                                variant="ghost"
-                                onClick={(e) => {
-                                  handleDeleteTicket({ id: servico._id });
-                                }}
-                                _hover={{ bg: "transparent" }}
-                              >
-                                <CircleX size={15} color="red" />
-                              </Button>
-                            )}
-                          </Flex>
-                        </Table.Cell>
-                      </Table.Row>
-                    </Tooltip>
+                      <Table.Cell>
+                        <Flex>
+                          {servico?.arquivo && (
+                            <Button
+                              onClick={async () => {
+                                await handleDownloadFile({
+                                  id: servico?.arquivo,
+                                });
+                              }}
+                              cursor="pointer"
+                              unstyled
+                            >
+                              <Download size={16} />
+                            </Button>
+                          )}
+                          {!onlyReading && (
+                            <Button
+                              size="xs"
+                              variant="ghost"
+                              onClick={(e) => {
+                                handleDeleteTicket({ id: servico._id });
+                              }}
+                              _hover={{ bg: "transparent" }}
+                            >
+                              <CircleX size={15} color="red" />
+                            </Button>
+                          )}
+                        </Flex>
+                      </Table.Cell>
+                    </Table.Row>
+                    // </Tooltip>
                   );
                 })}
               </Table.Body>

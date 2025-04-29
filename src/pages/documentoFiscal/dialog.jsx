@@ -21,6 +21,11 @@ import {
   DialogTitle,
 } from "../../components/ui/dialog";
 
+import {
+  FileUploadRoot,
+  FileUploadTrigger,
+} from "../../components/ui/file-upload";
+
 const DefaultTrigger = (props) => {
   return (
     <Button
@@ -97,6 +102,31 @@ export const DocumentosFiscaisDialog = ({
     },
   });
 
+  const { mutateAsync: uploadFileMutation } = useMutation({
+    mutationFn: async ({ files }) =>
+      await DocumentosFiscaisService.anexarArquivo({
+        id: data?._id,
+        file: files[0],
+      }),
+    onSuccess: ({ data }) => {
+      // const { nomeOriginal, mimetype, size, tipo, _id } = data?.arquivos[0];
+      // setFiles((prev) => [
+      //   ...prev,
+      //   { nomeOriginal, mimetype, size, tipo, _id },
+      // ]);
+      toaster.create({
+        title: "Arquivo anexado com sucesso",
+        type: "success",
+      });
+    },
+    onError: () => {
+      toaster.create({
+        title: "Ouve um erro ao anexar arquivo!",
+        type: "error",
+      });
+    },
+  });
+
   const onSubmit = async (values) => {
     const competencia = values?.competencia.split("/");
     const mes = Number(competencia?.[0]) || null;
@@ -164,7 +194,26 @@ export const DocumentosFiscaisDialog = ({
                 data={data}
                 onSubmit={onSubmit}
               />
-              <Text>Anexar arquivo</Text>
+              {data && !data?.arquivo && (
+                <Box mt="8">
+                  <FileUploadRoot
+                    onFileAccept={async (e) => {
+                      await uploadFileMutation({ files: e.files });
+                    }}
+                  >
+                    <FileUploadTrigger>
+                      <Button
+                        mt="4"
+                        size="2xs"
+                        variant="surface"
+                        color="gray.600"
+                      >
+                        Anexar arquivo
+                      </Button>
+                    </FileUploadTrigger>
+                  </FileUploadRoot>
+                </Box>
+              )}
             </DialogBody>
             <DialogCloseTrigger asChild>
               <CloseButton size="sm" />

@@ -18,8 +18,6 @@ export const FilesForm = ({ onlyReading, defaultValues, ticketId }) => {
     mutationFn: async ({ files }) =>
       await TicketService.uploadFiles({ ticketId, files }),
     onSuccess: ({ data }) => {
-      console.log("Arquivo enviado", data);
-
       const { nomeOriginal, mimetype, size, tipo, _id } = data?.arquivos[0];
       setFiles((prev) => [
         ...prev,

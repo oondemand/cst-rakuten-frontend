@@ -35,27 +35,29 @@ const deletarDocumentoFiscal = async ({ id }) => {
   return data;
 };
 
-// const importarDocumentosFiscais = async ({ files }) => {
-//   const formData = new FormData();
-//   for (const file of files) {
-//     formData.append("file", file);
-//   }
+const anexarArquivo = async ({ file, id }) => {
+  const formData = new FormData();
+  formData.append("file", file);
 
-//   const response = await api.post("acoes-etapas/importar-documentosfiscais", formData, {
-//     headers: {
-//       "Content-Type": "multipart/form-data",
-//     },
-//   });
+  const response = await api.post(
+    `/documentos-fiscais/anexar-arquivo/${id}`,
+    formData,
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    }
+  );
 
-//   return response;
-// };
+  return response;
+};
 
 export const DocumentosFiscaisService = {
   listarDocumentosFiscais,
   criarDocumentoFiscal,
   atualizarDocumentoFiscal,
-  // importarDocumentosFiscais,
   deletarDocumentoFiscal,
   listarDocumentosFiscaisPorPrestador,
   atualizarStatus,
+  anexarArquivo,
 };
