@@ -1,4 +1,4 @@
-import { Box, Button, Flex } from "@chakra-ui/react";
+import { Box, Button, Flex, Text } from "@chakra-ui/react";
 import { CloseButton } from "../../components/ui/close-button";
 
 import { useMemo, useState, useEffect } from "react";
@@ -164,6 +164,7 @@ export const DocumentosFiscaisDialog = ({
                 data={data}
                 onSubmit={onSubmit}
               />
+              <Text>Anexar arquivo</Text>
             </DialogBody>
             <DialogCloseTrigger asChild>
               <CloseButton size="sm" />

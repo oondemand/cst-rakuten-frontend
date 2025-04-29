@@ -77,6 +77,21 @@ const removerServico = async ({ servicoId }) => {
   return data;
 };
 
+const adicionarDocumentoFiscal = async ({ ticketId, documentoFiscalId }) => {
+  const { data } = await api.post(
+    `/tickets/adicionar-documento-fiscal/${ticketId}/${documentoFiscalId}`
+  );
+
+  return data;
+};
+
+const removerDocumentoFiscal = async ({ documentoFiscalId }) => {
+  const { data } = await api.post(
+    `/tickets/remover-documento-fiscal/${documentoFiscalId}`
+  );
+  return data;
+};
+
 const listarTicketsArquivados = async ({ filters }) => {
   const { data } = await api.get("tickets/arquivados", { params: filters });
   return data;
@@ -100,4 +115,6 @@ export const TicketService = {
   adicionarServico,
   listarTicketsArquivados,
   listarTicketsPagos,
+  adicionarDocumentoFiscal,
+  removerDocumentoFiscal,
 };
