@@ -77,6 +77,14 @@ export const createDynamicFormFields = () => {
       colSpan: 1,
     },
     {
+      accessorKey: "motivoRecusa",
+      label: "Motivo Recusa",
+      cod: "motivo-recusa",
+      render: SelectListaField,
+      validation: z.string().optional(),
+      colSpan: 1,
+    },
+    {
       accessorKey: "observacaoPrestador",
       label: "Observação Prestador",
       render: DefaultField,

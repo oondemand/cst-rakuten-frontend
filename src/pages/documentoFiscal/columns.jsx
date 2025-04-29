@@ -123,6 +123,18 @@ export const makeDocumentoFiscalDynamicColumns = () => {
       meta: { filterKey: "descricao" },
     },
     {
+      accessorKey: "motivoRecusa",
+      header: "Motivo recusa",
+      enableSorting: false,
+      cell: (props) => <SelectListaCell {...props} cod={"motivo-recusa"} />,
+      enableColumnFilter: true,
+      meta: {
+        filterKey: "motivoRecusa",
+        filterVariant: "selectLista",
+        cod: "motivo-recusa",
+      },
+    },
+    {
       accessorKey: "observacaoPrestador",
       header: "Observação Prestador",
       enableSorting: false,
