@@ -42,7 +42,7 @@ export const DocumentoFiscalForm = ({ ticket, onlyReading }) => {
 
   const options = data?.map((e) => ({
     label: `${e?.tipoDocumentoFiscal ?? ""} COMP. ${e?.competencia?.mes
-      .toString()
+      ?.toString()
       .padStart(2, "0")}/${e?.competencia?.ano} 
       ${currency.format(e?.valor ?? 0)}`,
 
@@ -237,7 +237,7 @@ export const DocumentoFiscalForm = ({ ticket, onlyReading }) => {
                       <Table.Cell>
                         <Text fontSize="xs" color="gray.400">
                           {servico?.competencia?.mes
-                            .toString()
+                            ?.toString()
                             .padStart(2, "0")}
                           /{servico?.competencia?.ano}
                         </Text>

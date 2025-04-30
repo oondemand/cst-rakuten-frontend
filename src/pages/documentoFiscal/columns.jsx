@@ -40,7 +40,7 @@ export const makeDocumentoFiscalDynamicColumns = () => {
                 value: props.row.original?.prestador?._id,
               },
               competencia: `${props.row.original.competencia?.mes
-                .toString()
+                ?.toString()
                 .padStart(2, "0")}/${props.row.original.competencia?.ano}`,
             }}
           />
