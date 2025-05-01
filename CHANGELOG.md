@@ -1,14 +1,6 @@
 # Changelog
 
-## 2.1.2 (2025-04-29)
-
-## 2.1.1 (2025-04-29)
-
-## 2.1.0 (2025-04-29)
-
-### Features
-
-* update competencia handling to support optional fields and improve validation ([fb7730a](https://github.com/oondemand/cst-rakuten-frontend/commit/fb7730a4b42c316d218418916acc895144f35ddd))
+## 2.0.22 (2025-04-23)
 
 ## [2.0.21](https://github.com/oondemand/cst-rakuten-frontend/compare/2.0.20...2.0.21) (2025-04-23)
 
