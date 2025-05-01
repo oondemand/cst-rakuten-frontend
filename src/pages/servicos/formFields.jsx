@@ -6,30 +6,7 @@ import { SelectListaField } from "../../components/buildForm/filds/selectListaFi
 import { DateField } from "../../components/buildForm/filds/dateField";
 import { CurrencyField } from "../../components/buildForm/filds/currencyField";
 import { DefaultField } from "../../components/buildForm/filds/default";
-import { dateValidation } from "../../utils/zodHelpers";
-
-const currencyValidation = preprocessEmptyToUndefined(
-  z.coerce
-    .string()
-    .transform((value) => {
-      const isNegative = value.includes("-");
-      const isCurrencyString = value.includes("R$");
-
-      const numericString = isCurrencyString
-        ? value
-            .replaceAll(".", "-")
-            .replaceAll("R$", "")
-            .replaceAll(",", ".")
-            .replaceAll("-", "")
-            .trim()
-        : value.replaceAll("-", "");
-
-      const numero = Number(numericString);
-
-      return isNegative ? -numero : numero;
-    })
-    .optional()
-);
+import { currencyValidation, dateValidation } from "../../utils/zodHelpers";
 
 export const createDynamicFormFields = () => {
   return [

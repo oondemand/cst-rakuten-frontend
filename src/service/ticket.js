@@ -51,7 +51,7 @@ const uploadFiles = async ({ ticketId, files }) => {
   });
 };
 
-const deleteFile = async ({ id }) => {
+const deleteFile = async ({ id, ticketId }) => {
   return await api.delete(`/tickets/arquivo/${id}`);
 };
 
@@ -74,6 +74,21 @@ const adicionarServico = async ({ ticketId, servicoId }) => {
 
 const removerServico = async ({ servicoId }) => {
   const { data } = await api.post(`/tickets/remover-servico/${servicoId}`);
+  return data;
+};
+
+const adicionarDocumentoFiscal = async ({ ticketId, documentoFiscalId }) => {
+  const { data } = await api.post(
+    `/tickets/adicionar-documento-fiscal/${ticketId}/${documentoFiscalId}`
+  );
+
+  return data;
+};
+
+const removerDocumentoFiscal = async ({ documentoFiscalId }) => {
+  const { data } = await api.post(
+    `/tickets/remover-documento-fiscal/${documentoFiscalId}`
+  );
   return data;
 };
 
@@ -100,4 +115,6 @@ export const TicketService = {
   adicionarServico,
   listarTicketsArquivados,
   listarTicketsPagos,
+  adicionarDocumentoFiscal,
+  removerDocumentoFiscal,
 };
