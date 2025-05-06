@@ -39,9 +39,9 @@ export const makeDocumentoFiscalDynamicColumns = () => {
                 label: `${props.row.original?.prestador?.nome}-${props.row.original?.prestador?.sid}-${props.row.original?.prestador?.documento}`,
                 value: props.row.original?.prestador?._id,
               },
-              competencia: `${props.row.original.competencia?.mes
-                .toString()
-                .padStart(2, "0")}/${props.row.original.competencia?.ano}`,
+              competencia: `${props.row.original?.competencia?.mes
+                ?.toString()
+                ?.padStart(2, "0")}/${props.row.original?.competencia?.ano}`,
             }}
           />
         </TableActionsCell>
