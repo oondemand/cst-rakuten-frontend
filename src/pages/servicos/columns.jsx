@@ -44,9 +44,9 @@ export const makeServicoDynamicColumns = () => {
               dataRegistro: formatDateToDDMMYYYY(
                 props.row.original?.dataRegistro
               ),
-              competencia: `${props.row.original.competencia.mes
-                .toString()
-                .padStart(2, "0")}/${props.row.original.competencia.ano}`,
+              competencia: `${props.row.original?.competencia?.mes
+                ?.toString()
+                .padStart(2, "0")}/${props.row.original?.competencia?.ano}`,
               valores: {
                 ...props.row.original?.valores,
                 revisionMonthProvision: formatDateToDDMMYYYY(
