@@ -9,6 +9,7 @@ import { currency } from "../../utils/currency";
 import { FilesDetailsCell } from "../../components/dataGrid/cells/filesDetailsCell";
 import { ServicosDetailsCell } from "../../components/dataGrid/cells/servicosDetailsCell";
 import { formatDateToDDMMYYYY } from "../../utils/formatting";
+import { DocumentosFiscaisDetailsCell } from "../../components/dataGrid/cells/documentosFiscaisDetailsCell";
 
 export const makeTicketsArquivadosDynamicColumns = () => {
   return [
@@ -107,6 +108,13 @@ export const makeTicketsArquivadosDynamicColumns = () => {
       enableColumnFilter: false,
       enableSorting: false,
       cell: FilesDetailsCell,
+    },
+    {
+      accessorKey: "quantidadeTotalDeDocumentosFiscais",
+      header: "Documentos fiscais",
+      enableColumnFilter: false,
+      enableSorting: false,
+      cell: DocumentosFiscaisDetailsCell,
     },
   ];
 };

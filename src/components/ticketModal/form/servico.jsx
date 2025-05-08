@@ -43,8 +43,8 @@ export const ServicoForm = ({ ticket, onlyReading }) => {
 
   const options = data?.map((e) => ({
     label: `${e?.tipoDocumentoFiscal ?? ""} COMP. ${e?.competencia?.mes
-      .toString()
-      .padStart(2, "0")}/${
+      ?.toString()
+      ?.padStart(2, "0")}/${
       e?.competencia?.ano
     }   REGIST. ${formatDateToDDMMYYYY(e?.dataRegistro, "dd/MM/yyyy")} ${
       e?.campanha ?? ""
@@ -237,8 +237,8 @@ export const ServicoForm = ({ ticket, onlyReading }) => {
                       <Table.Cell>
                         <Text fontSize="xs" color="gray.400">
                           {servico?.competencia?.mes
-                            .toString()
-                            .padStart(2, "0")}
+                            ?.toString()
+                            ?.padStart(2, "0")}
                           /{servico?.competencia?.ano}
                         </Text>
                       </Table.Cell>

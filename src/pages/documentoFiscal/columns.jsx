@@ -15,7 +15,6 @@ import { TableActionsCell } from "../../components/dataGrid/cells/tableActionsCe
 import { DeleteDocumentoFiscalAction } from "../../components/dataGrid/actions/deleteDocumentoFiscalButton";
 import { SelectAutoCompleteCell } from "../../components/dataGrid/cells/selectAutoComplete";
 import { DefaultEditableCell } from "../../components/dataGrid/cells/defaultEditable";
-import { DocumentosFiscaisFilesDetailsCell } from "../../components/dataGrid/cells/documentosFiscaisFilesDetailsCell";
 
 export const makeDocumentoFiscalDynamicColumns = () => {
   return [
@@ -150,13 +149,6 @@ export const makeDocumentoFiscalDynamicColumns = () => {
       cell: DefaultEditableCell,
       enableColumnFilter: true,
       meta: { filterKey: "observacaoInterna" },
-    },
-    {
-      accessorKey: "arquivo",
-      header: "Arquivo",
-      enableSorting: false,
-      cell: DocumentosFiscaisFilesDetailsCell,
-      enableColumnFilter: false,
     },
     {
       accessorKey: "statusValidacao",

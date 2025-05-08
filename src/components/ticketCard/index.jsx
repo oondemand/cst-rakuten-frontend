@@ -2,7 +2,7 @@ import { Box, Text, Flex, Badge } from "@chakra-ui/react";
 import React, { memo, useState } from "react";
 
 import { ptBR } from "date-fns/locale";
-import { LucideListCheck, Paperclip } from "lucide-react";
+import { LucideListCheck, Paperclip, File } from "lucide-react";
 import { Tooltip } from "../../components/ui/tooltip";
 
 import { ServicesCard } from "./servicesCard";
@@ -12,6 +12,7 @@ import { currency } from "../../utils/currency";
 import { CreateTicketModal } from "../ticketModal/modalCreate";
 import { format } from "date-fns";
 import { formatDateToDDMMYYYY } from "../../utils/formatting";
+import { DocumentosFiscaisCard } from "./documentosFiscaisCard";
 
 const BADGE_MAP = {
   pago: { color: "green", title: "Pago em" },
@@ -198,6 +199,35 @@ const _TicketCard = ({ ticket }) => {
                       fontSize="xs"
                     >
                       {ticket?.arquivos?.length ?? 0}
+                    </Text>
+                  </Flex>
+                </Tooltip>
+                <Tooltip
+                  showArrow
+                  content={
+                    <DocumentosFiscaisCard
+                      documentosFiscais={ticket?.documentosFiscais}
+                    />
+                  }
+                  positioning={{ placement: "bottom" }}
+                  openDelay={500}
+                  closeDelay={50}
+                  contentProps={{
+                    css: {
+                      "--tooltip-bg": "white",
+                      color: "gray.600",
+                    },
+                  }}
+                >
+                  <Flex color="gray.400" alignItems="center" gap="1px">
+                    <File size={14} />
+                    <Text
+                      h="15px"
+                      textAlign="center"
+                      fontWeight={400}
+                      fontSize="xs"
+                    >
+                      {ticket?.documentosFiscais?.length ?? 0}
                     </Text>
                   </Flex>
                 </Tooltip>
