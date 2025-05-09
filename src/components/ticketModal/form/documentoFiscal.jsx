@@ -231,7 +231,7 @@ export const DocumentoFiscalForm = ({ ticket, onlyReading }) => {
                           borderColor="gray.200"
                           rounded="xs"
                         >
-                          {servico?.tipoDocumentoFiscal}
+                          {servico?.tipoDocumentoFiscal?.toUpperCase()}
                         </Text>
                       </Table.Cell>
                       <Table.Cell>
@@ -257,7 +257,7 @@ export const DocumentoFiscalForm = ({ ticket, onlyReading }) => {
 
                       <Table.Cell>
                         <Text fontSize="xs" fontWeight="medium">
-                          {currency.format(servico?.valor)}
+                          {currency.format(servico?.valor ?? 0)}
                         </Text>
                       </Table.Cell>
 
