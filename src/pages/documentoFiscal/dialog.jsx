@@ -252,6 +252,7 @@ export const DocumentosFiscaisDialog = ({
               {data && !data?.arquivo && (
                 <Box mt="8">
                   <FileUploadRoot
+                    accept="application/pdf"
                     onFileAccept={async (e) => {
                       await uploadFileMutation({ files: e.files });
                     }}
