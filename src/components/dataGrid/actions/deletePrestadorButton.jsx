@@ -20,8 +20,10 @@ export const DeletePrestadorAction = ({ id }) => {
       });
     },
     onError: (error) => {
+      console.log(error);
       toaster.create({
         title: "Ouve um erro ao excluir prestador",
+        description: error?.response?.data?.message,
         type: "error",
       });
     },
