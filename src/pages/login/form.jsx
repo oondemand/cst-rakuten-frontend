@@ -81,7 +81,7 @@ export const LoginForm = () => {
             <Text color="brand.500">Senha</Text>
             <Input
               focusRingColor="brand.350"
-              type="senha"
+              type="password"
               placeholder="Sua senha"
               {...register("senha")}
             />
@@ -93,7 +93,7 @@ export const LoginForm = () => {
           </Box>
 
           <Button w="full" fontWeight="semibold" type="submit" bg="blue.500">
-            Submit
+            Entrar
           </Button>
         </VStack>
       </form>

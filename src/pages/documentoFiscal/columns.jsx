@@ -15,6 +15,7 @@ import { TableActionsCell } from "../../components/dataGrid/cells/tableActionsCe
 import { DeleteDocumentoFiscalAction } from "../../components/dataGrid/actions/deleteDocumentoFiscalButton";
 import { SelectAutoCompleteCell } from "../../components/dataGrid/cells/selectAutoComplete";
 import { DefaultEditableCell } from "../../components/dataGrid/cells/defaultEditable";
+import { DownloadFileAction } from "../../components/dataGrid/actions/downloadFileAction";
 
 export const makeDocumentoFiscalDynamicColumns = () => {
   return [
@@ -43,6 +44,9 @@ export const makeDocumentoFiscalDynamicColumns = () => {
                 ?.padStart(2, "0")}/${props.row.original?.competencia?.ano}`,
             }}
           />
+          {props.row.original?.arquivo && (
+            <DownloadFileAction id={props.row.original?.arquivo?._id} />
+          )}
         </TableActionsCell>
       ),
     },

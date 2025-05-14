@@ -267,7 +267,7 @@ export const DocumentoFiscalForm = ({ ticket, onlyReading }) => {
                             <Button
                               onClick={async () => {
                                 await handleDownloadFile({
-                                  id: servico?.arquivo,
+                                  id: servico?.arquivo?._id,
                                 });
                               }}
                               cursor="pointer"
