@@ -46,17 +46,31 @@ export function PlanejamentoMensal() {
           >
             <Target size={38} color="#8529CD" />
 
-            <Box>
-              <Text fontSize="lg" color="gray.500">
-                Valor provisionado
-              </Text>
-              <Text fontWeight="semibold" fontSize="3xl" color="brand.500">
-                {currency.format(
-                  (data?.find((e) => e.status === "pendente")?.total ?? 0) +
-                    (data?.find((e) => e.status === "processando")?.total ?? 0)
-                )}
-              </Text>
-            </Box>
+            <Flex alignItems="cente" gap="10">
+              <Box>
+                <Text fontSize="lg" color="gray.500">
+                  Valor provisionado
+                </Text>
+                <Text fontWeight="semibold" fontSize="3xl" color="brand.500">
+                  {currency.format(
+                    (data?.find((e) => e.status === "pendente")?.total ?? 0) +
+                      (data?.find((e) => e.status === "processando")?.total ??
+                        0)
+                  )}
+                </Text>
+              </Box>
+
+              <Box>
+                <Text fontSize="lg" color="gray.500">
+                  Valor pendente
+                </Text>
+                <Text fontWeight="semibold" fontSize="3xl" color="brand.500">
+                  {currency.format(
+                    data?.find((e) => e.status === "pendente")?.total ?? 0
+                  )}
+                </Text>
+              </Box>
+            </Flex>
           </Flex>
 
           <Flex
@@ -81,6 +95,15 @@ export function PlanejamentoMensal() {
 
             <Box>
               <Text fontSize="sm" color="gray.500">
+                Serviços pendentes
+              </Text>
+              <Text fontWeight="semibold" fontSize="3xl" color="brand.500">
+                {data?.find((e) => e.status === "pendente")?.count ?? 0}
+              </Text>
+            </Box>
+
+            <Box>
+              <Text fontSize="sm" color="gray.500">
                 Quantidade de Prestadores
               </Text>
               <Text fontWeight="semibold" fontSize="3xl" color="brand.500">
@@ -90,15 +113,6 @@ export function PlanejamentoMensal() {
                     ?.prestadoresCount ?? 0)}
               </Text>
             </Box>
-
-            {/* <Box>
-              <Text fontSize="sm" color="gray.500">
-                Valor Previsto
-              </Text>
-              <Text fontWeight="semibold" fontSize="3xl" color="brand.500">
-                -
-              </Text>
-            </Box> */}
           </Flex>
         </Flex>
       </Flex>

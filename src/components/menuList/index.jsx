@@ -8,7 +8,7 @@ export const MenuList = forwardRef(({ children, ...props }, ref) => {
   const virtualizer = useVirtualizer({
     count: children.length,
     getScrollElement: () => parentRef.current,
-    estimateSize: () => 35,
+    estimateSize: () => 30,
     overscan: 5,
   });
 
@@ -22,6 +22,8 @@ export const MenuList = forwardRef(({ children, ...props }, ref) => {
       overflowY="auto"
       scrollbarWidth="thin"
       background="white"
+      rounded="sm"
+      shadow="sm"
     >
       <Box
         height={`${virtualizer.getTotalSize()}px`}
@@ -37,9 +39,10 @@ export const MenuList = forwardRef(({ children, ...props }, ref) => {
             width="100%"
             height={`${virtualItem.size}px`}
             transform={`translateY(${virtualItem.start}px)`}
-            truncate
           >
-            {children[virtualItem.index]}
+            <Box p="1" rounded="md" bg="white" fontSize="xs">
+              {children[virtualItem.index]}
+            </Box>
           </Box>
         ))}
       </Box>

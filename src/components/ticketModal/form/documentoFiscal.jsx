@@ -42,7 +42,7 @@ export const DocumentoFiscalForm = ({ ticket, onlyReading }) => {
 
   const options = data?.map((e) => ({
     label: `${e?.tipoDocumentoFiscal ?? ""} COMP. ${e?.competencia?.mes
-      .toString()
+      ?.toString()
       .padStart(2, "0")}/${e?.competencia?.ano} 
       ${currency.format(e?.valor ?? 0)}`,
 
@@ -231,13 +231,13 @@ export const DocumentoFiscalForm = ({ ticket, onlyReading }) => {
                           borderColor="gray.200"
                           rounded="xs"
                         >
-                          {servico?.tipoDocumentoFiscal}
+                          {servico?.tipoDocumentoFiscal?.toUpperCase()}
                         </Text>
                       </Table.Cell>
                       <Table.Cell>
                         <Text fontSize="xs" color="gray.400">
                           {servico?.competencia?.mes
-                            .toString()
+                            ?.toString()
                             .padStart(2, "0")}
                           /{servico?.competencia?.ano}
                         </Text>
@@ -257,7 +257,7 @@ export const DocumentoFiscalForm = ({ ticket, onlyReading }) => {
 
                       <Table.Cell>
                         <Text fontSize="xs" fontWeight="medium">
-                          {currency.format(servico?.valor)}
+                          {currency.format(servico?.valor ?? 0)}
                         </Text>
                       </Table.Cell>
 
@@ -267,7 +267,7 @@ export const DocumentoFiscalForm = ({ ticket, onlyReading }) => {
                             <Button
                               onClick={async () => {
                                 await handleDownloadFile({
-                                  id: servico?.arquivo,
+                                  id: servico?.arquivo?._id,
                                 });
                               }}
                               cursor="pointer"
