@@ -36,9 +36,7 @@ export const createDynamicFormFields = () => {
       label: "Documento Fiscal",
       cod: "tipo-documento-fiscal",
       render: SelectListaField,
-      validation: z.string({
-        message: "Campo obrigatório",
-      }),
+      validation: z.string().optional(),
       colSpan: 1,
     },
     {
