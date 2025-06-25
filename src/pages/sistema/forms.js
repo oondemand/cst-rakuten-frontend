@@ -4,6 +4,7 @@ import { z } from "zod";
 import { SelectCategoriaField } from "../../components/buildForm/filds/selectCategoriaField";
 import { SelectContaCorrenteField } from "../../components/buildForm/filds/selectContaCorrenteField";
 import { dateValidation } from "../../utils/zodHelpers";
+import { PasswordField } from "../../components/buildForm/filds/passwordField";
 
 export const FORMS = [
   {
@@ -82,7 +83,7 @@ export const FORMS = [
       {
         accessorKey: "sendgrid_api_key",
         label: "Sendgrid api key",
-        render: DefaultField,
+        render: PasswordField,
         validation: z.string().nonempty(),
         colSpan: 2,
       },
