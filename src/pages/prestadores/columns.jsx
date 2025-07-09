@@ -17,6 +17,7 @@ import { Pencil } from "lucide-react";
 import { formatDateToDDMMYYYY } from "../../utils/formatting";
 import { EnviarConvitePrestadorAction } from "../../components/dataGrid/actions/enviarConvite";
 import { Tooltip } from "../../components/ui/tooltip";
+import { SidDisabledCell } from "../../components/dataGrid/cells/sidDisabledCell";
 
 export const makePrestadorDynamicColumns = () => {
   return [
@@ -75,7 +76,7 @@ export const makePrestadorDynamicColumns = () => {
     {
       accessorKey: "sid",
       header: "SID",
-      cell: DefaultEditableCell,
+      cell: SidDisabledCell,
       enableColumnFilter: true,
       enableSorting: false,
       meta: { filterKey: "sid" },
