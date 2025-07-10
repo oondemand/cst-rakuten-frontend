@@ -102,7 +102,6 @@ export const SelecaoManualTab = () => {
           columnSizingInfo={columnSizingInfo}
           setColumnSizing={setColumnSizing}
           setColumnSizingInfo={setColumnSizingInfo}
-          enableColumnResizing={false}
           onFilterChange={(value) => {
             setFilters((prev) => ({ ...prev, ...value, pageIndex: 0 }));
           }}

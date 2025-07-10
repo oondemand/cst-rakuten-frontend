@@ -11,3 +11,11 @@ export const formatDateToDDMMYYYY = (date) => {
 
   return `${day}/${month}/${year}`;
 };
+
+export const formatPrestadorLabel = (prestador) => {
+  if (!prestador) return "";
+
+  return `${prestador.nome} ${
+    prestador.sid ? `- SID: ${prestador.sid?.join(";")}` : ""
+  }  ${prestador.documento ? `- DOC: ${prestador.documento}` : ""}`;
+};

@@ -11,7 +11,10 @@ import { PrestadorService } from "../../../service/prestador";
 import { AsyncSelectAutocomplete } from "../../asyncSelectAutoComplete";
 
 import { VisibilityControlDialog } from "../../vibilityControlDialog";
-import { formatDateToDDMMYYYY } from "../../../utils/formatting";
+import {
+  formatDateToDDMMYYYY,
+  formatPrestadorLabel,
+} from "../../../utils/formatting";
 import { toaster } from "../../ui/toaster";
 
 export const fetchOptions = async (inputValue) => {
@@ -23,13 +26,11 @@ const obterPrestadores = async (inputValue) => {
     data: { prestadores },
   } = await fetchOptions(inputValue);
 
-  return prestadores.map((item) => {
+  return prestadores.map((prestador) => {
     return {
-      ...item,
-      value: item._id,
-      label: `${item.nome} ${item.sid ? `SID. ${item.sid}` : ""} ${`${
-        item.documento ? `DOC. ${item.documento}` : ""
-      }`}`,
+      ...prestador,
+      value: prestador._id,
+      label: formatPrestadorLabel(prestador),
     };
   });
 };

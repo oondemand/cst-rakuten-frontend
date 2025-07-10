@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { AsyncSelect } from "chakra-react-select";
 import { api } from "../../../config/api";
+import { formatPrestadorLabel } from "../../../utils/formatting";
 
 export const SelectPrestadorCell = ({
   getValue,
@@ -31,7 +32,7 @@ export const SelectPrestadorCell = ({
   };
 
   const createPrestadorOption = (prestador) => ({
-    label: `${prestador.nome} - ${prestador.sid} - ${prestador.documento}`,
+    label: formatPrestadorLabel(prestador),
     value: prestador._id,
   });
 
@@ -70,7 +71,7 @@ export const SelectPrestadorCell = ({
 
   const revertToInitialValue = () => {
     setValue({
-      label: `${initialValue?.nome} - ${initialValue?.sid} - ${initialValue?.documento}`,
+      label: formatPrestadorLabel(initialValue),
       value: initialValue?._id,
     });
   };
@@ -87,7 +88,7 @@ export const SelectPrestadorCell = ({
 
   const initializeValue = () => {
     setValue({
-      label: `${initialValue?.nome} - ${initialValue?.sid} - ${initialValue?.documento}`,
+      label: formatPrestadorLabel(initialValue),
       value: initialValue?._id,
     });
   };
