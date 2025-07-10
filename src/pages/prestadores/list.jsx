@@ -23,6 +23,7 @@ import { ExportData } from "../../components/dataGrid/exportData";
 import { formatDateToDDMMYYYY } from "../../utils/formatting";
 import { ImportDataDialog } from "../../components/dataGrid/importDataDialog";
 import { useNavigate } from "react-router-dom";
+import { LISTA_PAISES_OMIE } from "../../constants/omie";
 
 export const PrestadoresList = () => {
   const navigate = useNavigate();
@@ -61,10 +62,16 @@ export const PrestadoresList = () => {
       (e) =>
         !["dataExportacao", "createdAt", "updatedAt"].includes(e.accessorKey)
     )
-    .map((e) => ({
-      accessorKey: e.accessorKey,
-      header: e.header,
-    }));
+    .map((e) => {
+      if (e?.accessorKey === "endereco.pais.cod") {
+        return {
+          accessorKey: "endereco.pais.nome",
+          header: e.header,
+        };
+      }
+
+      return { accessorKey: e.accessorKey, header: e.header };
+    });
 
   const { mutateAsync: updatePrestadorMutation } = useMutation({
     mutationFn: async ({ id, data }) =>
