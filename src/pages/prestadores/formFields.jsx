@@ -11,6 +11,7 @@ import { SelectField } from "../../components/buildForm/filds/selectField";
 import { LISTA_PAISES_OMIE } from "../../constants/omie";
 import { PisPasepField } from "../../components/buildForm/filds/pisField";
 import { dateValidation } from "../../utils/zodHelpers";
+import { SidTagInputField } from "../../components/buildForm/filds/sidTagInputField";
 
 export const createDynamicFormFields = () => {
   return [
@@ -25,12 +26,20 @@ export const createDynamicFormFields = () => {
     },
     {
       accessorKey: "sid",
-      label: "SID",
-      render: DefaultField,
-      validation: z.coerce
-        .string()
-        .regex(/^\d{7}$/, "O SID deve ter exatamente 7 dígitos."),
-      colSpan: 1,
+      label: "SIDs",
+      render: SidTagInputField,
+      validation: z
+        .array(
+          z.coerce
+            .string()
+            .regex(/^\d{7}$/, "SID deve ter exatamente 7 dígitos"),
+          { required_error: "Adicione pelo menos um SID." }
+        )
+        .min(1, { message: "Adicione pelo menos um SID." })
+        .refine((sids) => new Set(sids).size === sids.length, {
+          message: "Existem SIDs duplicados.",
+        }),
+      colSpan: 2,
     },
     {
       accessorKey: "sciUnico",

@@ -75,7 +75,7 @@ export const makePrestadorDynamicColumns = () => {
     },
     {
       accessorKey: "sid",
-      header: "SID",
+      header: "SIDs",
       cell: SidDisabledCell,
       enableColumnFilter: true,
       enableSorting: false,
