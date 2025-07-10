@@ -13,12 +13,20 @@ export const CpfCnpjField = ({ ...props }) => {
     ext: null,
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === "Escape") {
+      event?.preventDefault();
+      props?.setValue(props?.accessorKey, props.initialValue);
+    }
+  };
+
   return (
     <Box>
       <Text fontSize="sm" color="gray.700">
         {props.label}
       </Text>
       <Input
+        onKeyDown={handleKeyDown}
         fontSize="sm"
         size="sm"
         variant="flushed"

@@ -22,6 +22,13 @@ export const SelectContaCorrenteField = ({ ...props }) => {
     [data]
   );
 
+  const handleKeyDown = (event) => {
+    if (event.key === "Escape") {
+      event?.preventDefault();
+      props?.setValue(props?.accessorKey, props.initialValue);
+    }
+  };
+
   return (
     <Box>
       <Box>
@@ -33,6 +40,7 @@ export const SelectContaCorrenteField = ({ ...props }) => {
           control={props.methods.control}
           render={({ field }) => (
             <Select
+              onKeyDown={handleKeyDown}
               fontSize="sm"
               size="sm"
               disabled={props?.disabled}

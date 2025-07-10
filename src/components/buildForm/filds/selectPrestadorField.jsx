@@ -25,7 +25,7 @@ export const SelectPrestadorField = ({ ...props }) => {
   };
 
   const createPrestadorOption = (prestador) => ({
-    label: `${prestador.nome} - ${prestador.sid} - ${prestador.documento}`,
+    label: formatPrestadorLabel(prestador),
     value: prestador._id,
   });
 
@@ -50,6 +50,13 @@ export const SelectPrestadorField = ({ ...props }) => {
     return options;
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === "Escape") {
+      event?.preventDefault();
+      props?.setValue(props?.accessorKey, props.initialValue);
+    }
+  };
+
   return (
     <Box>
       <Box>
@@ -60,6 +67,7 @@ export const SelectPrestadorField = ({ ...props }) => {
           render={({ field }) => {
             return (
               <AsyncSelect
+                onKeyDown={handleKeyDown}
                 fontSize="sm"
                 size="sm"
                 disabled={props?.disabled}

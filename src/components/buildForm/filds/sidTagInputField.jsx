@@ -32,12 +32,20 @@ export const SidTagInputField = ({ inputStyle, ...props }) => {
     props.clearErrors?.("sid");
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === "Escape") {
+      event?.preventDefault();
+      props?.setValue(props?.accessorKey, props.initialValue);
+    }
+  };
+
   return (
     <Box w="full">
       <Text fontSize="sm" color="gray.700">
         {props.label}
       </Text>
       <TagInput
+        onKeyDown={handleKeyDown}
         tags={props.watch("sid")}
         onAddTag={validarSidTag}
         onTagsChange={(e, newTags) => {

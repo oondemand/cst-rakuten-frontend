@@ -4,6 +4,13 @@ import { Controller } from "react-hook-form";
 import { createChakraStyles } from "./chakraStyles";
 
 export const SelectField = ({ options, ...props }) => {
+  const handleKeyDown = (event) => {
+    if (event.key === "Escape") {
+      event?.preventDefault();
+      props?.setValue(props?.accessorKey, props.initialValue);
+    }
+  };
+
   return (
     <Box>
       <Box>
@@ -15,6 +22,7 @@ export const SelectField = ({ options, ...props }) => {
           render={({ field }) => {
             return (
               <Select
+                onKeyDown={handleKeyDown}
                 fontSize="sm"
                 size="sm"
                 disabled={props?.disabled}

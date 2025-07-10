@@ -4,6 +4,14 @@ import { NumericFormat } from "react-number-format";
 
 export const CurrencyField = ({ ...props }) => {
   useEffect(() => {}, [props?.initialValue]);
+
+  const handleKeyDown = (event) => {
+    if (event.key === "Escape") {
+      event?.preventDefault();
+      props?.setValue(props?.accessorKey, props.initialValue);
+    }
+  };
+
   return (
     <Box>
       <Box borderBottom="1px solid" borderBottomColor="gray.200">
@@ -11,6 +19,7 @@ export const CurrencyField = ({ ...props }) => {
           {props.label}
         </Text>
         <NumericFormat
+          onKeyDown={handleKeyDown}
           disabled={props?.disabled}
           value={props?.initialValue}
           name={props.field.name}

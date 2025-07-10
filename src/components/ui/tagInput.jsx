@@ -6,6 +6,7 @@ export const TagInput = ({
   tags = [],
   onTagsChange,
   onAddTag,
+  onKeyDown,
   keys = ["Enter"],
 }) => {
   const inputRef = useRef(null);
@@ -26,6 +27,9 @@ export const TagInput = ({
   const handleKeyDown = (event) => {
     const { key, currentTarget } = event;
     const { value, selectionStart, selectionEnd } = currentTarget;
+
+    onKeyDown?.(event, value);
+    if (event.defaultPrevented) return;
 
     if (keys.includes(key) && value) {
       addTags(event, value);
