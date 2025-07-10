@@ -45,7 +45,9 @@ export const DialogCloseTrigger = React.forwardRef(function DialogCloseTrigger(
   );
 });
 
-export const DialogRoot = ChakraDialog.Root;
+export const DialogRoot = (props) => (
+  <ChakraDialog.Root closeOnEscape={false} {...props} />
+);
 export const DialogFooter = ChakraDialog.Footer;
 export const DialogHeader = ChakraDialog.Header;
 export const DialogBody = ChakraDialog.Body;
