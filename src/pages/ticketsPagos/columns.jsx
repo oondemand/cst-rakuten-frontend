@@ -10,6 +10,7 @@ import { FilesDetailsCell } from "../../components/dataGrid/cells/filesDetailsCe
 import { ServicosDetailsCell } from "../../components/dataGrid/cells/servicosDetailsCell";
 import { formatDateToDDMMYYYY } from "../../utils/formatting";
 import { DocumentosFiscaisDetailsCell } from "../../components/dataGrid/cells/documentosFiscaisDetailsCell";
+import { SidDisabledCell } from "../../components/dataGrid/cells/sidDisabledCell";
 
 export const makeTicketsArquivadosDynamicColumns = () => {
   return [
@@ -54,8 +55,8 @@ export const makeTicketsArquivadosDynamicColumns = () => {
     },
     {
       accessorKey: "prestador.sid",
-      header: "SID",
-      cell: DefaultCell,
+      header: "SIDs",
+      cell: SidDisabledCell,
       enableColumnFilter: true,
       enableSorting: false,
       meta: { filterKey: "prestador.sid" },

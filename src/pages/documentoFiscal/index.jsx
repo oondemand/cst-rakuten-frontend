@@ -115,6 +115,10 @@ export const DocumentosFiscaisList = () => {
       competencia: `${e?.competencia?.mes.toString().padStart(2, 0)}/${
         e?.competencia?.ano
       }`,
+      prestador: {
+        ...e?.prestador,
+        sid: e?.prestador?.sid?.join(";"),
+      },
     }));
   };
 

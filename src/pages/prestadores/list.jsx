@@ -118,6 +118,7 @@ export const PrestadoresList = () => {
         ...e.pessoaFisica,
         dataNascimento: formatDateToDDMMYYYY(e?.pessoaFisica?.dataNascimento),
       },
+      sid: e?.sid?.join(";"),
     }));
   };
 
