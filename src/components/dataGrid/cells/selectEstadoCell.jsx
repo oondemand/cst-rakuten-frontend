@@ -36,6 +36,17 @@ export const SelectEstadoCell = ({ getValue, row, column, table, ...rest }) => {
     }
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === "Escape") {
+      event.preventDefault();
+      const value = options?.find(
+        (e) => e?.value?.toString() === initialValue?.toString()
+      );
+
+      setValue(value);
+    }
+  };
+
   useEffect(() => {
     const value = options?.find(
       (e) => e?.value?.toString() === initialValue?.toString()
@@ -45,6 +56,7 @@ export const SelectEstadoCell = ({ getValue, row, column, table, ...rest }) => {
   }, [initialValue, data]);
   return (
     <SelectAutocomplete
+      onKeyDown={handleKeyDown}
       placeholder={value}
       onBlur={onBlur}
       value={value}

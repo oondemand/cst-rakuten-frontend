@@ -29,12 +29,20 @@ export const CompetenciaCell = ({ getValue, row, column, table, ...rest }) => {
     }
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === "Escape") {
+      event.preventDefault();
+      setValue(formatValue ? formatValue : "");
+    }
+  };
+
   useEffect(() => {
     setValue(formatValue ? formatValue : "");
   }, [formatValue]);
 
   return (
     <Input
+      onKeyDown={handleKeyDown}
       truncate
       variant="subtle"
       display="flex"

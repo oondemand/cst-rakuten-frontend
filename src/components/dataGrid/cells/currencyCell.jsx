@@ -23,12 +23,20 @@ export const CurrencyCell = ({ getValue, row, column, table, ...props }) => {
     }
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === "Escape") {
+      event.preventDefault();
+      setValue(initialValue ? initialValue : "");
+    }
+  };
+
   useEffect(() => {
     setValue(initialValue ? initialValue : "");
   }, [initialValue]);
 
   return (
     <NumericFormat
+      onKeyDown={handleKeyDown}
       width="100%"
       thousandSeparator="."
       decimalSeparator=","

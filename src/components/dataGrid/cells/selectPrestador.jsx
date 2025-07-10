@@ -69,6 +69,13 @@ export const SelectPrestadorCell = ({
     }
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === "Escape") {
+      event.preventDefault();
+      initializeValue();
+    }
+  };
+
   const revertToInitialValue = () => {
     setValue({
       label: formatPrestadorLabel(initialValue),
@@ -99,6 +106,7 @@ export const SelectPrestadorCell = ({
   return (
     <AsyncSelect
       {...rest}
+      onKeyDown={handleKeyDown}
       defaultInputValue={value}
       isClearable={true}
       variant="subtle"

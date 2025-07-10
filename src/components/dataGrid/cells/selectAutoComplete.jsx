@@ -9,12 +9,14 @@ export const SelectAutoCompleteCell = ({
   options,
   ...rest
 }) => {
-  const initialValue = getValue();
+  const initialValue = options.find(
+    (e) => e?.value?.toString() === getValue()?.toString()
+  );
 
   const [value, setValue] = useState("");
 
   const onBlur = async () => {
-    if (value && value !== options.find((e) => e?.value === initialValue)) {
+    if (value && value !== initialValue) {
       try {
         await table.options.meta?.updateData({
           prestadorId: row.original._id,
@@ -27,14 +29,19 @@ export const SelectAutoCompleteCell = ({
     }
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === "Escape") {
+      event.preventDefault();
+      setValue(initialValue);
+    }
+  };
+
   useEffect(() => {
-    const value = options.find(
-      (e) => e?.value?.toString() === initialValue?.toString()
-    );
-    setValue(value);
+    setValue(initialValue);
   }, [initialValue]);
   return (
     <SelectAutocomplete
+      onKeyDown={handleKeyDown}
       placeholder={value}
       onBlur={onBlur}
       value={value}

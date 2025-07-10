@@ -64,11 +64,19 @@ export const SelectListaCell = ({
     setValue(initialOption);
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === "Escape") {
+      event.preventDefault();
+      initializeValue();
+    }
+  };
+
   useEffect(() => {
     initializeValue();
   }, [initialValue, lista]);
   return (
     <SelectAutocomplete
+      onKeyDown={handleKeyDown}
       placeholder={value}
       onBlur={handleBlur}
       value={value}

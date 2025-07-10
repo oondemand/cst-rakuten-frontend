@@ -19,12 +19,20 @@ export const DefaultEditableCell = ({ getValue, row, column, table }) => {
     }
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === "Escape") {
+      event.preventDefault();
+      setValue(initialValue ? initialValue : "");
+    }
+  };
+
   useEffect(() => {
     setValue(initialValue ? initialValue : "");
   }, [initialValue]);
 
   return (
     <Input
+      onKeyDown={handleKeyDown}
       truncate
       variant="subtle"
       display="flex"
