@@ -4,6 +4,7 @@ import { api } from "../../../config/api";
 import { Controller } from "react-hook-form";
 import { AsyncSelect } from "chakra-react-select";
 import { createChakraStyles } from "./chakraStyles";
+import { formatPrestadorLabel } from "../../../utils/formatting";
 
 export const SelectPrestadorField = ({ ...props }) => {
   const timeoutRef = useRef(null);
