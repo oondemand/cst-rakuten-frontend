@@ -59,7 +59,12 @@ export const PrestadoresList = () => {
   const modeloDeExportacao = columns
     .filter(
       (e) =>
-        !["dataExportacao", "createdAt", "updatedAt"].includes(e.accessorKey)
+        ![
+          "dataExportacao",
+          "createdAt",
+          "updatedAt",
+          "codigo_cliente_omie",
+        ].includes(e.accessorKey)
     )
     .map((e) => ({
       accessorKey: e.accessorKey,

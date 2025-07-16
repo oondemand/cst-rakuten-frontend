@@ -5,6 +5,7 @@ import { SelectAutoCompleteCell } from "../../components/dataGrid/cells/selectAu
 import { DefaultEditableCell } from "../../components/dataGrid/cells/defaultEditable";
 import { SelectListaCell } from "../../components/dataGrid/cells/selectLista";
 import { DateCell } from "../../components/dataGrid/cells/dateCell";
+import { DefaultCell } from "../../components/dataGrid/cells/default";
 import { PisPasepCell } from "../../components/dataGrid/cells/pisPasepCell";
 import { LISTA_ESTADOS, LISTA_PAISES_OMIE } from "../../constants/omie";
 import { SelectBancoCell } from "../../components/dataGrid/cells/selectBancoCell";
@@ -47,6 +48,14 @@ export const makePrestadorDynamicColumns = () => {
           <EnviarConvitePrestadorAction prestador={props.row.original} />
         </TableActionsCell>
       ),
+    },
+    {
+      accessorKey: "codigo_cliente_omie",
+      header: "Código cliente omie",
+      cell: DefaultCell,
+      enableSorting: false,
+      enableSorting: false,
+      meta: { filterKey: "codigo_cliente_omie" },
     },
     {
       accessorKey: "sciUnico",
