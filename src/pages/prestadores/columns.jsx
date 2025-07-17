@@ -49,14 +49,7 @@ export const makePrestadorDynamicColumns = () => {
         </TableActionsCell>
       ),
     },
-    {
-      accessorKey: "codigo_cliente_omie",
-      header: "Código cliente omie",
-      cell: DefaultCell,
-      enableSorting: false,
-      enableSorting: false,
-      meta: { filterKey: "codigo_cliente_omie" },
-    },
+
     {
       accessorKey: "sciUnico",
       header: "SCI Único",
@@ -302,6 +295,13 @@ export const makePrestadorDynamicColumns = () => {
           { label: "Arquivado", value: "arquivado" },
         ],
       },
+    },
+    {
+      accessorKey: "codigo_cliente_omie",
+      header: "Código cliente omie",
+      cell: DefaultCell,
+      enableSorting: false,
+      meta: { filterKey: "codigo_cliente_omie" },
     },
     {
       accessorKey: "createdAt",
