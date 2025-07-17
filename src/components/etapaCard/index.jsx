@@ -1,21 +1,11 @@
-import React, { memo, useState } from "react";
-import { Box, Flex, Heading, Separator, Text, Button } from "@chakra-ui/react";
-import { TicketCard } from "../ticketCard";
+import React, { memo } from "react";
+import { Box, Flex, Heading } from "@chakra-ui/react";
 
 import { useRef, useMemo } from "react";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import "./custom-scrollbar.css";
 
-import { SquarePlus } from "lucide-react";
-import { CreateTicketModal } from "../ticketModal/modalCreate";
-import { IntegracaoRpaDialog } from "../integracaoRpaDialog";
-import { Tooltip } from "../ui/tooltip";
-import { Link } from "react-router-dom";
-import { ArrowUpDown } from "lucide-react";
-
-const _Etapa = ({ etapa, tickets }) => {
-  const [open, setOpen] = useState(false);
-
+const _Etapa = ({ etapa, tickets, action, card }) => {
   const etapaTickets = useMemo(
     () => tickets.filter((ticket) => ticket.etapa === etapa.codigo),
     [tickets, etapa.codigo]
@@ -41,58 +31,7 @@ const _Etapa = ({ etapa, tickets }) => {
           <Heading color="gray.700" fontSize="14px">
             {etapa.nome}
           </Heading>
-          {etapa.codigo === "requisicao" && (
-            <Tooltip
-              content="Criar ticket"
-              positioning={{ placement: "top" }}
-              openDelay={700}
-              closeDelay={50}
-              contentProps={{
-                css: {
-                  "--tooltip-bg": "white",
-                  color: "gray.600",
-                },
-              }}
-            >
-              <Text
-                p="1"
-                rounded="full"
-                _hover={{ bg: "gray.200" }}
-                onClick={() => setOpen(true)}
-                color="brand.500"
-                cursor="pointer"
-              >
-                <SquarePlus size={20} />
-              </Text>
-            </Tooltip>
-          )}
-          {/* {etapa?.codigo === "geracao-rpa" && <IntegracaoRpaDialog />} */}
-          {etapa?.codigo === "geracao-rpa" && (
-            <Tooltip
-              content="Integração RPA"
-              positioning={{ placement: "top" }}
-              openDelay={700}
-              closeDelay={50}
-              contentProps={{
-                css: {
-                  "--tooltip-bg": "white",
-                  color: "gray.600",
-                },
-              }}
-            >
-              <Link to="/integracao-rpa" viewTransition>
-                <Text
-                  p="1"
-                  rounded="full"
-                  _hover={{ bg: "gray.200" }}
-                  color="brand.500"
-                  cursor="pointer"
-                >
-                  <ArrowUpDown size={20} />
-                </Text>
-              </Link>
-            </Tooltip>
-          )}
+          {action && React.createElement(action, { etapa }, null)}
         </Flex>
       </Box>
 
@@ -129,17 +68,21 @@ const _Etapa = ({ etapa, tickets }) => {
                     textDecoration: "none",
                   }}
                 >
-                  <TicketCard
-                    index={virtualItem.index}
-                    ticket={etapaTickets[virtualItem.index]}
-                  />
+                  {card &&
+                    React.createElement(
+                      card,
+                      {
+                        index: virtualItem.index,
+                        ticket: etapaTickets[virtualItem.index],
+                      },
+                      null
+                    )}
                 </Box>
               );
             })}
           </Box>
         </Box>
       )}
-      {open && <CreateTicketModal open={open} setOpen={setOpen} />}
     </Box>
   );
 };

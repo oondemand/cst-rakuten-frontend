@@ -15,6 +15,8 @@ import { TicketService } from "../../service/ticket";
 import { Filter } from "lucide-react";
 import { DebouncedInput } from "../../components/DebouncedInput";
 import { useStateWithStorage } from "../../hooks/useStateStorage";
+import { TicketCard } from "../../components/ticketCard";
+import { EtapaActions } from "./etapaActions";
 
 const etapaIntegracaoOmie = {
   nome: "Financeiro",
@@ -113,11 +115,21 @@ export const ServicosTomados = () => {
                   key={etapa._id}
                   style={{ minWidth: "250px", maxWidth: "250px" }}
                 >
-                  <Etapa etapa={etapa} tickets={filteredTickets} />
+                  <Etapa
+                    etapa={etapa}
+                    tickets={filteredTickets}
+                    card={TicketCard}
+                    action={EtapaActions}
+                  />
                 </SwiperSlide>
               ))}
               <SwiperSlide style={{ minWidth: "250px", maxWidth: "250px" }}>
-                <Etapa etapa={etapaIntegracaoOmie} tickets={filteredTickets} />
+                <Etapa
+                  etapa={etapaIntegracaoOmie}
+                  tickets={filteredTickets}
+                  card={TicketCard}
+                  action={EtapaActions}
+                />
               </SwiperSlide>
             </Swiper>
           )}
