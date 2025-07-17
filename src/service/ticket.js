@@ -52,7 +52,7 @@ const uploadFiles = async ({ ticketId, files }) => {
 };
 
 const deleteFile = async ({ id, ticketId }) => {
-  return await api.delete(`/tickets/arquivo/${id}`);
+  return await api.delete(`/tickets/arquivo/${ticketId}/${id}`);
 };
 
 const getFile = async ({ id }) => {

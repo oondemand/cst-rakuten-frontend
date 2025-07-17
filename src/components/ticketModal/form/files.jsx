@@ -37,7 +37,8 @@ export const FilesForm = ({ onlyReading, defaultValues, ticketId }) => {
   });
 
   const { mutateAsync: deleteFileMutation } = useMutation({
-    mutationFn: async ({ id }) => await TicketService.deleteFile({ id }),
+    mutationFn: async ({ id }) =>
+      await TicketService.deleteFile({ id, ticketId }),
     onSuccess: ({ data }) => {
       const filteredFiles = files.filter((e) => e?._id !== data?._id);
       setFiles(filteredFiles);
