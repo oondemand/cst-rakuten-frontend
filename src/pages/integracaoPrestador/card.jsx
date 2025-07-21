@@ -140,7 +140,7 @@ export const _Card = ({ ticket }) => {
         <TicketDetailsModal
           onlyReading={true}
           open={open}
-          defaultValues={ticket}
+          ticket={ticket}
           setOpen={setOpen}
         />
       )}

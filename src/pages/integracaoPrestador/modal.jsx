@@ -6,6 +6,8 @@ import {
   Input,
   Text,
   Box,
+  Button,
+  Badge,
 } from "@chakra-ui/react";
 
 import {
@@ -22,12 +24,21 @@ import { Oondemand } from "../../components/svg/oondemand";
 import { PrestadorForm } from "./form/prestador";
 import { TicketActions } from "./actions";
 
-export const TicketDetailsModal = ({
-  open,
-  setOpen,
-  defaultValues,
-  onlyReading,
-}) => {
+import {
+  AccordionItem,
+  AccordionItemContent,
+  AccordionItemTrigger,
+  AccordionRoot,
+} from "../../components/ui/accordion";
+
+import { JsonView, allExpanded, collapseAllNested } from "react-json-view-lite";
+import "react-json-view-lite/dist/index.css";
+
+const customTheme = {};
+
+export const TicketDetailsModal = ({ open, setOpen, ticket, onlyReading }) => {
+  console.log("Ticket", ticket);
+
   return (
     <DialogRoot
       size="cover"
@@ -77,12 +88,12 @@ export const TicketDetailsModal = ({
               variant="subtle"
               size="sm"
               px="0"
-              defaultValue={`Prestador > Omie : ${defaultValues?.prestador?.nome}`}
+              defaultValue={ticket?.prestador?.titulo}
               disabled={onlyReading}
             />
           </Flex>
           <PrestadorForm
-            prestador={defaultValues?.prestador}
+            prestador={ticket?.prestador}
             onlyReading={onlyReading}
           />
           <Grid mt="4" templateColumns="repeat(4, 1fr)" gap="4">
@@ -100,11 +111,128 @@ export const TicketDetailsModal = ({
                 borderBottom="2px solid"
                 borderColor="gray.100"
               />
+              <Box mt="8">
+                {ticket?.erros &&
+                  ticket?.erros?.length > 0 &&
+                  ticket?.erros?.map((item, index) => (
+                    <AccordionRoot key={`$-${index}`} collapsible>
+                      <AccordionItem mb="2">
+                        <AccordionItemTrigger cursor="pointer" border="none">
+                          <Flex alignItems="center" gap="2">
+                            <Text
+                              fontSize="sm"
+                              color="gray.500"
+                              fontWeight="semibold"
+                            >
+                              Tentativa {index + 1}
+                            </Text>
+                            <Badge colorPalette="red">Error</Badge>
+                          </Flex>
+                        </AccordionItemTrigger>
+                        <AccordionItemContent w="full">
+                          <Box bg="gray.50" p="4" rounded="md">
+                            <Text fontSize="sm" color="gray.600" mb="2">
+                              Requisição:
+                            </Text>
+                            <Box
+                              p="2"
+                              bg="white"
+                              rounded="md"
+                              fontWeight="normal"
+                            >
+                              <JsonView
+                                container={{ backgroundColor: "red" }}
+                                data={ticket?.payload}
+                                shouldExpandNode={collapseAllNested}
+                                style={customTheme}
+                              />
+                            </Box>
+
+                            <Text fontSize="sm" mt="2" color="gray.600" mb="2">
+                              Resposta:
+                            </Text>
+                            <Box
+                              p="2"
+                              bg="white"
+                              rounded="md"
+                              fontWeight="normal"
+                            >
+                              <JsonView
+                                container={{ backgroundColor: "red" }}
+                                data={item}
+                                shouldExpandNode={collapseAllNested}
+                                style={customTheme}
+                              />
+                            </Box>
+                            {/* <Text fontSize="sm" color="gray.600">
+                              {JSON.stringify(item, null, 2)}
+                            </Text> */}
+                          </Box>
+                        </AccordionItemContent>
+                      </AccordionItem>
+                    </AccordionRoot>
+                  ))}
+                {ticket?.resposta && (
+                  <AccordionRoot collapsible>
+                    <AccordionItem mb="2">
+                      <AccordionItemTrigger cursor="pointer" border="none">
+                        <Flex alignItems="center" gap="2">
+                          <Text
+                            fontSize="sm"
+                            color="gray.500"
+                            fontWeight="semibold"
+                          >
+                            Tentativa {ticket?.erros?.length + 1}
+                          </Text>
+                          <Badge colorPalette="green">Sucesso</Badge>
+                        </Flex>
+                      </AccordionItemTrigger>
+                      <AccordionItemContent w="full">
+                        <Box bg="gray.50" p="4" rounded="md">
+                          <Text fontSize="sm" color="gray.600" mb="2">
+                            Requisição:
+                          </Text>
+                          <Box
+                            p="2"
+                            bg="white"
+                            rounded="md"
+                            fontWeight="normal"
+                          >
+                            <JsonView
+                              container={{ backgroundColor: "red" }}
+                              data={ticket?.payload}
+                              shouldExpandNode={collapseAllNested}
+                              style={customTheme}
+                            />
+                          </Box>
+
+                          <Text fontSize="sm" mt="2" color="gray.600" mb="2">
+                            Resposta:
+                          </Text>
+                          <Box
+                            p="2"
+                            bg="white"
+                            rounded="md"
+                            fontWeight="normal"
+                          >
+                            <JsonView
+                              container={{ backgroundColor: "red" }}
+                              data={ticket?.resposta}
+                              shouldExpandNode={collapseAllNested}
+                              style={customTheme}
+                            />
+                          </Box>
+                        </Box>
+                      </AccordionItemContent>
+                    </AccordionItem>
+                  </AccordionRoot>
+                )}
+              </Box>
             </GridItem>
           </Grid>
         </DialogBody>
         <DialogFooter justifyContent="start">
-          <TicketActions integracaoId={defaultValues?._id} />
+          <TicketActions integracaoId={ticket?._id} />
         </DialogFooter>
         <DialogCloseTrigger />
       </DialogContent>
