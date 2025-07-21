@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.0.36 (2025-07-21)
+
+### Bug Fixes
+
+* replace npm install with npm ci for consistent dependency installation ([ca0b21a](https://github.com/oondemand/cst-rakuten-frontend/commit/ca0b21acd20b84592c8aada3cf5cbe501e1b39af))
+
 ## 2.0.33 (2025-06-25)
 
 ## 2.0.32 (2025-06-20)
