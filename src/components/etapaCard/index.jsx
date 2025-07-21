@@ -74,6 +74,7 @@ const _Etapa = ({ etapa, tickets, action, card }) => {
                       {
                         index: virtualItem.index,
                         ticket: etapaTickets[virtualItem.index],
+                        etapa,
                       },
                       null
                     )}

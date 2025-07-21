@@ -14,6 +14,7 @@ import {
   CalendarSync,
   TicketCheckIcon,
   NotepadText,
+  Rotate3D,
 } from "lucide-react";
 
 import { NavLink } from "./navLink";
@@ -97,6 +98,12 @@ const navigationItems = [
         href: "/doc",
       },
     ],
+  },
+  {
+    title: "Integrações",
+    icon: Rotate3D,
+    rules: ["admin"],
+    subLinks: [{ title: "Prestador - Omie", href: "/integracao/prestador" }],
   },
 ];
 
