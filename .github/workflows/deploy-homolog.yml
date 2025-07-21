@@ -1,4 +1,4 @@
-name: Deploy frontend homolog
+name: Deploy central rakuten frontend homolog
 
 on:
   push:
