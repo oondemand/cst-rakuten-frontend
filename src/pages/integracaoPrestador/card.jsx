@@ -41,7 +41,7 @@ export const _Card = ({ ticket }) => {
               />
               <Tooltip
                 showArrow
-                content={` Prestador > Omie : ${ticket?.prestador?.nome}`}
+                content={ticket?.prestador?.titulo}
                 positioning={{ placement: "top" }}
                 openDelay={700}
                 closeDelay={50}
@@ -59,7 +59,7 @@ export const _Card = ({ ticket }) => {
                     fontSize="xs"
                     color="gray.700"
                   >
-                    Prestador {">"} Omie : {ticket?.prestador?.nome}
+                    {ticket?.prestador?.titulo}
                   </Text>
                   <Text
                     truncate

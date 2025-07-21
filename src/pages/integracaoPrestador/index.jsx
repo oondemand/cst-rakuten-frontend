@@ -54,28 +54,30 @@ export const IntegracaoPrestador = () => {
     refetchInterval: 1000 * 10, // 10s
   });
 
-  console.log(data);
+  const dataWithTitulo = data?.map((item) => ({
+    ...item,
+    prestador: {
+      ...item?.prestador,
+      titulo: `Prestador > Omie : ${item?.prestador?.nome}`,
+    },
+  }));
 
-  // const refactoredTickets =
-  //   searchTerm?.toLowerCase()?.trim()?.length > 2
-  //     ? data
-  //         ?.map((item) => ({ ...item, etapa: item?.status }))
-  //         ?.filter((ticket) => {
-  //           const term = searchTerm?.toLowerCase()?.trim();
-  //           return (
-  //             ticket?.titulo?.toLowerCase()?.includes(term) ||
-  //             ticket?.prestador?.documento
-  //               ?.toLowerCase()
-  //               ?.includes(term.replace(/[^a-zA-Z0-9]/g, "")) ||
-  //             ticket?.prestador?.sid
-  //               ?.toString()
-  //               ?.toLowerCase()
-  //               ?.includes(term.replace(/[^a-zA-Z0-9]/g, ""))
-  //           );
-  //         })
-  //     : data?.map((item) => ({ ...item, etapa: item?.status }));
-
-  const refactoredTickets = data;
+  const refactoredTickets =
+    searchTerm?.toLowerCase()?.trim()?.length > 2
+      ? dataWithTitulo?.filter((item) => {
+          const term = searchTerm?.toLowerCase()?.trim();
+          return (
+            item?.prestador?.titulo?.toLowerCase()?.includes(term) ||
+            item?.prestador?.documento
+              ?.toLowerCase()
+              ?.includes(term.replace(/[^a-zA-Z0-9]/g, "")) ||
+            item?.prestador?.sid
+              ?.toString()
+              ?.toLowerCase()
+              ?.includes(term.replace(/[^a-zA-Z0-9]/g, ""))
+          );
+        })
+      : dataWithTitulo;
 
   return (
     <Flex flex="1" flexDir="column" py="8" px="6" bg="#F8F9FA">
@@ -102,11 +104,9 @@ export const IntegracaoPrestador = () => {
               }
             />
           </Tooltip>
-          {/* {(isEtapasLoading || isTicketLoading || isTicketFetching) && (
-            <Spinner size="md" />
-          )} */}
+          {(isTicketLoading || isTicketFetching) && <Spinner size="md" />}
         </Flex>
-        {/* <Flex alignItems="center" color="gray.400" gap="3">
+        <Flex alignItems="center" color="gray.400" gap="3">
           <Filter size={24} />
           <DebouncedInput
             size="xs"
@@ -121,7 +121,7 @@ export const IntegracaoPrestador = () => {
             value={searchTerm}
             onChange={setSearchTerm}
           />
-        </Flex> */}
+        </Flex>
       </Flex>
       <Flex flex="1" pb="2" itens="center" overflow="hidden">
         {!isTicketLoading && refactoredTickets && etapas && (
