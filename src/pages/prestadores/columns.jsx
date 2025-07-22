@@ -18,6 +18,7 @@ import { Pencil } from "lucide-react";
 import { formatDateToDDMMYYYY } from "../../utils/formatting";
 import { EnviarConvitePrestadorAction } from "../../components/dataGrid/actions/enviarConvite";
 import { Tooltip } from "../../components/ui/tooltip";
+import { SyncOmieStatusCell } from "./syncOmieStatusCell";
 
 export const makePrestadorDynamicColumns = () => {
   return [
@@ -25,8 +26,19 @@ export const makePrestadorDynamicColumns = () => {
       accessorKey: "acoes",
       header: "Ações",
       enableSorting: false,
+      enableColumnFilter: true,
+      meta: {
+        filterKey: "status_sincronizacao_omie",
+        filterVariant: "select",
+        filterOptions: [
+          { label: "Erro", value: "erro" },
+          { label: "Sucesso", value: "sucesso" },
+          { label: "Processando", value: "processando" },
+        ],
+      },
       cell: (props) => (
         <TableActionsCell>
+          <SyncOmieStatusCell {...props} />
           <DeletePrestadorAction id={props.row.original?._id} />
           <PrestadoresDialog
             trigger={

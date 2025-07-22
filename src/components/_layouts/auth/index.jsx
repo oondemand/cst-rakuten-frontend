@@ -73,6 +73,12 @@ const navigationItems = [
     rules: ["admin", "tomador"],
   },
   {
+    title: "Integrações",
+    icon: Rotate3D,
+    rules: ["admin"],
+    subLinks: [{ title: "Prestador - Omie", href: "/integracao/prestador" }],
+  },
+  {
     title: "Configurações",
     icon: Settings,
     rules: ["admin"],
@@ -98,12 +104,6 @@ const navigationItems = [
         href: "/doc",
       },
     ],
-  },
-  {
-    title: "Integrações",
-    icon: Rotate3D,
-    rules: ["admin"],
-    subLinks: [{ title: "Prestador - Omie", href: "/integracao/prestador" }],
   },
 ];
 

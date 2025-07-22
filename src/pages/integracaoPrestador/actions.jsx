@@ -69,7 +69,7 @@ export const TicketActions = ({ integracaoId, etapa }) => {
     <Flex alignItems="center" w="full" justifyContent="space-between">
       <Flex gap="2">
         <Button
-          disabled={isReprocessingPending}
+          disabled={isReprocessingPending || etapa === "sucesso"}
           onClick={async (e) => {
             await reprocessarTicketMutation();
             setOpen(false);

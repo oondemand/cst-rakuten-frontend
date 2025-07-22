@@ -232,7 +232,7 @@ export const TicketDetailsModal = ({ open, setOpen, ticket, onlyReading }) => {
           </Grid>
         </DialogBody>
         <DialogFooter justifyContent="start">
-          <TicketActions integracaoId={ticket?._id} />
+          <TicketActions integracaoId={ticket?._id} etapa={ticket.etapa} />
         </DialogFooter>
         <DialogCloseTrigger />
       </DialogContent>
