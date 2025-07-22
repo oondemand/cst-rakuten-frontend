@@ -39,6 +39,13 @@ export const Dashboard = () => {
     placeholderData: keepPreviousData,
   });
 
+  const { data: integracaoPrestadorCentralOmie } = useQuery({
+    queryFn: DashboardService.integracaoPrestadorCentralOmie,
+    queryKey: ["dashboard-integracao-prestador-central-omie"],
+    staleTime: 1000 * 60, //1m
+    placeholderData: keepPreviousData,
+  });
+
   const valorTotalTodosServicos = valoresPorStatus?.reduce((acc, cur) => {
     return acc + cur.total;
   }, 0);
@@ -62,6 +69,14 @@ export const Dashboard = () => {
     revisao: "red.500",
     concluido: "blue.500",
     arquivado: "gray.500",
+  };
+
+  const integracaoEtapaColorMap = {
+    processando: "yellow.400",
+    falhas: "red.400",
+    requisicao: "gray.300",
+    sucesso: "green.500",
+    reprocessar: "gray.300",
   };
 
   const ticketEtapaMap = {
@@ -313,6 +328,62 @@ export const Dashboard = () => {
           </Box>
         )}
       </Flex>
+
+      <Box mt="8">
+        <Text color="gray.400" fontSize="sm">
+          Integração com Omie
+        </Text>
+        {integracaoPrestadorCentralOmie && (
+          <Flex gap="10" mt="4">
+            <Box maxW="600px" bg="white" p="4" rounded="2xl">
+              <Text fontWeight="semibold">Prestador central {"->"} Omie</Text>
+              <Table.Root mt="4">
+                <Table.Header>
+                  <Table.Row>
+                    <Table.ColumnHeader
+                      fontSize="xs"
+                      color="gray.500"
+                      fontWeight="light"
+                      py="1"
+                    >
+                      STATUS
+                    </Table.ColumnHeader>
+                    <Table.ColumnHeader
+                      fontSize="xs"
+                      color="gray.500"
+                      fontWeight="light"
+                      py="1"
+                    >
+                      QUANTIDADE
+                    </Table.ColumnHeader>
+                  </Table.Row>
+                </Table.Header>
+                <Table.Body>
+                  {integracaoPrestadorCentralOmie?.map((item) => (
+                    <Table.Row>
+                      <Table.Cell
+                        display="flex"
+                        gap="2"
+                        alignItems="center"
+                        border="none"
+                      >
+                        <Box
+                          h="3"
+                          w="3"
+                          rounded="full"
+                          bg={integracaoEtapaColorMap[item.etapa]}
+                        />
+                        {item.etapa}
+                      </Table.Cell>
+                      <Table.Cell border="none">{item.count}</Table.Cell>
+                    </Table.Row>
+                  ))}
+                </Table.Body>
+              </Table.Root>
+            </Box>
+          </Flex>
+        )}
+      </Box>
     </Flex>
   );
 };
