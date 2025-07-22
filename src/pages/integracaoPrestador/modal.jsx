@@ -112,6 +112,22 @@ export const TicketDetailsModal = ({ open, setOpen, ticket, onlyReading }) => {
                 borderColor="gray.100"
               />
               <Box mt="8">
+                {ticket?.payload && (
+                  <Box bg="gray.50" p="4" rounded="sm" mb="4">
+                    <Text fontSize="sm" color="gray.600" mb="2.5">
+                      Body:
+                    </Text>
+                    <Box p="2.5" bg="white" rounded="sm" fontWeight="normal">
+                      <JsonView
+                        container={{ backgroundColor: "red" }}
+                        data={ticket?.payload}
+                        shouldExpandNode={collapseAllNested}
+                        style={customTheme}
+                      />
+                    </Box>
+                  </Box>
+                )}
+
                 {ticket?.erros &&
                   ticket?.erros?.length > 0 &&
                   ticket?.erros?.map((item, index) => (
@@ -131,23 +147,6 @@ export const TicketDetailsModal = ({ open, setOpen, ticket, onlyReading }) => {
                         </AccordionItemTrigger>
                         <AccordionItemContent w="full">
                           <Box bg="gray.50" p="4" rounded="md">
-                            <Text fontSize="sm" color="gray.600" mb="2">
-                              Requisição:
-                            </Text>
-                            <Box
-                              p="2"
-                              bg="white"
-                              rounded="md"
-                              fontWeight="normal"
-                            >
-                              <JsonView
-                                container={{ backgroundColor: "red" }}
-                                data={ticket?.payload}
-                                shouldExpandNode={collapseAllNested}
-                                style={customTheme}
-                              />
-                            </Box>
-
                             <Text fontSize="sm" mt="2" color="gray.600" mb="2">
                               Resposta:
                             </Text>
@@ -164,15 +163,12 @@ export const TicketDetailsModal = ({ open, setOpen, ticket, onlyReading }) => {
                                 style={customTheme}
                               />
                             </Box>
-                            {/* <Text fontSize="sm" color="gray.600">
-                              {JSON.stringify(item, null, 2)}
-                            </Text> */}
                           </Box>
                         </AccordionItemContent>
                       </AccordionItem>
                     </AccordionRoot>
                   ))}
-                {ticket?.resposta && (
+                {/* {ticket?.resposta && (
                   <AccordionRoot collapsible>
                     <AccordionItem mb="2">
                       <AccordionItemTrigger cursor="pointer" border="none">
@@ -226,7 +222,7 @@ export const TicketDetailsModal = ({ open, setOpen, ticket, onlyReading }) => {
                       </AccordionItemContent>
                     </AccordionItem>
                   </AccordionRoot>
-                )}
+                )} */}
               </Box>
             </GridItem>
           </Grid>

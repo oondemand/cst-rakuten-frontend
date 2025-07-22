@@ -13,6 +13,7 @@ export const _Card = ({ ticket }) => {
     falhas: "red.400",
     requisicao: "gray.300",
     sucesso: "green.500",
+    reprocessar: "gray.300",
   };
 
   return (

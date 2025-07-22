@@ -58,7 +58,7 @@ export const IntegracaoPrestador = () => {
     ...item,
     prestador: {
       ...item?.prestador,
-      titulo: `Prestador > Omie : ${item?.prestador?.nome}`,
+      titulo: `Central -> Omie : ${item?.prestador?.nome}`,
     },
   }));
 
@@ -84,7 +84,7 @@ export const IntegracaoPrestador = () => {
       <Flex pb="4" justifyContent="space-between">
         <Flex alignItems="center" gap="4">
           <Heading color="gray.700" fontSize="2xl">
-            Integração prestador - Omie
+            Integração prestador central {"->"} Omie
           </Heading>
           <Tooltip
             content="Sincronizar com omie"

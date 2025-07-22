@@ -76,7 +76,9 @@ const navigationItems = [
     title: "Integrações",
     icon: Rotate3D,
     rules: ["admin"],
-    subLinks: [{ title: "Prestador - Omie", href: "/integracao/prestador" }],
+    subLinks: [
+      { title: "Prestador central -> Omie", href: "/integracao/prestador" },
+    ],
   },
   {
     title: "Configurações",
