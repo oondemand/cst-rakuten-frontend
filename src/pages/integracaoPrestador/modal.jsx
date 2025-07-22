@@ -115,12 +115,24 @@ export const TicketDetailsModal = ({ open, setOpen, ticket, onlyReading }) => {
                 {ticket?.payload && (
                   <Box bg="gray.50" p="4" rounded="sm" mb="4">
                     <Text fontSize="sm" color="gray.600" mb="2.5">
+                      Url:
+                    </Text>
+                    <Box
+                      p="2.5"
+                      bg="white"
+                      rounded="sm"
+                      fontWeight="medium"
+                      mb="4"
+                    >
+                      {ticket?.payload?.url || "N/A"}
+                    </Box>
+                    <Text fontSize="sm" color="gray.600" mb="2.5">
                       Body:
                     </Text>
                     <Box p="2.5" bg="white" rounded="sm" fontWeight="normal">
                       <JsonView
                         container={{ backgroundColor: "red" }}
-                        data={ticket?.payload}
+                        data={ticket?.payload?.body}
                         shouldExpandNode={collapseAllNested}
                         style={customTheme}
                       />
@@ -168,7 +180,7 @@ export const TicketDetailsModal = ({ open, setOpen, ticket, onlyReading }) => {
                       </AccordionItem>
                     </AccordionRoot>
                   ))}
-                {/* {ticket?.resposta && (
+                {ticket?.resposta && (
                   <AccordionRoot collapsible>
                     <AccordionItem mb="2">
                       <AccordionItemTrigger cursor="pointer" border="none">
@@ -185,23 +197,6 @@ export const TicketDetailsModal = ({ open, setOpen, ticket, onlyReading }) => {
                       </AccordionItemTrigger>
                       <AccordionItemContent w="full">
                         <Box bg="gray.50" p="4" rounded="md">
-                          <Text fontSize="sm" color="gray.600" mb="2">
-                            Requisição:
-                          </Text>
-                          <Box
-                            p="2"
-                            bg="white"
-                            rounded="md"
-                            fontWeight="normal"
-                          >
-                            <JsonView
-                              container={{ backgroundColor: "red" }}
-                              data={ticket?.payload}
-                              shouldExpandNode={collapseAllNested}
-                              style={customTheme}
-                            />
-                          </Box>
-
                           <Text fontSize="sm" mt="2" color="gray.600" mb="2">
                             Resposta:
                           </Text>
@@ -222,7 +217,7 @@ export const TicketDetailsModal = ({ open, setOpen, ticket, onlyReading }) => {
                       </AccordionItemContent>
                     </AccordionItem>
                   </AccordionRoot>
-                )} */}
+                )}
               </Box>
             </GridItem>
           </Grid>

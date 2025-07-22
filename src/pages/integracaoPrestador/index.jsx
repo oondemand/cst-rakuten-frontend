@@ -1,5 +1,3 @@
-import React from "react";
-
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Navigation } from "swiper/modules";
 import "swiper/css";
@@ -7,31 +5,37 @@ import "swiper/css/navigation";
 
 import "../../styles/swiper.css";
 
-import { Flex, Spinner, Heading, Button } from "@chakra-ui/react";
+import { Flex, Spinner, Heading, createListCollection } from "@chakra-ui/react";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import { EtapaService } from "../../service/etapa";
 import { Etapa } from "../../components/etapaCard";
-import { TicketService } from "../../service/ticket";
-import { CloudUpload, Filter } from "lucide-react";
+import { Filter } from "lucide-react";
 import { DebouncedInput } from "../../components/DebouncedInput";
 import { useStateWithStorage } from "../../hooks/useStateStorage";
 import { IntegracaoService } from "../../service/integracao";
 import { Card } from "./card";
 import { Tooltip } from "../../components/ui/tooltip";
 import { AsyncButton } from "./asyncButton";
+import {
+  SelectRoot,
+  SelectTrigger,
+  SelectValueText,
+  SelectContent,
+  SelectItem,
+} from "../../components/ui/select";
+
+const selectTimeOptions = createListCollection({
+  items: [
+    { value: 1, label: "1 dia" },
+    { value: 5, label: "5 dias" },
+    { value: 10, label: "10 dias" },
+    { value: 15, label: "15 dias" },
+    { value: 30, label: "30 dias" },
+  ],
+});
 
 export const IntegracaoPrestador = () => {
   const [searchTerm, setSearchTerm] = useStateWithStorage("searchTerm");
-
-  // const {
-  //   data: etapas,
-  //   error: etapasError,
-  //   isLoading: isEtapasLoading,
-  // } = useQuery({
-  //   queryKey: ["listar-etapas"],
-  //   queryFn: IntegracaoService.integracaoPrestador,
-  //   staleTime: 1000 * 60 * 10, // 10 minutos
-  // });
+  const [time, setTime] = useStateWithStorage("time", 1);
 
   const etapas = [
     { codigo: "requisicao", nome: "Requisição" },
@@ -47,8 +51,8 @@ export const IntegracaoPrestador = () => {
     isLoading: isTicketLoading,
     isFetching: isTicketFetching,
   } = useQuery({
-    queryKey: ["listar-tickets-integracao-prestador"],
-    queryFn: async () => await IntegracaoService.integracaoPrestador(),
+    queryKey: ["listar-tickets-integracao-prestador", { time }],
+    queryFn: async () => await IntegracaoService.integracaoPrestador({ time }),
     placeholderData: keepPreviousData,
     onSuccess: (data) => setTickets(data),
     refetchInterval: 1000 * 10, // 10s
@@ -108,6 +112,28 @@ export const IntegracaoPrestador = () => {
         </Flex>
         <Flex alignItems="center" color="gray.400" gap="3">
           <Filter size={24} />
+          <SelectRoot
+            w="90px"
+            size="xs"
+            bg="white"
+            defaultValue={[1]}
+            collection={selectTimeOptions}
+            value={[time]}
+            onValueChange={({ value }) => {
+              setTime(Number(value[0]));
+            }}
+          >
+            <SelectTrigger>
+              <SelectValueText placeholder="Selecione um período..." />
+            </SelectTrigger>
+            <SelectContent>
+              {selectTimeOptions.items.map((item) => (
+                <SelectItem item={item} key={item.value}>
+                  {item.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </SelectRoot>
           <DebouncedInput
             size="xs"
             w="sm"

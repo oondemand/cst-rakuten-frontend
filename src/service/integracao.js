@@ -1,7 +1,7 @@
 import { api } from "../config/api";
 
-const integracaoPrestador = async () => {
-  const { data } = await api.get("/integracao/prestador");
+const integracaoPrestador = async ({ time }) => {
+  const { data } = await api.get("/integracao/prestador", { params: { time } });
   return data;
 };
 
