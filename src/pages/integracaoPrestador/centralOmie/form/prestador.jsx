@@ -1,10 +1,10 @@
 import { Box, Flex, Grid, GridItem, Text } from "@chakra-ui/react";
-import { BuildForm } from "../../../components/buildForm";
-import { VisibilityControlDialog } from "../../../components/vibilityControlDialog";
-import { createDynamicFormFields } from "../../prestadores/formFields";
+import { BuildForm } from "../../../../components/buildForm";
+import { VisibilityControlDialog } from "../../../../components/vibilityControlDialog";
+import { createDynamicFormFields } from "../../../prestadores/formFields";
 import { useMemo } from "react";
-import { useVisibleInputForm } from "../../../hooks/useVisibleInputForms";
-import { formatDateToDDMMYYYY } from "../../../utils/formatting";
+import { useVisibleInputForm } from "../../../../hooks/useVisibleInputForms";
+import { formatDateToDDMMYYYY } from "../../../../utils/formatting";
 
 export const PrestadorForm = ({ prestador, onlyReading }) => {
   const fields = useMemo(() => createDynamicFormFields(), []);

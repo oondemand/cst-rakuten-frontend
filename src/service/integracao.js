@@ -19,9 +19,18 @@ const reprocessarIntegracaoPrestador = async ({ id }) => {
   const { data } = await api.post(`/integracao/prestador/reprocessar/${id}`);
   return data;
 };
+
+const listarIntegracaoPrestadorCentralOmieArquivados = async ({ filtros }) => {
+  const { data } = await api.get(`/integracao/prestador/arquivados`, {
+    params: filtros,
+  });
+  return data;
+};
+
 export const IntegracaoService = {
   integracaoPrestador,
   processarIntegracaoPrestador,
   arquivarIntegracaoPrestador,
   reprocessarIntegracaoPrestador,
+  listarIntegracaoPrestadorCentralOmieArquivados,
 };

@@ -3,17 +3,24 @@ import { FreeMode, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 
-import "../../styles/swiper.css";
+import "../../../styles/swiper.css";
 
-import { Flex, Spinner, Heading, createListCollection } from "@chakra-ui/react";
+import {
+  Flex,
+  Spinner,
+  Heading,
+  createListCollection,
+  Button,
+  Box,
+} from "@chakra-ui/react";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import { Etapa } from "../../components/etapaCard";
-import { Filter } from "lucide-react";
-import { DebouncedInput } from "../../components/DebouncedInput";
-import { useStateWithStorage } from "../../hooks/useStateStorage";
-import { IntegracaoService } from "../../service/integracao";
+import { Etapa } from "../../../components/etapaCard";
+import { File, FileArchive, Filter } from "lucide-react";
+import { DebouncedInput } from "../../../components/DebouncedInput";
+import { useStateWithStorage } from "../../../hooks/useStateStorage";
+import { IntegracaoService } from "../../../service/integracao";
 import { Card } from "./card";
-import { Tooltip } from "../../components/ui/tooltip";
+import { Tooltip } from "../../../components/ui/tooltip";
 import { AsyncButton } from "./asyncButton";
 import {
   SelectRoot,
@@ -21,7 +28,8 @@ import {
   SelectValueText,
   SelectContent,
   SelectItem,
-} from "../../components/ui/select";
+} from "../../../components/ui/select";
+import { Link } from "react-router-dom";
 
 const selectTimeOptions = createListCollection({
   items: [
@@ -33,7 +41,7 @@ const selectTimeOptions = createListCollection({
   ],
 });
 
-export const IntegracaoPrestador = () => {
+export const IntegracaoPrestadorCentralOmie = () => {
   const [searchTerm, setSearchTerm] = useStateWithStorage("searchTerm");
   const [time, setTime] = useStateWithStorage("time", 1);
 
@@ -107,6 +115,30 @@ export const IntegracaoPrestador = () => {
                 await IntegracaoService.processarIntegracaoPrestador()
               }
             />
+          </Tooltip>
+          <Tooltip
+            content="Arquivados"
+            positioning={{ placement: "top" }}
+            openDelay={500}
+            closeDelay={50}
+            contentProps={{
+              css: {
+                "--tooltip-bg": "white",
+                color: "gray.600",
+              },
+            }}
+          >
+            <Link to="/integracao/prestador/arquivados">
+              <Button
+                color="gray.600"
+                bg="gray.200"
+                p="1.5"
+                rounded="full"
+                cursor="pointer"
+              >
+                <FileArchive />
+              </Button>
+            </Link>
           </Tooltip>
           {(isTicketLoading || isTicketFetching) && <Spinner size="md" />}
         </Flex>

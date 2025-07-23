@@ -1,11 +1,11 @@
 import { Flex, Button, useDialogContext } from "@chakra-ui/react";
 import { Check, File, ListRestart, Trash, X } from "lucide-react";
 
-import { toaster } from "../../components/ui/toaster";
+import { toaster } from "../../../components/ui/toaster";
 import { useMutation } from "@tanstack/react-query";
-import { useConfirmation } from "../../hooks/useConfirmation";
-import { queryClient } from "../../config/react-query";
-import { IntegracaoService } from "../../service/integracao";
+import { useConfirmation } from "../../../hooks/useConfirmation";
+import { queryClient } from "../../../config/react-query";
+import { IntegracaoService } from "../../../service/integracao";
 
 export const TicketActions = ({ integracaoId, etapa }) => {
   const { setOpen } = useDialogContext();

@@ -20,7 +20,8 @@ import { TicketsPagosPage } from "./pages/ticketsPagos";
 import { AccessDenied } from "./pages/accessDenied";
 import { DocumentosFiscaisList } from "./pages/documentoFiscal";
 import { ImportDocumentosFiscaisPage } from "./pages/documentoFiscal/importacao";
-import { IntegracaoPrestador } from "./pages/integracaoPrestador";
+import { IntegracaoPrestadorCentralOmie } from "./pages/integracaoPrestador/centralOmie";
+import { IntegracaoPrestadorCentralOmieArquivados } from "./pages/integracaoPrestador/centralOmie/arquivados";
 
 export const router = createBrowserRouter([
   {
@@ -46,7 +47,14 @@ export const router = createBrowserRouter([
       { path: "/doc", element: <Doc /> },
       { path: "/integracao-rpa", element: <IntegracaoRpaPage /> },
       { path: "/pagos", element: <TicketsPagosPage /> },
-      { path: "/integracao/prestador", element: <IntegracaoPrestador /> },
+      {
+        path: "/integracao/prestador",
+        element: <IntegracaoPrestadorCentralOmie />,
+      },
+      {
+        path: "/integracao/prestador/arquivados",
+        element: <IntegracaoPrestadorCentralOmieArquivados />,
+      },
     ],
   },
 
