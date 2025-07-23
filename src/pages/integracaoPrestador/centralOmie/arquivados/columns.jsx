@@ -7,7 +7,7 @@ export const makeTicketsArquivadosDynamicColumns = () => {
       header: "ID",
       cell: DefaultCell,
       enableSorting: false,
-      enableColumnFilter: true,
+      enableColumnFilter: false,
       meta: { filterKey: "_id" },
     },
     {
@@ -15,7 +15,7 @@ export const makeTicketsArquivadosDynamicColumns = () => {
       header: "Nome do Prestador",
       cell: DefaultCell,
       enableSorting: false,
-      enableColumnFilter: true,
+      enableColumnFilter: false,
       meta: { filterKey: "prestador.nome" },
     },
     {
@@ -23,7 +23,7 @@ export const makeTicketsArquivadosDynamicColumns = () => {
       header: "SID",
       cell: DefaultCell,
       enableSorting: false,
-      enableColumnFilter: true,
+      enableColumnFilter: false,
       meta: { filterKey: "prestador.sid" },
     },
     {
@@ -31,7 +31,7 @@ export const makeTicketsArquivadosDynamicColumns = () => {
       header: "Documento",
       cell: DefaultCell,
       enableSorting: false,
-      enableColumnFilter: true,
+      enableColumnFilter: false,
       meta: { filterKey: "prestador.documento" },
     },
     {
@@ -40,7 +40,15 @@ export const makeTicketsArquivadosDynamicColumns = () => {
       cell: DefaultCell,
       enableSorting: false,
       enableColumnFilter: true,
-      meta: { filterKey: "motivoArquivamento" },
+      meta: {
+        filterKey: "motivoArquivamento",
+        filterVariant: "select",
+        filterOptions: [
+          { label: "Duplicidade", value: "duplicidade" },
+          { label: "Arquivado pelo usuario", value: "arquivado pelo usuario" },
+          { label: "Exterior", value: "ext" },
+        ],
+      },
     },
   ];
 };
