@@ -22,6 +22,8 @@ import { DocumentosFiscaisList } from "./pages/documentoFiscal";
 import { ImportDocumentosFiscaisPage } from "./pages/documentoFiscal/importacao";
 import { IntegracaoPrestadorCentralOmieEsteira } from "./pages/integracao/prestador/centralOmie";
 import { IntegracaoPrestadorCentralOmieDatagrid } from "./pages/integracao/prestador/centralOmie/datagrid";
+import { IntegracaoPrestadorOmieCentralEsteira } from "./pages/integracao/prestador/omieCentral";
+import { IntegracaoPrestadorOmieCentralDatagrid } from "./pages/integracao/prestador/omieCentral/datagrid";
 
 export const router = createBrowserRouter([
   {
@@ -47,28 +49,24 @@ export const router = createBrowserRouter([
       { path: "/doc", element: <Doc /> },
       { path: "/integracao-rpa", element: <IntegracaoRpaPage /> },
       { path: "/pagos", element: <TicketsPagosPage /> },
+
       {
-        path: "/integracao",
-        children: [
-          {
-            path: "/integracao/prestador",
-            children: [
-              {
-                path: "/integracao/prestador/central-omie",
-                element: <IntegracaoPrestadorCentralOmieEsteira />,
-              },
-              {
-                path: "/integracao/prestador/central-omie/todos",
-                element: <IntegracaoPrestadorCentralOmieDatagrid />,
-              },
-            ],
-          },
-        ],
+        path: "/integracao/prestador/central-omie",
+        element: <IntegracaoPrestadorCentralOmieEsteira />,
       },
-      // {
-      //   path: "/integracao/prestador/arquivados",
-      //   element: <IntegracaoPrestadorCentralOmieArquivados />,
-      // },
+      {
+        path: "/integracao/prestador/central-omie/todos",
+        element: <IntegracaoPrestadorCentralOmieDatagrid />,
+      },
+      {
+        path: "/integracao/prestador/omie-central",
+        element: <IntegracaoPrestadorOmieCentralEsteira />,
+      },
+
+      {
+        path: "/integracao/prestador/omie-central/todos",
+        element: <IntegracaoPrestadorOmieCentralDatagrid />,
+      },
       // {
       //   path: "/integracao/omie-prestador",
       //   element: <IntegracaoPrestadorOmieCentral />,

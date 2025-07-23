@@ -81,10 +81,10 @@ const navigationItems = [
         title: "Prestador central -> Omie",
         href: "/integracao/prestador/central-omie",
       },
-      // {
-      //   title: "Prestador omie -> central",
-      //   href: "/integracao/omie-prestador",
-      // },
+      {
+        title: "Prestador omie -> central",
+        href: "/integracao/prestador/omie-central",
+      },
     ],
   },
   {

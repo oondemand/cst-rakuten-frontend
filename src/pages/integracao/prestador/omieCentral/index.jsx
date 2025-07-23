@@ -18,7 +18,7 @@ import { Etapa } from "../../../../components/etapaCard";
 import { File, FileArchive, Filter, Table } from "lucide-react";
 import { DebouncedInput } from "../../../../components/DebouncedInput";
 import { useStateWithStorage } from "../../../../hooks/useStateStorage";
-import { IntegracaoPrestadorCentralOmieService } from "../../../../service/integracao/prestador/central-omie";
+import { IntegracaoPrestadorOmieCentralService } from "../../../../service/integracao/prestador/omie-central";
 import { Card } from "./card";
 import { Tooltip } from "../../../../components/ui/tooltip";
 import { AsyncButton } from "./asyncButton";
@@ -41,12 +41,12 @@ const selectTimeOptions = createListCollection({
   ],
 });
 
-export const IntegracaoPrestadorCentralOmieEsteira = () => {
+export const IntegracaoPrestadorOmieCentralEsteira = () => {
   const [searchTerm, setSearchTerm] = useStateWithStorage(
-    "integracao_prestador_central_omie_searchTerm"
+    "integracao_prestador_omie_central_searchTerm"
   );
   const [time, setTime] = useStateWithStorage(
-    "integracao_prestador_central_omie_time",
+    "integracao_prestador_omie_central_time",
     1
   );
 
@@ -66,7 +66,7 @@ export const IntegracaoPrestadorCentralOmieEsteira = () => {
   } = useQuery({
     queryKey: ["listar-tickets-integracao-omie-central-prestador", { time }],
     queryFn: async () =>
-      await IntegracaoPrestadorCentralOmieService.listarTodos({ time }),
+      await IntegracaoPrestadorOmieCentralService.listarTodos({ time }),
     placeholderData: keepPreviousData,
     onSuccess: (data) => setTickets(data),
     refetchInterval: 1000 * 10, // 10s
@@ -76,7 +76,7 @@ export const IntegracaoPrestadorCentralOmieEsteira = () => {
     ...item,
     prestador: {
       ...item?.prestador,
-      titulo: `Central -> Omie : ${item?.prestador?.nome}`,
+      titulo: `Omie -> Central : ${item?.prestador?.nome}`,
     },
   }));
 
@@ -118,7 +118,7 @@ export const IntegracaoPrestadorCentralOmieEsteira = () => {
           >
             <AsyncButton
               onClick={async () =>
-                await IntegracaoPrestadorCentralOmieService.processar()
+                await IntegracaoPrestadorOmieCentralService.processar()
               }
             />
           </Tooltip>
@@ -134,7 +134,7 @@ export const IntegracaoPrestadorCentralOmieEsteira = () => {
               },
             }}
           >
-            <Link to="/integracao/prestador/central-omie/todos">
+            <Link to="/integracao/prestador/omie-central/todos">
               <Button
                 color="purple.700"
                 bg="purple.200"
