@@ -29,12 +29,9 @@ const reprocessar = async ({ id }) => {
 };
 
 const listarComPaginacao = async ({ filtros }) => {
-  const { data } = await api.get(
-    `/integracao/prestador/central-omie/arquivados`,
-    {
-      params: filtros,
-    }
-  );
+  const { data } = await api.get(`/integracao/prestador/central-omie/`, {
+    params: filtros,
+  });
   return data;
 };
 

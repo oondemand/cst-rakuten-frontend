@@ -1,5 +1,5 @@
 import { Button } from "@chakra-ui/react";
-import { CloudUpload } from "lucide-react";
+import { CloudUpload, RefreshCcw } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export const AsyncButton = ({ onClick, ...rest }) => {
@@ -37,16 +37,14 @@ export const AsyncButton = ({ onClick, ...rest }) => {
     <Button
       disabled={isClicked}
       onClick={handleClick}
-      color="gray.600"
-      bg="gray.200"
+      color="purple.700"
+      bg="purple.200"
       p="1.5"
-      rounded="full"
-      cursor="pointer"
-      _disabled={{ cursor: "not-allowed" }}
-      fontSize="xs"
+      rounded="2xl"
+      size="sm"
       {...rest}
     >
-      {!isClicked && <CloudUpload />}
+      {!isClicked && <RefreshCcw />}
       {isClicked && `${counter}s`}
     </Button>
   );

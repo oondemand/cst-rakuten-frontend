@@ -15,7 +15,7 @@ import {
 } from "@chakra-ui/react";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { Etapa } from "../../../../components/etapaCard";
-import { File, FileArchive, Filter } from "lucide-react";
+import { File, FileArchive, Filter, Table } from "lucide-react";
 import { DebouncedInput } from "../../../../components/DebouncedInput";
 import { useStateWithStorage } from "../../../../hooks/useStateStorage";
 import { IntegracaoPrestadorCentralOmieService } from "../../../../service/integracao/prestador/central-omie";
@@ -41,7 +41,7 @@ const selectTimeOptions = createListCollection({
   ],
 });
 
-export const IntegracaoPrestadorCentralOmie = () => {
+export const IntegracaoPrestadorCentralOmieEsteira = () => {
   const [searchTerm, setSearchTerm] = useStateWithStorage("searchTerm");
   const [time, setTime] = useStateWithStorage("time", 1);
 
@@ -95,8 +95,8 @@ export const IntegracaoPrestadorCentralOmie = () => {
   return (
     <Flex flex="1" flexDir="column" py="8" px="6" bg="#F8F9FA">
       <Flex pb="4" justifyContent="space-between">
-        <Flex alignItems="center" gap="4">
-          <Heading color="gray.700" fontSize="2xl">
+        <Flex alignItems="flex-end" gap="2">
+          <Heading color="gray.700" fontSize="2xl" mr="2">
             Integração prestador central {"->"} Omie
           </Heading>
           <Tooltip
@@ -129,15 +129,16 @@ export const IntegracaoPrestadorCentralOmie = () => {
               },
             }}
           >
-            <Link to="/integracao/prestador/arquivados">
+            <Link to="/integracao/prestador/central-omie/todos">
               <Button
-                color="gray.600"
-                bg="gray.200"
+                color="purple.700"
+                bg="purple.200"
                 p="1.5"
-                rounded="full"
+                rounded="2xl"
                 cursor="pointer"
+                size="sm"
               >
-                <FileArchive />
+                <Table />
               </Button>
             </Link>
           </Tooltip>

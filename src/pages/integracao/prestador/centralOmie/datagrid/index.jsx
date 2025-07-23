@@ -3,7 +3,7 @@ import { useFilters } from "../../../../../hooks/useFilters";
 import { useColumnVisibility } from "../../../../../hooks/useColumnVisibility";
 import { useColumnSizing } from "../../../../../hooks/useColumnSizing";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import { IntegracaoService } from "../../../../service/integracao";
+import { IntegracaoPrestadorCentralOmieService } from "../../../../../service/integracao/prestador/central-omie";
 import { sortByToState, stateToSortBy } from "../../../../../utils/sorting";
 import { useMemo } from "react";
 import { makeTicketsArquivadosDynamicColumns } from "./columns";
@@ -11,13 +11,13 @@ import { VisibilityControlDialog } from "../../../../../components/vibilityContr
 import { DataGrid } from "../../../../../components/dataGrid";
 import { DebouncedInput } from "../../../../../components/DebouncedInput";
 
-export const IntegracaoPrestadorCentralOmieArquivados = () => {
+export const IntegracaoPrestadorCentralOmieDatagrid = () => {
   const { filters, resetFilters, setFilters } = useFilters({
-    key: "PRESTADOR-CENTRAL-OMIE-TICKETS-ARQUIVADOS",
+    key: "PRESTADOR-CENTRAL-OMIE-TICKETS",
   });
 
   const { columnVisibility, setColumnVisibility } = useColumnVisibility({
-    key: "PRESTADOR-CENTRAL-OMIE-TICKETS-ARQUIVADOS",
+    key: "PRESTADOR-CENTRAL-OMIE-TICKETS",
   });
 
   const {
@@ -26,13 +26,13 @@ export const IntegracaoPrestadorCentralOmieArquivados = () => {
     setColumnSizing,
     setColumnSizingInfo,
   } = useColumnSizing({
-    key: "PRESTADOR-CENTRAL-OMIE-TICKETS-ARQUIVADOS",
+    key: "PRESTADOR-CENTRAL-OMIE-TICKETS",
   });
 
   const { data, error, isLoading, isFetching } = useQuery({
     queryKey: ["listar-tickets-arquivados", { filters }],
     queryFn: async () =>
-      await IntegracaoService.listarIntegracaoPrestadorCentralOmieArquivados({
+      await IntegracaoPrestadorCentralOmieService.listarComPaginacao({
         filtros: filters,
       }),
     placeholderData: keepPreviousData,
@@ -112,7 +112,7 @@ export const IntegracaoPrestadorCentralOmieArquivados = () => {
             sorting={sortingState}
             columns={columns}
             pagination={paginationState}
-            data={data?.integracaoPrestador || []}
+            data={data?.integracoes || []}
             columnVisibility={columnVisibility}
             setColumnVisibility={setColumnVisibility}
             columnSizing={columnSizing}

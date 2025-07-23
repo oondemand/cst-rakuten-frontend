@@ -1,14 +1,14 @@
+import { Box, Flex, Text } from "@chakra-ui/react";
 import { DefaultCell } from "../../../../../components/dataGrid/cells/default";
 
 export const makeTicketsArquivadosDynamicColumns = () => {
   return [
     {
-      accessorKey: "_id",
-      header: "ID",
-      cell: DefaultCell,
+      accessorKey: "acoes",
+      header: "Ações",
+      // cell: DefaultCell,
       enableSorting: false,
       enableColumnFilter: false,
-      meta: { filterKey: "_id" },
     },
     {
       accessorKey: "prestador.nome",
@@ -35,6 +35,21 @@ export const makeTicketsArquivadosDynamicColumns = () => {
       meta: { filterKey: "prestador.documento" },
     },
     {
+      accessorKey: "arquivado",
+      header: "Arquivado",
+      cell: (props) => (
+        <Box minH="8" fontSize="sm" alignContent="center" px="1">
+          {props.getValue() && "Arquivado"}
+        </Box>
+      ),
+      enableColumnFilter: true,
+      meta: {
+        filterKey: "arquivado",
+        filterVariant: "select",
+        filterOptions: [{ label: "Arquivados", value: "true" }],
+      },
+    },
+    {
       accessorKey: "motivoArquivamento",
       header: "Motivo do Arquivamento",
       cell: DefaultCell,
@@ -46,7 +61,6 @@ export const makeTicketsArquivadosDynamicColumns = () => {
         filterOptions: [
           { label: "Duplicidade", value: "duplicidade" },
           { label: "Arquivado pelo usuario", value: "arquivado pelo usuario" },
-          { label: "Exterior", value: "ext" },
         ],
       },
     },

@@ -20,7 +20,8 @@ import { TicketsPagosPage } from "./pages/ticketsPagos";
 import { AccessDenied } from "./pages/accessDenied";
 import { DocumentosFiscaisList } from "./pages/documentoFiscal";
 import { ImportDocumentosFiscaisPage } from "./pages/documentoFiscal/importacao";
-import { IntegracaoPrestadorCentralOmie } from "./pages/integracao/prestador/centralOmie";
+import { IntegracaoPrestadorCentralOmieEsteira } from "./pages/integracao/prestador/centralOmie";
+import { IntegracaoPrestadorCentralOmieDatagrid } from "./pages/integracao/prestador/centralOmie/datagrid";
 
 export const router = createBrowserRouter([
   {
@@ -47,14 +48,18 @@ export const router = createBrowserRouter([
       { path: "/integracao-rpa", element: <IntegracaoRpaPage /> },
       { path: "/pagos", element: <TicketsPagosPage /> },
       {
-        path: "/integracao/",
+        path: "/integracao",
         children: [
           {
-            path: "prestador/",
+            path: "/integracao/prestador",
             children: [
               {
-                path: "central-omie",
-                element: <IntegracaoPrestadorCentralOmie />,
+                path: "/integracao/prestador/central-omie",
+                element: <IntegracaoPrestadorCentralOmieEsteira />,
+              },
+              {
+                path: "/integracao/prestador/central-omie/todos",
+                element: <IntegracaoPrestadorCentralOmieDatagrid />,
               },
             ],
           },
