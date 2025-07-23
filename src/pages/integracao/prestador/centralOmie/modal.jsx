@@ -17,10 +17,10 @@ import {
   DialogFooter,
   DialogRoot,
   DialogTitle,
-} from "../../../components/ui/dialog";
-import { queryClient } from "../../../config/react-query";
+} from "../../../../components/ui/dialog";
+import { queryClient } from "../../../../config/react-query";
 
-import { Oondemand } from "../../../components/svg/oondemand";
+import { Oondemand } from "../../../../components/svg/oondemand";
 import { PrestadorForm } from "./form/prestador";
 import { TicketActions } from "./actions";
 
@@ -29,7 +29,7 @@ import {
   AccordionItemContent,
   AccordionItemTrigger,
   AccordionRoot,
-} from "../../../components/ui/accordion";
+} from "../../../../components/ui/accordion";
 
 import { JsonView, allExpanded, collapseAllNested } from "react-json-view-lite";
 import "react-json-view-lite/dist/index.css";

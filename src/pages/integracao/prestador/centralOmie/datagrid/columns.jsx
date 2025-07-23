@@ -1,4 +1,4 @@
-import { DefaultCell } from "../../../../components/dataGrid/cells/default";
+import { DefaultCell } from "../../../../../components/dataGrid/cells/default";
 
 export const makeTicketsArquivadosDynamicColumns = () => {
   return [

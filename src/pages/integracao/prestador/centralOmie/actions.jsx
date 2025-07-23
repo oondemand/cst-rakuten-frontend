@@ -1,11 +1,11 @@
 import { Flex, Button, useDialogContext } from "@chakra-ui/react";
 import { Check, File, ListRestart, Trash, X } from "lucide-react";
 
-import { toaster } from "../../../components/ui/toaster";
+import { toaster } from "../../../../components/ui/toaster";
 import { useMutation } from "@tanstack/react-query";
-import { useConfirmation } from "../../../hooks/useConfirmation";
-import { queryClient } from "../../../config/react-query";
-import { IntegracaoService } from "../../../service/integracao";
+import { useConfirmation } from "../../../../hooks/useConfirmation";
+import { queryClient } from "../../../../config/react-query";
+import { IntegracaoPrestadorCentralOmieService } from "../../../../service/integracao/prestador/central-omie";
 
 export const TicketActions = ({ integracaoId, etapa }) => {
   const { setOpen } = useDialogContext();
@@ -14,7 +14,7 @@ export const TicketActions = ({ integracaoId, etapa }) => {
   const { mutateAsync: arquiveTicketMutation, isPending: isArquivePending } =
     useMutation({
       mutationFn: async () =>
-        await IntegracaoService.arquivarIntegracaoPrestador({
+        await IntegracaoPrestadorCentralOmieService.arquivar({
           id: integracaoId,
         }),
       onSuccess: () => {
@@ -36,7 +36,7 @@ export const TicketActions = ({ integracaoId, etapa }) => {
     isPending: isReprocessingPending,
   } = useMutation({
     mutationFn: async () =>
-      await IntegracaoService.reprocessarIntegracaoPrestador({
+      await IntegracaoPrestadorCentralOmieService.reprocessar({
         id: integracaoId,
       }),
     onSuccess: () => {

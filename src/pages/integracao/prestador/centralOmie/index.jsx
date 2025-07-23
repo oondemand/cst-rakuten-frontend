@@ -3,7 +3,7 @@ import { FreeMode, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 
-import "../../../styles/swiper.css";
+import "../../../../styles/swiper.css";
 
 import {
   Flex,
@@ -14,13 +14,13 @@ import {
   Box,
 } from "@chakra-ui/react";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import { Etapa } from "../../../components/etapaCard";
+import { Etapa } from "../../../../components/etapaCard";
 import { File, FileArchive, Filter } from "lucide-react";
-import { DebouncedInput } from "../../../components/DebouncedInput";
-import { useStateWithStorage } from "../../../hooks/useStateStorage";
-import { IntegracaoService } from "../../../service/integracao";
+import { DebouncedInput } from "../../../../components/DebouncedInput";
+import { useStateWithStorage } from "../../../../hooks/useStateStorage";
+import { IntegracaoPrestadorCentralOmieService } from "../../../../service/integracao/prestador/central-omie";
 import { Card } from "./card";
-import { Tooltip } from "../../../components/ui/tooltip";
+import { Tooltip } from "../../../../components/ui/tooltip";
 import { AsyncButton } from "./asyncButton";
 import {
   SelectRoot,
@@ -28,7 +28,7 @@ import {
   SelectValueText,
   SelectContent,
   SelectItem,
-} from "../../../components/ui/select";
+} from "../../../../components/ui/select";
 import { Link } from "react-router-dom";
 
 const selectTimeOptions = createListCollection({
@@ -60,7 +60,8 @@ export const IntegracaoPrestadorCentralOmie = () => {
     isFetching: isTicketFetching,
   } = useQuery({
     queryKey: ["listar-tickets-integracao-prestador", { time }],
-    queryFn: async () => await IntegracaoService.integracaoPrestador({ time }),
+    queryFn: async () =>
+      await IntegracaoPrestadorCentralOmieService.listarTodos({ time }),
     placeholderData: keepPreviousData,
     onSuccess: (data) => setTickets(data),
     refetchInterval: 1000 * 10, // 10s
@@ -112,7 +113,7 @@ export const IntegracaoPrestadorCentralOmie = () => {
           >
             <AsyncButton
               onClick={async () =>
-                await IntegracaoService.processarIntegracaoPrestador()
+                await IntegracaoPrestadorCentralOmieService.processar()
               }
             />
           </Tooltip>

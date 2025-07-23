@@ -20,8 +20,7 @@ import { TicketsPagosPage } from "./pages/ticketsPagos";
 import { AccessDenied } from "./pages/accessDenied";
 import { DocumentosFiscaisList } from "./pages/documentoFiscal";
 import { ImportDocumentosFiscaisPage } from "./pages/documentoFiscal/importacao";
-import { IntegracaoPrestadorCentralOmie } from "./pages/integracaoPrestador/centralOmie";
-import { IntegracaoPrestadorCentralOmieArquivados } from "./pages/integracaoPrestador/centralOmie/arquivados";
+import { IntegracaoPrestadorCentralOmie } from "./pages/integracao/prestador/centralOmie";
 
 export const router = createBrowserRouter([
   {
@@ -48,13 +47,27 @@ export const router = createBrowserRouter([
       { path: "/integracao-rpa", element: <IntegracaoRpaPage /> },
       { path: "/pagos", element: <TicketsPagosPage /> },
       {
-        path: "/integracao/prestador",
-        element: <IntegracaoPrestadorCentralOmie />,
+        path: "/integracao/",
+        children: [
+          {
+            path: "prestador/",
+            children: [
+              {
+                path: "central-omie",
+                element: <IntegracaoPrestadorCentralOmie />,
+              },
+            ],
+          },
+        ],
       },
-      {
-        path: "/integracao/prestador/arquivados",
-        element: <IntegracaoPrestadorCentralOmieArquivados />,
-      },
+      // {
+      //   path: "/integracao/prestador/arquivados",
+      //   element: <IntegracaoPrestadorCentralOmieArquivados />,
+      // },
+      // {
+      //   path: "/integracao/omie-prestador",
+      //   element: <IntegracaoPrestadorOmieCentral />,
+      // },
     ],
   },
 

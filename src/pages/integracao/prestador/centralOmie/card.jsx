@@ -1,5 +1,5 @@
 import { Box, Flex, Text } from "@chakra-ui/react";
-import { Tooltip } from "../../../components/ui/tooltip";
+import { Tooltip } from "../../../../components/ui/tooltip";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { CircleAlert, ListRestart } from "lucide-react";

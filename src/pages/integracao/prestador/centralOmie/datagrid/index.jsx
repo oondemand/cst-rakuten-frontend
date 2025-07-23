@@ -1,15 +1,15 @@
 import { Box, Flex, Button, Spinner, Text } from "@chakra-ui/react";
-import { useFilters } from "../../../../hooks/useFilters";
-import { useColumnVisibility } from "../../../../hooks/useColumnVisibility";
-import { useColumnSizing } from "../../../../hooks/useColumnSizing";
+import { useFilters } from "../../../../../hooks/useFilters";
+import { useColumnVisibility } from "../../../../../hooks/useColumnVisibility";
+import { useColumnSizing } from "../../../../../hooks/useColumnSizing";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { IntegracaoService } from "../../../../service/integracao";
-import { sortByToState, stateToSortBy } from "../../../../utils/sorting";
+import { sortByToState, stateToSortBy } from "../../../../../utils/sorting";
 import { useMemo } from "react";
 import { makeTicketsArquivadosDynamicColumns } from "./columns";
-import { VisibilityControlDialog } from "../../../../components/vibilityControlDialog";
-import { DataGrid } from "../../../../components/dataGrid";
-import { DebouncedInput } from "../../../../components/DebouncedInput";
+import { VisibilityControlDialog } from "../../../../../components/vibilityControlDialog";
+import { DataGrid } from "../../../../../components/dataGrid";
+import { DebouncedInput } from "../../../../../components/DebouncedInput";
 
 export const IntegracaoPrestadorCentralOmieArquivados = () => {
   const { filters, resetFilters, setFilters } = useFilters({
