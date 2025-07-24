@@ -87,6 +87,7 @@ export const IntegracaoPrestadorOmieCentralEsteira = () => {
           return (
             item?.prestador?.titulo?.toLowerCase()?.includes(term) ||
             item?.prestador?.documento
+              ?.toString()
               ?.toLowerCase()
               ?.includes(term.replace(/[^a-zA-Z0-9]/g, "")) ||
             item?.prestador?.sid

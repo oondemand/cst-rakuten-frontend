@@ -1,12 +1,20 @@
 import { Box, Flex, Text } from "@chakra-ui/react";
 import { DefaultCell } from "../../../../../components/dataGrid/cells/default";
+import { TableActionsCell } from "../../../../../components/dataGrid/cells/tableActionsCell";
+import { VerDetalhesCell } from "./modalAction";
 
 export const makeTicketsArquivadosDynamicColumns = () => {
   return [
     {
       accessorKey: "acoes",
       header: "Ações",
-      // cell: DefaultCell,
+      cell: (props) => {
+        return (
+          <TableActionsCell>
+            <VerDetalhesCell {...props} />
+          </TableActionsCell>
+        );
+      },
       enableSorting: false,
       enableColumnFilter: false,
     },
