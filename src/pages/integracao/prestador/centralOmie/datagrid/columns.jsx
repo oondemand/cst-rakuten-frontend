@@ -19,6 +19,24 @@ export const makeTicketsArquivadosDynamicColumns = () => {
       enableColumnFilter: false,
     },
     {
+      accessorKey: "etapa",
+      header: "Etapa",
+      cell: DefaultCell,
+      enableSorting: false,
+      enableColumnFilter: true,
+      meta: {
+        filterKey: "etapa",
+        filterVariant: "select",
+        filterOptions: [
+          { value: "requisicao", label: "Requisição" },
+          { value: "reprocessar", label: "Reprocessar" },
+          { value: "processando", label: "Processando" },
+          { value: "falhas", label: "Falhas" },
+          { value: "sucesso", label: "Sucesso" },
+        ],
+      },
+    },
+    {
       accessorKey: "prestador.nome",
       header: "Nome do Prestador",
       cell: DefaultCell,
@@ -41,6 +59,26 @@ export const makeTicketsArquivadosDynamicColumns = () => {
       enableSorting: false,
       enableColumnFilter: false,
       meta: { filterKey: "prestador.documento" },
+    },
+    {
+      accessorKey: "tentativas",
+      header: "Tentativas",
+      cell: DefaultCell,
+      enableSorting: false,
+      enableColumnFilter: false,
+      meta: { filterKey: "tentativas" },
+    },
+    {
+      accessorKey: "erros",
+      header: "Errors",
+      cell: (props) => (
+        <Box minH="8" fontSize="sm" alignContent="center" px="1">
+          {props.getValue()?.length ?? 0}
+        </Box>
+      ),
+      enableSorting: false,
+      enableColumnFilter: false,
+      meta: { filterKey: "erros" },
     },
     {
       accessorKey: "arquivado",

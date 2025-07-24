@@ -46,7 +46,7 @@ export const createDynamicFormFields = () => {
       accessorKey: "email",
       label: "E-mail",
       render: DefaultField,
-      validation: z.string().email().optional().or(z.literal("")).nullable(),
+      validation: z.string().email({ message: "Email inválido." }),
       colSpan: 2,
     },
     {
