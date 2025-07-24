@@ -122,7 +122,6 @@ export const CreateTicketModal = ({
           fontSize="md"
           fontWeight="600"
           color="gray.600"
-          maxH="600px"
           overflowY="auto"
           className="dialog-custom-scrollbar"
         >
