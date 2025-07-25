@@ -9,7 +9,7 @@ import { formatDateToDDMMYYYY } from "../../../../../utils/formatting";
 export const PrestadorForm = ({ prestador, onlyReading }) => {
   const fields = useMemo(() => createDynamicFormFields(), []);
   const { inputsVisibility, setInputsVisibility } = useVisibleInputForm({
-    key: "INTEGRACAO_PRESTADORES_TICKET_MODAL_FORM",
+    key: "INTEGRACAO_PRESTADOR_FORM",
   });
 
   return (
