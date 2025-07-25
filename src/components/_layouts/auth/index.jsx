@@ -85,6 +85,10 @@ const navigationItems = [
         title: "Prestador omie -> central",
         href: "/integracao/prestador/omie-central",
       },
+      {
+        title: "Conta pagar central -> omie",
+        href: "/integracao/conta-pagar/central-omie",
+      },
     ],
   },
   {
