@@ -16,6 +16,7 @@ import { DeleteDocumentoFiscalAction } from "../../components/dataGrid/actions/d
 import { SelectAutoCompleteCell } from "../../components/dataGrid/cells/selectAutoComplete";
 import { DefaultEditableCell } from "../../components/dataGrid/cells/defaultEditable";
 import { DownloadFileAction } from "../../components/dataGrid/actions/downloadFileAction";
+import { DefaultCell } from "../../components/dataGrid/cells/default";
 
 export const makeDocumentoFiscalDynamicColumns = () => {
   return [
@@ -50,7 +51,16 @@ export const makeDocumentoFiscalDynamicColumns = () => {
         </TableActionsCell>
       ),
     },
-
+    {
+      accessorKey: "_id",
+      header: "ID",
+      cell: DefaultCell,
+      enableColumnFilter: true,
+      enableSorting: false,
+      meta: {
+        filterKey: "_id",
+      },
+    },
     {
       accessorKey: "prestador",
       header: "Prestador",

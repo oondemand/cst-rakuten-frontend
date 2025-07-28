@@ -61,7 +61,16 @@ export const makePrestadorDynamicColumns = () => {
         </TableActionsCell>
       ),
     },
-
+    {
+      accessorKey: "_id",
+      header: "ID",
+      cell: DefaultCell,
+      enableColumnFilter: true,
+      enableSorting: false,
+      meta: {
+        filterKey: "_id",
+      },
+    },
     {
       accessorKey: "sciUnico",
       header: "SCI Único",

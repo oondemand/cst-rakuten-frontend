@@ -114,7 +114,12 @@ export const CreateTicketModal = ({
         >
           <Flex gap="4" alignItems="center" mt="-4" py="2" px="4">
             <Oondemand />
-            <Heading fontSize="sm">Criar novo ticket</Heading>
+            <Flex gap="4" alignItems="baseline">
+              <Heading fontSize="sm">Criar novo ticket</Heading>
+              <Text fontSize="xs" fontWeight="normal" fontStyle="italic">
+                {ticket._id}
+              </Text>
+            </Flex>
           </Flex>
         </DialogTitle>
         <DialogBody

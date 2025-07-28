@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Text, IconButton } from "@chakra-ui/react";
+import { Box, Button, Flex, Text, IconButton, Heading } from "@chakra-ui/react";
 import { CloseButton } from "../../components/ui/close-button";
 
 import { useMemo, useState, useEffect } from "react";
@@ -231,7 +231,14 @@ export const DocumentosFiscaisDialog = ({
           >
             <DialogHeader mt="-4" py="2" px="4">
               <Flex gap="4">
-                <DialogTitle>{label}</DialogTitle>
+                <Flex gap="4" alignItems="baseline">
+                  <Heading>{label}</Heading>
+                  {data && (
+                    <Text fontSize="xs" fontWeight="normal" fontStyle="italic">
+                      {data._id}
+                    </Text>
+                  )}
+                </Flex>
                 <VisibilityControlDialog
                   fields={fields}
                   setVisibilityState={setInputsVisibility}

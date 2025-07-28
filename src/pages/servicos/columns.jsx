@@ -15,6 +15,7 @@ import { TableActionsCell } from "../../components/dataGrid/cells/tableActionsCe
 import { DeleteServicoAction } from "../../components/dataGrid/actions/deleteServicoButton";
 import { SelectAutoCompleteCell } from "../../components/dataGrid/cells/selectAutoComplete";
 import { DefaultEditableCell } from "../../components/dataGrid/cells/defaultEditable";
+import { DefaultCell } from "../../components/dataGrid/cells/default";
 
 export const makeServicoDynamicColumns = () => {
   return [
@@ -57,6 +58,16 @@ export const makeServicoDynamicColumns = () => {
           />
         </TableActionsCell>
       ),
+    },
+    {
+      accessorKey: "_id",
+      header: "ID",
+      cell: DefaultCell,
+      enableColumnFilter: true,
+      enableSorting: false,
+      meta: {
+        filterKey: "_id",
+      },
     },
     {
       accessorKey: "notaFiscal",

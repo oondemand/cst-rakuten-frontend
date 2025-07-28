@@ -1,4 +1,4 @@
-import { Box, Button, Flex } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, Text } from "@chakra-ui/react";
 import { CloseButton } from "../../components/ui/close-button";
 
 import { useEffect, useMemo, useState } from "react";
@@ -162,7 +162,18 @@ export const PrestadoresDialog = ({
             <DialogHeader mt="-4" py="2" px="4">
               <DialogTitle>
                 <Flex gap="4">
-                  {label}
+                  <Flex gap="4" alignItems="baseline">
+                    <Heading>{label}</Heading>
+                    {data && (
+                      <Text
+                        fontSize="xs"
+                        fontWeight="normal"
+                        fontStyle="italic"
+                      >
+                        {data._id}
+                      </Text>
+                    )}
+                  </Flex>
                   <VisibilityControlDialog
                     fields={fields}
                     setVisibilityState={setInputsVisibility}

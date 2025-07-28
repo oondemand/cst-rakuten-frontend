@@ -85,7 +85,8 @@ export const ServicosTomados = () => {
             ticket?.prestador?.sid
               ?.toString()
               ?.toLowerCase()
-              ?.includes(term.replace(/[^a-zA-Z0-9]/g, ""))
+              ?.includes(term.replace(/[^a-zA-Z0-9]/g, "")) ||
+            ticket?._id === term
           );
         })
       : data;

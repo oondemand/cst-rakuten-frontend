@@ -1,4 +1,4 @@
-import { Box, Button, Flex } from "@chakra-ui/react";
+import { Box, Button, Flex, Text, Heading } from "@chakra-ui/react";
 import { CloseButton } from "../../components/ui/close-button";
 
 import { useMemo, useState, useEffect } from "react";
@@ -20,6 +20,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from "../../components/ui/dialog";
+
+import { Oondemand } from "../../components/svg/oondemand";
 
 const DefaultTrigger = (props) => {
   return (
@@ -145,7 +147,14 @@ export const ServicosDialog = ({
           >
             <DialogHeader mt="-4" py="2" px="4">
               <Flex gap="4">
-                <DialogTitle>{label}</DialogTitle>
+                <Flex gap="4" alignItems="baseline">
+                  <Heading>{label}</Heading>
+                  {data && (
+                    <Text fontSize="xs" fontWeight="normal" fontStyle="italic">
+                      {data._id}
+                    </Text>
+                  )}
+                </Flex>
                 <VisibilityControlDialog
                   fields={fields}
                   setVisibilityState={setInputsVisibility}

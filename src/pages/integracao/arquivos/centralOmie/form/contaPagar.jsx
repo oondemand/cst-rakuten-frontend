@@ -12,19 +12,12 @@ export const ContaPagarForm = ({ contaPagar, onlyReading }) => {
     key: "INTEGRACAO_CONTA_PAGAR_FORM",
   });
 
-  console.log("Conta Pagar", contaPagar);
-
   return (
     <Grid mt="4" templateColumns="repeat(4, 1fr)" gap="4">
       <GridItem colSpan={1} mt="6">
-        <Box>
-          <Text color="gray.600" fontSize="sm">
-            Arquivos
-          </Text>
-          <Text fontSize="xs" fontWeight="normal">
-            {contaPagar?._id}
-          </Text>
-        </Box>
+        <Text color="gray.600" fontSize="sm">
+          Arquivos
+        </Text>
       </GridItem>
       <GridItem colSpan={3} mt="6">
         <Flex alignItems="center" gap="4" mb="6">

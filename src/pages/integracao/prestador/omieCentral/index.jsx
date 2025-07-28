@@ -93,7 +93,8 @@ export const IntegracaoPrestadorOmieCentralEsteira = () => {
             item?.prestador?.sid
               ?.toString()
               ?.toLowerCase()
-              ?.includes(term.replace(/[^a-zA-Z0-9]/g, ""))
+              ?.includes(term.replace(/[^a-zA-Z0-9]/g, "")) ||
+            item?._id === term
           );
         })
       : dataWithTitulo;

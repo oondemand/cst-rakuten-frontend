@@ -25,6 +25,16 @@ export const makeTicketsArquivadosDynamicColumns = () => {
       ),
     },
     {
+      accessorKey: "_id",
+      header: "ID",
+      cell: DefaultCell,
+      enableColumnFilter: true,
+      enableSorting: false,
+      meta: {
+        filterKey: "_id",
+      },
+    },
+    {
       accessorKey: "titulo",
       header: "Titulo",
       cell: DefaultCell,
