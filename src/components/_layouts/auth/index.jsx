@@ -89,6 +89,10 @@ const navigationItems = [
         title: "Conta pagar central -> omie",
         href: "/integracao/conta-pagar/central-omie",
       },
+      {
+        title: "Anexos central -> omie",
+        href: "/integracao/arquivos/central-omie",
+      },
     ],
   },
   {

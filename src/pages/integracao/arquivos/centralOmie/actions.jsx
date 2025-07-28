@@ -5,7 +5,7 @@ import { toaster } from "../../../../components/ui/toaster";
 import { useMutation } from "@tanstack/react-query";
 import { useConfirmation } from "../../../../hooks/useConfirmation";
 import { queryClient } from "../../../../config/react-query";
-import { IntegracaoContaPagarCentralOmieService } from "../../../../service/integracao/contaPagar/central-omie";
+import { IntegracaoArquivosCentralOmieService } from "../../../../service/integracao/arquivos/central-omie";
 
 export const TicketActions = ({ integracaoId, etapa }) => {
   const { setOpen } = useDialogContext();
@@ -14,7 +14,7 @@ export const TicketActions = ({ integracaoId, etapa }) => {
   const { mutateAsync: arquiveTicketMutation, isPending: isArquivePending } =
     useMutation({
       mutationFn: async () =>
-        await IntegracaoContaPagarCentralOmieService.arquivar({
+        await IntegracaoArquivosCentralOmieService.arquivar({
           id: integracaoId,
         }),
       onSuccess: () => {
@@ -36,7 +36,7 @@ export const TicketActions = ({ integracaoId, etapa }) => {
     isPending: isReprocessingPending,
   } = useMutation({
     mutationFn: async () =>
-      await IntegracaoContaPagarCentralOmieService.reprocessar({
+      await IntegracaoArquivosCentralOmieService.reprocessar({
         id: integracaoId,
       }),
     onSuccess: () => {
