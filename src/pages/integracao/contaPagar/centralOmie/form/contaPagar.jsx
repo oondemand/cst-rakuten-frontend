@@ -1,23 +1,26 @@
 import { Box, Flex, Grid, GridItem, Text } from "@chakra-ui/react";
 import { BuildForm } from "../../../../../components/buildForm";
 import { VisibilityControlDialog } from "../../../../../components/vibilityControlDialog";
-import { createDynamicFormFields } from "../../../../prestadores/formFields";
+import { createDynamicFormFields } from "./formFields";
 import { useMemo } from "react";
 import { useVisibleInputForm } from "../../../../../hooks/useVisibleInputForms";
 import { formatDateToDDMMYYYY } from "../../../../../utils/formatting";
 
-export const PrestadorForm = ({ prestador, onlyReading }) => {
+export const ContaPagarForm = ({ contaPagar, onlyReading }) => {
   const fields = useMemo(() => createDynamicFormFields(), []);
   const { inputsVisibility, setInputsVisibility } = useVisibleInputForm({
-    key: "INTEGRACAO_PRESTADORES_TICKET_MODAL_FORM",
+    key: "INTEGRACAO_CONTA_PAGAR_FORM",
   });
 
   return (
     <Grid mt="4" templateColumns="repeat(4, 1fr)" gap="4">
       <GridItem colSpan={1} mt="6">
-        <Box w="100px">
+        <Box>
           <Text color="gray.600" fontSize="sm">
-            Prestador
+            Conta Pagar
+          </Text>
+          <Text fontSize="xs" fontWeight="normal">
+            {contaPagar?._id}
           </Text>
         </Box>
       </GridItem>
@@ -34,15 +37,7 @@ export const PrestadorForm = ({ prestador, onlyReading }) => {
         <BuildForm
           disabled={onlyReading}
           fields={fields}
-          data={{
-            ...prestador,
-            pessoaFisica: {
-              ...prestador?.pessoaFisica,
-              dataNascimento: formatDateToDDMMYYYY(
-                prestador?.pessoaFisica?.dataNascimento
-              ),
-            },
-          }}
+          data={contaPagar}
           visibleState={inputsVisibility}
           onSubmit={() => {}}
           gridColumns={2}

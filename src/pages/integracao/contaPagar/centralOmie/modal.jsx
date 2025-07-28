@@ -21,7 +21,7 @@ import {
 import { queryClient } from "../../../../config/react-query";
 
 import { Oondemand } from "../../../../components/svg/oondemand";
-import { PrestadorForm } from "./form/prestador";
+import { ContaPagarForm } from "./form/contaPagar";
 import { TicketActions } from "./actions";
 
 import {
@@ -37,8 +37,6 @@ import "react-json-view-lite/dist/index.css";
 const customTheme = {};
 
 export const TicketDetailsModal = ({ open, setOpen, ticket, onlyReading }) => {
-  console.log("Ticket", ticket);
-
   return (
     <DialogRoot
       size="cover"
@@ -92,8 +90,8 @@ export const TicketDetailsModal = ({ open, setOpen, ticket, onlyReading }) => {
               disabled={onlyReading}
             />
           </Flex>
-          <PrestadorForm
-            prestador={ticket?.prestador}
+          <ContaPagarForm
+            contaPagar={{ ...ticket?.contaPagar, prestador: ticket?.prestador }}
             onlyReading={onlyReading}
           />
           <Grid mt="4" templateColumns="repeat(4, 1fr)" gap="4">

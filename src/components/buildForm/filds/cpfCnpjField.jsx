@@ -13,6 +13,12 @@ export const CpfCnpjField = ({ ...props }) => {
     ext: null,
   };
 
+  const formatBasedOnNumberOfCharacters = (str) => {
+    if (str?.length === 11) return "pf";
+    if (str?.length === 14) return "pj";
+    return "ext";
+  };
+
   return (
     <Box>
       <Text fontSize="sm" color="gray.700">
@@ -23,7 +29,12 @@ export const CpfCnpjField = ({ ...props }) => {
         size="sm"
         variant="flushed"
         disabled={props.disabled}
-        {...registerWithMask(props.accessorKey, rowMaskMap[tipo] ?? null)}
+        {...registerWithMask(
+          props.accessorKey,
+          rowMaskMap[
+            tipo ?? formatBasedOnNumberOfCharacters(props.initialValue)
+          ] ?? null
+        )}
       />
       <Text mt="0.5" fontSize="xs" color="red.400">
         {props.error}

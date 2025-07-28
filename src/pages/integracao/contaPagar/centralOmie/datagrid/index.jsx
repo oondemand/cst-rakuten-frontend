@@ -3,7 +3,7 @@ import { useFilters } from "../../../../../hooks/useFilters";
 import { useColumnVisibility } from "../../../../../hooks/useColumnVisibility";
 import { useColumnSizing } from "../../../../../hooks/useColumnSizing";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import { IntegracaoPrestadorCentralOmieService } from "../../../../../service/integracao/prestador/central-omie";
+import { IntegracaoContaPagarCentralOmieService } from "../../../../../service/integracao/contaPagar/central-omie";
 import { sortByToState, stateToSortBy } from "../../../../../utils/sorting";
 import { useMemo } from "react";
 import { makeTicketsArquivadosDynamicColumns } from "./columns";
@@ -11,13 +11,13 @@ import { VisibilityControlDialog } from "../../../../../components/vibilityContr
 import { DataGrid } from "../../../../../components/dataGrid";
 import { DebouncedInput } from "../../../../../components/DebouncedInput";
 
-export const IntegracaoPrestadorCentralOmieDatagrid = () => {
+export const IntegracaoContaPagarCentralOmieDatagrid = () => {
   const { filters, resetFilters, setFilters } = useFilters({
-    key: "PRESTADOR-CENTRAL-OMIE-TICKETS",
+    key: "INTEGRACAO-CONTA-PAGAR-CENTRAL-OMIE",
   });
 
   const { columnVisibility, setColumnVisibility } = useColumnVisibility({
-    key: "PRESTADOR-CENTRAL-OMIE-TICKETS",
+    key: "INTEGRACAO-CONTA-PAGAR-CENTRAL-OMIE",
   });
 
   const {
@@ -26,13 +26,13 @@ export const IntegracaoPrestadorCentralOmieDatagrid = () => {
     setColumnSizing,
     setColumnSizingInfo,
   } = useColumnSizing({
-    key: "PRESTADOR-CENTRAL-OMIE-TICKETS",
+    key: "INTEGRACAO-CONTA-PAGAR-CENTRAL-OMIE",
   });
 
   const { data, error, isLoading, isFetching } = useQuery({
-    queryKey: ["listar-tickets-arquivados", { filters }],
+    queryKey: ["listar-integracao-conta-pagar-central-omie", { filters }],
     queryFn: async () =>
-      await IntegracaoPrestadorCentralOmieService.listarComPaginacao({
+      await IntegracaoContaPagarCentralOmieService.listarComPaginacao({
         filtros: filters,
       }),
     placeholderData: keepPreviousData,
@@ -59,7 +59,7 @@ export const IntegracaoPrestadorCentralOmieDatagrid = () => {
     >
       <Box>
         <Text fontSize="lg" color="gray.700" fontWeight="semibold">
-          Integrações prestador central {"->"} omie arquivadas
+          Integrações conta pagar central {"->"} omie
         </Text>
         <Box mt="4" bg="white" py="6" px="4" rounded="lg" shadow="xs">
           <Flex
