@@ -18,7 +18,7 @@ import {
 } from "lucide-react";
 
 import { NavLink } from "./navLink";
-import { invertedChart } from "../../svg/invertedChart";
+import { InvertedChart } from "../../svg/invertedChart";
 
 import { Link } from "react-router-dom";
 import { useConfirmation } from "../../../hooks/useConfirmation";
@@ -38,7 +38,7 @@ const navigationItems = [
   },
   {
     title: "Central Serviços Tomados",
-    icon: invertedChart,
+    icon: InvertedChart,
     href: "/servicos-tomados",
     rules: ["admin", "tomador", "contabilidade"],
   },
@@ -90,7 +90,7 @@ const navigationItems = [
         href: "/integracao/conta-pagar/central-omie",
       },
       {
-        title: "Anexos central -> omie",
+        title: "Arquivos central -> omie",
         href: "/integracao/arquivos/central-omie",
       },
     ],

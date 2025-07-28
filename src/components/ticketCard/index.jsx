@@ -251,7 +251,9 @@ const _TicketCard = ({ ticket }) => {
           defaultValue={ticket}
           open={open}
           setOpen={setOpen}
-          onlyReading={ticket?.etapa === "integracao-omie"}
+          onlyReading={["integracao-omie", "conta-pagar-central-omie"].includes(
+            ticket?.etapa
+          )}
         />
       )}
     </Box>

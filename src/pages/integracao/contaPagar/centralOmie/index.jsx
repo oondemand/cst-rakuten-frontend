@@ -55,7 +55,7 @@ export const IntegracaoContaPagarCentralOmieEsteira = () => {
     { codigo: "reprocessar", nome: "Reprocessar" },
     { codigo: "processando", nome: "Processando" },
     { codigo: "falhas", nome: "Falhas" },
-    { codigo: "upload_arquivos", nome: "Upload de arquivos" },
+    { codigo: "upload_arquivos", nome: "Anexos" },
     { codigo: "sucesso", nome: "Sucesso" },
   ];
 

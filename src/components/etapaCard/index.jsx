@@ -5,7 +5,7 @@ import { useRef, useMemo } from "react";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import "./custom-scrollbar.css";
 
-const _Etapa = ({ etapa, tickets, action, card }) => {
+const _Etapa = ({ etapa, tickets, action, card, bg = "#E8ECEF" }) => {
   const etapaTickets = useMemo(
     () => tickets.filter((ticket) => ticket.etapa === etapa.codigo),
     [tickets, etapa.codigo]
@@ -21,11 +21,7 @@ const _Etapa = ({ etapa, tickets, action, card }) => {
   });
 
   return (
-    <Box
-      bg="#E8ECEF"
-      rounded="lg"
-      boxShadow=" 0px 1px 2px 0px rgba(0, 0, 0, 0.05)"
-    >
+    <Box bg={bg} rounded="lg" boxShadow=" 0px 1px 2px 0px rgba(0, 0, 0, 0.05)">
       <Box borderBottom="1px solid" borderColor="gray.100" py="2" px="3">
         <Flex alignItems="center" justifyContent="space-between">
           <Heading color="gray.700" fontSize="14px">

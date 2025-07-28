@@ -83,7 +83,10 @@ export const TicketActions = ({ ticketId, etapa }) => {
             await aproveTicketMutation();
             setOpen(false);
           }}
-          disabled={etapa === "integracao-omie" || isAprovePending}
+          disabled={
+            ["integracao-omie", "conta-pagar-central-omie"].includes(etapa) ||
+            isAprovePending
+          }
           variant="surface"
           shadow="xs"
           colorPalette="green"
@@ -93,9 +96,11 @@ export const TicketActions = ({ ticketId, etapa }) => {
         </Button>
         <Button
           disabled={
-            etapa === "requisicao" ||
-            etapa === "integracao-omie" ||
-            isReprovePending
+            [
+              "integracao-omie",
+              "conta-pagar-central-omie",
+              "requisicao",
+            ].includes(etapa) || isReprovePending
           }
           onClick={async (e) => {
             await reproveTicketMutation();

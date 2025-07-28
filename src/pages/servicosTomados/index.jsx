@@ -164,6 +164,9 @@ export const ServicosTomados = () => {
                 >
                   <Etapa
                     etapa={etapa}
+                    {...(etapa.codigo === "conta-pagar-central-omie" && {
+                      bg: "#dcdcdcff",
+                    })}
                     tickets={filteredTickets}
                     card={TicketCard}
                     action={EtapaActions}
