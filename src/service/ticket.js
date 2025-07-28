@@ -15,8 +15,8 @@ const carregarTicket = async (id) => {
   return response.data;
 };
 
-const listarTickets = async (filtro) => {
-  const { data } = await api.get("/tickets", { params: filtro });
+const listarTickets = async ({ filters }) => {
+  const { data } = await api.get("/tickets", { params: filters });
   return data;
 };
 
