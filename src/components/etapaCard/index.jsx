@@ -17,7 +17,11 @@ const _Etapa = ({ etapa, tickets, action, card, bg = "#E8ECEF" }) => {
     count: etapaTickets.length,
     getScrollElement: () => parentRef.current,
     estimateSize: () =>
-      ["integracao-omie", "conta-pagar-central-omie"].includes(etapa.codigo)
+      [
+        "concluido",
+        "conta-pagar-central-omie",
+        "conta-pagar-omie-central",
+      ].includes(etapa.codigo)
         ? 110
         : 85,
     overscan: 1,
