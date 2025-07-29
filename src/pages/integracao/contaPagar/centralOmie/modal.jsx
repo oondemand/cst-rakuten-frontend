@@ -115,7 +115,7 @@ export const TicketDetailsModal = ({ open, setOpen, ticket, onlyReading }) => {
                 borderColor="gray.100"
               />
               <Box mt="8">
-                {ticket?.payload && (
+                {ticket?.requisicao && (
                   <Box bg="gray.50" p="4" rounded="sm" mb="4">
                     <Text fontSize="sm" color="gray.600" mb="2.5">
                       Url:
@@ -127,7 +127,7 @@ export const TicketDetailsModal = ({ open, setOpen, ticket, onlyReading }) => {
                       fontWeight="medium"
                       mb="4"
                     >
-                      {ticket?.payload?.url || "N/A"}
+                      {ticket?.requisicao?.url || "N/A"}
                     </Box>
                     <Text fontSize="sm" color="gray.600" mb="2.5">
                       Body:
@@ -135,7 +135,7 @@ export const TicketDetailsModal = ({ open, setOpen, ticket, onlyReading }) => {
                     <Box p="2.5" bg="white" rounded="sm" fontWeight="normal">
                       <JsonView
                         container={{ backgroundColor: "red" }}
-                        data={ticket?.payload?.body}
+                        data={ticket?.requisicao?.body}
                         shouldExpandNode={collapseAllNested}
                         style={customTheme}
                       />
