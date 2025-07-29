@@ -26,11 +26,6 @@ import {
   SelectItem,
 } from "../../components/ui/select";
 
-const etapaIntegracaoOmie = {
-  nome: "Concluido",
-  codigo: "integracao-omie",
-};
-
 const selectTimeOptions = createListCollection({
   items: [
     { value: 1, label: "1 dia" },
@@ -178,14 +173,6 @@ export const ServicosTomados = () => {
                   />
                 </SwiperSlide>
               ))}
-              <SwiperSlide style={{ minWidth: "250px", maxWidth: "250px" }}>
-                <Etapa
-                  etapa={etapaIntegracaoOmie}
-                  tickets={filteredTickets}
-                  card={TicketCard}
-                  action={EtapaActions}
-                />
-              </SwiperSlide>
             </Swiper>
           )}
       </Flex>
