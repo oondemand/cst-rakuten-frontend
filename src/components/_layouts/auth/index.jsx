@@ -90,7 +90,7 @@ const navigationItems = [
         href: "/integracao/conta-pagar/central-omie",
       },
       {
-        title: "Arquivos central -> omie",
+        title: "Anexos central -> omie",
         href: "/integracao/arquivos/central-omie",
       },
     ],

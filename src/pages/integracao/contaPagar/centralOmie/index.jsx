@@ -30,6 +30,7 @@ import {
   SelectItem,
 } from "../../../../components/ui/select";
 import { Link } from "react-router-dom";
+import { EtapaActions } from "./etapaAction";
 
 const selectTimeOptions = createListCollection({
   items: [
@@ -55,7 +56,7 @@ export const IntegracaoContaPagarCentralOmieEsteira = () => {
     { codigo: "reprocessar", nome: "Reprocessar" },
     { codigo: "processando", nome: "Processando" },
     { codigo: "falhas", nome: "Falhas" },
-    { codigo: "upload_arquivos", nome: "Anexos" },
+    { codigo: "upload_arquivos", nome: "-> Anexos -> Omie" },
     { codigo: "sucesso", nome: "Sucesso" },
   ];
 
@@ -211,7 +212,15 @@ export const IntegracaoContaPagarCentralOmieEsteira = () => {
                 key={etapa.codigo}
                 style={{ minWidth: "250px", maxWidth: "250px" }}
               >
-                <Etapa etapa={etapa} tickets={refactoredTickets} card={Card} />
+                <Etapa
+                  etapa={etapa}
+                  {...(etapa.codigo === "upload_arquivos" && {
+                    bg: "#dcdcdcff",
+                  })}
+                  action={EtapaActions}
+                  tickets={refactoredTickets}
+                  card={Card}
+                />
               </SwiperSlide>
             ))}
           </Swiper>
