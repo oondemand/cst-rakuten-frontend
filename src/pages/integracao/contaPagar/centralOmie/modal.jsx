@@ -65,7 +65,7 @@ export const TicketDetailsModal = ({ open, setOpen, ticket, onlyReading }) => {
             <Flex gap="4" alignItems="baseline">
               <Heading fontSize="sm">Detalhes</Heading>
               <Text fontSize="xs" fontWeight="normal" fontStyle="italic">
-                {ticket._id}
+                {ticket?.contaPagarId}
               </Text>
             </Flex>
           </Flex>

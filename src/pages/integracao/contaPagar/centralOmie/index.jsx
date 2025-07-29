@@ -95,12 +95,11 @@ export const IntegracaoContaPagarCentralOmieEsteira = () => {
               ?.toString()
               ?.toLowerCase()
               ?.includes(term.replace(/[^a-zA-Z0-9]/g, "")) ||
-            item?._id === term
+            item?._id === term ||
+            item?.ticketId === term
           );
         })
       : dataWithTitulo;
-
-  // const refactoredTickets = data;
 
   return (
     <Flex flex="1" flexDir="column" py="8" px="6" bg="#F8F9FA">

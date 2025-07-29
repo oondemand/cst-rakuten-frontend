@@ -15,6 +15,8 @@ import { CpfCnpjField } from "../../../../../components/buildForm/filds/cpfCnpjF
 
 // const ContaPagarSchema = new mongoose.Schema({
 //   baseOmie: { type: Schema.Types.ObjectId, ref: "BaseOmie" },
+//   data_previsao: { type: String },
+//   data_entrada: { type: String },
 //   codigo_lancamento_omie: { type: Number },
 //   codigo_lancamento_integracao: { type: String },
 //   data_vencimento: { type: String },
@@ -25,6 +27,8 @@ import { CpfCnpjField } from "../../../../../components/buildForm/filds/cpfCnpjF
 //   numero_parcela: { type: String },
 //   status_titulo: { type: String },
 //   valor_pag: { type: Number },
+//   codigo_categoria: { type: String },
+//   observacao: { type: String },
 // });
 
 export const createDynamicFormFields = () => {
@@ -60,6 +64,24 @@ export const createDynamicFormFields = () => {
       colSpan: 1,
     },
     {
+      accessorKey: "numero_documento",
+      label: "Numero do documento",
+      render: DefaultField,
+      colSpan: 1,
+    },
+    {
+      accessorKey: "numero_documento_fiscal",
+      label: "Numero do documento fiscal",
+      render: DefaultField,
+      colSpan: 1,
+    },
+    {
+      accessorKey: "codigo_categoria",
+      label: "Código da categoria",
+      render: DefaultField,
+      colSpan: 1,
+    },
+    {
       accessorKey: "data_emissao",
       label: "Data de emissão",
       render: DateField,
@@ -70,6 +92,24 @@ export const createDynamicFormFields = () => {
       label: "Data de vencimento",
       render: DateField,
       colSpan: 1,
+    },
+    {
+      accessorKey: "data_previsao",
+      label: "Data de Previsão",
+      render: DateField,
+      colSpan: 1,
+    },
+    {
+      accessorKey: "data_entrada",
+      label: "Data de Previsão",
+      render: DateField,
+      colSpan: 1,
+    },
+    {
+      accessorKey: "observacao",
+      label: "Observação",
+      render: DefaultField,
+      colSpan: 2,
     },
   ];
 };

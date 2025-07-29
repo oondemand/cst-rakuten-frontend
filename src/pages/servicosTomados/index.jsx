@@ -27,7 +27,7 @@ import {
 } from "../../components/ui/select";
 
 const etapaIntegracaoOmie = {
-  nome: "Financeiro",
+  nome: "Concluido",
   codigo: "integracao-omie",
 };
 
@@ -77,6 +77,7 @@ export const ServicosTomados = () => {
     searchTerm?.toLowerCase()?.trim()?.length > 2
       ? data?.filter((ticket) => {
           const term = searchTerm?.toLowerCase()?.trim();
+
           return (
             ticket?.titulo?.toLowerCase()?.includes(term) ||
             ticket?.prestador?.documento
@@ -86,7 +87,8 @@ export const ServicosTomados = () => {
               ?.toString()
               ?.toLowerCase()
               ?.includes(term.replace(/[^a-zA-Z0-9]/g, "")) ||
-            ticket?._id === term
+            ticket?._id === term ||
+            ticket?.contaPagarOmie?._id === term
           );
         })
       : data;
@@ -164,7 +166,10 @@ export const ServicosTomados = () => {
                 >
                   <Etapa
                     etapa={etapa}
-                    {...(etapa.codigo === "conta-pagar-central-omie" && {
+                    {...([
+                      "conta-pagar-central-omie",
+                      "conta-pagar-omie-central",
+                    ].includes(etapa.codigo) && {
                       bg: "#dcdcdcff",
                     })}
                     tickets={filteredTickets}

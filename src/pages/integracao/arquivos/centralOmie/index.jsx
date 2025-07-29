@@ -93,7 +93,8 @@ export const IntegracaoArquivosCentralOmieEsteira = () => {
               ?.toString()
               ?.toLowerCase()
               ?.includes(term.replace(/[^a-zA-Z0-9]/g, "")) ||
-            item?._id === term
+            item?._id === term ||
+            item?.contaPagarId === term
           );
         })
       : dataWithTitulo;

@@ -115,10 +115,14 @@ export const CreateTicketModal = ({
           <Flex gap="4" alignItems="center" mt="-4" py="2" px="4">
             <Oondemand />
             <Flex gap="4" alignItems="baseline">
-              <Heading fontSize="sm">Criar novo ticket</Heading>
-              <Text fontSize="xs" fontWeight="normal" fontStyle="italic">
-                {ticket._id}
-              </Text>
+              <Heading fontSize="sm">
+                {ticket ? "Detalhes" : "Criar novo ticket"}
+              </Heading>
+              {ticket?._id && (
+                <Text fontSize="xs" fontWeight="normal" fontStyle="italic">
+                  {ticket._id}
+                </Text>
+              )}
             </Flex>
           </Flex>
         </DialogTitle>
