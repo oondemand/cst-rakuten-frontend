@@ -65,7 +65,7 @@ export const TicketDetailsModal = ({ open, setOpen, ticket, onlyReading }) => {
             <Flex gap="4" alignItems="baseline">
               <Heading fontSize="sm">Detalhes</Heading>
               <Text fontSize="xs" fontWeight="normal" fontStyle="italic">
-                {ticket._id}
+                {ticket?.prestadorId}
               </Text>
             </Flex>
           </Flex>
@@ -79,21 +79,7 @@ export const TicketDetailsModal = ({ open, setOpen, ticket, onlyReading }) => {
           className="dialog-custom-scrollbar"
         >
           <Flex mt="7" w="full" gap="4" justifyContent="space-between">
-            <Input
-              autoComplete="off"
-              fontSize="md"
-              borderBottom="none"
-              focusRing="transparent"
-              focusRingColor="transparent"
-              outline="none"
-              name="titulo"
-              bg="white"
-              variant="subtle"
-              size="sm"
-              px="0"
-              defaultValue={ticket?.prestador?.titulo}
-              disabled={onlyReading}
-            />
+            <Text fontSize="md">{ticket?.prestador?.titulo}</Text>
           </Flex>
           <PrestadorForm
             prestador={ticket?.prestador}

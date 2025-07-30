@@ -93,7 +93,7 @@ export const IntegracaoPrestadorCentralOmieEsteira = () => {
               ?.toString()
               ?.toLowerCase()
               ?.includes(term.replace(/[^a-zA-Z0-9]/g, "")) ||
-            item?._id === term
+            item?.prestador?._id === term
           );
         })
       : dataWithTitulo;
@@ -124,7 +124,7 @@ export const IntegracaoPrestadorCentralOmieEsteira = () => {
             />
           </Tooltip>
           <Tooltip
-            content="Arquivados"
+            content="Visualizar todos em tabela"
             positioning={{ placement: "top" }}
             openDelay={500}
             closeDelay={50}

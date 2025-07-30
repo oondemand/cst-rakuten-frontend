@@ -127,7 +127,7 @@ export const IntegracaoContaPagarCentralOmieEsteira = () => {
             />
           </Tooltip>
           <Tooltip
-            content="Arquivados"
+            content="Visualizar todos em tabela"
             positioning={{ placement: "top" }}
             openDelay={500}
             closeDelay={50}

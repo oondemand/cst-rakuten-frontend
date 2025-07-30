@@ -18,7 +18,7 @@ export const NavLink = ({ to, title, icon, i, ...props }) => {
       px={icon ? "2" : "4"}
       focusRingColor="transparent"
       _hover={{ backgroundColor: "gray.50" }}
-      bg={location.pathname == to ? "gray.50" : "white"}
+      bg={location.pathname == to ? "#F8F9FA" : "white"}
       color={
         location.pathname == to ? "gray.800" : icon ? "gray.500" : "gray.500"
       }

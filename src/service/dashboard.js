@@ -15,10 +15,8 @@ const obterTicketsPorEtapa = async () => {
   return data;
 };
 
-const integracaoPrestadorCentralOmie = async () => {
-  const { data } = await api.get(
-    "/dashboard/integracao/prestador/central-omie"
-  );
+const integracao = async () => {
+  const { data } = await api.get("/dashboard/integracao");
   return data;
 };
 
@@ -26,5 +24,5 @@ export const DashboardService = {
   obterValoresPorStatus,
   obterTicketsPorStatus,
   obterTicketsPorEtapa,
-  integracaoPrestadorCentralOmie,
+  integracao,
 };

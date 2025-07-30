@@ -105,7 +105,7 @@ export const IntegracaoContaPagarOmieCentralEsteira = () => {
       <Flex pb="4" justifyContent="space-between">
         <Flex alignItems="flex-end" gap="2">
           <Heading color="gray.700" fontSize="2xl" mr="2">
-            Integração conta pagar omie {"->"} central
+            Integração conta pagar central {"<-"} Omie
           </Heading>
           <Tooltip
             content="Sincronizar com omie"
@@ -126,7 +126,7 @@ export const IntegracaoContaPagarOmieCentralEsteira = () => {
             />
           </Tooltip>
           <Tooltip
-            content="Arquivados"
+            content="Visualizar todos em tabela"
             positioning={{ placement: "top" }}
             openDelay={500}
             closeDelay={50}
@@ -137,7 +137,7 @@ export const IntegracaoContaPagarOmieCentralEsteira = () => {
               },
             }}
           >
-            <Link to="/integracao/conta-pagar/central-omie/todos">
+            <Link to="/integracao/conta-pagar/omie-central/todos">
               <Button
                 color="purple.700"
                 bg="purple.200"

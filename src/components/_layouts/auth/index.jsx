@@ -82,7 +82,7 @@ const navigationItems = [
         href: "/integracao/prestador/central-omie",
       },
       {
-        title: "Prestador omie -> central",
+        title: "Prestador central <- omie",
         href: "/integracao/prestador/omie-central",
       },
       {
@@ -95,7 +95,7 @@ const navigationItems = [
       },
       {
         title: "Anexos central -> omie",
-        href: "/integracao/arquivos/central-omie",
+        href: "/integracao/anexos/central-omie",
       },
     ],
   },
@@ -170,17 +170,18 @@ export const AuthLayout = () => {
       <Flex
         pt="4"
         flexDir="column"
-        maxW="160px"
-        minW="160px"
-        w="160px"
-        borderRight="1px solid"
-        borderColor="gray.100"
+        maxW="165px"
+        minW="165px"
+        w="165px"
         gap="2"
+        maxH="vh"
+        overflowY="auto"
+        className="custom-scrollbar"
+        pb="8"
       >
         <Flex
           pb="2"
           mb="1"
-          w="full"
           alignItems="center"
           justifyContent="center"
           borderBottom="1px solid"

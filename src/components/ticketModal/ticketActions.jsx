@@ -84,8 +84,11 @@ export const TicketActions = ({ ticketId, etapa }) => {
             setOpen(false);
           }}
           disabled={
-            ["integracao-omie", "conta-pagar-central-omie"].includes(etapa) ||
-            isAprovePending
+            [
+              "integracao-omie",
+              "conta-pagar-central-omie",
+              "conta-pagar-omie-central",
+            ].includes(etapa) || isAprovePending
           }
           variant="surface"
           shadow="xs"
@@ -99,6 +102,7 @@ export const TicketActions = ({ ticketId, etapa }) => {
             [
               "integracao-omie",
               "conta-pagar-central-omie",
+              "conta-pagar-omie-central",
               "requisicao",
             ].includes(etapa) || isReprovePending
           }

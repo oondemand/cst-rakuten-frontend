@@ -3,7 +3,7 @@ import { useFilters } from "../../../../../hooks/useFilters";
 import { useColumnVisibility } from "../../../../../hooks/useColumnVisibility";
 import { useColumnSizing } from "../../../../../hooks/useColumnSizing";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import { IntegracaoContaPagarCentralOmieService } from "../../../../../service/integracao/contaPagar/central-omie";
+import { IntegracaoContaPagarOmieCentralService } from "../../../../../service/integracao/contaPagar/omie-central";
 import { sortByToState, stateToSortBy } from "../../../../../utils/sorting";
 import { useMemo } from "react";
 import { makeTicketsArquivadosDynamicColumns } from "./columns";
@@ -11,13 +11,13 @@ import { VisibilityControlDialog } from "../../../../../components/vibilityContr
 import { DataGrid } from "../../../../../components/dataGrid";
 import { DebouncedInput } from "../../../../../components/DebouncedInput";
 
-export const IntegracaoContaPagarCentralOmieDatagrid = () => {
+export const IntegracaoContaPagarOmieCentralDatagrid = () => {
   const { filters, resetFilters, setFilters } = useFilters({
-    key: "INTEGRACAO-CONTA-PAGAR-CENTRAL-OMIE",
+    key: "INTEGRACAO-CONTA-PAGAR-OMIE-CENTRAL",
   });
 
   const { columnVisibility, setColumnVisibility } = useColumnVisibility({
-    key: "INTEGRACAO-CONTA-PAGAR-CENTRAL-OMIE",
+    key: "INTEGRACAO-CONTA-PAGAR-OMIE-CENTRAL",
   });
 
   const {
@@ -26,13 +26,13 @@ export const IntegracaoContaPagarCentralOmieDatagrid = () => {
     setColumnSizing,
     setColumnSizingInfo,
   } = useColumnSizing({
-    key: "INTEGRACAO-CONTA-PAGAR-CENTRAL-OMIE",
+    key: "INTEGRACAO-CONTA-PAGAR-OMIE-CENTRAL",
   });
 
   const { data, error, isLoading, isFetching } = useQuery({
-    queryKey: ["listar-integracao-conta-pagar-central-omie", { filters }],
+    queryKey: ["listar-integracao-conta-pagar-omie-central", { filters }],
     queryFn: async () =>
-      await IntegracaoContaPagarCentralOmieService.listarComPaginacao({
+      await IntegracaoContaPagarOmieCentralService.listarComPaginacao({
         filtros: filters,
       }),
     placeholderData: keepPreviousData,
@@ -59,7 +59,7 @@ export const IntegracaoContaPagarCentralOmieDatagrid = () => {
     >
       <Box>
         <Text fontSize="lg" color="gray.700" fontWeight="semibold">
-          Integrações conta pagar central {"->"} omie
+          Integrações conta pagar central {"<-"} omie
         </Text>
         <Box mt="4" bg="white" py="6" px="4" rounded="lg" shadow="xs">
           <Flex

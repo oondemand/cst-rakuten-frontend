@@ -37,6 +37,8 @@ import "react-json-view-lite/dist/index.css";
 const customTheme = {};
 
 export const TicketDetailsModal = ({ open, setOpen, ticket, onlyReading }) => {
+  console.log("Ticket", ticket);
+
   return (
     <DialogRoot
       size="cover"
@@ -83,7 +85,10 @@ export const TicketDetailsModal = ({ open, setOpen, ticket, onlyReading }) => {
           </Flex>
           {ticket.contaPagar && (
             <ContaPagarForm
-              contaPagar={ticket?.contaPagar}
+              contaPagar={{
+                ...ticket?.contaPagar,
+                prestador: ticket?.prestador,
+              }}
               onlyReading={onlyReading}
             />
           )}

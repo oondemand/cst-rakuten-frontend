@@ -104,7 +104,7 @@ export const IntegracaoPrestadorOmieCentralEsteira = () => {
       <Flex pb="4" justifyContent="space-between">
         <Flex alignItems="flex-end" gap="2">
           <Heading color="gray.700" fontSize="2xl" mr="2">
-            Integração prestador central {"->"} Omie
+            Integração prestador central {"<-"} Omie
           </Heading>
           <Tooltip
             content="Sincronizar com omie"
@@ -125,7 +125,7 @@ export const IntegracaoPrestadorOmieCentralEsteira = () => {
             />
           </Tooltip>
           <Tooltip
-            content="Arquivados"
+            content="Visualizar todos em tabela"
             positioning={{ placement: "top" }}
             openDelay={500}
             closeDelay={50}

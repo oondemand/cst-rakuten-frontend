@@ -33,6 +33,7 @@ import {
 
 import { JsonView, allExpanded, collapseAllNested } from "react-json-view-lite";
 import "react-json-view-lite/dist/index.css";
+import { Download, Paperclip } from "lucide-react";
 
 const customTheme = {};
 
@@ -79,26 +80,17 @@ export const TicketDetailsModal = ({ open, setOpen, ticket, onlyReading }) => {
           className="dialog-custom-scrollbar"
         >
           <Flex mt="7" w="full" gap="4" justifyContent="space-between">
-            <Input
-              autoComplete="off"
-              fontSize="md"
-              borderBottom="none"
-              focusRing="transparent"
-              focusRingColor="transparent"
-              outline="none"
-              name="titulo"
-              bg="white"
-              variant="subtle"
-              size="sm"
-              px="0"
-              defaultValue={ticket?.prestador?.titulo}
-              disabled={onlyReading}
-            />
+            <Text fontSize="md">{ticket?.prestador?.titulo}</Text>
           </Flex>
           <ContaPagarForm
-            contaPagar={{ ...ticket?.contaPagar, prestador: ticket?.prestador }}
+            contaPagar={{
+              ...ticket?.contaPagar,
+              prestador: ticket?.prestador,
+              arquivo: ticket.arquivo,
+            }}
             onlyReading={onlyReading}
           />
+
           <Grid mt="4" templateColumns="repeat(4, 1fr)" gap="4">
             <GridItem colSpan={1} mt="6">
               <Box w="100px">

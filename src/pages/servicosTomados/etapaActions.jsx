@@ -104,4 +104,33 @@ export const EtapaActions = ({ etapa }) => {
       </Tooltip>
     );
   }
+
+  if (etapa.codigo === "conta-pagar-omie-central") {
+    return (
+      <Tooltip
+        content="Conta pagar central <- omie"
+        positioning={{ placement: "top" }}
+        openDelay={700}
+        closeDelay={50}
+        contentProps={{
+          css: {
+            "--tooltip-bg": "white",
+            color: "gray.600",
+          },
+        }}
+      >
+        <Link to="/integracao/conta-pagar/omie-central" viewTransition>
+          <Text
+            p="1"
+            rounded="full"
+            _hover={{ bg: "gray.200" }}
+            color="brand.500"
+            cursor="pointer"
+          >
+            <InvertedChart />
+          </Text>
+        </Link>
+      </Tooltip>
+    );
+  }
 };

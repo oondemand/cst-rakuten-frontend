@@ -16,6 +16,7 @@ import { FileCheck2, PiggyBank, RotateCcw, Wallet } from "lucide-react";
 import { DashboardService } from "../../service/dashboard";
 
 import { currency } from "../../utils/currency";
+import { IntegracaoCard } from "./integracaoCard";
 
 export const Dashboard = () => {
   const { data: valoresPorStatus } = useQuery({
@@ -39,8 +40,8 @@ export const Dashboard = () => {
     placeholderData: keepPreviousData,
   });
 
-  const { data: integracaoPrestadorCentralOmie } = useQuery({
-    queryFn: DashboardService.integracaoPrestadorCentralOmie,
+  const { data: integracao } = useQuery({
+    queryFn: DashboardService.integracao,
     queryKey: ["dashboard-integracao-prestador-central-omie"],
     staleTime: 1000 * 60, //1m
     placeholderData: keepPreviousData,
@@ -53,6 +54,8 @@ export const Dashboard = () => {
   const quantidadeTotalDeServicos = valoresPorStatus?.reduce((acc, cur) => {
     return acc + cur.count;
   }, 0);
+
+  console.log("Integrações", integracao);
 
   const servicoStatusColorMap = {
     processando: "purple.500",
@@ -69,14 +72,6 @@ export const Dashboard = () => {
     revisao: "red.500",
     concluido: "blue.500",
     arquivado: "gray.500",
-  };
-
-  const integracaoEtapaColorMap = {
-    processando: "yellow.400",
-    falhas: "red.400",
-    requisicao: "gray.300",
-    sucesso: "green.500",
-    reprocessar: "gray.300",
   };
 
   const ticketEtapaMap = {
@@ -331,58 +326,50 @@ export const Dashboard = () => {
 
       <Box mt="8">
         <Text color="gray.400" fontSize="sm">
-          Integração com Omie
+          Integrações com Omie
         </Text>
-        {integracaoPrestadorCentralOmie && (
-          <Flex gap="10" mt="4">
-            <Box maxW="600px" bg="white" p="4" rounded="2xl">
-              <Text fontWeight="semibold">Prestador central {"->"} Omie</Text>
-              <Table.Root mt="4">
-                <Table.Header>
-                  <Table.Row>
-                    <Table.ColumnHeader
-                      fontSize="xs"
-                      color="gray.500"
-                      fontWeight="light"
-                      py="1"
-                    >
-                      STATUS
-                    </Table.ColumnHeader>
-                    <Table.ColumnHeader
-                      fontSize="xs"
-                      color="gray.500"
-                      fontWeight="light"
-                      py="1"
-                    >
-                      QUANTIDADE
-                    </Table.ColumnHeader>
-                  </Table.Row>
-                </Table.Header>
-                <Table.Body>
-                  {integracaoPrestadorCentralOmie?.map((item) => (
-                    <Table.Row>
-                      <Table.Cell
-                        display="flex"
-                        gap="2"
-                        alignItems="center"
-                        border="none"
-                      >
-                        <Box
-                          h="3"
-                          w="3"
-                          rounded="full"
-                          bg={integracaoEtapaColorMap[item.etapa]}
-                        />
-                        {item.etapa}
-                      </Table.Cell>
-                      <Table.Cell border="none">{item.count}</Table.Cell>
-                    </Table.Row>
-                  ))}
-                </Table.Body>
-              </Table.Root>
-            </Box>
-          </Flex>
-        )}
+
+        <Flex gap="10" mt="4" alignItems="flex-start">
+          {integracao?.prestador?.centralOmie && (
+            <IntegracaoCard
+              title="Prestador central -> omie"
+              link="/integracao/prestador/central-omie"
+              integracao={integracao.prestador.centralOmie}
+            />
+          )}
+
+          {integracao?.prestador?.omieCentral && (
+            <IntegracaoCard
+              title="Prestador central <- omie"
+              link="/integracao/prestador/omie-central"
+              integracao={integracao.prestador.omieCentral}
+            />
+          )}
+
+          {integracao?.contaPagar?.centralOmie && (
+            <IntegracaoCard
+              title="Conta pagar central -> omie"
+              link="/integracao/conta-pagar/central-omie"
+              integracao={integracao?.contaPagar?.centralOmie}
+            />
+          )}
+
+          {integracao?.contaPagar?.omieCentral && (
+            <IntegracaoCard
+              title="Conta pagar central <- omie"
+              link="/integracao/conta-pagar/omie-central"
+              integracao={integracao?.contaPagar?.omieCentral}
+            />
+          )}
+
+          {integracao?.anexos?.centralOmie && (
+            <IntegracaoCard
+              title="Anexos central -> omie"
+              link="/integracao/anexos/central-omie"
+              integracao={integracao?.anexos?.centralOmie}
+            />
+          )}
+        </Flex>
       </Box>
     </Flex>
   );
