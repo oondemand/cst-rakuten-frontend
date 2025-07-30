@@ -19,7 +19,7 @@ export const EtapaActions = ({ etapa }) => {
           },
         }}
       >
-        <Link to="/integracao/arquivos/central-omie" viewTransition>
+        <Link to="/integracao/anexos/central-omie" viewTransition>
           <Text
             p="1"
             rounded="full"
