@@ -77,7 +77,9 @@ export const IntegracaoContaPagarOmieCentralEsteira = () => {
     ...item,
     prestador: {
       ...item?.prestador,
-      titulo: `Central <- Omie : ${item?.prestador?.nome}`,
+      titulo: `Central <- Omie${
+        item?.prestador?.nome ? ": " + item?.prestador?.nome : ""
+      }`,
     },
   }));
 
